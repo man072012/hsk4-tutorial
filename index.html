@@ -8676,6 +8676,12 @@ async function tryIflytekEndpoint(host, pcmInt16) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Force show subFlashcards as default
+  const sf = document.getElementById('subFlashcards');
+  if (sf) { sf.style.display = 'block'; sf.classList.add('sub-active'); }
+  const sg = document.getElementById('subGrammar');
+  if (sg) sg.style.display = 'none';
+  
   console.log('%c🎙️ نظام النطق + ASR Voice Recognition', 'font-size:14px;color:#667eea;font-weight:bold');
   console.log('Active TTS engine:', ttsEngine);
   console.log('iFlytek ASR ready - record your voice and get instant feedback');
