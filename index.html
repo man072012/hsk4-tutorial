@@ -691,7 +691,7 @@ body.hide-pinyin .zh-pny-inner::before {
 }
 
 .sub-section { display: none; }
-.sub-section:first-of-type { display: block; }
+.sub-section.sub-active { display: block; }
 
 /* Floating Pinyin Toggle Button */
 .pinyin-toggle-floating {
@@ -6108,7 +6108,7 @@ body.hide-pinyin .zh-pny-inner::before {
     <button class="tab-btn" onclick="showSubsection('subGrammar', this)" style="flex:1">📐 القواعد المفتاحية (15)</button>
   </div>
 
-  <div id="subFlashcards" class="sub-section">
+  <div id="subFlashcards" class="sub-section" style="display:block">
 
   <div id="micPermBanner" style="display:none;background:linear-gradient(135deg,#fef3c7,#fde68a);padding:16px 20px;border-radius:12px;margin-bottom:18px;border-right:5px solid #f59e0b;color:#78350f">
     <b>🔑 لحفظ إذن الميكروفون بشكل دائم:</b>
@@ -8685,12 +8685,19 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function showSubsection(name, btn) {
-  // Hide all sub-sections in the current tab
   const parent = btn.closest('.tab-content');
   if (parent) {
-    parent.querySelectorAll('.sub-section').forEach(s => s.style.display = 'none');
+    // Hide all sub-sections (both via class and inline style)
+    parent.querySelectorAll('.sub-section').forEach(s => {
+      s.style.display = 'none';
+      s.classList.remove('sub-active');
+    });
+    // Show the target
     const target = document.getElementById(name);
-    if (target) target.style.display = 'block';
+    if (target) {
+      target.style.display = 'block';
+      target.classList.add('sub-active');
+    }
     // Update sub-tab buttons
     btn.parentElement.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
