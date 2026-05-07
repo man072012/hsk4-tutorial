@@ -8029,10 +8029,11 @@ const IFLYTEK_DEFAULT = {
   apiSecret: 'ZThkMDM2ZDUwMmQ3NDYxMTUwMjIyNzZm'
 };
 
-// Load saved or use defaults
-if (!iflytekConfig) {
+// Load saved or use defaults - ignore empty/invalid stored values
+if (!iflytekConfig || !iflytekConfig.appid || iflytekConfig.appid === '') {
   iflytekConfig = IFLYTEK_DEFAULT;
   localStorage.setItem('iflytekConfig', JSON.stringify(IFLYTEK_DEFAULT));
+  console.log('[iFlytek] Loaded default keys');
 }
 
 function setupIflytek() {
