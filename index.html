@@ -7894,7 +7894,7 @@ function buildEngineUrl(engine, text) {
   const enc = encodeURIComponent(text);
   if (engine === 'youdao') return 'https://dict.youdao.com/dictvoice?type=2&audio=' + enc;
   if (engine === 'google') return 'https://translate.google.com/translate_tts?ie=UTF-8&tl=zh-CN&q=' + enc + '&client=tw-ob';
-  if (engine === 'sogou') return 'https://fanyi.sogou.com/reventondc/synthesis?text=' + enc + '&speed=1&lang=zh-CHS&from=translateweb&speaker=6';
+  if (engine === 'sogou') return 'https://fanyi.sogou.com/reventondc/synthesis?text=' + enc + '&speed=1&lang=zh-CHS&from=translateweb&speaker=2';
   if (engine === 'baidu') return 'https://fanyi.baidu.com/gettts?lan=zh&text=' + enc + '&spd=3&source=web';
   return 'https://dict.youdao.com/dictvoice?type=2&audio=' + enc;
 }
@@ -7960,29 +7960,38 @@ async function playChinese(text, btn) {
     return;
   }
   
-  // Build cascade order based on selected engine
-  let cascade;
-  if (ttsEngine === 'iflytek' && iflytekConfig && iflytekConfig.appid) {
-    // Try iFlytek first, then youdao, then google
-    iflytekTTS(text, btn);
+  console.log('%c[TTS] Using engine: ' + ttsEngine.toUpperCase(), 'background:#dc2626;color:white;padding:3px 8px;border-radius:4px;font-weight:bold');
+  
+  // Use ONLY selected engine - no automatic fallback unless it fails completely
+  if (ttsEngine === 'iflytek') {
+    if (iflytekConfig && iflytekConfig.appid) {
+      iflytekTTS(text, btn);
+    } else {
+      alert('⚠️ مفاتيح iFlytek غير مضبوطة. اضغط على زر iFlytek أولاً لإدخالها.');
+      setPlayingVisual(btn, false);
+    }
     return;
-  } else if (ttsEngine === 'google') {
-    cascade = ['google', 'youdao', 'sogou'];
-  } else {
-    cascade = ['youdao', 'google', 'sogou'];
   }
   
-  // Try each engine in order
-  for (const engine of cascade) {
+  // Use the selected engine ONLY
+  const success = await tryEngine(ttsEngine, text, btn);
+  if (success) {
+    console.log('%c[TTS] ✓ Played with: ' + ttsEngine, 'color:#10b981;font-weight:bold');
+    return;
+  }
+  
+  // Selected engine failed - try alternatives in order
+  console.warn('[TTS] ' + ttsEngine + ' failed, trying alternatives...');
+  const alternatives = ['youdao', 'google', 'sogou'].filter(e => e !== ttsEngine);
+  for (const engine of alternatives) {
     setPlayingVisual(btn, true);
-    const success = await tryEngine(engine, text, btn);
-    if (success) {
-      console.log('[TTS] Success with:', engine);
+    const ok = await tryEngine(engine, text, btn);
+    if (ok) {
+      console.log('%c[TTS] ⚠️ Fallback used: ' + engine + ' (because ' + ttsEngine + ' failed)', 'color:#f59e0b;font-weight:bold');
       return;
     }
   }
   
-  // All failed - try Web Speech as final fallback
   console.warn('[TTS] All HTTP engines failed, trying Web Speech');
   tryWebSpeechFallback(text, btn);
 }
@@ -7993,6 +8002,24 @@ function setTtsEngine(engine) {
   document.querySelectorAll('.tts-engine-btn').forEach(b => b.classList.remove('active'));
   const activeBtn = document.querySelector('.tts-engine-btn[data-engine="' + engine + '"]');
   if (activeBtn) activeBtn.classList.add('active');
+  
+  // Show toast notification
+  showTtsToast('🎙️ تم تفعيل: ' + engine.toUpperCase() + ' - جرّب أي زر نطق الآن');
+  console.log('%c[TTS Engine Changed] -> ' + engine.toUpperCase(), 'background:#7c3aed;color:white;padding:5px 12px;border-radius:6px;font-weight:bold;font-size:13px');
+}
+
+function showTtsToast(message) {
+  let toast = document.getElementById('tts-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'tts-toast';
+    toast.style.cssText = 'position:fixed;top:20px;right:20px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;padding:14px 22px;border-radius:12px;z-index:9999;font-weight:bold;box-shadow:0 8px 25px rgba(0,0,0,0.3);font-family:inherit;max-width:300px;font-size:14px;direction:rtl;';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.style.display = 'block';
+  toast.style.opacity = '1';
+  setTimeout(() => { toast.style.transition = 'opacity 0.5s'; toast.style.opacity = '0'; setTimeout(() => toast.style.display = 'none', 500); }, 3000);
 }
 
 // iFlytek credentials (saved by user)
