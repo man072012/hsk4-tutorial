@@ -600,10 +600,16 @@ body {
   background: linear-gradient(180deg, transparent 60%, #fde047 60%);
   padding: 0 3px;
   font-weight: bold;
-  cursor: help;
+  cursor: pointer;
   position: relative;
   border-bottom: 2px dashed #ca8a04;
   transition: all 0.2s;
+  display: inline-block;
+}
+.keyword.playing {
+  background: linear-gradient(180deg, transparent 0%, #10b981 0%);
+  color: white;
+  animation: pulse 0.8s infinite;
 }
 .keyword:hover {
   background: linear-gradient(180deg, transparent 0%, #fbbf24 0%);
@@ -683,6 +689,9 @@ body.hide-pinyin .zh-pny-inner::before {
   font-size: 0.65em;
   color: #94a3b8;
 }
+
+.sub-section { display: none; }
+.sub-section:first-of-type { display: block; }
 
 /* Floating Pinyin Toggle Button */
 .pinyin-toggle-floating {
@@ -769,8 +778,7 @@ body.hide-pinyin .zh-pny-inner::before {
   <button class="tab-btn" onclick="showTab('listening', this)">🎧 الاستماع</button>
   <button class="tab-btn" onclick="showTab('reading', this)">📖 القراءة</button>
   <button class="tab-btn" onclick="showTab('writing', this)">✏️ الكتابة</button>
-  <button class="tab-btn" onclick="showTab('grammar', this)">📐 القواعد المفتاحية</button>
-  <button class="tab-btn" onclick="showTab('flashcards', this)">🎨 بطاقات الذاكرة</button>
+  <button class="tab-btn" onclick="showTab('flashcards', this)">📚 المرجع الشامل</button>
 </div>
 
 <!-- TAB: INTRO -->
@@ -837,7 +845,7 @@ body.hide-pinyin .zh-pny-inner::before {
   </div>
 
   <div class="keyword-legend">
-    <b>🔑 الكلمات المفتاحية:</b> الكلمات التي تظهر <span class="keyword">بخلفية صفراء<span class="keyword-tooltip">💡 هكذا يبدو التظليل!</span></span> في النصوص الصينية هي <b>المفاتيح التي تكشف الإجابة الصحيحة</b>. مرّر الفأرة فوقها لرؤية تلميح يشرح لماذا هي مفتاحية. <b>هذه الكلمات يجب أن تتوقف عندها وتتأملها جيداً!</b>
+    <b>🔑 الكلمات المفتاحية:</b> الكلمات التي تظهر <span class="keyword" onclick="playChinese('بخلفية صفراء', this)">بخلفية صفراء<span class="keyword-tooltip">💡 (انقر للنطق) 💡 هكذا يبدو التظليل!</span></span> في النصوص الصينية هي <b>المفاتيح التي تكشف الإجابة الصحيحة</b>. مرّر الفأرة فوقها لرؤية تلميح يشرح لماذا هي مفتاحية. <b>هذه الكلمات يجب أن تتوقف عندها وتتأملها جيداً!</b>
   </div>
 
   <!-- Q1 -->
@@ -854,7 +862,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص المسموع:</span>
-      <div class="chinese-text">我拿的是学生签证，<span class="keyword">换成工作签证以后<span class="keyword-tooltip">💡 هذا يعني لم يحصل عليها بعد</span></span>，才能申请这份工作。</div>
+      <div class="chinese-text">我拿的是学生签证，<span class="keyword" onclick="playChinese('换成工作签证以后', this)">换成工作签证以后<span class="keyword-tooltip">💡 (انقر للنطق) 💡 هذا يعني لم يحصل عليها بعد</span></span>，才能申请这份工作。</div>
       <div class="pinyin-text">Wǒ ná de shì xuéshēng qiānzhèng, huànchéng gōngzuò qiānzhèng yǐhòu, cái néng shēnqǐng zhè fèn gōngzuò.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
         <span class="label">⭐ الجملة المراد الحكم عليها:</span>
@@ -912,7 +920,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص المسموع:</span>
-      <div class="chinese-text">这个活动本来<span class="keyword">已经推迟了<span class="keyword-tooltip">💡 كلمة 已经 = بالفعل، أي التأجيل حدث في الماضي</span></span>两周了，现在负责活动的经理又病了，怎么办呢？</div>
+      <div class="chinese-text">这个活动本来<span class="keyword" onclick="playChinese('已经推迟了', this)">已经推迟了<span class="keyword-tooltip">💡 (انقر للنطق) 💡 كلمة 已经 = بالفعل، أي التأجيل حدث في الماضي</span></span>两周了，现在负责活动的经理又病了，怎么办呢？</div>
       <div class="pinyin-text">Zhège huódòng běnlái yǐjīng tuīchí le liǎng zhōu le, xiànzài fùzé huódòng de jīnglǐ yòu bìng le, zěnme bàn ne?</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
         <span class="label">⭐ الجملة المراد الحكم عليها:</span>
@@ -973,7 +981,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص المسموع:</span>
-      <div class="chinese-text">宾馆房间里有电脑，可以上网，<span class="keyword">早七点到晚十点<span class="keyword-tooltip">💡 ساعات محدودة، ليس طوال اليوم</span></span>有热水，早上还提供免费早餐。</div>
+      <div class="chinese-text">宾馆房间里有电脑，可以上网，<span class="keyword" onclick="playChinese('早七点到晚十点', this)">早七点到晚十点<span class="keyword-tooltip">💡 (انقر للنطق) 💡 ساعات محدودة، ليس طوال اليوم</span></span>有热水，早上还提供免费早餐。</div>
       <div class="pinyin-text">Bīnguǎn fángjiān lǐ yǒu diànnǎo, kěyǐ shàngwǎng, zǎo qī diǎn dào wǎn shí diǎn yǒu rèshuǐ, zǎoshang hái tígōng miǎnfèi zǎocān.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
         <span class="label">⭐ الجملة المختبرة:</span>
@@ -1031,7 +1039,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص المسموع:</span>
-      <div class="chinese-text">我和李月差不多三年没有联系了，我<span class="keyword">哪儿知道<span class="keyword-tooltip">💡 سؤال بلاغي = لا أعرف!</span></span>她现在在哪儿啊？</div>
+      <div class="chinese-text">我和李月差不多三年没有联系了，我<span class="keyword" onclick="playChinese('哪儿知道', this)">哪儿知道<span class="keyword-tooltip">💡 (انقر للنطق) 💡 سؤال بلاغي = لا أعرف!</span></span>她现在在哪儿啊？</div>
       <div class="pinyin-text">Wǒ hé Lǐ Yuè chàbuduō sān nián méiyǒu liánxì le, wǒ nǎr zhīdào tā xiànzài zài nǎr a?</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
         <span class="label">⭐ المختبرة:</span>
@@ -1089,7 +1097,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص المسموع:</span>
-      <div class="chinese-text">这个新的法律规定可以<span class="keyword">更好地保护儿童<span class="keyword-tooltip">💡 تعبير صريح بأن القانون لحماية الأطفال</span></span>，他们不仅是父母的孩子，更是国家的希望。</div>
+      <div class="chinese-text">这个新的法律规定可以<span class="keyword" onclick="playChinese('更好地保护儿童', this)">更好地保护儿童<span class="keyword-tooltip">💡 (انقر للنطق) 💡 تعبير صريح بأن القانون لحماية الأطفال</span></span>，他们不仅是父母的孩子，更是国家的希望。</div>
       <div class="pinyin-text">Zhège xīn de fǎlǜ guīdìng kěyǐ gèng hǎo de bǎohù értóng, tāmen bùjǐn shì fùmǔ de háizi, gèng shì guójiā de xīwàng.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
         <span class="label">⭐ المختبرة:</span>
@@ -1149,7 +1157,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص المسموع:</span>
-      <div class="chinese-text">我是北方人，特别喜欢吃饺子，平时也经常在家<span class="keyword">自己包饺子吃<span class="keyword-tooltip">💡 يحضرها بنفسه في البيت، ليس في المطعم</span></span>。</div>
+      <div class="chinese-text">我是北方人，特别喜欢吃饺子，平时也经常在家<span class="keyword" onclick="playChinese('自己包饺子吃', this)">自己包饺子吃<span class="keyword-tooltip">💡 (انقر للنطق) 💡 يحضرها بنفسه في البيت، ليس في المطعم</span></span>。</div>
       <div class="pinyin-text">Wǒ shì běifāng rén, tèbié xǐhuān chī jiǎozi, píngshí yě jīngcháng zài jiā zìjǐ bāo jiǎozi chī.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
         <span class="label">⭐ المختبرة:</span>
@@ -1208,7 +1216,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص المسموع:</span>
-      <div class="chinese-text">去年有五十万中国学生出国留学，其中<span class="keyword">超过百分之五十<span class="keyword-tooltip">💡 أكثر من 50% = أكثر من النصف</span></span>的人是高中生。</div>
+      <div class="chinese-text">去年有五十万中国学生出国留学，其中<span class="keyword" onclick="playChinese('超过百分之五十', this)">超过百分之五十<span class="keyword-tooltip">💡 (انقر للنطق) 💡 أكثر من 50% = أكثر من النصف</span></span>的人是高中生。</div>
       <div class="pinyin-text">Qùnián yǒu wǔshí wàn Zhōngguó xuéshēng chūguó liúxué, qízhōng chāoguò bǎi fēn zhī wǔshí de rén shì gāozhōng shēng.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
         <span class="label">⭐ المختبرة:</span>
@@ -1279,7 +1287,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص المسموع:</span>
-      <div class="chinese-text">人们常说遇到危险时要冷静，可是当它发生在自己身上时，<span class="keyword">却很难做到<span class="keyword-tooltip">💡 كلمة 难 = صعب</span></span>。</div>
+      <div class="chinese-text">人们常说遇到危险时要冷静，可是当它发生在自己身上时，<span class="keyword" onclick="playChinese('却很难做到', this)">却很难做到<span class="keyword-tooltip">💡 (انقر للنطق) 💡 كلمة 难 = صعب</span></span>。</div>
       <div class="pinyin-text">Rénmen cháng shuō yùdào wēixiǎn shí yào lěngjìng, kěshì dāng tā fāshēng zài zìjǐ shēn shàng shí, què hěn nán zuòdào.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
         <span class="label">⭐ المختبرة:</span>
@@ -1340,7 +1348,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص المسموع:</span>
-      <div class="chinese-text">儿子，<span class="keyword">祝贺你大学毕业<span class="keyword-tooltip">💡 كلمة 祝贺 = تهنئة، تخرج فعلاً</span></span>。你现在比爸妈有知识，如果再增加一些社会经验，你会更优秀的。</div>
+      <div class="chinese-text">儿子，<span class="keyword" onclick="playChinese('祝贺你大学毕业', this)">祝贺你大学毕业<span class="keyword-tooltip">💡 (انقر للنطق) 💡 كلمة 祝贺 = تهنئة، تخرج فعلاً</span></span>。你现在比爸妈有知识，如果再增加一些社会经验，你会更优秀的。</div>
       <div class="pinyin-text">Érzi, zhùhè nǐ dàxué bìyè. Nǐ xiànzài bǐ bàmā yǒu zhīshi, rúguǒ zài zēngjiā yīxiē shèhuì jīngyàn, nǐ huì gèng yōuxiù de.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
         <span class="label">⭐ المختبرة:</span>
@@ -1404,7 +1412,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص المسموع:</span>
-      <div class="chinese-text">小周真是挺努力的，连礼拜天都不放松一下，<span class="keyword">现在还在办公室<span class="keyword-tooltip">💡 在 + المكان = موجود هناك الآن</span></span>呢。</div>
+      <div class="chinese-text">小周真是挺努力的，连礼拜天都不放松一下，<span class="keyword" onclick="playChinese('现在还在办公室', this)">现在还在办公室<span class="keyword-tooltip">💡 (انقر للنطق) 💡 在 + المكان = موجود هناك الآن</span></span>呢。</div>
       <div class="pinyin-text">Xiǎo Zhōu zhēn shì tǐng nǔlì de, lián lǐbàitiān dōu bù fàngsōng yīxià, xiànzài hái zài bàngōngshì ne.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
         <span class="label">⭐ المختبرة:</span>
@@ -1481,7 +1489,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：你下个星期就要回国了，行李收拾得差不多了吧？<br>女：我已经把书、鞋、包什么的寄回去了，<span class="keyword">再收拾一下衣服<span class="keyword-tooltip">💡 ما تبقى ترتيبه = ملابس</span></span>就行了。<br>问：女的还需要收拾什么？</div>
+      <div class="chinese-text">男：你下个星期就要回国了，行李收拾得差不多了吧？<br>女：我已经把书、鞋、包什么的寄回去了，<span class="keyword" onclick="playChinese('再收拾一下衣服', this)">再收拾一下衣服<span class="keyword-tooltip">💡 (انقر للنطق) 💡 ما تبقى ترتيبه = ملابس</span></span>就行了。<br>问：女的还需要收拾什么？</div>
       <div class="pinyin-text">Nán: Nǐ xià gè xīngqī jiù yào huí guó le, xíngli shōushi de chàbuduō le ba?<br>Nǚ: Wǒ yǐjīng bǎ shū, xié, bāo shénme de jì huíqu le, zài shōushi yīxià yīfu jiù xíng le.<br>Wèn: Nǚ de hái xūyào shōushi shénme?</div>
     </div>
 
@@ -1546,7 +1554,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：怎么样？张教授对你的文章满意吗？<br>男：张教授<span class="keyword">要求高<span class="keyword-tooltip">💡 متطلب عالي = صارم</span></span>，我估计至少还得改两三次才能通过。<br>问：张教授怎么样？</div>
+      <div class="chinese-text">女：怎么样？张教授对你的文章满意吗？<br>男：张教授<span class="keyword" onclick="playChinese('要求高', this)">要求高<span class="keyword-tooltip">💡 (انقر للنطق) 💡 متطلب عالي = صارم</span></span>，我估计至少还得改两三次才能通过。<br>问：张教授怎么样？</div>
       <div class="pinyin-text">Nǚ: Zěnmeyàng? Zhāng jiàoshòu duì nǐ de wénzhāng mǎnyì ma?<br>Nán: Zhāng jiàoshòu yāoqiú gāo, wǒ gūjì zhìshǎo hái děi gǎi liǎng-sān cì cái néng tōngguò.<br>Wèn: Zhāng jiàoshòu zěnmeyàng?</div>
     </div>
 
@@ -1611,7 +1619,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：请问一下，我要去中山公园，是在下一站下吧？<br>女：呀，你方向坐反了，下一站<span class="keyword">换乘对面的车<span class="keyword-tooltip">💡 تغيير القطار = مترو</span></span>吧。<br>问：这段对话可能发生在哪儿？</div>
+      <div class="chinese-text">男：请问一下，我要去中山公园，是在下一站下吧？<br>女：呀，你方向坐反了，下一站<span class="keyword" onclick="playChinese('换乘对面的车', this)">换乘对面的车<span class="keyword-tooltip">💡 (انقر للنطق) 💡 تغيير القطار = مترو</span></span>吧。<br>问：这段对话可能发生在哪儿？</div>
       <div class="pinyin-text">Nán: Qǐng wèn yīxià, wǒ yào qù Zhōngshān gōngyuán, shì zài xià yī zhàn xià ba?<br>Nǚ: Yā, nǐ fāngxiàng zuò fǎn le, xià yī zhàn huànchéng duìmiàn de chē ba.<br>Wèn: Zhè duàn duìhuà kěnéng fāshēng zài nǎr?</div>
     </div>
 
@@ -1673,7 +1681,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：你看你，一回家来就躺在沙发上，东西还到处乱扔！<br>男：怎么又生气啦？我们<span class="keyword">结婚前<span class="keyword-tooltip">💡 قبل الزواج → الآن متزوجان</span></span>，你的脾气多好啊！<br>问：说话人是什么关系？</div>
+      <div class="chinese-text">女：你看你，一回家来就躺在沙发上，东西还到处乱扔！<br>男：怎么又生气啦？我们<span class="keyword" onclick="playChinese('结婚前', this)">结婚前<span class="keyword-tooltip">💡 (انقر للنطق) 💡 قبل الزواج → الآن متزوجان</span></span>，你的脾气多好啊！<br>问：说话人是什么关系？</div>
       <div class="pinyin-text">Nǚ: Nǐ kàn nǐ, yī huí jiā lái jiù tǎng zài shāfā shàng, dōngxi hái dàochù luàn rēng!<br>Nán: Zěnme yòu shēngqì la? Wǒmen jiéhūn qián, nǐ de píqì duō hǎo a!<br>Wèn: Shuōhuàrén shì shénme guānxi?</div>
     </div>
 
@@ -1740,7 +1748,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：你好像对这附近特别熟悉。<br>女：我原来就住在这儿，<span class="keyword">住了有二十多年<span class="keyword-tooltip">💡 عاشت سنوات طويلة = تألف المنطقة</span></span>，上个月才搬走。<br>问：关于女的，可以知道什么？</div>
+      <div class="chinese-text">男：你好像对这附近特别熟悉。<br>女：我原来就住在这儿，<span class="keyword" onclick="playChinese('住了有二十多年', this)">住了有二十多年<span class="keyword-tooltip">💡 (انقر للنطق) 💡 عاشت سنوات طويلة = تألف المنطقة</span></span>，上个月才搬走。<br>问：关于女的，可以知道什么？</div>
       <div class="pinyin-text">Nán: Nǐ hǎoxiàng duì zhè fùjìn tèbié shúxī.<br>Nǚ: Wǒ yuánlái jiù zhù zài zhèr, zhù le yǒu èrshí duō nián, shàng gè yuè cái bān zǒu.<br>Wèn: Guānyú nǚ de, kěyǐ zhīdào shénme?</div>
     </div>
 
@@ -1806,7 +1814,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：生活不会一直顺利，但也不会一直有这么多麻烦事，总会过去的。<br>男：你说得对，咱们应该<span class="keyword">积极地解决问题<span class="keyword-tooltip">💡 موقف إيجابي</span></span>。<br>问：这段对话主要谈的是什么？</div>
+      <div class="chinese-text">女：生活不会一直顺利，但也不会一直有这么多麻烦事，总会过去的。<br>男：你说得对，咱们应该<span class="keyword" onclick="playChinese('积极地解决问题', this)">积极地解决问题<span class="keyword-tooltip">💡 (انقر للنطق) 💡 موقف إيجابي</span></span>。<br>问：这段对话主要谈的是什么？</div>
       <div class="pinyin-text">Nǚ: Shēnghuó bù huì yīzhí shùnlì, dàn yě bù huì yīzhí yǒu zhème duō máfan shì, zǒng huì guòqù de.<br>Nán: Nǐ shuō de duì, zánmen yīnggāi jījí de jiějué wèntí.<br>Wèn: Zhè duàn duìhuà zhǔyào tán de shì shénme?</div>
     </div>
 
@@ -1871,7 +1879,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：我女儿考试没考好，昨天晚上我批评了她。<br>女：最好要<span class="keyword">让她知道没考好的原因<span class="keyword-tooltip">💡 اكتشاف السبب</span></span>：是粗心呢？还是没听懂？<br>问：女的认为孩子考试没考好应该怎么办？</div>
+      <div class="chinese-text">男：我女儿考试没考好，昨天晚上我批评了她。<br>女：最好要<span class="keyword" onclick="playChinese('让她知道没考好的原因', this)">让她知道没考好的原因<span class="keyword-tooltip">💡 (انقر للنطق) 💡 اكتشاف السبب</span></span>：是粗心呢？还是没听懂？<br>问：女的认为孩子考试没考好应该怎么办？</div>
       <div class="pinyin-text">Nán: Wǒ nǚ'ér kǎoshì méi kǎo hǎo, zuótiān wǎnshang wǒ pīpíng le tā.<br>Nǚ: Zuì hǎo yào ràng tā zhīdào méi kǎo hǎo de yuányīn: shì cūxīn ne? Háishi méi tīng dǒng?<br>Wèn: Nǚ de rènwéi háizi kǎoshì méi kǎo hǎo yīnggāi zěnme bàn?</div>
     </div>
 
@@ -1937,7 +1945,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：你认为幸福有标准吗？<br>男：每个人对幸福都有自己的理解。但对我来说，工作顺利，<span class="keyword">家人身体好<span class="keyword-tooltip">💡 صحة الأسرة = السعادة</span></span>就是幸福。<br>问：男的认为什么是幸福？</div>
+      <div class="chinese-text">女：你认为幸福有标准吗？<br>男：每个人对幸福都有自己的理解。但对我来说，工作顺利，<span class="keyword" onclick="playChinese('家人身体好', this)">家人身体好<span class="keyword-tooltip">💡 (انقر للنطق) 💡 صحة الأسرة = السعادة</span></span>就是幸福。<br>问：男的认为什么是幸福？</div>
       <div class="pinyin-text">Nǚ: Nǐ rènwéi xìngfú yǒu biāozhǔn ma?<br>Nán: Měi gè rén duì xìngfú dōu yǒu zìjǐ de lǐjiě. Dàn duì wǒ lái shuō, gōngzuò shùnlì, jiārén shēntǐ hǎo jiù shì xìngfú.<br>Wèn: Nán de rènwéi shénme shì xìngfú?</div>
     </div>
 
@@ -2001,7 +2009,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：<span class="keyword">护士<span class="keyword-tooltip">💡 ممرضة = مستشفى = مريض</span></span>，可以关一下空调，打开窗户吗？我想换换新鲜空气。<br>女：那我开一点儿，外面冷，你身体还没完全好。<br>问：男的可能是什么人？</div>
+      <div class="chinese-text">男：<span class="keyword" onclick="playChinese('护士', this)">护士<span class="keyword-tooltip">💡 (انقر للنطق) 💡 ممرضة = مستشفى = مريض</span></span>，可以关一下空调，打开窗户吗？我想换换新鲜空气。<br>女：那我开一点儿，外面冷，你身体还没完全好。<br>问：男的可能是什么人？</div>
       <div class="pinyin-text">Nán: Hùshi, kěyǐ guān yīxià kōngtiáo, dǎkāi chuānghu ma? Wǒ xiǎng huànhuan xīnxiān kōngqì.<br>Nǚ: Nà wǒ kāi yīdiǎnr, wàimiàn lěng, nǐ shēntǐ hái méi wánquán hǎo.<br>Wèn: Nán de kěnéng shì shénme rén?</div>
     </div>
 
@@ -2071,7 +2079,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：还有十秒就到十二点了！<span class="keyword">快把酒倒好<span class="keyword-tooltip">💡 اسكب المشروب = شرب</span></span>！<br>男：来，给你，一起干杯！祝我们在新的一年里万事顺利！<br>问：他们最可能在做什么？</div>
+      <div class="chinese-text">女：还有十秒就到十二点了！<span class="keyword" onclick="playChinese('快把酒倒好', this)">快把酒倒好<span class="keyword-tooltip">💡 (انقر للنطق) 💡 اسكب المشروب = شرب</span></span>！<br>男：来，给你，一起干杯！祝我们在新的一年里万事顺利！<br>问：他们最可能在做什么？</div>
       <div class="pinyin-text">Nǚ: Hái yǒu shí miǎo jiù dào shí'èr diǎn le! Kuài bǎ jiǔ dào hǎo!<br>Nán: Lái, gěi nǐ, yīqǐ gānbēi! Zhù wǒmen zài xīn de yī nián lǐ wàn shì shùnlì!<br>Wèn: Tāmen zuì kěnéng zài zuò shénme?</div>
     </div>
 
@@ -2131,7 +2139,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：我那个红色的帽子呢，昨天我放在沙发上的，你整理房间的时候拿走了吗？<br>女：<span class="keyword">我给你洗了<span class="keyword-tooltip">💡 غسلتها = نظفت</span></span>，刚才放你床上了。<br>问：关于帽子，下面哪个是对的？</div>
+      <div class="chinese-text">男：我那个红色的帽子呢，昨天我放在沙发上的，你整理房间的时候拿走了吗？<br>女：<span class="keyword" onclick="playChinese('我给你洗了', this)">我给你洗了<span class="keyword-tooltip">💡 (انقر للنطق) 💡 غسلتها = نظفت</span></span>，刚才放你床上了。<br>问：关于帽子，下面哪个是对的？</div>
       <div class="pinyin-text">Nán: Wǒ nàge hóngsè de màozi ne, zuótiān wǒ fàng zài shāfā shàng de, nǐ zhěnglǐ fángjiān de shíhou ná zǒu le ma?<br>Nǚ: Wǒ gěi nǐ xǐ le, gāngcái fàng nǐ chuáng shàng le.<br>Wèn: Guānyú màozi, xiàmiàn nǎge shì duì de?</div>
     </div>
 
@@ -2201,7 +2209,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：您这么年轻就获得了这么大的成功，能不能给我们介绍一下经验？<br>男：做自己喜欢的事情，并且<span class="keyword">不要放弃<span class="keyword-tooltip">💡 عدم الاستسلام = المثابرة</span></span>，就一定会成功。<br>问：男的能成功的原因是什么？</div>
+      <div class="chinese-text">女：您这么年轻就获得了这么大的成功，能不能给我们介绍一下经验？<br>男：做自己喜欢的事情，并且<span class="keyword" onclick="playChinese('不要放弃', this)">不要放弃<span class="keyword-tooltip">💡 (انقر للنطق) 💡 عدم الاستسلام = المثابرة</span></span>，就一定会成功。<br>问：男的能成功的原因是什么？</div>
       <div class="pinyin-text">Nǚ: Nín zhème niánqīng jiù huòdé le zhème dà de chénggōng, néng bù néng gěi wǒmen jièshào yīxià jīngyàn?<br>Nán: Zuò zìjǐ xǐhuān de shìqing, bìngqiě bù yào fàngqì, jiù yīdìng huì chénggōng.<br>Wèn: Nán de néng chénggōng de yuányīn shì shénme?</div>
     </div>
 
@@ -2267,7 +2275,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：今天孙子来咱们家，<span class="keyword">进门也不打招呼<span class="keyword-tooltip">💡 عدم التحية = قلة أدب</span></span>，就问了我一句上网密码是多少。<br>女：太不应该了！过会儿好好跟他谈谈。<br>问：男的对孙子的哪方面不满意？</div>
+      <div class="chinese-text">男：今天孙子来咱们家，<span class="keyword" onclick="playChinese('进门也不打招呼', this)">进门也不打招呼<span class="keyword-tooltip">💡 (انقر للنطق) 💡 عدم التحية = قلة أدب</span></span>，就问了我一句上网密码是多少。<br>女：太不应该了！过会儿好好跟他谈谈。<br>问：男的对孙子的哪方面不满意？</div>
       <div class="pinyin-text">Nán: Jīntiān sūnzi lái zánmen jiā, jìnmén yě bù dǎ zhāohū, jiù wèn le wǒ yī jù shàngwǎng mìmǎ shì duōshao.<br>Nǚ: Tài bù yīnggāi le! Guò huìr hǎohǎo gēn tā tántan.<br>Wèn: Nán de duì sūnzi de nǎ fāngmiàn bù mǎnyì?</div>
     </div>
 
@@ -2329,7 +2337,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：高老师的《<span class="keyword">世界经济<span class="keyword-tooltip">💡 اسم المادة</span></span>》你上学期上过了吧？怎么样？<br>男：挺好的，但是需要有一些经济学的基础知识，否则很难听懂。<br>问：他们在讨论什么？</div>
+      <div class="chinese-text">女：高老师的《<span class="keyword" onclick="playChinese('世界经济', this)">世界经济<span class="keyword-tooltip">💡 (انقر للنطق) 💡 اسم المادة</span></span>》你上学期上过了吧？怎么样？<br>男：挺好的，但是需要有一些经济学的基础知识，否则很难听懂。<br>问：他们在讨论什么？</div>
       <div class="pinyin-text">Nǚ: Gāo lǎoshī de "Shìjiè Jīngjì" nǐ shàng xuéqī shàng guò le ba? Zěnmeyàng?<br>Nán: Tǐng hǎo de, dànshì xūyào yǒu yīxiē jīngjìxué de jīchǔ zhīshi, fǒuzé hěn nán tīng dǒng.<br>Wèn: Tāmen zài tǎolùn shénme?</div>
     </div>
 
@@ -2394,7 +2402,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：这件衣服您穿着大小合适，而且无论价格还是质量都很不错。<br>女：样子也挺好，但<span class="keyword">这个颜色太深了<span class="keyword-tooltip">💡 اللون الذي لا يعجب</span></span>。<br>问：女的对什么不满意？</div>
+      <div class="chinese-text">男：这件衣服您穿着大小合适，而且无论价格还是质量都很不错。<br>女：样子也挺好，但<span class="keyword" onclick="playChinese('这个颜色太深了', this)">这个颜色太深了<span class="keyword-tooltip">💡 (انقر للنطق) 💡 اللون الذي لا يعجب</span></span>。<br>问：女的对什么不满意？</div>
       <div class="pinyin-text">Nán: Zhè jiàn yīfu nín chuān zhe dàxiǎo héshì, érqiě wúlùn jiàgé háishi zhìliàng dōu hěn bùcuò.<br>Nǚ: Yàngzi yě tǐng hǎo, dàn zhège yánsè tài shēn le.<br>Wèn: Nǚ de duì shénme bù mǎnyì?</div>
     </div>
 
@@ -2474,7 +2482,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：我想申请读历史专业的研究生，请问需要什么条件？<br>男：您要提供大学四年的成绩，而且需要通过我们的考试。<br>女：好的。<span class="keyword">现在可以报名吗<span class="keyword-tooltip">💡 تريد التسجيل</span></span>？<br>男：研究生报名还没开始，请您关注我们网站上的通知。<br>问：女的想做什么？</div>
+      <div class="chinese-text">女：我想申请读历史专业的研究生，请问需要什么条件？<br>男：您要提供大学四年的成绩，而且需要通过我们的考试。<br>女：好的。<span class="keyword" onclick="playChinese('现在可以报名吗', this)">现在可以报名吗<span class="keyword-tooltip">💡 (انقر للنطق) 💡 تريد التسجيل</span></span>？<br>男：研究生报名还没开始，请您关注我们网站上的通知。<br>问：女的想做什么？</div>
       <div class="pinyin-text">Nǚ: Wǒ xiǎng shēnqǐng dú lìshǐ zhuānyè de yánjiūshēng, qǐng wèn xūyào shénme tiáojiàn?<br>Nán: Nín yào tígōng dàxué sì nián de chéngjì, érqiě xūyào tōngguò wǒmen de kǎoshì.<br>Nǚ: Hǎo de. Xiànzài kěyǐ bàomíng ma?<br>Nán: Yánjiūshēng bàomíng hái méi kāishǐ, qǐng nín guānzhù wǒmen wǎngzhàn shàng de tōngzhī.</div>
     </div>
 
@@ -2542,7 +2550,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：我昨天晚上九点多给你打了好几个电话，你都没接，睡觉了吗？<br>女：我昨天睡得很晚，可是手机一直都没有响啊。<br>男：怎么可能，你看，这是你的号码吧？<br>女：我看看，啊呀！<span class="keyword">最后三位数字是二六八<span class="keyword-tooltip">💡 رقم خاطئ</span></span>，不是二八六。<br>问：电话为什么没打通？</div>
+      <div class="chinese-text">男：我昨天晚上九点多给你打了好几个电话，你都没接，睡觉了吗？<br>女：我昨天睡得很晚，可是手机一直都没有响啊。<br>男：怎么可能，你看，这是你的号码吧？<br>女：我看看，啊呀！<span class="keyword" onclick="playChinese('最后三位数字是二六八', this)">最后三位数字是二六八<span class="keyword-tooltip">💡 (انقر للنطق) 💡 رقم خاطئ</span></span>，不是二八六。<br>问：电话为什么没打通？</div>
       <div class="pinyin-text">Nán: Wǒ zuótiān wǎnshang jiǔ diǎn duō gěi nǐ dǎ le hǎo jǐ gè diànhuà, nǐ dōu méi jiē, shuìjiào le ma?<br>Nǚ: Wǒ zuótiān shuì de hěn wǎn, kěshì shǒujī yīzhí dōu méiyǒu xiǎng a.<br>Nán: Zěnme kěnéng, nǐ kàn, zhè shì nǐ de hàomǎ ba?<br>Nǚ: Wǒ kànkan, āyā! Zuìhòu sān wèi shùzì shì èr-liù-bā, bùshì èr-bā-liù.</div>
     </div>
 
@@ -2610,7 +2618,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：这条路不太对啊，你打开手机地图看看我们在哪儿？<br>男：我来看看，我们现在在长江路上。<br>女：坏了，刚才的<span class="keyword">路口应该左转的<span class="keyword-tooltip">💡 أخطأوا الطريق</span></span>。<br>男：没事，时间还早，聚会八点才开始呢。<br>问：他们遇到了什么问题？</div>
+      <div class="chinese-text">女：这条路不太对啊，你打开手机地图看看我们在哪儿？<br>男：我来看看，我们现在在长江路上。<br>女：坏了，刚才的<span class="keyword" onclick="playChinese('路口应该左转的', this)">路口应该左转的<span class="keyword-tooltip">💡 (انقر للنطق) 💡 أخطأوا الطريق</span></span>。<br>男：没事，时间还早，聚会八点才开始呢。<br>问：他们遇到了什么问题？</div>
       <div class="pinyin-text">Nǚ: Zhè tiáo lù bù tài duì a, nǐ dǎkāi shǒujī dìtú kànkan wǒmen zài nǎr?<br>Nán: Wǒ lái kànkan, wǒmen xiànzài zài Chángjiāng lù shàng.<br>Nǚ: Huài le, gāngcái de lùkǒu yīnggāi zuǒ zhuǎn de.<br>Nán: Méi shì, shíjiān hái zǎo, jùhuì bā diǎn cái kāishǐ ne.</div>
     </div>
 
@@ -2677,7 +2685,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：谢老师，您好！我是蓝天科技公司的小钱，经理让我来接您。<br>女：小钱你好，<span class="keyword">飞机刚降落<span class="keyword-tooltip">💡 لم يلتقيا بعد</span></span>，可能还要等我一会儿。<br>男：好的，我举着公司的牌子，您一出来就能看到我。<br>女：谢谢你，一会儿见。<br>问：下面哪个是正确的？</div>
+      <div class="chinese-text">男：谢老师，您好！我是蓝天科技公司的小钱，经理让我来接您。<br>女：小钱你好，<span class="keyword" onclick="playChinese('飞机刚降落', this)">飞机刚降落<span class="keyword-tooltip">💡 (انقر للنطق) 💡 لم يلتقيا بعد</span></span>，可能还要等我一会儿。<br>男：好的，我举着公司的牌子，您一出来就能看到我。<br>女：谢谢你，一会儿见。<br>问：下面哪个是正确的？</div>
       <div class="pinyin-text">Nán: Xiè lǎoshī, nín hǎo! Wǒ shì Lántiān Kējì Gōngsī de Xiǎo Qián, jīnglǐ ràng wǒ lái jiē nín.<br>Nǚ: Xiǎo Qián nǐ hǎo, fēijī gāng jiàngluò, kěnéng hái yào děng wǒ yīhuìr.<br>Nán: Hǎo de, wǒ jǔ zhe gōngsī de páizi, nín yī chūlái jiù néng kàn dào wǒ.<br>Nǚ: Xièxiè nǐ, yīhuìr jiàn.</div>
     </div>
 
@@ -2752,7 +2760,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：各位观众晚上好，今晚我们请来了第一医院的孙海医生，欢迎您，孙医生。<br>男：大家晚上好。<br>女：今晚您会给我们带来哪方面的<span class="keyword">健康知识<span class="keyword-tooltip">💡 صحة</span></span>呢？<br>男：我们来谈谈运动对健康的好处。<br>问：这可能是什么节目？</div>
+      <div class="chinese-text">女：各位观众晚上好，今晚我们请来了第一医院的孙海医生，欢迎您，孙医生。<br>男：大家晚上好。<br>女：今晚您会给我们带来哪方面的<span class="keyword" onclick="playChinese('健康知识', this)">健康知识<span class="keyword-tooltip">💡 (انقر للنطق) 💡 صحة</span></span>呢？<br>男：我们来谈谈运动对健康的好处。<br>问：这可能是什么节目？</div>
       <div class="pinyin-text">Nǚ: Gèwèi guānzhòng wǎnshang hǎo, jīn wǎn wǒmen qǐng lái le Dì-yī Yīyuàn de Sūn Hǎi yīshēng, huānyíng nín, Sūn yīshēng.<br>Nán: Dàjiā wǎnshang hǎo.<br>Nǚ: Jīn wǎn nín huì gěi wǒmen dài lái nǎ fāngmiàn de jiànkāng zhīshi ne?<br>Nán: Wǒmen lái tántan yùndòng duì jiànkāng de hǎochù.</div>
     </div>
 
@@ -2821,7 +2829,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：你猜一猜这个盒子里面是什么？<br>女：我猜不出来，是什么呢？<br>男：是<span class="keyword">一条裙子<span class="keyword-tooltip">💡 هدية تنورة لأمه</span></span>，我用自己赚的钱给你买的。<br>女：啊，谢谢你，我的孩子。妈妈太感动了！<br>问：关于男的，下面哪个正确？</div>
+      <div class="chinese-text">男：你猜一猜这个盒子里面是什么？<br>女：我猜不出来，是什么呢？<br>男：是<span class="keyword" onclick="playChinese('一条裙子', this)">一条裙子<span class="keyword-tooltip">💡 (انقر للنطق) 💡 هدية تنورة لأمه</span></span>，我用自己赚的钱给你买的。<br>女：啊，谢谢你，我的孩子。妈妈太感动了！<br>问：关于男的，下面哪个正确？</div>
       <div class="pinyin-text">Nán: Nǐ cāi yī cāi zhège hézi lǐmiàn shì shénme?<br>Nǚ: Wǒ cāi bù chūlái, shì shénme ne?<br>Nán: Shì yī tiáo qúnzi, wǒ yòng zìjǐ zhuàn de qián gěi nǐ mǎi de.<br>Nǚ: Ā, xièxiè nǐ, wǒ de háizi. Māma tài gǎndòng le!</div>
     </div>
 
@@ -2892,7 +2900,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：<span class="keyword">明天晚上有个音乐会<span class="keyword-tooltip">💡 سيلتقيان غداً مساءً</span></span>，听说很不错，我们一起去吧？<br>男：我正好也想约你呢！<br>女：开始前顺便在附近吃个晚饭，怎么样？<br>男：好啊，竟然都想到一块儿去了。<br>问：根据对话，可以知道什么？</div>
+      <div class="chinese-text">女：<span class="keyword" onclick="playChinese('明天晚上有个音乐会', this)">明天晚上有个音乐会<span class="keyword-tooltip">💡 (انقر للنطق) 💡 سيلتقيان غداً مساءً</span></span>，听说很不错，我们一起去吧？<br>男：我正好也想约你呢！<br>女：开始前顺便在附近吃个晚饭，怎么样？<br>男：好啊，竟然都想到一块儿去了。<br>问：根据对话，可以知道什么？</div>
       <div class="pinyin-text">Nǚ: Míngtiān wǎnshang yǒu gè yīnyuèhuì, tīngshuō hěn bùcuò, wǒmen yīqǐ qù ba?<br>Nán: Wǒ zhènghǎo yě xiǎng yuē nǐ ne!<br>Nǚ: Kāishǐ qián shùnbiàn zài fùjìn chī gè wǎnfàn, zěnmeyàng?<br>Nán: Hǎo a, jìngrán dōu xiǎng dào yīkuàir qù le.</div>
     </div>
 
@@ -2959,7 +2967,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：你在我们北京的公司干了有好几年了吧？<br>女：有三四年了。<br>男：公司想安排你去上海的公司，负责那儿的技术工作。<br>女：太好了，<span class="keyword">我这个上海人<span class="keyword-tooltip">💡 تصريح بأنها من شانغهاي</span></span>终于可以回家了。<br>问：关于女的，下面哪个是对的？</div>
+      <div class="chinese-text">男：你在我们北京的公司干了有好几年了吧？<br>女：有三四年了。<br>男：公司想安排你去上海的公司，负责那儿的技术工作。<br>女：太好了，<span class="keyword" onclick="playChinese('我这个上海人', this)">我这个上海人<span class="keyword-tooltip">💡 (انقر للنطق) 💡 تصريح بأنها من شانغهاي</span></span>终于可以回家了。<br>问：关于女的，下面哪个是对的？</div>
       <div class="pinyin-text">Nán: Nǐ zài wǒmen Běijīng de gōngsī gàn le yǒu hǎo jǐ nián le ba?<br>Nǚ: Yǒu sān-sì nián le.<br>Nán: Gōngsī xiǎng ānpái nǐ qù Shànghǎi de gōngsī, fùzé nàr de jìshù gōngzuò.<br>Nǚ: Tài hǎo le, wǒ zhège Shànghǎi rén zhōngyú kěyǐ huí jiā le.</div>
     </div>
 
@@ -3026,7 +3034,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：这个肉汤的味道有点儿奇怪。<br>男：我尝尝，啊，坏了！我<span class="keyword">把糖当成盐<span class="keyword-tooltip">💡 وضع السكر بدل الملح</span></span>了！<br>女：我说怎么那么甜呢？<br>男：不好意思，我去厨房重新做一个汤吧，等我一会儿啊。<br>问：根据对话，可以知道什么？</div>
+      <div class="chinese-text">女：这个肉汤的味道有点儿奇怪。<br>男：我尝尝，啊，坏了！我<span class="keyword" onclick="playChinese('把糖当成盐', this)">把糖当成盐<span class="keyword-tooltip">💡 (انقر للنطق) 💡 وضع السكر بدل الملح</span></span>了！<br>女：我说怎么那么甜呢？<br>男：不好意思，我去厨房重新做一个汤吧，等我一会儿啊。<br>问：根据对话，可以知道什么？</div>
       <div class="pinyin-text">Nǚ: Zhège ròutāng de wèidao yǒudiǎnr qíguài.<br>Nán: Wǒ chángchang, ā, huài le! Wǒ bǎ táng dàngchéng yán le!<br>Nǚ: Wǒ shuō zěnme nàme tián ne?<br>Nán: Bù hǎoyìsi, wǒ qù chúfáng chóngxīn zuò yī gè tāng ba, děng wǒ yīhuìr a.</div>
     </div>
 
@@ -3104,7 +3112,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：听说你得到了去英国留学的机会，祝贺你啊！<br>女：谢谢，我也很兴奋呢。<br>男：你是学英语的，应该到英语的语言环境中去锻炼锻炼。<br>女：是啊，不仅是语言，<span class="keyword">最关键的是可以了解<span class="keyword-tooltip">💡 الأهم فهم الثقافة</span></span>语言中那些丰富的社会文化。<br>问：女的认为去英国学习的最大好处是什么？</div>
+      <div class="chinese-text">男：听说你得到了去英国留学的机会，祝贺你啊！<br>女：谢谢，我也很兴奋呢。<br>男：你是学英语的，应该到英语的语言环境中去锻炼锻炼。<br>女：是啊，不仅是语言，<span class="keyword" onclick="playChinese('最关键的是可以了解', this)">最关键的是可以了解<span class="keyword-tooltip">💡 (انقر للنطق) 💡 الأهم فهم الثقافة</span></span>语言中那些丰富的社会文化。<br>问：女的认为去英国学习的最大好处是什么？</div>
       <div class="pinyin-text">Nán: Tīngshuō nǐ dédào le qù Yīngguó liúxué de jīhuì, zhùhè nǐ a!<br>Nǚ: Xièxiè, wǒ yě hěn xīngfèn ne.<br>Nán: Nǐ shì xué Yīngyǔ de, yīnggāi dào Yīngyǔ de yǔyán huánjìng zhōng qù duànliàn duànliàn.<br>Nǚ: Shì a, bùjǐn shì yǔyán, zuì guānjiàn de shì kěyǐ liǎojiě yǔyán zhōng nàxiē fēngfù de shèhuì wénhuà.</div>
     </div>
 
@@ -3311,7 +3319,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="why-box">
       <span class="label">🕵️ لماذا A؟</span>
-      <p>الفقرة قالت: <b>"还<span class="keyword">一直坚持写旅行日记<span class="keyword-tooltip">💡 تكتب يوميات السفر</span></span>"</b> = "تستمر دائماً في كتابة يوميات السفر". الكلمة المفتاحية: 坚持写日记 = تثابر على كتابة اليوميات ✓</p>
+      <p>الفقرة قالت: <b>"还<span class="keyword" onclick="playChinese('一直坚持写旅行日记', this)">一直坚持写旅行日记<span class="keyword-tooltip">💡 (انقر للنطق) 💡 تكتب يوميات السفر</span></span>"</b> = "تستمر دائماً في كتابة يوميات السفر". الكلمة المفتاحية: 坚持写日记 = تثابر على كتابة اليوميات ✓</p>
     </div>
   </div>
 
@@ -3333,7 +3341,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="why-box">
       <span class="label">🕵️ لماذا B؟</span>
-      <p>الجملة الأخيرة: <b>"这也<span class="keyword">让她变得更勇敢<span class="keyword-tooltip">💡 أصبحت أكثر شجاعة</span></span>了"</b> = "هذا (السفر) جعلها أكثر شجاعة". تطابق مباشر! ✓</p>
+      <p>الجملة الأخيرة: <b>"这也<span class="keyword" onclick="playChinese('让她变得更勇敢', this)">让她变得更勇敢<span class="keyword-tooltip">💡 (انقر للنطق) 💡 أصبحت أكثر شجاعة</span></span>了"</b> = "هذا (السفر) جعلها أكثر شجاعة". تطابق مباشر! ✓</p>
     </div>
 
     <div class="explain-box">
@@ -3402,7 +3410,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="why-box">
       <span class="label">🕵️ لماذا A؟</span>
-      <p>النص يقول: <b>"目的是...<span class="keyword">提高人们的生活质量<span class="keyword-tooltip">💡 هدف رفع جودة الحياة</span></span>"</b> = "الهدف هو رفع جودة حياة الناس". تطابق حرفي ✓</p>
+      <p>النص يقول: <b>"目的是...<span class="keyword" onclick="playChinese('提高人们的生活质量', this)">提高人们的生活质量<span class="keyword-tooltip">💡 (انقر للنطق) 💡 هدف رفع جودة الحياة</span></span>"</b> = "الهدف هو رفع جودة حياة الناس". تطابق حرفي ✓</p>
     </div>
   </div>
 
@@ -3484,7 +3492,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="why-box">
       <span class="label">🕵️ لماذا C؟</span>
-      <p>النص يقول: <b>"<span class="keyword">非常流行的歌<span class="keyword-tooltip">💡 أغنية شعبية</span></span>"</b> = <b>"أغنية شائعة جداً"</b>. الكلمات 流行 (شائع) + 歌 (أغنية) = <b>أغنية شعبية</b> ✓</p>
+      <p>النص يقول: <b>"<span class="keyword" onclick="playChinese('非常流行的歌', this)">非常流行的歌<span class="keyword-tooltip">💡 (انقر للنطق) 💡 أغنية شعبية</span></span>"</b> = <b>"أغنية شائعة جداً"</b>. الكلمات 流行 (شائع) + 歌 (أغنية) = <b>أغنية شعبية</b> ✓</p>
     </div>
 
     <div class="explain-box">
@@ -3511,7 +3519,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="why-box">
       <span class="label">🕵️ لماذا D؟</span>
-      <p>النص يقول: <b>"经<span class="keyword">常回家看看父母<span class="keyword-tooltip">💡 زيارة الوالدين</span></span>"</b> + <b>"跟爸爸说说工作"</b> + <b>"跟妈妈谈谈"</b> + <b>"帮父母洗洗碗"</b>. كل هذه = <b>قضاء الوقت مع الوالدين / مرافقتهم</b> ✓</p>
+      <p>النص يقول: <b>"经<span class="keyword" onclick="playChinese('常回家看看父母', this)">常回家看看父母<span class="keyword-tooltip">💡 (انقر للنطق) 💡 زيارة الوالدين</span></span>"</b> + <b>"跟爸爸说说工作"</b> + <b>"跟妈妈谈谈"</b> + <b>"帮父母洗洗碗"</b>. كل هذه = <b>قضاء الوقت مع الوالدين / مرافقتهم</b> ✓</p>
     </div>
   </div>
 
@@ -3570,7 +3578,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="why-box">
       <span class="label">🕵️ لماذا B؟</span>
-      <p>النص قال: <b>"葡萄<span class="keyword">不但对身体有好处<span class="keyword-tooltip">💡 مفيد للجسم</span></span>"</b> = "العنب ليس فقط مفيد للجسم". تطابق حرفي مع الجواب ✓</p>
+      <p>النص قال: <b>"葡萄<span class="keyword" onclick="playChinese('不但对身体有好处', this)">不但对身体有好处<span class="keyword-tooltip">💡 (انقر للنطق) 💡 مفيد للجسم</span></span>"</b> = "العنب ليس فقط مفيد للجسم". تطابق حرفي مع الجواب ✓</p>
     </div>
   </div>
 
@@ -3579,7 +3587,7 @@ body.hide-pinyin .zh-pny-inner::before {
     <div class="q-header">
       <div class="q-num-badge">45</div>
       <span class="q-type">سؤال على الفقرة</span>
-      <span style="margin-right:auto;color:#10b981;font-weight:bold">✓ الجواب: A (《<span class="keyword">水果<span class="keyword-tooltip">💡 موضوع الفاكهة والصحة</span></span>与健康》 - الفاكهة والصحة)</span>
+      <span style="margin-right:auto;color:#10b981;font-weight:bold">✓ الجواب: A (《<span class="keyword" onclick="playChinese('水果', this)">水果<span class="keyword-tooltip">💡 (انقر للنطق) 💡 موضوع الفاكهة والصحة</span></span>与健康》 - الفاكهة والصحة)</span>
     </div>
     <p style="background:#f1f5f9;padding:10px;border-radius:8px;margin:10px 0"><b>السؤال:</b> هذه الفقرة قد تكون من أي كتاب/برنامج؟</p>
 
@@ -4426,7 +4434,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص:</span>
-      <div class="chinese-text">随着社会的发展，<span class="keyword">许多人开始习惯<span class="keyword-tooltip">💡 كثيرون يقبلون الفكرة</span></span>"租"东西，而不是"买"。你只需要花很少的钱，就可以使用你需要的东西，非常方便。</div>
+      <div class="chinese-text">随着社会的发展，<span class="keyword" onclick="playChinese('许多人开始习惯', this)">许多人开始习惯<span class="keyword-tooltip">💡 (انقر للنطق) 💡 كثيرون يقبلون الفكرة</span></span>"租"东西，而不是"买"。你只需要花很少的钱，就可以使用你需要的东西，非常方便。</div>
       <p style="margin-top:10px;color:#854d0e"><b>السؤال:</b> 关于"租"，我们可以知道...</p>
     </div>
 
@@ -4480,7 +4488,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص:</span>
-      <div class="chinese-text">很多公司在招聘时都希望<span class="keyword">应聘者<span class="keyword-tooltip">💡 متطلبات التوظيف</span></span>有较高的时间管理能力，有能力安排好时间，并且能同时解决多个问题。</div>
+      <div class="chinese-text">很多公司在招聘时都希望<span class="keyword" onclick="playChinese('应聘者', this)">应聘者<span class="keyword-tooltip">💡 (انقر للنطق) 💡 متطلبات التوظيف</span></span>有较高的时间管理能力，有能力安排好时间，并且能同时解决多个问题。</div>
       <p style="margin-top:10px;color:#854d0e"><b>السؤال:</b> 这段话主要谈论的是...</p>
     </div>
 
@@ -4523,7 +4531,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص:</span>
-      <div class="chinese-text">虽然机票经常打折，速度也比火车快，可是它特别容易受雨雪天气影响，不能总是准时起飞，但<span class="keyword">高速火车一般不会受此影响<span class="keyword-tooltip">💡 في موعدها دائماً</span></span>，因此在出差时选择乘坐高速火车的人越来越多。</div>
+      <div class="chinese-text">虽然机票经常打折，速度也比火车快，可是它特别容易受雨雪天气影响，不能总是准时起飞，但<span class="keyword" onclick="playChinese('高速火车一般不会受此影响', this)">高速火车一般不会受此影响<span class="keyword-tooltip">💡 (انقر للنطق) 💡 في موعدها دائماً</span></span>，因此在出差时选择乘坐高速火车的人越来越多。</div>
       <p style="margin-top:10px;color:#854d0e"><b>السؤال:</b> 人们出差时选择高速火车的原因是...</p>
     </div>
 
@@ -4569,7 +4577,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص:</span>
-      <div class="chinese-text">许老师虽然年龄不大，但是他在读博士的时候成绩就非常优秀，写了很多关于<span class="keyword">解决环境污染问题<span class="keyword-tooltip">💡 يبحث في تلوث البيئة</span></span>的文章，现在已经是我们这儿最著名的教授了。</div>
+      <div class="chinese-text">许老师虽然年龄不大，但是他在读博士的时候成绩就非常优秀，写了很多关于<span class="keyword" onclick="playChinese('解决环境污染问题', this)">解决环境污染问题<span class="keyword-tooltip">💡 (انقر للنطق) 💡 يبحث في تلوث البيئة</span></span>的文章，现在已经是我们这儿最著名的教授了。</div>
       <p style="margin-top:10px;color:#854d0e"><b>السؤال:</b> 关于许老师，我们可以知道...</p>
     </div>
 
@@ -4611,7 +4619,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص:</span>
-      <div class="chinese-text">"多肉"植物喜欢阳光，不需要太多的水。它的样子挺可爱的，看到它，你会觉得心情都好起来了。因此，它越来越<span class="keyword">受到年轻人的欢迎<span class="keyword-tooltip">💡 محبوب من الشباب</span></span>。</div>
+      <div class="chinese-text">"多肉"植物喜欢阳光，不需要太多的水。它的样子挺可爱的，看到它，你会觉得心情都好起来了。因此，它越来越<span class="keyword" onclick="playChinese('受到年轻人的欢迎', this)">受到年轻人的欢迎<span class="keyword-tooltip">💡 (انقر للنطق) 💡 محبوب من الشباب</span></span>。</div>
       <p style="margin-top:10px;color:#854d0e"><b>السؤال:</b> "多肉"植物...</p>
     </div>
 
@@ -4654,7 +4662,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص:</span>
-      <div class="chinese-text">"世界这么大，我想去看看"这句话在互联网上很流行，因为它鼓励大家离开自己熟悉的地方，<span class="keyword">勇敢地走出去<span class="keyword-tooltip">💡 يشجع على السفر</span></span>，看看外面的世界。</div>
+      <div class="chinese-text">"世界这么大，我想去看看"这句话在互联网上很流行，因为它鼓励大家离开自己熟悉的地方，<span class="keyword" onclick="playChinese('勇敢地走出去', this)">勇敢地走出去<span class="keyword-tooltip">💡 (انقر للنطق) 💡 يشجع على السفر</span></span>，看看外面的世界。</div>
       <p style="margin-top:10px;color:#854d0e"><b>السؤال:</b> 这句话建议大家...</p>
     </div>
 
@@ -4691,7 +4699,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص:</span>
-      <div class="chinese-text">年轻人结婚越来越晚，甚至有很多人表示不想结婚。他们觉得结婚之后<span class="keyword">生活压力太大<span class="keyword-tooltip">💡 السبب الذي يخيف من الزواج</span></span>，还是一个人过轻松愉快。</div>
+      <div class="chinese-text">年轻人结婚越来越晚，甚至有很多人表示不想结婚。他们觉得结婚之后<span class="keyword" onclick="playChinese('生活压力太大', this)">生活压力太大<span class="keyword-tooltip">💡 (انقر للنطق) 💡 السبب الذي يخيف من الزواج</span></span>，还是一个人过轻松愉快。</div>
       <p style="margin-top:10px;color:#854d0e"><b>السؤال:</b> 很多年轻人不想结婚是因为...</p>
     </div>
 
@@ -4734,7 +4742,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص:</span>
-      <div class="chinese-text">小张刚开始工作时，担心大家觉得自己太笨，即使在工作中遇到困难，也<span class="keyword">不敢问其他同事<span class="keyword-tooltip">💡 كان يجب أن يطلب المساعدة</span></span>或请他们帮忙。结果浪费了很多时间，问题还没解决。</div>
+      <div class="chinese-text">小张刚开始工作时，担心大家觉得自己太笨，即使在工作中遇到困难，也<span class="keyword" onclick="playChinese('不敢问其他同事', this)">不敢问其他同事<span class="keyword-tooltip">💡 (انقر للنطق) 💡 كان يجب أن يطلب المساعدة</span></span>或请他们帮忙。结果浪费了很多时间，问题还没解决。</div>
       <p style="margin-top:10px;color:#854d0e"><b>السؤال:</b> 遇到困难时，小张应该...</p>
     </div>
 
@@ -4774,7 +4782,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص:</span>
-      <div class="chinese-text">购物时付款的方法越来越多，以前我们去逛街的时候，要带上钱包、银行卡，有时还要提前准备好零钱。现在<span class="keyword">流行用手机付款<span class="keyword-tooltip">💡 الدفع عبر الهاتف</span></span>，真是方便极了！</div>
+      <div class="chinese-text">购物时付款的方法越来越多，以前我们去逛街的时候，要带上钱包、银行卡，有时还要提前准备好零钱。现在<span class="keyword" onclick="playChinese('流行用手机付款', this)">流行用手机付款<span class="keyword-tooltip">💡 (انقر للنطق) 💡 الدفع عبر الهاتف</span></span>，真是方便极了！</div>
       <p style="margin-top:10px;color:#854d0e"><b>السؤال:</b> 现在人们购物时喜欢用手机...</p>
     </div>
 
@@ -4817,7 +4825,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص:</span>
-      <div class="chinese-text">夏天室外温度高，大家在中午要减少外出。有条件的话，<span class="keyword">最好午睡半个小时<span class="keyword-tooltip">💡 نصيحة القيلولة</span></span>，这样下午就不会觉得太累。另外，要注意空调的温度不要太低，太冷容易感冒。</div>
+      <div class="chinese-text">夏天室外温度高，大家在中午要减少外出。有条件的话，<span class="keyword" onclick="playChinese('最好午睡半个小时', this)">最好午睡半个小时<span class="keyword-tooltip">💡 (انقر للنطق) 💡 نصيحة القيلولة</span></span>，这样下午就不会觉得太累。另外，要注意空调的温度不要太低，太冷容易感冒。</div>
       <p style="margin-top:10px;color:#854d0e"><b>السؤال:</b> 夏天的中午应该...</p>
     </div>
 
@@ -4861,7 +4869,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص:</span>
-      <div class="chinese-text">许多宾馆都会为客人提供牙刷、牙膏，这样确实很方便，但是<span class="keyword">只用一次就扔掉实在太浪费<span class="keyword-tooltip">💡 غير اقتصادي/مسرف</span></span>了，因此引起了那些重视环保的人的不满。</div>
+      <div class="chinese-text">许多宾馆都会为客人提供牙刷、牙膏，这样确实很方便，但是<span class="keyword" onclick="playChinese('只用一次就扔掉实在太浪费', this)">只用一次就扔掉实在太浪费<span class="keyword-tooltip">💡 (انقر للنطق) 💡 غير اقتصادي/مسرف</span></span>了，因此引起了那些重视环保的人的不满。</div>
       <p style="margin-top:10px;color:#854d0e"><b>السؤال:</b> 重视环保的人会觉得宾馆的这个做法...</p>
     </div>
 
@@ -4906,7 +4914,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص:</span>
-      <div class="chinese-text">就像世界上没有完全相同的叶子，这个世界上也<span class="keyword">没有性格完全相同的人<span class="keyword-tooltip">💡 كل شخص مختلف</span></span>。有的人喜欢说、喜欢笑、喜欢热闹；有的人喜欢安静、喜欢一个人吃饭、看书、逛街。尊重别人的性格，其实也就是尊重自己。</div>
+      <div class="chinese-text">就像世界上没有完全相同的叶子，这个世界上也<span class="keyword" onclick="playChinese('没有性格完全相同的人', this)">没有性格完全相同的人<span class="keyword-tooltip">💡 (انقر للنطق) 💡 كل شخص مختلف</span></span>。有的人喜欢说、喜欢笑、喜欢热闹；有的人喜欢安静、喜欢一个人吃饭、看书、逛街。尊重别人的性格，其实也就是尊重自己。</div>
       <p style="margin-top:10px;color:#854d0e"><b>السؤال:</b> 这段话的意思是...</p>
     </div>
 
@@ -4955,7 +4963,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص:</span>
-      <div class="chinese-text">我选这个房子的原因有三个：首先，两个房间都在南边，阳光好；其次，到公司也不远；最后，<span class="keyword">周围的景色也很不错<span class="keyword-tooltip">💡 جمال المناظر المحيطة</span></span>。</div>
+      <div class="chinese-text">我选这个房子的原因有三个：首先，两个房间都在南边，阳光好；其次，到公司也不远；最后，<span class="keyword" onclick="playChinese('周围的景色也很不错', this)">周围的景色也很不错<span class="keyword-tooltip">💡 (انقر للنطق) 💡 جمال المناظر المحيطة</span></span>。</div>
       <p style="margin-top:10px;color:#854d0e"><b>السؤال:</b> 这个房子...</p>
     </div>
 
@@ -5009,7 +5017,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 النص:</span>
-      <div class="chinese-text">我们不要因为一次成功就骄傲得意，也不能因为一次失败就放弃努力。不管发生什么事情，我们都<span class="keyword">不要对自己失去信心<span class="keyword-tooltip">💡 الثقة بالنفس مفتاح السعادة</span></span>，这才是打开幸福大门的钥匙。</div>
+      <div class="chinese-text">我们不要因为一次成功就骄傲得意，也不能因为一次失败就放弃努力。不管发生什么事情，我们都<span class="keyword" onclick="playChinese('不要对自己失去信心', this)">不要对自己失去信心<span class="keyword-tooltip">💡 (انقر للنطق) 💡 الثقة بالنفس مفتاح السعادة</span></span>，这才是打开幸福大门的钥匙。</div>
       <p style="margin-top:10px;color:#854d0e"><b>السؤال:</b> 打开幸福大门的钥匙是...</p>
     </div>
 
@@ -5100,7 +5108,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="why-box">
       <span class="label">🕵️ لماذا C؟</span>
-      <p>النص يقول: <b>"<span class="keyword">8月27日<span class="keyword-tooltip">💡 نهاية أغسطس</span></span>到9月8日"</b> = "27 أغسطس إلى 8 سبتمبر". 27 أغسطس = <b>نهاية أغسطس</b> ✓</p>
+      <p>النص يقول: <b>"<span class="keyword" onclick="playChinese('8月27日', this)">8月27日<span class="keyword-tooltip">💡 (انقر للنطق) 💡 نهاية أغسطس</span></span>到9月8日"</b> = "27 أغسطس إلى 8 سبتمبر". 27 أغسطس = <b>نهاية أغسطس</b> ✓</p>
     </div>
   </div>
 
@@ -5122,7 +5130,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="why-box">
       <span class="label">🕵️ لماذا B؟</span>
-      <p>النص يقول: <b>"在网站上选座购票，这样<span class="keyword">可以节约不少时间<span class="keyword-tooltip">💡 توفير الوقت</span></span>"</b> = "الشراء على الموقع يوفّر الكثير من الوقت" ✓</p>
+      <p>النص يقول: <b>"在网站上选座购票，这样<span class="keyword" onclick="playChinese('可以节约不少时间', this)">可以节约不少时间<span class="keyword-tooltip">💡 (انقر للنطق) 💡 توفير الوقت</span></span>"</b> = "الشراء على الموقع يوفّر الكثير من الوقت" ✓</p>
     </div>
   </div>
 
@@ -5176,7 +5184,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="why-box">
       <span class="label">🕵️ لماذا D؟</span>
-      <p>النص قال: <b>"<span class="keyword">不能完全相信书本<span class="keyword-tooltip">💡 لا تصديق مطلق</span></span>上的内容"</b> = "لا يمكن تصديق محتوى الكتب تماماً". 不必完全相信 (لا يجب التصديق التام) = نفس المعنى ✓</p>
+      <p>النص قال: <b>"<span class="keyword" onclick="playChinese('不能完全相信书本', this)">不能完全相信书本<span class="keyword-tooltip">💡 (انقر للنطق) 💡 لا تصديق مطلق</span></span>上的内容"</b> = "لا يمكن تصديق محتوى الكتب تماماً". 不必完全相信 (لا يجب التصديق التام) = نفس المعنى ✓</p>
     </div>
   </div>
 
@@ -5198,7 +5206,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="why-box">
       <span class="label">🕵️ لماذا A؟</span>
-      <p>النص ينتهي بـ <b>"<span class="keyword">敢于提出自己的意见<span class="keyword-tooltip">💡 كوّن رأيك</span></span>"</b> = "تجرّأ على طرح رأيك الخاص". الفكرة الرئيسية: <b>كوّن رأيك الخاص بدلاً من قبول كل شيء بلا تفكير</b> ✓</p>
+      <p>النص ينتهي بـ <b>"<span class="keyword" onclick="playChinese('敢于提出自己的意见', this)">敢于提出自己的意见<span class="keyword-tooltip">💡 (انقر للنطق) 💡 كوّن رأيك</span></span>"</b> = "تجرّأ على طرح رأيك الخاص". الفكرة الرئيسية: <b>كوّن رأيك الخاص بدلاً من قبول كل شيء بلا تفكير</b> ✓</p>
     </div>
   </div>
 
@@ -5250,7 +5258,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="why-box">
       <span class="label">🕵️ لماذا D؟</span>
-      <p>النص يقول: <b>"他<span class="keyword">更愿意去超市把菜买回来自己做<span class="keyword-tooltip">💡 يفضل الطبخ بنفسه</span></span>"</b> = "يفضّل شراء الطعام والطبخ بنفسه". تطابق مباشر ✓</p>
+      <p>النص يقول: <b>"他<span class="keyword" onclick="playChinese('更愿意去超市把菜买回来自己做', this)">更愿意去超市把菜买回来自己做<span class="keyword-tooltip">💡 (انقر للنطق) 💡 يفضل الطبخ بنفسه</span></span>"</b> = "يفضّل شراء الطعام والطبخ بنفسه". تطابق مباشر ✓</p>
     </div>
   </div>
 
@@ -6091,9 +6099,16 @@ body.hide-pinyin .zh-pny-inner::before {
 <!-- TAB: FLASHCARDS - Visual Memory Cards -->
 <div id="flashcards" class="tab-content">
   <div class="section-title">
-    <h2>🎨 بطاقات الذاكرة البصرية</h2>
-    <p>كل بطاقة فيها رسم يربط الحرف الصيني بمعناه - الصورة الذهنية تساعدك تتذكّر بدون حفظ!</p>
+    <h2>📚 المرجع الشامل - بطاقات الذاكرة + القواعد</h2>
+    <p>كل ما تحتاجه في مكان واحد: 54 بطاقة بصرية لحفظ المفردات + جميع القواعد الأساسية للـ HSK4. الصور الذهنية + النطق الصوتي = تعلّم بدون حفظ!</p>
   </div>
+
+  <div class="tabs" style="position:sticky;top:80px;background:#f1f5f9;padding:8px;border-radius:10px;margin-bottom:15px">
+    <button class="tab-btn active" onclick="showSubsection('subFlashcards', this)" style="flex:1">🎨 بطاقات الذاكرة (54)</button>
+    <button class="tab-btn" onclick="showSubsection('subGrammar', this)" style="flex:1">📐 القواعد المفتاحية (15)</button>
+  </div>
+
+  <div id="subFlashcards" class="sub-section">
 
   <div id="micPermBanner" style="display:none;background:linear-gradient(135deg,#fef3c7,#fde68a);padding:16px 20px;border-radius:12px;margin-bottom:18px;border-right:5px solid #f59e0b;color:#78350f">
     <b>🔑 لحفظ إذن الميكروفون بشكل دائم:</b>
@@ -7727,12 +7742,14 @@ body.hide-pinyin .zh-pny-inner::before {
     4️⃣ <b>عُد بعد يوم</b>: تأكد من الكلمة التي ربحتَها<br>
     5️⃣ <b>استخدم الكلمة فوراً</b>: حاول صياغة جملة بنفسك</p>
   </div>
-</div>
-</div>
+</div><!-- end subFlashcards -->
 
-<!-- TAB: GRAMMAR -->
-<div id="grammar" class="tab-content">
-  <div class="section-title">
+<div id="subGrammar" class="sub-section" style="display:none">
+  <div class="welcome-card" style="background:linear-gradient(135deg,#ddd6fe,#c4b5fd);border-right-color:#7c3aed;margin-bottom:20px">
+    <h2 style="color:#5b21b6">📐 القواعد المفتاحية في HSK4</h2>
+    <p>أهم 15 قاعدة ستراها في الاختبار. كل قاعدة مشروحة بأمثلة + كل كلمة صينية قابلة للنطق!</p>
+  </div>
+<div class="section-title">
     <h2>📐 القواعد المفتاحية في HSK4</h2>
     <p>أهم القواعد التي ستراها في الاختبار</p>
   </div>
@@ -7836,7 +7853,10 @@ body.hide-pinyin .zh-pny-inner::before {
     <h2 style="color:#1e40af">📚 نصيحة أخيرة</h2>
     <p>هذه القواعد <b>ليست للحفظ</b>! اقرأها مرة، افهم المنطق، ثم <b>عُد لمراجعة الأسئلة</b>. اللغة <b>تُعاش</b>، لا <b>تُحفظ</b>!</p>
   </div>
-</div>
+  </div><!-- end subGrammar -->
+</div><!-- end flashcards combined -->
+</div><!-- end subGrammar -->
+</div><!-- end flashcards combined -->
 
 </div><!-- end wrapper -->
 
@@ -8665,6 +8685,20 @@ document.addEventListener('DOMContentLoaded', function() {
   const activeBtn = document.querySelector('.tts-engine-btn[data-engine="' + ttsEngine + '"]');
   if (activeBtn) activeBtn.classList.add('active');
 });
+
+function showSubsection(name, btn) {
+  // Hide all sub-sections in the current tab
+  const parent = btn.closest('.tab-content');
+  if (parent) {
+    parent.querySelectorAll('.sub-section').forEach(s => s.style.display = 'none');
+    const target = document.getElementById(name);
+    if (target) target.style.display = 'block';
+    // Update sub-tab buttons
+    btn.parentElement.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    window.scrollTo({top: parent.offsetTop - 80, behavior: 'smooth'});
+  }
+}
 
 function showTab(name, btn) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
