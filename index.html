@@ -8676,10 +8676,16 @@ async function tryIflytekEndpoint(host, pcmInt16) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Fix: move subGrammar to be sibling of subFlashcards (inside flashcards tab)
+  const fcTab = document.getElementById('flashcards');
+  const sg = document.getElementById('subGrammar');
+  if (fcTab && sg && sg.parentElement.id === 'subFlashcards') {
+    fcTab.appendChild(sg);
+  }
+  
   // Force show subFlashcards as default
   const sf = document.getElementById('subFlashcards');
   if (sf) { sf.style.display = 'block'; sf.classList.add('sub-active'); }
-  const sg = document.getElementById('subGrammar');
   if (sg) sg.style.display = 'none';
   
   console.log('%c🎙️ نظام النطق + ASR Voice Recognition', 'font-size:14px;color:#667eea;font-weight:bold');
