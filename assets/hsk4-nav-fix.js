@@ -24,6 +24,13 @@
     if (target){
       target.classList.add('active');
       document.body.dataset.activeTab = tabId;
+      // Force-load images that were dormant in hidden tab
+      target.querySelectorAll('img[data-src]').forEach(img => {
+        if (!img.src && img.dataset.src) img.src = img.dataset.src;
+      });
+      target.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        img.loading = 'eager';
+      });
     }
     document.querySelectorAll('.m6-mini-nav a, .mk9-mini-nav a, .hsk-nav a').forEach(a => {
       a.classList.remove('is-active', 'active');

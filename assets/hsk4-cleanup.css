@@ -482,3 +482,79 @@ body.mk9-redesign #pinyinToggle{
   height:44px !important;
   min-height:44px !important;
 }
+
+/* ============================================================
+   === ROUND 4 FIXES ===
+   ============================================================ */
+
+/* R4-1: Nav menu opens BELOW header with proper z-index (was 200, header is 9000) */
+@media (max-width:860px){
+  html body .m6-mini-nav,
+  html body .mk9-mini-nav,
+  html body .hsk-nav{
+    top:100% !important;
+    inset-inline-start:12px !important;
+    inset-inline-end:12px !important;
+    right:auto !important;
+    left:auto !important;
+    z-index:9500 !important;
+    margin-top:6px !important;
+  }
+  html body .m6-topbar,
+  html body .mk9-topbar,
+  html body .hsk-topbar{
+    position:relative !important;
+  }
+}
+
+/* R4-2: Flashcard buttons 44px min-height */
+html body .fc-speak-btn,
+html body .fc-record-btn,
+html body .fc-listen-btn,
+html body .fc-replay-btn,
+html body button[class*="fc-"]{
+  min-height:44px !important;
+  padding-block:12px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:6px !important;
+}
+
+/* R4-3: Skip-nav fixed + animated focus */
+html body .skip-nav,
+html body .skip-link{
+  position:fixed !important;
+  top:-60px !important;
+  left:50% !important;
+  right:auto !important;
+  transform:translateX(-50%) !important;
+  transition:top 0.2s ease !important;
+  z-index:10002 !important;
+  background:#0f172a !important;
+  color:#fff !important;
+  padding:10px 20px !important;
+  border-radius:0 0 12px 12px !important;
+  text-decoration:none !important;
+  font-weight:bold !important;
+  border:2px solid #facc15 !important;
+}
+html body .skip-nav:focus,
+html body .skip-link:focus{
+  top:0 !important;
+  outline:none !important;
+}
+
+/* R4-4: Q-header tighter padding (force) */
+html body .q-header,
+body.mock6-redesign .q-header{
+  padding:10px 14px !important;
+  gap:6px !important;
+}
+@media (max-width:768px){
+  html body .q-header,
+  body.mock6-redesign .q-header{
+    padding:10px 12px !important;
+    gap:5px !important;
+  }
+}
