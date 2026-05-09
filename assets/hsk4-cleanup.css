@@ -14,9 +14,7 @@ button[aria-label*="نهاري"],
 .toggle-answers-btn,
 .tabs,
 .tab-btn,
-.tabs button{
-  display:none !important;
-}
+.tabs button{display:none !important}
 
 /* === Show only ONE tab-content at a time === */
 .tab-content{display:none;margin-bottom:30px;padding-top:20px}
@@ -46,8 +44,8 @@ body:not([data-active-tab]) #listening{display:block !important}
 .reveal-btn:hover,.reveal-answer-btn:hover{transform:scale(1.03);box-shadow:0 4px 12px rgba(59,130,246,0.4) !important}
 .reveal-btn.shown,.reveal-answer-btn.shown{background:linear-gradient(135deg,#16a34a,#15803d) !important}
 
-/* === MOBILE NAV === */
-@media (max-width:768px){
+/* === MOBILE NAV (hamburger) === */
+@media (max-width:860px){
   .m6-mini-nav,.mk9-mini-nav,.hsk-nav{
     display:none !important;flex-direction:column;position:absolute;top:60px;right:8px;left:8px;
     background:#fff;border:2px solid rgba(11,99,206,0.2);border-radius:12px;padding:10px;z-index:200;
@@ -57,17 +55,10 @@ body:not([data-active-tab]) #listening{display:block !important}
   .m6-mini-nav a,.mk9-mini-nav a,.hsk-nav a{
     padding:12px 14px !important;border-radius:8px;width:100%;text-align:right;font-size:15px !important;
   }
-  .nav-toggle-btn{
-    display:flex !important;position:absolute;top:14px;right:12px;
-    background:linear-gradient(135deg,#0b63ce,#064aa3);color:#fff;border:none;width:42px;height:42px;
-    border-radius:50%;cursor:pointer;z-index:201;align-items:center;justify-content:center;
-    font-size:20px;box-shadow:0 4px 12px rgba(0,0,0,0.15);
-  }
   .m6-lang,.mk9-lang,.hsk-lang{display:none !important}
   .m6-topbar,.mk9-topbar,.hsk-topbar{padding:10px 14px !important}
   .m6-brand,.hsk-brand{font-size:14px !important}
 }
-@media (min-width:769px){.nav-toggle-btn{display:none !important}}
 
 /* === Tip + Section title === */
 .hsk-tip-banner{position:relative !important;top:auto !important;margin:12px 0 18px !important}
@@ -83,7 +74,7 @@ body:not([data-active-tab]) #listening{display:block !important}
 [class*="install"]:not(input):not(button[type]),[class*="prompt-banner"]{display:none !important}
 .hsk-stage5-tools-frame,[class*="tools-frame"],[class*="floating-tools"]{display:none !important}
 
-/* === FLASHCARD GRID FIX - high specificity overrides === */
+/* === FLASHCARD GRID FIX === */
 html body .flashcard-grid,
 body.mock6-redesign .flashcard-grid,
 body.mk9-redesign .flashcard-grid{
@@ -131,14 +122,12 @@ html body .flashcard:not(:has(.hsk-card-image-wrap)){min-height:auto !important}
   }
 }
 
-/* === Writing section original images - cap height === */
+/* === Writing section original images === */
 html body img.hsk-original-image{
   max-height:520px !important;width:auto !important;max-width:100% !important;
   object-fit:contain !important;display:block !important;margin:10px auto !important;
 }
-@media (max-width:600px){
-  html body img.hsk-original-image{max-height:340px !important}
-}
+@media (max-width:600px){html body img.hsk-original-image{max-height:340px !important}}
 
 /* === Index page minimal cleanup === */
 body.hsk-landing-page .hsk-final-status,
@@ -146,16 +135,14 @@ body.hsk-landing-page .hsk-hero,
 body.hsk-landing-page .hsk-deep-row,
 body.hsk-landing-page #introTip,
 body.hsk-landing-page .hsk-intro-note,
-body.hsk-landing-page .hsk-section-title{
-  display:none !important;
-}
+body.hsk-landing-page .hsk-section-title{display:none !important}
 body.hsk-landing-page #tests{margin-top:24px !important;padding-top:8px !important}
 
 /* ============================================================
-   === GEOMETRY FIXES (from engineering audit, 9 issues) ===
+   === GEOMETRY FIXES (Round 1 + Round 2) ===
    ============================================================ */
 
-/* FIX 1+5: Header flex layout + 44x44 touch target */
+/* Header flex + 44x44 touch + brand RTL right */
 html body .hsk-topbar,
 html body .m6-topbar,
 html body .mk9-topbar{
@@ -166,125 +153,82 @@ html body .mk9-topbar{
   grid-template-columns:unset !important;
 }
 html body .hsk-brand{
-  flex:1 1 auto !important;
-  max-width:calc(100% - 60px) !important;
+  margin-inline-start:auto !important;
+  flex:0 0 auto !important;
+  flex-grow:0 !important;
   min-width:0 !important;
+  max-width:calc(100% - 60px) !important;
 }
 html body .nav-toggle-btn{
   position:static !important;
   flex-shrink:0 !important;
-  width:44px !important;
-  height:44px !important;
-  min-width:44px !important;
-  min-height:44px !important;
+  width:44px !important;height:44px !important;
+  min-width:44px !important;min-height:44px !important;
+  background:linear-gradient(135deg,#0b63ce,#064aa3);
+  color:#fff;border:none;border-radius:50%;cursor:pointer;
+  align-items:center;justify-content:center;font-size:20px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* FIX 3+4: stat-strip 3-cols on mobile + card height auto */
-@media (max-width:768px){
-  html body .hsk-stat-strip{
-    grid-template-columns:repeat(3, 1fr) !important;
-    height:auto !important;
-    gap:6px !important;
-  }
-  html body .hsk-stat{
-    height:auto !important;
-    padding:10px 4px !important;
-  }
-  html body .hsk-stat b{font-size:18px !important}
-  html body .hsk-stat span{font-size:11px !important}
-  html body .hsk-card-body{
-    gap:12px !important;
-    padding:14px !important;
-  }
-  html body .hsk-test-card{min-height:0 !important}
-  html body .hsk-card-art{min-height:160px !important}
-}
-
-/* FIX 8: Unified breakpoint for nav toggle (860px) */
+/* Unified breakpoint for nav toggle (860px) */
 @media (max-width:860px){
   html body .nav-toggle-btn{display:flex !important}
 }
 @media (min-width:861px){
   html body .nav-toggle-btn{display:none !important}
   html body .hsk-nav{
-    display:flex !important;
-    position:static !important;
-    box-shadow:none !important;
-    border:none !important;
-    background:transparent !important;
-    padding:0 !important;
+    display:flex !important;position:static !important;
+    box-shadow:none !important;border:none !important;
+    background:transparent !important;padding:0 !important;
     flex-direction:row !important;
   }
 }
 
-/* FIX 7: Index page - hide nav toggle entirely (no internal pages to navigate) */
-body.hsk-landing-page .nav-toggle-btn,
-body.hsk-landing-page .hsk-mobile-menu-btn{
-  display:none !important;
+/* Landing page: SHOW nav toggle (useful links to mock6/mock9) */
+body.hsk-landing-page .nav-toggle-btn{display:flex !important}
+body.hsk-landing-page .hsk-mobile-menu-btn{display:none !important}
+
+/* Mobile card: stat-strip 3-cols + reduced height */
+@media (max-width:768px){
+  html body .hsk-stat-strip{
+    grid-template-columns:repeat(3, 1fr) !important;
+    height:auto !important;gap:6px !important;
+  }
+  html body .hsk-stat{height:auto !important;padding:10px 4px !important}
+  html body .hsk-stat b{font-size:18px !important}
+  html body .hsk-stat span{font-size:11px !important}
+  html body .hsk-card-heading{padding-top:42px !important}
+  html body .hsk-card-art{
+    min-height:160px !important;
+    max-height:180px !important;
+  }
+  html body .hsk-features{gap:6px !important;margin:8px 0 !important}
+  html body .hsk-features li{
+    font-size:13px !important;line-height:1.45 !important;
+    padding:4px 8px !important;
+  }
+  html body .hsk-card-body{gap:10px !important;padding:12px !important}
+  html body .hsk-test-card{min-height:0 !important}
+  html body .hsk-chip{font-size:11px !important;padding:5px 10px !important}
+  html body .hsk-cta{padding:12px 16px !important;font-size:15px !important}
 }
 
-/* FIX 9: Remove duplicate grid-template on test card (keep final-polish minmax) */
+/* Test card grid - single source of truth */
 html body .hsk-test-card{
   grid-template-columns:minmax(200px, 0.82fr) minmax(300px, 1.18fr);
 }
 @media (max-width:1100px){
-  html body .hsk-test-card{
-    grid-template-columns:1fr !important;
-  }
+  html body .hsk-test-card{grid-template-columns:1fr !important}
 }
 
-/* ============================================================
-   === GEOMETRY FIXES (from engineering audit, 9 issues) ===
-   ============================================================ */
-
-/* FIX 1+5: Header flex layout + 44x44 touch target */
-html body .hsk-topbar,
-html body .m6-topbar,
-html body .mk9-topbar{
-  display:flex !important;
-  align-items:center !important;
-  justify-content:space-between !important;
-  gap:12px !important;
-  grid-template-columns:unset !important;
+/* Kill ALL stage5 dead UI tools */
+html body .hsk-stage5-tools,
+html body .hsk-stage5-tools-frame,
+html body .hsk-stage5-tool-main,
+html body .hsk-stage5-tool-menu,
+html body [class*="stage5-tools"],
+html body [class*="floating-tools"]{
+  display:none !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
 }
-html body .hsk-brand{
-  flex:1 1 auto !important;
-  max-width:calc(100% - 60px) !important;
-  min-width:0 !important;
-}
-html body .nav-toggle-btn{
-  position:static !important;
-  flex-shrink:0 !important;
-  width:44px !important;
-  height:44px !important;
-  min-width:44px !important;
-  min-height:44px !important;
-}
-
-/* FIX 3+4: stat-strip 3-cols on mobile + card height auto */
-@media (max-width:768px){
-  html body .hsk-stat-strip{
-    grid-template-columns:repeat(3, 1fr) !important;
-    height:auto !important;
-    gap:6px !important;
-  }
-  html body .hsk-stat{
-    height:auto !important;
-    padding:10px 4px !important;
-  }
-  html body .hsk-stat b{font-size:18px !important}
-  html body .hsk-stat span{font-size:11px !important}
-  html body .hsk-card-body{
-    gap:12px !important;
-    padding:14px !important;
-  }
-  html body .hsk-test-card{min-height:0 !important}
-  html body .hsk-card-art{min-height:160px !important}
-}
-
-/* FIX 8: Unified breakpoint for nav toggle (860px) */
-@media (max-width:860px){
-  html body .nav-toggle-btn{display:flex !important}
-}
-@media (min-width:861px){
-  html
