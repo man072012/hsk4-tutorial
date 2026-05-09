@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HSK4 Mock 9 - Arabic Tutorial</title>
+<meta name="description" content="دليل تعليمي تفاعلي شامل بالعربية لاختبار HSK4 المحاكي رقم 9 - 100 سؤال + 57 بطاقة + الصوت الأصلي MP3">
+<meta name="keywords" content="HSK4, الصينية, اختبار محاكي رقم 9, دليل بالعربية, Pinyin">
+<meta name="author" content="man072012">
+<meta property="og:title" content="📚 شرح اختبار HSK4 المحاكي رقم 9 - بالعربية">
+<meta property="og:description" content="دليل تعليمي تفاعلي للاختبار 9 مع الصوت الأصلي + 57 بطاقة ذاكرة">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://man072012.github.io/hsk4-tutorial/mock9.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23c0392b'/%3E%3Ctext x='50' y='65' font-size='50' text-anchor='middle' fill='white' font-weight='bold'%3E中%3C/text%3E%3C/svg%3E">
 <style>
 :root{--primary:#c0392b;--secondary:#e74c3c;--accent:#f39c12;--bg:#fdf6f0;--card:#fff;--text:#2c3e50;--green:#27ae60;--blue:#2980b9}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -80,10 +88,34 @@ span.answer.answer-hidden:hover{filter:blur(3px)}
 .fc{background:#fff;padding:20px;border-radius:12px;text-align:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.08);border:2px solid #ddd}
 .fc-zh{font-size:1.5em;margin:8px 0}
 .fc-py{color:#888;font-size:0.85em}
+
+.skip-nav{position:absolute;top:-40px;left:0;background:#000;color:#fff;padding:8px 16px;z-index:10000;text-decoration:none;border-radius:0 0 8px 0}
+.skip-nav:focus{top:0}
+#progress-bar{position:fixed;top:0;left:0;right:0;height:6px;background:#e5e7eb;z-index:9999;display:flex;align-items:center}
+#progress-fill{height:100%;background:linear-gradient(90deg,#10b981,#059669);width:0%;transition:width 0.5s ease}
+#progress-text{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;font-weight:bold;color:#1f2937;background:#fff;padding:2px 8px;border-radius:10px;border:1px solid #e5e7eb}
+body.dark-mode{background:#0f172a;color:#e2e8f0}
+body.dark-mode .container,body.dark-mode .question,body.dark-mode .intro-card,body.dark-mode .fc,body.dark-mode .controls,body.dark-mode nav{background:#1e293b !important;color:#e2e8f0 !important;border-color:#334155 !important}
+body.dark-mode .chinese,body.dark-mode .explanation,body.dark-mode .option{background:#0f172a !important;color:#e2e8f0 !important}
+body.dark-mode .chinese{color:#fbbf24 !important}
+body.dark-mode .pinyin,body.dark-mode .fc-py{color:#94a3b8 !important}
+.dark-mode-btn{position:fixed;bottom:80px;left:20px;width:48px;height:48px;border-radius:50%;background:#1e293b;color:#fbbf24;border:2px solid #334155;cursor:pointer;font-size:20px;z-index:200;box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+body.dark-mode .dark-mode-btn{background:#fbbf24;color:#1e293b}
+@media (min-width:601px) and (max-width:900px){.container{padding:15px}.fc-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){#progress-bar{height:5px}#progress-text{font-size:10px;right:5px}.dark-mode-btn{bottom:140px;left:10px}}
+.summary-card{background:linear-gradient(135deg,#fef3c7,#fde68a);padding:20px;border-radius:12px;margin:20px;border:2px dashed #d97706;display:none}
+body.show-summary .summary-card{display:block}
+.summary-stat{display:inline-block;margin:6px;padding:8px 14px;background:#fff;border-radius:8px;font-weight:bold}
+
 </style>
 </head>
 <body>
-<div class="container">
+<a href="#main" class="skip-nav">تخطّي إلى المحتوى الرئيسي</a>
+<div id="progress-bar" role="progressbar" aria-label="مؤشر التقدم" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+  <div id="progress-fill"></div>
+  <span id="progress-text">0%</span>
+</div>
+<main id="main"><div class="container">
 <header>
 <h1>📚 شرح اختبار HSK4 المحاكي رقم 9</h1>
 <p>دليل تعليمي بالعربية - 100 سؤال مع شروحات وكلمات مفتاحية</p>
@@ -853,6 +885,102 @@ addRevealButtons();
 // إعادة الربط بعد أي إعادة بناء
 const observer = new MutationObserver(() => addRevealButtons());
 observer.observe(document.body, {childList:true, subtree:true});
+
+// ========== PROGRESS TRACKING ==========
+const PROGRESS_KEY9 = 'hsk4_mock9_progress';
+let progress9 = JSON.parse(localStorage.getItem(PROGRESS_KEY9) || '{}');
+
+function updateProgress9(qNum, status){
+  if (!qNum) return;
+  progress9[qNum] = status;
+  localStorage.setItem(PROGRESS_KEY9, JSON.stringify(progress9));
+  refreshProgress9();
+}
+
+function refreshProgress9(){
+  const total = document.querySelectorAll('.question').length;
+  const answered = Object.keys(progress9).length;
+  const correct = Object.values(progress9).filter(s => s === 'correct').length;
+  const pct = total > 0 ? Math.round((answered / total) * 100) : 0;
+  const fill = document.getElementById('progress-fill');
+  const text = document.getElementById('progress-text');
+  if (fill) fill.style.width = pct + '%';
+  if (text) text.textContent = answered + '/' + total + ' (' + pct + '%) ✓ ' + correct;
+  document.getElementById('progress-bar')?.setAttribute('aria-valuenow', pct);
+}
+
+document.addEventListener('click', function(e){
+  const card = e.target.closest('.question');
+  if (!card) return;
+  const qNum = card.querySelector('.qnum')?.textContent.replace(/\D/g,'');
+  if (!qNum) return;
+  setTimeout(() => {
+    if (e.target.classList.contains('option-correct-revealed') || e.target.classList.contains('user-correct')){
+      updateProgress9(qNum, 'correct');
+    } else if (e.target.classList.contains('option-wrong') || e.target.classList.contains('user-wrong')){
+      if (!progress9[qNum] || progress9[qNum] === 'wrong') updateProgress9(qNum, 'wrong');
+    } else if (card.classList.contains('revealed') && !progress9[qNum]){
+      updateProgress9(qNum, 'revealed');
+    }
+  }, 100);
+});
+
+window.addEventListener('load', refreshProgress9);
+setInterval(refreshProgress9, 2000);
+
+// ========== DARK MODE ==========
+const DARK_KEY9 = 'hsk4_dark_mode';
+if (localStorage.getItem(DARK_KEY9) === '1') document.body.classList.add('dark-mode');
+
+const darkBtn9 = document.createElement('button');
+darkBtn9.className = 'dark-mode-btn';
+darkBtn9.setAttribute('aria-label', 'تبديل الوضع الليلي');
+darkBtn9.innerHTML = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+darkBtn9.onclick = function(){
+  const isDark = document.body.classList.toggle('dark-mode');
+  localStorage.setItem(DARK_KEY9, isDark ? '1' : '0');
+  this.innerHTML = isDark ? '☀️' : '🌙';
+};
+document.body.appendChild(darkBtn9);
+
+// ========== ARIA ==========
+document.querySelectorAll('audio').forEach(a => a.setAttribute('aria-label', 'صوت السؤال'));
+document.querySelectorAll('button:not([aria-label])').forEach(b => {
+  if (b.textContent) b.setAttribute('aria-label', b.textContent.trim().substring(0,50));
+});
+
+// ========== SUMMARY ==========
+function showSummary9(){
+  let card = document.getElementById('summaryCard9');
+  if (!card){
+    card = document.createElement('div');
+    card.id = 'summaryCard9';
+    card.className = 'summary-card';
+    card.innerHTML = '<h3>📊 ملخص الأداء</h3><div id="summaryStats9"></div>';
+    document.querySelector('.container').appendChild(card);
+  }
+  document.body.classList.add('show-summary');
+  const total = document.querySelectorAll('.question').length;
+  const answered = Object.keys(progress9).length;
+  const correct = Object.values(progress9).filter(s => s === 'correct').length;
+  const wrong = Object.values(progress9).filter(s => s === 'wrong').length;
+  const revealed = Object.values(progress9).filter(s => s === 'revealed').length;
+  document.getElementById('summaryStats9').innerHTML =
+    '<div class="summary-stat" style="color:#16a34a">✓ صحيح: ' + correct + '</div>' +
+    '<div class="summary-stat" style="color:#dc2626">✗ خطأ: ' + wrong + '</div>' +
+    '<div class="summary-stat" style="color:#6b7280">🔍 مكشوف: ' + revealed + '</div>' +
+    '<div class="summary-stat">📋 لم يُجَب: ' + (total - answered) + '</div>' +
+    '<div class="summary-stat" style="background:#10b981;color:#fff">🎯 النسبة: ' + (answered > 0 ? Math.round((correct/answered)*100) : 0) + '%</div>';
+}
+
+const sbtn = document.createElement('button');
+sbtn.style.cssText = 'position:fixed;bottom:140px;left:20px;width:48px;height:48px;border-radius:50%;background:#3b82f6;color:#fff;border:none;cursor:pointer;font-size:20px;z-index:200;box-shadow:0 4px 12px rgba(0,0,0,0.2)';
+sbtn.setAttribute('aria-label', 'عرض ملخص الأداء');
+sbtn.innerHTML = '📊';
+sbtn.onclick = showSummary9;
+document.body.appendChild(sbtn);
+
 </script>
+</main>
 </body>
 </html>

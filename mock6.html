@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>📚 شرح اختبار HSK4 المحاكي رقم 6 - دليل تعليمي شامل بالعربية</title>
+<meta name="description" content="دليل تعليمي تفاعلي شامل بالعربية لاختبار HSK4 المحاكي رقم 6 - 100 سؤال مفصّل مع شرح كامل، 54 بطاقة ذاكرة بصرية، نطق صيني حقيقي، وتسجيل الصوت">
+<meta name="keywords" content="HSK4, الصينية, تعلم الصينية, اختبار محاكي, دليل بالعربية, Pinyin, مفردات, نحو, استماع, قراءة, كتابة">
+<meta name="author" content="man072012">
+<meta property="og:title" content="📚 شرح اختبار HSK4 المحاكي رقم 6 - بالعربية">
+<meta property="og:description" content="دليل تعليمي تفاعلي للاختبار المحاكي مع 100 سؤال + بطاقات ذاكرة + نطق + اختبار ذاتي">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://man072012.github.io/hsk4-tutorial/mock6.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="📚 HSK4 Mock 6 - دليل بالعربية">
+<meta name="twitter:description" content="دليل تعليمي تفاعلي للاختبار المحاكي رقم 6 من HSK4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23667eea'/%3E%3Ctext x='50' y='65' font-size='50' text-anchor='middle' fill='white' font-weight='bold'%3E中%3C/text%3E%3C/svg%3E">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -855,9 +866,68 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 .vocab-item{transition:0.2s}
 .vocab-item:hover{box-shadow:0 4px 12px rgba(0,0,0,0.1)}
 
+
+/* ========== ACCESSIBILITY & SEO ENHANCEMENTS ========== */
+.skip-nav{position:absolute;top:-40px;left:0;background:#000;color:#fff;padding:8px 16px;z-index:10000;text-decoration:none;border-radius:0 0 8px 0}
+.skip-nav:focus{top:0}
+
+/* ========== PROGRESS BAR ========== */
+#progress-bar{position:fixed;top:0;left:0;right:0;height:6px;background:#e5e7eb;z-index:9999;display:flex;align-items:center}
+#progress-fill{height:100%;background:linear-gradient(90deg,#10b981,#059669);width:0%;transition:width 0.5s ease;position:relative}
+#progress-text{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;font-weight:bold;color:#1f2937;background:#fff;padding:2px 8px;border-radius:10px;border:1px solid #e5e7eb;z-index:1}
+
+/* ========== DARK MODE ========== */
+body.dark-mode{background:#0f172a;color:#e2e8f0}
+body.dark-mode .q-card,body.dark-mode .intro-section,body.dark-mode .vocab-grid,
+body.dark-mode .chinese-box,body.dark-mode .trans-box,body.dark-mode .vocab-section,
+body.dark-mode .why-box,body.dark-mode .explain-box,body.dark-mode .memory-box,
+body.dark-mode .flashcard,body.dark-mode .keyword-legend,
+body.dark-mode .welcome-card,body.dark-mode .summary-card{background:#1e293b !important;color:#e2e8f0 !important;border-color:#334155 !important}
+body.dark-mode .opt-item{background:#0f172a !important;color:#e2e8f0}
+body.dark-mode .opt-arabic,body.dark-mode .vocab-mean,body.dark-mode .pinyin-text,body.dark-mode .fc-pinyin{color:#94a3b8 !important}
+body.dark-mode .chinese-text,body.dark-mode .vocab-char,body.dark-mode .opt-chinese,body.dark-mode .fc-char{color:#fbbf24 !important}
+body.dark-mode .label{color:#fde047 !important}
+body.dark-mode .why-box p,body.dark-mode .explain-box p,body.dark-mode .memory-box p,body.dark-mode .trans-box p{color:#cbd5e1 !important}
+body.dark-mode .keyword{background:#92400e !important;color:#fde047 !important}
+.dark-mode-btn{position:fixed;bottom:80px;left:20px;width:48px;height:48px;border-radius:50%;background:#1e293b;color:#fbbf24;border:2px solid #334155;cursor:pointer;font-size:20px;z-index:200;box-shadow:0 4px 12px rgba(0,0,0,0.2);transition:0.2s}
+.dark-mode-btn:hover{transform:scale(1.1)}
+body.dark-mode .dark-mode-btn{background:#fbbf24;color:#1e293b}
+
+/* ========== TABLET SUPPORT ========== */
+@media (min-width:601px) and (max-width:900px){
+  .container,main{padding:15px}
+  .q-card{padding:18px}
+  .opt-item{padding:10px 14px}
+  .vocab-grid{grid-template-columns:repeat(2,1fr)}
+  .floating-buttons-stack{display:flex;flex-direction:column;gap:8px}
+}
+@media (max-width:600px){
+  /* Stack the floating buttons better on mobile */
+  .pinyin-toggle-floating{top:auto;bottom:140px;left:10px}
+  .toggle-answers-btn{top:auto;bottom:80px;left:10px}
+  .dark-mode-btn{bottom:200px}
+  #backTop{bottom:20px;left:10px}
+  #progress-bar{height:5px}
+  #progress-text{font-size:10px;right:5px}
+}
+
+/* ========== SUMMARY CARD (Self-Assessment) ========== */
+.summary-card{background:linear-gradient(135deg,#fef3c7,#fde68a);padding:20px;border-radius:12px;margin:20px 0;border:2px dashed #d97706;display:none}
+body.show-summary .summary-card{display:block}
+.summary-card h3{color:#7c2d12;margin-bottom:12px;font-size:1.3em}
+.summary-stat{display:inline-block;margin:8px 12px;padding:8px 16px;background:#fff;border-radius:8px;font-weight:bold}
+.summary-correct{color:#16a34a}
+.summary-wrong{color:#dc2626}
+.summary-pending{color:#9ca3af}
+
 </style>
 </head>
 <body>
+<a href="#main" class="skip-nav">تخطّي إلى المحتوى الرئيسي</a>
+<div id="progress-bar" role="progressbar" aria-label="مؤشر التقدم" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+  <div id="progress-fill"></div>
+  <span id="progress-text">0%</span>
+</div>
 <button class="toggle-answers-btn" id="toggleAnswersMock6">🔒 الإجابات مخفية</button>
 
 <div class="wrapper">
@@ -974,7 +1044,7 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
       <div class="chinese-text">我拿的是学生签证，<span class="keyword" onclick="playChinese('换成工作签证以后', this)">换成工作签证以后<span class="keyword-tooltip">💡 (انقر للنطق) 💡 هذا يعني لم يحصل عليها بعد</span></span>，才能申请这份工作。</div>
       <div class="pinyin-text">Wǒ ná de shì xuéshēng qiānzhèng, huànchéng gōngzuò qiānzhèng yǐhòu, cái néng shēnqǐng zhè fèn gōngzuò.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
-        <span class="label">⭐ الجملة المراد الحكم عليها:</span>
+        <span class="label">⭐ الجملة المختبرة:</span>
         <div class="chinese-text">他还没拿到工作签证。</div>
         <div class="pinyin-text">Tā hái méi nádào gōngzuò qiānzhèng.</div>
       </div>
@@ -1036,7 +1106,7 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
       <div class="chinese-text">这个活动本来<span class="keyword" onclick="playChinese('已经推迟了', this)">已经推迟了<span class="keyword-tooltip">💡 (انقر للنطق) 💡 كلمة 已经 = بالفعل، أي التأجيل حدث في الماضي</span></span>两周了，现在负责活动的经理又病了，怎么办呢？</div>
       <div class="pinyin-text">Zhège huódòng běnlái yǐjīng tuīchí le liǎng zhōu le, xiànzài fùzé huódòng de jīnglǐ yòu bìng le, zěnme bàn ne?</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
-        <span class="label">⭐ الجملة المراد الحكم عليها:</span>
+        <span class="label">⭐ الجملة المختبرة:</span>
         <div class="chinese-text">这个活动要推迟两周举行。</div>
         <div class="pinyin-text">Zhège huódòng yào tuīchí liǎng zhōu jǔxíng.</div>
       </div>
@@ -1114,7 +1184,7 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
     </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p><b>المسموع:</b> "غرفة الفندق فيها كمبيوتر، يمكن استخدام الإنترنت، الماء الساخن متوفر من السابعة صباحاً حتى العاشرة مساءً، ويقدّم الفطور مجاناً."</p>
-      <p style="margin-top:8px"><b>المختبرة:</b> "هذا الفندق يوفر ماء ساخن طوال اليوم."</p>
+      <p style="margin-top:8px"><b>الجملة المختبرة:</b> "هذا الفندق يوفر ماء ساخن طوال اليوم."</p>
     </div>
 
     <div class="vocab-section">
@@ -1163,7 +1233,7 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
       <div class="chinese-text">我和李月差不多三年没有联系了，我<span class="keyword" onclick="playChinese('哪儿知道', this)">哪儿知道<span class="keyword-tooltip">💡 (انقر للنطق) 💡 سؤال بلاغي = لا أعرف!</span></span>她现在在哪儿啊？</div>
       <div class="pinyin-text">Wǒ hé Lǐ Yuè chàbuduō sān nián méiyǒu liánxì le, wǒ nǎr zhīdào tā xiànzài zài nǎr a?</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
-        <span class="label">⭐ المختبرة:</span>
+        <span class="label">⭐ الجملة المختبرة:</span>
         <div class="chinese-text">他知道李月在哪儿。</div>
         <div class="pinyin-text">Tā zhīdào Lǐ Yuè zài nǎr.</div>
       </div>
@@ -1176,7 +1246,7 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
     </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p><b>المسموع:</b> "أنا و"لي يوي" تقريباً 3 سنوات لم نتواصل، من أين لي أن أعرف أين هي الآن؟"</p>
-      <p style="margin-top:8px"><b>المختبرة:</b> "هو يعرف أين تكون لي يوي."</p>
+      <p style="margin-top:8px"><b>الجملة المختبرة:</b> "هو يعرف أين تكون لي يوي."</p>
     </div>
 
     <div class="vocab-section">
@@ -1225,7 +1295,7 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
       <div class="chinese-text">这个新的法律规定可以<span class="keyword" onclick="playChinese('更好地保护儿童', this)">更好地保护儿童<span class="keyword-tooltip">💡 (انقر للنطق) 💡 تعبير صريح بأن القانون لحماية الأطفال</span></span>，他们不仅是父母的孩子，更是国家的希望。</div>
       <div class="pinyin-text">Zhège xīn de fǎlǜ guīdìng kěyǐ gèng hǎo de bǎohù értóng, tāmen bùjǐn shì fùmǔ de háizi, gèng shì guójiā de xīwàng.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
-        <span class="label">⭐ المختبرة:</span>
+        <span class="label">⭐ الجملة المختبرة:</span>
         <div class="chinese-text">那个法律是保护儿童的。</div>
         <div class="pinyin-text">Nàge fǎlǜ shì bǎohù értóng de.</div>
       </div>
@@ -1238,7 +1308,7 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
     </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p><b>المسموع:</b> "هذا القانون الجديد يستطيع حماية الأطفال بشكل أفضل، فهم ليسوا فقط أبناء آبائهم، بل أيضاً أمل الوطن."</p>
-      <p style="margin-top:8px"><b>المختبرة:</b> "ذلك القانون لحماية الأطفال."</p>
+      <p style="margin-top:8px"><b>الجملة المختبرة:</b> "ذلك القانون لحماية الأطفال."</p>
     </div>
 
     <div class="vocab-section">
@@ -1289,7 +1359,7 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
       <div class="chinese-text">我是北方人，特别喜欢吃饺子，平时也经常在家<span class="keyword" onclick="playChinese('自己包饺子吃', this)">自己包饺子吃<span class="keyword-tooltip">💡 (انقر للنطق) 💡 يحضرها بنفسه في البيت، ليس في المطعم</span></span>。</div>
       <div class="pinyin-text">Wǒ shì běifāng rén, tèbié xǐhuān chī jiǎozi, píngshí yě jīngcháng zài jiā zìjǐ bāo jiǎozi chī.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
-        <span class="label">⭐ المختبرة:</span>
+        <span class="label">⭐ الجملة المختبرة:</span>
         <div class="chinese-text">他常常去饭店吃饺子。</div>
         <div class="pinyin-text">Tā chángcháng qù fàndiàn chī jiǎozi.</div>
       </div>
@@ -1302,7 +1372,7 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
     </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p><b>المسموع:</b> "أنا من الشمال، أحبّ جداً أكل الجياوزي (الزلابية الصينية)، وعادةً أيضاً أحضّرها في البيت بنفسي وآكلها."</p>
-      <p style="margin-top:8px"><b>المختبرة:</b> "هو دائماً يذهب إلى المطعم ليأكل الجياوزي."</p>
+      <p style="margin-top:8px"><b>الجملة المختبرة:</b> "هو دائماً يذهب إلى المطعم ليأكل الجياوزي."</p>
     </div>
 
     <div class="vocab-section">
@@ -1352,7 +1422,7 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
       <div class="chinese-text">去年有五十万中国学生出国留学，其中<span class="keyword" onclick="playChinese('超过百分之五十', this)">超过百分之五十<span class="keyword-tooltip">💡 (انقر للنطق) 💡 أكثر من 50% = أكثر من النصف</span></span>的人是高中生。</div>
       <div class="pinyin-text">Qùnián yǒu wǔshí wàn Zhōngguó xuéshēng chūguó liúxué, qízhōng chāoguò bǎi fēn zhī wǔshí de rén shì gāozhōng shēng.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
-        <span class="label">⭐ المختبرة:</span>
+        <span class="label">⭐ الجملة المختبرة:</span>
         <div class="chinese-text">去年出国留学的人一半儿以上是高中生。</div>
         <div class="pinyin-text">Qùnián chūguó liúxué de rén yībànr yǐshàng shì gāozhōng shēng.</div>
       </div>
@@ -1365,7 +1435,7 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
     </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p><b>المسموع:</b> "في السنة الماضية، 500,000 طالب صيني سافروا للدراسة بالخارج، من بينهم أكثر من 50% هم طلاب ثانوية."</p>
-      <p style="margin-top:8px"><b>المختبرة:</b> "في السنة الماضية، أكثر من نصف الذين سافروا للدراسة بالخارج هم طلاب ثانوية."</p>
+      <p style="margin-top:8px"><b>الجملة المختبرة:</b> "في السنة الماضية، أكثر من نصف الذين سافروا للدراسة بالخارج هم طلاب ثانوية."</p>
     </div>
 
     <div class="vocab-section">
@@ -1427,7 +1497,7 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
       <div class="chinese-text">人们常说遇到危险时要冷静，可是当它发生在自己身上时，<span class="keyword" onclick="playChinese('却很难做到', this)">却很难做到<span class="keyword-tooltip">💡 (انقر للنطق) 💡 كلمة 难 = صعب</span></span>。</div>
       <div class="pinyin-text">Rénmen cháng shuō yùdào wēixiǎn shí yào lěngjìng, kěshì dāng tā fāshēng zài zìjǐ shēn shàng shí, què hěn nán zuòdào.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
-        <span class="label">⭐ المختبرة:</span>
+        <span class="label">⭐ الجملة المختبرة:</span>
         <div class="chinese-text">遇到危险时很难冷静。</div>
         <div class="pinyin-text">Yùdào wēixiǎn shí hěn nán lěngjìng.</div>
       </div>
@@ -1440,7 +1510,7 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
     </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p><b>المسموع:</b> "يقول الناس دائماً إنه يجب البقاء هادئاً عند مواجهة الخطر، لكن عندما يحدث الأمر لك أنت شخصياً، يصعب جداً تحقيق ذلك."</p>
-      <p style="margin-top:8px"><b>المختبرة:</b> "عند مواجهة الخطر، من الصعب البقاء هادئاً."</p>
+      <p style="margin-top:8px"><b>الجملة المختبرة:</b> "عند مواجهة الخطر، من الصعب البقاء هادئاً."</p>
     </div>
 
     <div class="vocab-section">
@@ -1492,7 +1562,7 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
       <div class="chinese-text">儿子，<span class="keyword" onclick="playChinese('祝贺你大学毕业', this)">祝贺你大学毕业<span class="keyword-tooltip">💡 (انقر للنطق) 💡 كلمة 祝贺 = تهنئة، تخرج فعلاً</span></span>。你现在比爸妈有知识，如果再增加一些社会经验，你会更优秀的。</div>
       <div class="pinyin-text">Érzi, zhùhè nǐ dàxué bìyè. Nǐ xiànzài bǐ bàmā yǒu zhīshi, rúguǒ zài zēngjiā yīxiē shèhuì jīngyàn, nǐ huì gèng yōuxiù de.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
-        <span class="label">⭐ المختبرة:</span>
+        <span class="label">⭐ الجملة المختبرة:</span>
         <div class="chinese-text">儿子快要大学毕业了。</div>
         <div class="pinyin-text">Érzi kuài yào dàxué bìyè le.</div>
       </div>
@@ -1505,7 +1575,7 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
     </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p><b>المسموع:</b> "يا بني، تهانينا على تخرّجك من الجامعة. أنت الآن أكثر علماً من أبيك وأمك، وإذا اكتسبت بعض الخبرة الاجتماعية، ستكون أكثر تميزاً."</p>
-      <p style="margin-top:8px"><b>المختبرة:</b> "الابن على وشك التخرج من الجامعة."</p>
+      <p style="margin-top:8px"><b>الجملة المختبرة:</b> "الابن على وشك التخرج من الجامعة."</p>
     </div>
 
     <div class="vocab-section">
@@ -1560,7 +1630,7 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
       <div class="chinese-text">小周真是挺努力的，连礼拜天都不放松一下，<span class="keyword" onclick="playChinese('现在还在办公室', this)">现在还在办公室<span class="keyword-tooltip">💡 (انقر للنطق) 💡 在 + المكان = موجود هناك الآن</span></span>呢。</div>
       <div class="pinyin-text">Xiǎo Zhōu zhēn shì tǐng nǔlì de, lián lǐbàitiān dōu bù fàngsōng yīxià, xiànzài hái zài bàngōngshì ne.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
-        <span class="label">⭐ المختبرة:</span>
+        <span class="label">⭐ الجملة المختبرة:</span>
         <div class="chinese-text">小周星期日还在工作。</div>
         <div class="pinyin-text">Xiǎo Zhōu xīngqīrì hái zài gōngzuò.</div>
       </div>
@@ -1573,7 +1643,7 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
     </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p><b>المسموع:</b> "شياو جو حقاً مجتهد جداً، حتى يوم الأحد لا يرتاح، وهو الآن لا يزال في المكتب."</p>
-      <p style="margin-top:8px"><b>المختبرة:</b> "شياو جو يوم الأحد لا يزال يعمل."</p>
+      <p style="margin-top:8px"><b>الجملة المختبرة:</b> "شياو جو يوم الأحد لا يزال يعمل."</p>
     </div>
 
     <div class="vocab-section">
@@ -9148,6 +9218,140 @@ attachTFClicks();
 const tfObs = new MutationObserver(() => attachTFClicks());
 tfObs.observe(document.body, {childList:true, subtree:true});
 
+
+// ========== PROGRESS TRACKING ==========
+const PROGRESS_KEY = 'hsk4_mock6_progress';
+let progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}');
+
+function updateProgress(qNum, status){
+  // status: 'correct', 'wrong', 'revealed'
+  if (!qNum) return;
+  progress[qNum] = status;
+  localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+  refreshProgressBar();
+}
+
+function refreshProgressBar(){
+  const total = document.querySelectorAll('.q-card').length;
+  const answered = Object.keys(progress).length;
+  const correct = Object.values(progress).filter(s => s === 'correct').length;
+  const pct = total > 0 ? Math.round((answered / total) * 100) : 0;
+  const fill = document.getElementById('progress-fill');
+  const text = document.getElementById('progress-text');
+  if (fill) fill.style.width = pct + '%';
+  if (text) text.textContent = answered + '/' + total + ' (' + pct + '%) ✓ ' + correct;
+  const bar = document.getElementById('progress-bar');
+  if (bar) bar.setAttribute('aria-valuenow', pct);
+}
+
+// تحديث التقدم عند النقر على الخيارات
+document.addEventListener('click', function(e){
+  const card = e.target.closest('.q-card');
+  if (!card) return;
+  const qNum = card.querySelector('.q-num-badge')?.textContent.trim();
+  if (!qNum) return;
+  // فحص نوع التفاعل
+  setTimeout(() => {
+    if (e.target.classList.contains('user-correct') || e.target.closest('.user-correct')){
+      updateProgress(qNum, 'correct');
+    } else if (e.target.classList.contains('user-wrong') || e.target.closest('.user-wrong')){
+      if (!progress[qNum] || progress[qNum] === 'wrong') updateProgress(qNum, 'wrong');
+    } else if (card.classList.contains('revealed') && !progress[qNum]){
+      updateProgress(qNum, 'revealed');
+    }
+  }, 100);
+});
+
+// تشغيل عند التحميل
+window.addEventListener('load', refreshProgressBar);
+setInterval(refreshProgressBar, 2000); // تحديث دوري
+
+// ========== DARK MODE ==========
+const DARK_KEY = 'hsk4_dark_mode';
+if (localStorage.getItem(DARK_KEY) === '1') document.body.classList.add('dark-mode');
+
+const darkBtn = document.createElement('button');
+darkBtn.className = 'dark-mode-btn';
+darkBtn.id = 'darkModeBtn';
+darkBtn.setAttribute('aria-label', 'تبديل الوضع الليلي/النهاري');
+darkBtn.innerHTML = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+darkBtn.onclick = function(){
+  const isDark = document.body.classList.toggle('dark-mode');
+  localStorage.setItem(DARK_KEY, isDark ? '1' : '0');
+  this.innerHTML = isDark ? '☀️' : '🌙';
+};
+document.body.appendChild(darkBtn);
+
+// ========== ARIA ENHANCEMENTS ==========
+document.querySelectorAll('audio').forEach(a => {
+  a.setAttribute('aria-label', 'صوت السؤال');
+});
+document.querySelectorAll('.opt-item').forEach((opt, i) => {
+  opt.setAttribute('role', 'button');
+  opt.setAttribute('tabindex', '0');
+  opt.setAttribute('aria-label', 'الخيار ' + (opt.querySelector('.opt-letter')?.textContent || (i+1)));
+  opt.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      this.click();
+    }
+  });
+});
+document.querySelectorAll('.tf-btn,.fill-option,.reveal-answer-btn').forEach(b => {
+  b.setAttribute('role', 'button');
+});
+document.querySelectorAll('.vocab-char').forEach(v => {
+  v.setAttribute('role', 'button');
+  v.setAttribute('tabindex', '0');
+  v.setAttribute('aria-label', 'استمع لنطق: ' + v.textContent);
+});
+
+// ========== SUMMARY (Self Assessment) ==========
+function showSummary(){
+  const summary = document.getElementById('summaryCard') || (() => {
+    const c = document.createElement('div');
+    c.id = 'summaryCard';
+    c.className = 'summary-card';
+    c.innerHTML = '<h3>📊 ملخّص الأداء</h3><div id="summaryStats"></div>';
+    document.querySelector('.container, main, body').appendChild(c);
+    return c;
+  })();
+  document.body.classList.add('show-summary');
+  const total = document.querySelectorAll('.q-card').length;
+  const answered = Object.keys(progress).length;
+  const correct = Object.values(progress).filter(s => s === 'correct').length;
+  const wrong = Object.values(progress).filter(s => s === 'wrong').length;
+  const revealed = Object.values(progress).filter(s => s === 'revealed').length;
+  const stats = document.getElementById('summaryStats');
+  if (stats){
+    stats.innerHTML =
+      '<div class="summary-stat summary-correct">✓ صحيح: ' + correct + '</div>' +
+      '<div class="summary-stat summary-wrong">✗ خطأ: ' + wrong + '</div>' +
+      '<div class="summary-stat summary-pending">🔍 مكشوف: ' + revealed + '</div>' +
+      '<div class="summary-stat">📋 لم يُجَب: ' + (total - answered) + '</div>' +
+      '<div class="summary-stat" style="background:#10b981;color:#fff">🎯 النسبة: ' +
+      (answered > 0 ? Math.round((correct/answered)*100) : 0) + '%</div>' +
+      '<button onclick="if(confirm(\'هل تريد إعادة تعيين التقدم؟\')){localStorage.removeItem(PROGRESS_KEY);progress={};location.reload();}" style="background:#dc2626;color:#fff;padding:8px 16px;border:none;border-radius:6px;cursor:pointer;margin-right:12px">🔄 إعادة تعيين</button>';
+  }
+}
+
+// زر "عرض الملخص"
+const summaryBtn = document.createElement('button');
+summaryBtn.style.cssText = 'position:fixed;bottom:140px;left:20px;width:48px;height:48px;border-radius:50%;background:#3b82f6;color:#fff;border:none;cursor:pointer;font-size:20px;z-index:200;box-shadow:0 4px 12px rgba(0,0,0,0.2)';
+summaryBtn.setAttribute('aria-label', 'عرض ملخص الأداء');
+summaryBtn.innerHTML = '📊';
+summaryBtn.onclick = showSummary;
+document.body.appendChild(summaryBtn);
+
+// تحديث aria للأزرار الديناميكية
+const ariaObs = new MutationObserver(() => {
+  document.querySelectorAll('button:not([aria-label])').forEach(b => {
+    if (b.textContent) b.setAttribute('aria-label', b.textContent.trim().substring(0,50));
+  });
+});
+ariaObs.observe(document.body, {childList:true, subtree:true});
+
 </script>
+</main>
 </body>
 </html>
