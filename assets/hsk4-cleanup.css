@@ -221,11 +221,17 @@ body:not([data-active-tab]) #listening{display:block !important}
 /* === FLASHCARD GRID FIX - prevent stretching and uneven heights === */
 .flashcard-grid{
   display:grid;
-  /* تقليل عدد الأعمدة - حجم أصغر للبطاقات */
-  grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)) !important;
+  /* حجم ثابت للبطاقات - لا تمتد لتملأ الصف */
+  grid-template-columns:repeat(auto-fill, minmax(240px, 280px)) !important;
   gap:16px !important;
-  /* أهم تعديل: لا تمدد البطاقات لتطابق الأطول */
   align-items:start !important;
+  /* في RTL: align cards to the right (start) */
+  justify-content:flex-start !important;
+}
+/* خاص بصفوف فيها 3 بطاقات أو أقل - تقصير العرض الأقصى */
+.flashcard-grid:has(.flashcard:nth-child(3):last-child),
+.flashcard-grid:has(.flashcard:nth-child(2):last-child){
+  grid-template-columns:repeat(auto-fill, 260px) !important;
 }
 .flashcard{
   /* البطاقة لا تمتد - حجمها حسب محتواها فقط */
@@ -254,8 +260,7 @@ body:not([data-active-tab]) #listening{display:block !important}
 /* على الشاشات الكبيرة - حدد عدد الأعمدة */
 @media (min-width:1200px){
   .flashcard-grid{
-    grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)) !important;
-    max-width:1200px !important;
+    max-width:1280px !important;
     margin:0 auto !important;
   }
 }
