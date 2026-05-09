@@ -558,3 +558,11 @@ body.mock6-redesign .q-header{
     gap:5px !important;
   }
 }
+
+/* R4-3 patch: skip-nav focus - higher specificity */
+html body a.skip-nav:focus,
+html body a.skip-link:focus,
+html[lang] body .skip-nav:focus{
+  top:0 !important;
+  outline:3px solid #facc15 !important;
+}
