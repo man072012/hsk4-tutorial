@@ -182,3 +182,48 @@ button[aria-label*="نهاري"],
 #intro{
   display:none !important;
 }
+
+/* === إخفاء المقدمة وقسم "ابدأ هنا" بالكامل === */
+.hero,
+.welcome-card,
+#intro,
+.intro-section,
+.keyword-legend,
+.tab-content#intro,
+[id="intro"]{
+  display:none !important;
+}
+
+/* keyword-legend هو شرح للكلمات المفتاحية - إذا أردت إبقاءها يمكن إزالة السطر أعلاه */
+
+/* لو كان أول section هو hero، نخفيه */
+.wrapper > .hero,
+main > .hero,
+.container > .hero{
+  display:none !important;
+}
+
+/* topbar nav - إزالة "ابدأ هنا" / "الرئيسية" إذا كانت تشير إلى section مخفي */
+.m6-mini-nav a[href*="#intro"],
+.mk9-mini-nav a[href*="#intro"],
+.hsk-nav a[href*="#intro"]{
+  display:none !important;
+}
+
+/* تأكيد إخفاء كل tab-btn (شريط التبويبات السفلي إذا ظهر) */
+.tab-btn,
+.tabs button{
+  display:none !important;
+}
+
+/* جعل أول section ظاهر هو الاستماع مباشرة */
+#listening{
+  margin-top:0 !important;
+  padding-top:0 !important;
+}
+
+/* welcome-card الموجود في أقسام داخلية (ليس فقط في البداية) - إخفاؤها أيضاً */
+.tab-content .welcome-card,
+.tab-content > .welcome-card{
+  display:none !important;
+}
