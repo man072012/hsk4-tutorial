@@ -829,6 +829,25 @@ body:not(.answer-hidden) .reveal-answer-btn{display:none}
 .tf-btn.user-correct{background:#16a34a !important;color:white !important;border-color:#15803d !important;animation:pulse-success 0.5s}
 .tf-btn.user-wrong{background:#dc2626 !important;color:white !important;border-color:#991b1b !important;animation:shake-wrong 0.4s}
 
+
+/* إخفاء النص المسموع المكتوب وترجمات الخيارات في وضع الاختبار */
+/* استخدام :has() لتحديد الأسئلة التي بها صوت */
+body.answer-hidden .q-card:has(audio):not(.revealed) .chinese-box .chinese-text,
+body.answer-hidden .q-card:has(audio):not(.revealed) .chinese-box .pinyin-text{display:none}
+body.answer-hidden .q-card:has(audio):not(.revealed) .chinese-box .label{
+  color:#a16207;
+  font-style:italic;
+}
+body.answer-hidden .q-card:has(audio):not(.revealed) .chinese-box::after{
+  content:'🎧 استمع للصوت أعلاه قبل الإجابة';
+  display:block;color:#854d0e;background:#fef9c3;padding:6px 10px;
+  border-radius:6px;margin-top:8px;font-size:13px;text-align:center
+}
+/* إخفاء الترجمة العربية للخيارات (opt-arabic) */
+body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
+/* إظهار الترجمة عند الكشف */
+.q-card.revealed .opt-item .opt-arabic{display:inline}
+
 </style>
 </head>
 <body>
@@ -9026,8 +9045,10 @@ function attachOptionClicks(){
           this.appendChild(m);
           // إظهار الشرح بإضافة .revealed
           card.classList.add('revealed');
-          // إظهار صناديق الشرح كاملة
-          card.querySelectorAll('.why-box, .explain-box, .memory-box, .trans-box, .vocab-section').forEach(b => b.style.display = '');
+          // إظهار صناديق الشرح وترجمات الخيارات
+          card.querySelectorAll('.why-box, .explain-box, .memory-box, .trans-box, .vocab-section, .opt-arabic').forEach(b => b.style.display = '');
+          // إظهار النص المسموع
+          card.querySelectorAll('.chinese-text, .pinyin-text').forEach(b => b.style.display = '');
         } else {
           this.classList.add('user-wrong');
           const m = document.createElement('span');
@@ -9098,7 +9119,8 @@ function attachTFClicks(){
           this.innerHTML += ' ✓ صحيح!';
           if (card){
             card.classList.add('revealed');
-            card.querySelectorAll('.why-box, .explain-box, .memory-box, .trans-box, .vocab-section').forEach(b => b.style.display = '');
+            card.querySelectorAll('.why-box, .explain-box, .memory-box, .trans-box, .vocab-section, .opt-arabic').forEach(b => b.style.display = '');
+            card.querySelectorAll('.chinese-text, .pinyin-text').forEach(b => b.style.display = '');
           }
         } else {
           this.classList.add('user-wrong');
