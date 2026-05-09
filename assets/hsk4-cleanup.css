@@ -232,3 +232,132 @@ html body [class*="floating-tools"]{
   visibility:hidden !important;
   pointer-events:none !important;
 }
+
+/* ============================================================
+   === MOCK6 GEOMETRY FIXES (11 issues from internal audit) ===
+   ============================================================ */
+
+/* M6-FIX-1: Topbar inner takes full width (was 159px in 430 viewport!) */
+html body .m6-topbar-inner,
+html body .mk9-topbar-inner{
+  flex:1 1 auto !important;
+  margin:0 !important;
+  width:100% !important;
+  max-width:1340px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:12px !important;
+}
+
+/* M6-FIX-2: Progress text visible above bar */
+html body #progress-text,
+html body .progress-text{
+  top:8px !important;
+  z-index:10001 !important;
+  font-size:11px !important;
+  background:rgba(255,255,255,0.92) !important;
+  border-radius:8px !important;
+  padding:2px 6px !important;
+  color:#0b63ce !important;
+  font-weight:bold !important;
+}
+
+/* M6-FIX-3: Reveal answer button 44x44 touch target */
+html body .reveal-btn,
+html body .reveal-answer-btn{
+  min-height:44px !important;
+  padding:10px 16px !important;
+  align-items:center !important;
+}
+
+/* M6-FIX-4: Pinyin floating button RTL-correct + 44h + lifted */
+html body #pinyinToggle,
+html body #togglePinyin,
+html body .pinyin-toggle-floating{
+  right:auto !important;
+  left:auto !important;
+  inset-inline-end:20px !important;
+  inset-inline-start:auto !important;
+  bottom:78px !important;
+  min-height:44px !important;
+  height:44px !important;
+}
+
+/* M6-FIX-5: Back-top stays clear of pinyin button */
+html body .back-top,
+html body #back-top{
+  inset-inline-start:auto !important;
+  inset-inline-end:auto !important;
+  right:auto !important;
+  left:14px !important;
+  bottom:18px !important;
+  width:48px !important;
+  height:48px !important;
+}
+
+/* M6-FIX-6: Q num badge 44x44 */
+html body .q-num-badge{
+  width:44px !important;
+  height:44px !important;
+  min-width:44px !important;
+  min-height:44px !important;
+}
+
+/* M6-FIX-7: Q header reduced padding/gap on mobile */
+@media (max-width:768px){
+  html body .q-header{
+    padding:14px 16px !important;
+    gap:8px !important;
+  }
+  html body .m6-mini-chip{
+    min-height:32px !important;
+    font-size:12px !important;
+    padding:4px 10px !important;
+  }
+  html body .q-type{
+    font-size:13px !important;
+  }
+}
+
+/* M6-FIX-8: Section title compact on mobile */
+@media (max-width:768px){
+  html body .tab-content > .section-title,
+  html body .tab-content > h2,
+  html body .tab-content > h1{
+    padding:14px 16px !important;
+    font-size:16px !important;
+    border-radius:16px !important;
+    margin:8px 0 14px !important;
+    box-shadow:0 4px 10px rgba(11,99,206,0.15) !important;
+  }
+}
+
+/* M6-FIX-9: Flashcard image fills card width on mobile */
+@media (max-width:600px){
+  html body .flashcard .hsk-card-image-wrap{
+    max-width:100% !important;
+    width:100% !important;
+    max-height:220px !important;
+  }
+  html body .flashcard .hsk-card-image{
+    width:100% !important;
+    max-height:220px !important;
+    object-fit:cover !important;
+  }
+}
+
+/* M6-FIX-10: Options list full width inside q-card */
+html body .options-list,
+html body .opts,
+html body ul.opts{
+  width:100% !important;
+  padding-inline:0 !important;
+  list-style:none !important;
+  margin:0 !important;
+}
+html body .opt-item,
+html body .options-list li{
+  width:100% !important;
+  box-sizing:border-box !important;
+}
