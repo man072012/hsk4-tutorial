@@ -1,99 +1,127 @@
-/* HSK4 Topbar Navigation Fix - smooth scroll + active scroll-spy */
+/* HSK4 Navigation: tab-based + mobile hamburger */
 (function(){
   function ready(fn){
     if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', fn);
     else fn();
   }
   
-  ready(function(){
-    // Find all nav links in topbar
-    const navs = document.querySelectorAll('.m6-mini-nav, .mk9-mini-nav, .hsk-nav');
-    if (navs.length === 0) return;
+  // Map nav link href → tab id
+  const TAB_MAP = {
+    '#listening': 'listening',
+    '#reading': 'reading',
+    '#writing': 'writing',
+    '#flashcards': 'flashcards',
+    '#grammar': 'grammar',
+    '#tab-listening': 'tab-listening',
+    '#tab-reading': 'tab-reading',
+    '#tab-writing': 'tab-writing',
+    '#tab-grammar': 'tab-grammar'
+  };
+  
+  function activateTab(tabId){
+    if (!tabId) return;
     
-    // For each nav, fix the links
-    navs.forEach(nav => {
-      const links = nav.querySelectorAll('a');
-      
-      // 1. Make "الرئيسية" go to top of CURRENT page (not index.html)
-      // unless we're already on index.html
-      const isHomePage = location.pathname.endsWith('/') || location.pathname.endsWith('index.html');
-      
-      links.forEach(link => {
-        const href = link.getAttribute('href');
-        
-        // "الرئيسية" link
-        if (link.textContent.trim() === 'الرئيسية' && !isHomePage){
-          // On mock pages, scroll to top instead of going home
-          link.setAttribute('data-original-href', href);
-          link.addEventListener('click', function(e){
-            e.preventDefault();
-            window.scrollTo({top: 0, behavior: 'smooth'});
-            // Update active state immediately
-            updateActiveState();
-          });
-        }
-        // Anchor links - smooth scroll
-        else if (href && href.startsWith('#')){
-          link.addEventListener('click', function(e){
-            const target = document.querySelector(href);
-            if (target){
-              e.preventDefault();
-              const topbar = document.querySelector('.m6-topbar, .mk9-topbar, .hsk-topbar');
-              const offset = topbar ? topbar.offsetHeight + 20 : 80;
-              const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-              window.scrollTo({top, behavior: 'smooth'});
-              // Update URL hash without jumping
-              history.pushState(null, '', href);
-              updateActiveState();
-            }
-          });
-        }
-        // Anchor links to other pages (e.g., "mock9.html#tab-listening") - leave default
-      });
+    // Hide all tab-content
+    document.querySelectorAll('.tab-content, .tab').forEach(el => {
+      el.classList.remove('active');
     });
     
-    // Scroll-spy: update active class based on scroll position
-    function updateActiveState(){
-      const sections = document.querySelectorAll('[id="listening"],[id="reading"],[id="writing"],[id="flashcards"],[id="grammar"]');
-      let current = '';
-      const scrollY = window.scrollY + 150; // offset for topbar
-      
-      sections.forEach(sec => {
-        if (sec.offsetTop <= scrollY){
-          current = sec.id;
-        }
-      });
-      
-      // If at very top, mark "الرئيسية" as active
-      if (window.scrollY < 100) current = '__home__';
-      
-      // Update all nav links
-      document.querySelectorAll('.m6-mini-nav a, .mk9-mini-nav a, .hsk-nav a').forEach(a => {
-        a.classList.remove('is-active', 'active');
-        const href = a.getAttribute('href') || '';
-        const linkText = a.textContent.trim();
-        
-        if (current === '__home__' && linkText === 'الرئيسية'){
-          a.classList.add('is-active', 'active');
-        } else if (href === '#' + current){
-          a.classList.add('is-active', 'active');
-        }
-      });
+    // Show target tab
+    const target = document.getElementById(tabId);
+    if (target){
+      target.classList.add('active');
+      document.body.dataset.activeTab = tabId;
     }
     
-    // Throttled scroll listener
-    let ticking = false;
-    window.addEventListener('scroll', function(){
-      if (!ticking){
-        window.requestAnimationFrame(function(){
-          updateActiveState();
-          ticking = false;
-        });
-        ticking = true;
+    // Update nav active state
+    document.querySelectorAll('.m6-mini-nav a, .mk9-mini-nav a, .hsk-nav a').forEach(a => {
+      a.classList.remove('is-active', 'active');
+      const href = a.getAttribute('href') || '';
+      if (TAB_MAP[href] === tabId){
+        a.classList.add('is-active', 'active');
       }
     });
     
-    // Initial call
-    updateActiveState();
+    // Scroll to top of content
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    
+    // Close mobile nav
+    document.body.classList.remove('nav-open');
+    const mobBtn = document.querySelector('.nav-toggle-btn');
+    if (mobBtn) mobBtn.setAttribute('aria-expanded', 'false');
+  }
+  
+  ready(function(){
+    // === Add hamburger button for mobile ===
+    const topbar = document.querySelector('.m6-topbar, .mk9-topbar, .hsk-topbar');
+    if (topbar && !topbar.querySelector('.nav-toggle-btn')){
+      const btn = document.createElement('button');
+      btn.className = 'nav-toggle-btn';
+      btn.setAttribute('aria-label', 'القائمة');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.innerHTML = '☰';
+      btn.onclick = function(){
+        const isOpen = document.body.classList.toggle('nav-open');
+        this.setAttribute('aria-expanded', String(isOpen));
+        this.innerHTML = isOpen ? '✕' : '☰';
+      };
+      topbar.appendChild(btn);
+    }
+    
+    // === Convert nav links to tab switchers ===
+    document.querySelectorAll('.m6-mini-nav a, .mk9-mini-nav a, .hsk-nav a').forEach(link => {
+      const href = link.getAttribute('href') || '';
+      const text = link.textContent.trim();
+      
+      // "الرئيسية" - go to listening (the default first section)
+      if (text === 'الرئيسية' && !location.pathname.endsWith('index.html') && location.pathname !== '/'){
+        link.addEventListener('click', function(e){
+          e.preventDefault();
+          activateTab('listening');
+        });
+      }
+      // Anchor links - switch tabs
+      else if (TAB_MAP[href]){
+        link.addEventListener('click', function(e){
+          e.preventDefault();
+          activateTab(TAB_MAP[href]);
+          // Update URL hash
+          history.pushState(null, '', href);
+        });
+      }
+    });
+    
+    // === Determine initial active tab ===
+    const hash = location.hash;
+    let initialTab = TAB_MAP[hash] || 'listening';
+    
+    // Check if it exists, fallback to listening
+    if (!document.getElementById(initialTab)){
+      // Try first available tab
+      const first = document.querySelector('.tab-content, .tab');
+      if (first && first.id) initialTab = first.id;
+    }
+    
+    activateTab(initialTab);
+    
+    // Listen to back/forward
+    window.addEventListener('popstate', function(){
+      const newTab = TAB_MAP[location.hash] || 'listening';
+      activateTab(newTab);
+    });
+    
+    // Close mobile nav when clicking outside
+    document.addEventListener('click', function(e){
+      const isToggle = e.target.classList.contains('nav-toggle-btn');
+      const inNav = e.target.closest('.m6-mini-nav, .mk9-mini-nav, .hsk-nav');
+      if (!isToggle && !inNav && document.body.classList.contains('nav-open')){
+        document.body.classList.remove('nav-open');
+        const btn = document.querySelector('.nav-toggle-btn');
+        if (btn){
+          btn.setAttribute('aria-expanded', 'false');
+          btn.innerHTML = '☰';
+        }
+      }
+    });
   });
 })();

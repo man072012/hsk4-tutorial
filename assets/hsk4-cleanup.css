@@ -1,6 +1,5 @@
-/* HSK4 Cleanup Layer - Remove visual clutter
-   Goal: Keep only essential controls (Pinyin toggle + Answer toggle).
-   Remove redundant floating buttons (dark mode, summary, tools).
+/* HSK4 Cleanup Layer - Clean UI with tabbed navigation
+   Each section displays as separate "page" via tabs.
 */
 
 /* === HIDE redundant floating elements === */
@@ -14,17 +13,47 @@ button[aria-label*="نهاري"],
 .mk9-tool-bar,
 .m6-tool-bar,
 .hsk-floating-tools,
-.toggle-answers-btn{
+.toggle-answers-btn,
+.tabs,
+.tab-btn,
+.tabs button{
   display:none !important;
 }
 
-/* "تحليل تعليمي" chip - hide it */
-.q-card .hsk-chip,
-.mk9-question-shell .mk9-chip{
+/* === Show only ONE tab-content at a time (tabbed navigation) === */
+.tab-content{
+  display:none;
+  margin-bottom:30px;
+  padding-top:20px;
+}
+.tab-content.active{
+  display:block !important;
+  animation:fadeInTab 0.3s ease;
+}
+@keyframes fadeInTab{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+
+/* If no tab-content has .active, show first non-intro one (listening) */
+body:not([data-active-tab]) #listening{display:block !important}
+
+/* "ابدأ هنا" intro tab content - hidden permanently */
+#intro,
+.tab-content#intro{
   display:none !important;
 }
 
-/* === Keep only essential toggles - reposition cleanly === */
+/* hide the .hero/.welcome that we already removed but in case they remain */
+.hero,
+.welcome-card,
+.intro-section,
+.keyword-legend,
+.tab-content .welcome-card{
+  display:none !important;
+}
+
+/* === Pinyin toggle - small floating pill bottom-right === */
 #pinyinToggle,
 #togglePinyin{
   position:fixed !important;
@@ -43,7 +72,6 @@ button[aria-label*="نهاري"],
   font-size:14px !important;
 }
 
-/* Answer toggle as part of each question instead of floating bar */
 #toggleAnswers,
 #toggleAnswersMock6{
   display:none !important;
@@ -66,174 +94,126 @@ button[aria-label*="نهاري"],
   font-size:14px !important;
   box-shadow:0 2px 8px rgba(59,130,246,0.3) !important;
 }
-
 .reveal-btn:hover,
-.reveal-answer-btn:hover{
-  transform:scale(1.03);
-  box-shadow:0 4px 12px rgba(59,130,246,0.4) !important;
-}
-
+.reveal-answer-btn:hover{transform:scale(1.03);box-shadow:0 4px 12px rgba(59,130,246,0.4) !important}
 .reveal-btn.shown,
-.reveal-answer-btn.shown{
-  background:linear-gradient(135deg,#16a34a,#15803d) !important;
-  box-shadow:0 2px 8px rgba(22,163,74,0.3) !important;
-}
+.reveal-answer-btn.shown{background:linear-gradient(135deg,#16a34a,#15803d) !important}
 
-/* Mobile responsive */
-@media (max-width:600px){
-  #pinyinToggle,
-  #togglePinyin{
-    bottom:14px !important;
-    right:14px !important;
-    padding:8px 14px !important;
-    font-size:13px !important;
+/* === MOBILE NAV (hamburger) === */
+@media (max-width:768px){
+  /* Hide nav links by default on mobile */
+  .m6-mini-nav,
+  .mk9-mini-nav,
+  .hsk-nav{
+    display:none !important;
+    flex-direction:column;
+    position:absolute;
+    top:60px;
+    right:8px;
+    left:8px;
+    background:#fff;
+    border:2px solid rgba(11,99,206,0.2);
+    border-radius:12px;
+    padding:10px;
+    z-index:200;
+    gap:6px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.15);
+  }
+  body.nav-open .m6-mini-nav,
+  body.nav-open .mk9-mini-nav,
+  body.nav-open .hsk-nav{
+    display:flex !important;
+  }
+  .m6-mini-nav a,
+  .mk9-mini-nav a,
+  .hsk-nav a{
+    padding:12px 14px !important;
+    border-radius:8px;
+    width:100%;
+    text-align:right;
+    font-size:15px !important;
+  }
+  
+  /* Hamburger button */
+  .nav-toggle-btn{
+    display:flex !important;
+    position:absolute;
+    top:14px;
+    right:12px;
+    background:linear-gradient(135deg,#0b63ce,#064aa3);
+    color:#fff;
+    border:none;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    cursor:pointer;
+    z-index:201;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+  }
+  
+  /* Hide language selector on mobile (cluttering) */
+  .m6-lang,
+  .mk9-lang,
+  .hsk-lang{
+    display:none !important;
+  }
+  
+  /* Topbar smaller padding on mobile */
+  .m6-topbar,
+  .mk9-topbar,
+  .hsk-topbar{
+    padding:10px 14px !important;
+  }
+  
+  /* Brand smaller on mobile */
+  .m6-brand,
+  .hsk-brand{
+    font-size:14px !important;
   }
 }
 
-/* Hide the bottom "أدوات" tool bar from release-hardening */
-.hsk-stage5-tools-frame,
-[class*="tools-frame"],
-[class*="floating-tools"]{
-  display:none !important;
+@media (min-width:769px){
+  .nav-toggle-btn{display:none !important}
 }
 
-/* The yellow tip banner - keep but make less floaty */
+/* Tip banner - normal flow, not sticky */
 .hsk-tip-banner{
   position:relative !important;
   top:auto !important;
   margin:12px 0 18px !important;
 }
 
-/* progress bar - keep but make subtler */
-#progress-bar{
-  height:4px !important;
-}
-#progress-text{
-  font-size:10px !important;
-  padding:1px 6px !important;
-}
-
-/* Service Worker badge / install prompt - hide if any */
-[class*="install"],
-[class*="prompt-banner"]{
-  display:none !important;
-}
-
-/* === إخفاء شريط التبويبات الزائد في Mock 6 === */
-/* الـ topbar الجديد يحتوي على نفس الروابط، فلا داعي للـ tabs السفلي */
-.tabs{
-  display:none !important;
-}
-
-/* عند إخفاء التبويبات نظهر كل المحتوى بترتيبه (الاستماع → القراءة → الكتابة → المرجع) */
-.tab-content{
-  display:block !important;
-  margin-bottom:30px !important;
-  padding-top:20px;
-  border-top:3px solid rgba(11,99,206,0.15);
-}
-.tab-content:first-of-type{
-  border-top:none;
-  padding-top:0;
-}
-
-/* عنوان كل قسم يصبح بارزاً */
+/* Section title - prominent at top */
 .tab-content > .section-title,
-#intro h2,
-#listening h2,
-#reading h2,
-#writing h2,
-#flashcards h2,
-#grammar h2{
+.tab-content > h2,
+.tab-content > h1{
   background:linear-gradient(135deg,#0b63ce,#064aa3);
-  color:#fff;
+  color:#fff !important;
   padding:14px 20px;
   border-radius:14px;
-  margin:20px 0 12px;
+  margin:10px 0 18px;
   text-align:center;
   font-size:1.3em;
   box-shadow:0 6px 18px rgba(11,99,206,0.2);
-  position:sticky;
-  top:0;
-  z-index:30;
+}
+.tab-content > .section-title h2,
+.tab-content > .section-title h1{
+  color:#fff !important;
+  margin:0;
 }
 
-/* فاصل أنيق بين الأقسام */
-.tab-content::before{
-  content:'';
-  display:block;
-  height:2px;
-  background:linear-gradient(90deg,transparent,rgba(11,99,206,0.3),transparent);
-  margin:30px auto 20px;
-  max-width:300px;
-}
-.tab-content:first-of-type::before{
-  display:none;
-}
+/* Progress bar smaller */
+#progress-bar{height:4px !important}
+#progress-text{font-size:10px !important;padding:1px 6px !important}
 
-/* topbar links - اجعل الكليك يعمل scroll بدلاً من showTab */
-.m6-mini-nav a,
-.mk9-mini-nav a,
-.hsk-nav a{
-  scroll-behavior:smooth;
-}
+/* Hide install/prompt banners */
+[class*="install"]:not(input):not(button[type]),
+[class*="prompt-banner"]{display:none !important}
 
-/* "ابدأ هنا" - intro tab content يبقى مخفي للحفاظ على التركيز */
-#intro{
-  display:none !important;
-}
-
-/* === إخفاء المقدمة وقسم "ابدأ هنا" بالكامل === */
-.hero,
-.welcome-card,
-#intro,
-.intro-section,
-.keyword-legend,
-.tab-content#intro,
-[id="intro"]{
-  display:none !important;
-}
-
-/* keyword-legend هو شرح للكلمات المفتاحية - إذا أردت إبقاءها يمكن إزالة السطر أعلاه */
-
-/* لو كان أول section هو hero، نخفيه */
-.wrapper > .hero,
-main > .hero,
-.container > .hero{
-  display:none !important;
-}
-
-/* topbar nav - إزالة "ابدأ هنا" / "الرئيسية" إذا كانت تشير إلى section مخفي */
-.m6-mini-nav a[href*="#intro"],
-.mk9-mini-nav a[href*="#intro"],
-.hsk-nav a[href*="#intro"]{
-  display:none !important;
-}
-
-/* تأكيد إخفاء كل tab-btn (شريط التبويبات السفلي إذا ظهر) */
-.tab-btn,
-.tabs button{
-  display:none !important;
-}
-
-/* جعل أول section ظاهر هو الاستماع مباشرة */
-#listening{
-  margin-top:0 !important;
-  padding-top:0 !important;
-}
-
-/* welcome-card الموجود في أقسام داخلية (ليس فقط في البداية) - إخفاؤها أيضاً */
-.tab-content .welcome-card,
-.tab-content > .welcome-card{
-  display:none !important;
-}
-
-/* === تأكيد إخفاء كامل لزر "ابدأ هنا" === */
-button.tab-btn.active[onclick*="intro"],
-button[onclick*="showTab('intro'"],
-.tab-btn[onclick*="intro"]{
-  display:none !important;
-}
-
-/* بعض الـ themes الأخرى تستخدم نصوصاً مختلفة */
-*[class*="tab-btn"]:not([class*="active"]):empty{display:none}
+/* Hide redundant tools */
+.hsk-stage5-tools-frame,
+[class*="tools-frame"],
+[class*="floating-tools"]{display:none !important}
