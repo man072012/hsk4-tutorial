@@ -4,11 +4,15 @@
   document.addEventListener('focusin', function(e){
     if (e.target && e.target.matches && e.target.matches('.skip-nav, .skip-link')){
       e.target.classList.add('skip-nav-shown');
+      e.target.style.setProperty('top', '0', 'important');
+      e.target.style.setProperty('outline', '3px solid #facc15', 'important');
     }
   }, true);
   document.addEventListener('focusout', function(e){
     if (e.target && e.target.classList && e.target.classList.contains('skip-nav-shown')){
       e.target.classList.remove('skip-nav-shown');
+      e.target.style.removeProperty('top');
+      e.target.style.removeProperty('outline');
     }
   }, true);
 
