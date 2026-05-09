@@ -282,4 +282,41 @@ body.mock6-redesign .flashcard{
   padding:14px !important;
 }
 
-/* Image inside card -
+/* Image inside card - fixed size, no stretch */
+html body .flashcard .hsk-card-image-wrap{
+  max-height:160px !important;
+  max-width:240px !important;
+  margin:0 auto 12px !important;
+}
+html body .flashcard .hsk-card-image{
+  max-height:160px !important;
+  object-fit:cover !important;
+}
+
+html body .flashcard:not(:has(.hsk-card-image-wrap)){
+  min-height:auto !important;
+}
+
+/* Container max-width on very wide screens */
+@media (min-width:1200px){
+  html body .flashcard-grid,
+  body.mock6-redesign .flashcard-grid{
+    max-width:1280px !important;
+    margin:0 auto !important;
+  }
+}
+
+/* === Writing section original images - cap height to prevent huge scroll === */
+html body img.hsk-original-image{
+  max-height:520px !important;
+  width:auto !important;
+  max-width:100% !important;
+  object-fit:contain !important;
+  display:block !important;
+  margin:10px auto !important;
+}
+@media (max-width:600px){
+  html body img.hsk-original-image{
+    max-height:340px !important;
+  }
+}
