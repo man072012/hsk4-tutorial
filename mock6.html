@@ -832,16 +832,16 @@ body:not(.answer-hidden) .reveal-answer-btn{display:none}
 
 /* إخفاء النص المسموع المكتوب وترجمات الخيارات في وضع الاختبار */
 /* استخدام :has() لتحديد الأسئلة التي بها صوت */
-body.answer-hidden .q-card:has(audio):not(.revealed) .chinese-box .chinese-text,
-body.answer-hidden .q-card:has(audio):not(.revealed) .chinese-box .pinyin-text{display:none}
+body.answer-hidden .q-card:has(audio):not(.revealed) .chinese-box .zh-dialogue{display:none}
+body.answer-hidden .q-card:has(audio):not(.revealed) .chinese-box .zh-question{display:inline-block;background:#fef3c7;padding:6px 12px;border-radius:6px;border:2px dashed #d97706;font-weight:bold}
 body.answer-hidden .q-card:has(audio):not(.revealed) .chinese-box .label{
   color:#a16207;
   font-style:italic;
 }
-body.answer-hidden .q-card:has(audio):not(.revealed) .chinese-box::after{
-  content:'🎧 استمع للصوت أعلاه قبل الإجابة';
+body.answer-hidden .q-card:has(audio):not(.revealed) .chinese-box::before{
+  content:'🎧 استمع للحوار، ثم اقرأ السؤال أدناه واختر الإجابة';
   display:block;color:#854d0e;background:#fef9c3;padding:6px 10px;
-  border-radius:6px;margin-top:8px;font-size:13px;text-align:center
+  border-radius:6px;margin-bottom:8px;font-size:13px;text-align:center
 }
 /* إخفاء الترجمة العربية للخيارات (opt-arabic) */
 body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
@@ -1631,8 +1631,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：你下个星期就要回国了，行李收拾得差不多了吧？<br>女：我已经把书、鞋、包什么的寄回去了，<span class="keyword" onclick="playChinese('再收拾一下衣服', this)">再收拾一下衣服<span class="keyword-tooltip">💡 (انقر للنطق) 💡 ما تبقى ترتيبه = ملابس</span></span>就行了。<br>问：女的还需要收拾什么？</div>
-      <div class="pinyin-text">Nán: Nǐ xià gè xīngqī jiù yào huí guó le, xíngli shōushi de chàbuduō le ba?<br>Nǚ: Wǒ yǐjīng bǎ shū, xié, bāo shénme de jì huíqu le, zài shōushi yīxià yīfu jiù xíng le.<br>Wèn: Nǚ de hái xūyào shōushi shénme?</div>
+      <div class="chinese-text"><span class="zh-dialogue">男：你下个星期就要回国了，行李收拾得差不多了吧？</span><br><span class="zh-dialogue">女：我已经把书、鞋、包什么的寄回去了，<span class="keyword" onclick="playChinese('再收拾一下衣服', this)">再收拾一下衣服<span class="keyword-tooltip">💡 (انقر للنطق) 💡 ما تبقى ترتيبه = ملابس</span></span>就行了。</span><br><span class="zh-question">问：女的还需要收拾什么？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nán: Nǐ xià gè xīngqī jiù yào huí guó le, xíngli shōushi de chàbuduō le ba?</span><br><span class="zh-dialogue">Nǚ: Wǒ yǐjīng bǎ shū, xié, bāo shénme de jì huíqu le, zài shōushi yīxià yīfu jiù xíng le.</span><br><span class="zh-question">Wèn: Nǚ de hái xūyào shōushi shénme?</span></div>
     </div>
 
     <div class="trans-box">
@@ -1696,8 +1696,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：怎么样？张教授对你的文章满意吗？<br>男：张教授<span class="keyword" onclick="playChinese('要求高', this)">要求高<span class="keyword-tooltip">💡 (انقر للنطق) 💡 متطلب عالي = صارم</span></span>，我估计至少还得改两三次才能通过。<br>问：张教授怎么样？</div>
-      <div class="pinyin-text">Nǚ: Zěnmeyàng? Zhāng jiàoshòu duì nǐ de wénzhāng mǎnyì ma?<br>Nán: Zhāng jiàoshòu yāoqiú gāo, wǒ gūjì zhìshǎo hái děi gǎi liǎng-sān cì cái néng tōngguò.<br>Wèn: Zhāng jiàoshòu zěnmeyàng?</div>
+      <div class="chinese-text"><span class="zh-dialogue">女：怎么样？张教授对你的文章满意吗？</span><br><span class="zh-dialogue">男：张教授<span class="keyword" onclick="playChinese('要求高', this)">要求高<span class="keyword-tooltip">💡 (انقر للنطق) 💡 متطلب عالي = صارم</span></span>，我估计至少还得改两三次才能通过。</span><br><span class="zh-question">问：张教授怎么样？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nǚ: Zěnmeyàng? Zhāng jiàoshòu duì nǐ de wénzhāng mǎnyì ma?</span><br><span class="zh-dialogue">Nán: Zhāng jiàoshòu yāoqiú gāo, wǒ gūjì zhìshǎo hái děi gǎi liǎng-sān cì cái néng tōngguò.</span><br><span class="zh-question">Wèn: Zhāng jiàoshòu zěnmeyàng?</span></div>
     </div>
 
     <div class="trans-box">
@@ -1761,8 +1761,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：请问一下，我要去中山公园，是在下一站下吧？<br>女：呀，你方向坐反了，下一站<span class="keyword" onclick="playChinese('换乘对面的车', this)">换乘对面的车<span class="keyword-tooltip">💡 (انقر للنطق) 💡 تغيير القطار = مترو</span></span>吧。<br>问：这段对话可能发生在哪儿？</div>
-      <div class="pinyin-text">Nán: Qǐng wèn yīxià, wǒ yào qù Zhōngshān gōngyuán, shì zài xià yī zhàn xià ba?<br>Nǚ: Yā, nǐ fāngxiàng zuò fǎn le, xià yī zhàn huànchéng duìmiàn de chē ba.<br>Wèn: Zhè duàn duìhuà kěnéng fāshēng zài nǎr?</div>
+      <div class="chinese-text"><span class="zh-dialogue">男：请问一下，我要去中山公园，是在下一站下吧？</span><br><span class="zh-dialogue">女：呀，你方向坐反了，下一站<span class="keyword" onclick="playChinese('换乘对面的车', this)">换乘对面的车<span class="keyword-tooltip">💡 (انقر للنطق) 💡 تغيير القطار = مترو</span></span>吧。</span><br><span class="zh-question">问：这段对话可能发生在哪儿？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nán: Qǐng wèn yīxià, wǒ yào qù Zhōngshān gōngyuán, shì zài xià yī zhàn xià ba?</span><br><span class="zh-dialogue">Nǚ: Yā, nǐ fāngxiàng zuò fǎn le, xià yī zhàn huànchéng duìmiàn de chē ba.</span><br><span class="zh-question">Wèn: Zhè duàn duìhuà kěnéng fāshēng zài nǎr?</span></div>
     </div>
 
     <div class="trans-box">
@@ -1823,8 +1823,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：你看你，一回家来就躺在沙发上，东西还到处乱扔！<br>男：怎么又生气啦？我们<span class="keyword" onclick="playChinese('结婚前', this)">结婚前<span class="keyword-tooltip">💡 (انقر للنطق) 💡 قبل الزواج → الآن متزوجان</span></span>，你的脾气多好啊！<br>问：说话人是什么关系？</div>
-      <div class="pinyin-text">Nǚ: Nǐ kàn nǐ, yī huí jiā lái jiù tǎng zài shāfā shàng, dōngxi hái dàochù luàn rēng!<br>Nán: Zěnme yòu shēngqì la? Wǒmen jiéhūn qián, nǐ de píqì duō hǎo a!<br>Wèn: Shuōhuàrén shì shénme guānxi?</div>
+      <div class="chinese-text"><span class="zh-dialogue">女：你看你，一回家来就躺在沙发上，东西还到处乱扔！</span><br><span class="zh-dialogue">男：怎么又生气啦？我们<span class="keyword" onclick="playChinese('结婚前', this)">结婚前<span class="keyword-tooltip">💡 (انقر للنطق) 💡 قبل الزواج → الآن متزوجان</span></span>，你的脾气多好啊！</span><br><span class="zh-question">问：说话人是什么关系？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nǚ: Nǐ kàn nǐ, yī huí jiā lái jiù tǎng zài shāfā shàng, dōngxi hái dàochù luàn rēng!</span><br><span class="zh-dialogue">Nán: Zěnme yòu shēngqì la? Wǒmen jiéhūn qián, nǐ de píqì duō hǎo a!</span><br><span class="zh-question">Wèn: Shuōhuàrén shì shénme guānxi?</span></div>
     </div>
 
     <div class="trans-box">
@@ -1890,8 +1890,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：你好像对这附近特别熟悉。<br>女：我原来就住在这儿，<span class="keyword" onclick="playChinese('住了有二十多年', this)">住了有二十多年<span class="keyword-tooltip">💡 (انقر للنطق) 💡 عاشت سنوات طويلة = تألف المنطقة</span></span>，上个月才搬走。<br>问：关于女的，可以知道什么？</div>
-      <div class="pinyin-text">Nán: Nǐ hǎoxiàng duì zhè fùjìn tèbié shúxī.<br>Nǚ: Wǒ yuánlái jiù zhù zài zhèr, zhù le yǒu èrshí duō nián, shàng gè yuè cái bān zǒu.<br>Wèn: Guānyú nǚ de, kěyǐ zhīdào shénme?</div>
+      <div class="chinese-text"><span class="zh-dialogue">男：你好像对这附近特别熟悉。</span><br><span class="zh-dialogue">女：我原来就住在这儿，<span class="keyword" onclick="playChinese('住了有二十多年', this)">住了有二十多年<span class="keyword-tooltip">💡 (انقر للنطق) 💡 عاشت سنوات طويلة = تألف المنطقة</span></span>，上个月才搬走。</span><br><span class="zh-question">问：关于女的，可以知道什么？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nán: Nǐ hǎoxiàng duì zhè fùjìn tèbié shúxī.</span><br><span class="zh-dialogue">Nǚ: Wǒ yuánlái jiù zhù zài zhèr, zhù le yǒu èrshí duō nián, shàng gè yuè cái bān zǒu.</span><br><span class="zh-question">Wèn: Guānyú nǚ de, kěyǐ zhīdào shénme?</span></div>
     </div>
 
     <div class="trans-box">
@@ -1956,8 +1956,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：生活不会一直顺利，但也不会一直有这么多麻烦事，总会过去的。<br>男：你说得对，咱们应该<span class="keyword" onclick="playChinese('积极地解决问题', this)">积极地解决问题<span class="keyword-tooltip">💡 (انقر للنطق) 💡 موقف إيجابي</span></span>。<br>问：这段对话主要谈的是什么？</div>
-      <div class="pinyin-text">Nǚ: Shēnghuó bù huì yīzhí shùnlì, dàn yě bù huì yīzhí yǒu zhème duō máfan shì, zǒng huì guòqù de.<br>Nán: Nǐ shuō de duì, zánmen yīnggāi jījí de jiějué wèntí.<br>Wèn: Zhè duàn duìhuà zhǔyào tán de shì shénme?</div>
+      <div class="chinese-text"><span class="zh-dialogue">女：生活不会一直顺利，但也不会一直有这么多麻烦事，总会过去的。</span><br><span class="zh-dialogue">男：你说得对，咱们应该<span class="keyword" onclick="playChinese('积极地解决问题', this)">积极地解决问题<span class="keyword-tooltip">💡 (انقر للنطق) 💡 موقف إيجابي</span></span>。</span><br><span class="zh-question">问：这段对话主要谈的是什么？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nǚ: Shēnghuó bù huì yīzhí shùnlì, dàn yě bù huì yīzhí yǒu zhème duō máfan shì, zǒng huì guòqù de.</span><br><span class="zh-dialogue">Nán: Nǐ shuō de duì, zánmen yīnggāi jījí de jiějué wèntí.</span><br><span class="zh-question">Wèn: Zhè duàn duìhuà zhǔyào tán de shì shénme?</span></div>
     </div>
 
     <div class="trans-box">
@@ -2021,8 +2021,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：我女儿考试没考好，昨天晚上我批评了她。<br>女：最好要<span class="keyword" onclick="playChinese('让她知道没考好的原因', this)">让她知道没考好的原因<span class="keyword-tooltip">💡 (انقر للنطق) 💡 اكتشاف السبب</span></span>：是粗心呢？还是没听懂？<br>问：女的认为孩子考试没考好应该怎么办？</div>
-      <div class="pinyin-text">Nán: Wǒ nǚ'ér kǎoshì méi kǎo hǎo, zuótiān wǎnshang wǒ pīpíng le tā.<br>Nǚ: Zuì hǎo yào ràng tā zhīdào méi kǎo hǎo de yuányīn: shì cūxīn ne? Háishi méi tīng dǒng?<br>Wèn: Nǚ de rènwéi háizi kǎoshì méi kǎo hǎo yīnggāi zěnme bàn?</div>
+      <div class="chinese-text"><span class="zh-dialogue">男：我女儿考试没考好，昨天晚上我批评了她。</span><br><span class="zh-dialogue">女：最好要<span class="keyword" onclick="playChinese('让她知道没考好的原因', this)">让她知道没考好的原因<span class="keyword-tooltip">💡 (انقر للنطق) 💡 اكتشاف السبب</span></span>：是粗心呢？还是没听懂？</span><br><span class="zh-question">问：女的认为孩子考试没考好应该怎么办？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nán: Wǒ nǚ'ér kǎoshì méi kǎo hǎo, zuótiān wǎnshang wǒ pīpíng le tā.</span><br><span class="zh-dialogue">Nǚ: Zuì hǎo yào ràng tā zhīdào méi kǎo hǎo de yuányīn: shì cūxīn ne? Háishi méi tīng dǒng?</span><br><span class="zh-question">Wèn: Nǚ de rènwéi háizi kǎoshì méi kǎo hǎo yīnggāi zěnme bàn?</span></div>
     </div>
 
     <div class="trans-box">
@@ -2087,8 +2087,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：你认为幸福有标准吗？<br>男：每个人对幸福都有自己的理解。但对我来说，工作顺利，<span class="keyword" onclick="playChinese('家人身体好', this)">家人身体好<span class="keyword-tooltip">💡 (انقر للنطق) 💡 صحة الأسرة = السعادة</span></span>就是幸福。<br>问：男的认为什么是幸福？</div>
-      <div class="pinyin-text">Nǚ: Nǐ rènwéi xìngfú yǒu biāozhǔn ma?<br>Nán: Měi gè rén duì xìngfú dōu yǒu zìjǐ de lǐjiě. Dàn duì wǒ lái shuō, gōngzuò shùnlì, jiārén shēntǐ hǎo jiù shì xìngfú.<br>Wèn: Nán de rènwéi shénme shì xìngfú?</div>
+      <div class="chinese-text"><span class="zh-dialogue">女：你认为幸福有标准吗？</span><br><span class="zh-dialogue">男：每个人对幸福都有自己的理解。但对我来说，工作顺利，<span class="keyword" onclick="playChinese('家人身体好', this)">家人身体好<span class="keyword-tooltip">💡 (انقر للنطق) 💡 صحة الأسرة = السعادة</span></span>就是幸福。</span><br><span class="zh-question">问：男的认为什么是幸福？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nǚ: Nǐ rènwéi xìngfú yǒu biāozhǔn ma?</span><br><span class="zh-dialogue">Nán: Měi gè rén duì xìngfú dōu yǒu zìjǐ de lǐjiě. Dàn duì wǒ lái shuō, gōngzuò shùnlì, jiārén shēntǐ hǎo jiù shì xìngfú.</span><br><span class="zh-question">Wèn: Nán de rènwéi shénme shì xìngfú?</span></div>
     </div>
 
     <div class="trans-box">
@@ -2151,8 +2151,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：<span class="keyword" onclick="playChinese('护士', this)">护士<span class="keyword-tooltip">💡 (انقر للنطق) 💡 ممرضة = مستشفى = مريض</span></span>，可以关一下空调，打开窗户吗？我想换换新鲜空气。<br>女：那我开一点儿，外面冷，你身体还没完全好。<br>问：男的可能是什么人？</div>
-      <div class="pinyin-text">Nán: Hùshi, kěyǐ guān yīxià kōngtiáo, dǎkāi chuānghu ma? Wǒ xiǎng huànhuan xīnxiān kōngqì.<br>Nǚ: Nà wǒ kāi yīdiǎnr, wàimiàn lěng, nǐ shēntǐ hái méi wánquán hǎo.<br>Wèn: Nán de kěnéng shì shénme rén?</div>
+      <div class="chinese-text"><span class="zh-dialogue">男：<span class="keyword" onclick="playChinese('护士', this)">护士<span class="keyword-tooltip">💡 (انقر للنطق) 💡 ممرضة = مستشفى = مريض</span></span>，可以关一下空调，打开窗户吗？我想换换新鲜空气。</span><br><span class="zh-dialogue">女：那我开一点儿，外面冷，你身体还没完全好。</span><br><span class="zh-question">问：男的可能是什么人？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nán: Hùshi, kěyǐ guān yīxià kōngtiáo, dǎkāi chuānghu ma? Wǒ xiǎng huànhuan xīnxiān kōngqì.</span><br><span class="zh-dialogue">Nǚ: Nà wǒ kāi yīdiǎnr, wàimiàn lěng, nǐ shēntǐ hái méi wánquán hǎo.</span><br><span class="zh-question">Wèn: Nán de kěnéng shì shénme rén?</span></div>
     </div>
 
     <div class="trans-box">
@@ -2221,8 +2221,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：还有十秒就到十二点了！<span class="keyword" onclick="playChinese('快把酒倒好', this)">快把酒倒好<span class="keyword-tooltip">💡 (انقر للنطق) 💡 اسكب المشروب = شرب</span></span>！<br>男：来，给你，一起干杯！祝我们在新的一年里万事顺利！<br>问：他们最可能在做什么？</div>
-      <div class="pinyin-text">Nǚ: Hái yǒu shí miǎo jiù dào shí'èr diǎn le! Kuài bǎ jiǔ dào hǎo!<br>Nán: Lái, gěi nǐ, yīqǐ gānbēi! Zhù wǒmen zài xīn de yī nián lǐ wàn shì shùnlì!<br>Wèn: Tāmen zuì kěnéng zài zuò shénme?</div>
+      <div class="chinese-text"><span class="zh-dialogue">女：还有十秒就到十二点了！<span class="keyword" onclick="playChinese('快把酒倒好', this)">快把酒倒好<span class="keyword-tooltip">💡 (انقر للنطق) 💡 اسكب المشروب = شرب</span></span>！</span><br><span class="zh-dialogue">男：来，给你，一起干杯！祝我们在新的一年里万事顺利！</span><br><span class="zh-question">问：他们最可能在做什么？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nǚ: Hái yǒu shí miǎo jiù dào shí'èr diǎn le! Kuài bǎ jiǔ dào hǎo!</span><br><span class="zh-dialogue">Nán: Lái, gěi nǐ, yīqǐ gānbēi! Zhù wǒmen zài xīn de yī nián lǐ wàn shì shùnlì!</span><br><span class="zh-question">Wèn: Tāmen zuì kěnéng zài zuò shénme?</span></div>
     </div>
 
     <div class="trans-box">
@@ -2281,8 +2281,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：我那个红色的帽子呢，昨天我放在沙发上的，你整理房间的时候拿走了吗？<br>女：<span class="keyword" onclick="playChinese('我给你洗了', this)">我给你洗了<span class="keyword-tooltip">💡 (انقر للنطق) 💡 غسلتها = نظفت</span></span>，刚才放你床上了。<br>问：关于帽子，下面哪个是对的？</div>
-      <div class="pinyin-text">Nán: Wǒ nàge hóngsè de màozi ne, zuótiān wǒ fàng zài shāfā shàng de, nǐ zhěnglǐ fángjiān de shíhou ná zǒu le ma?<br>Nǚ: Wǒ gěi nǐ xǐ le, gāngcái fàng nǐ chuáng shàng le.<br>Wèn: Guānyú màozi, xiàmiàn nǎge shì duì de?</div>
+      <div class="chinese-text"><span class="zh-dialogue">男：我那个红色的帽子呢，昨天我放在沙发上的，你整理房间的时候拿走了吗？</span><br><span class="zh-dialogue">女：<span class="keyword" onclick="playChinese('我给你洗了', this)">我给你洗了<span class="keyword-tooltip">💡 (انقر للنطق) 💡 غسلتها = نظفت</span></span>，刚才放你床上了。</span><br><span class="zh-question">问：关于帽子，下面哪个是对的？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nán: Wǒ nàge hóngsè de màozi ne, zuótiān wǒ fàng zài shāfā shàng de, nǐ zhěnglǐ fángjiān de shíhou ná zǒu le ma?</span><br><span class="zh-dialogue">Nǚ: Wǒ gěi nǐ xǐ le, gāngcái fàng nǐ chuáng shàng le.</span><br><span class="zh-question">Wèn: Guānyú màozi, xiàmiàn nǎge shì duì de?</span></div>
     </div>
 
     <div class="trans-box">
@@ -2351,8 +2351,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：您这么年轻就获得了这么大的成功，能不能给我们介绍一下经验？<br>男：做自己喜欢的事情，并且<span class="keyword" onclick="playChinese('不要放弃', this)">不要放弃<span class="keyword-tooltip">💡 (انقر للنطق) 💡 عدم الاستسلام = المثابرة</span></span>，就一定会成功。<br>问：男的能成功的原因是什么？</div>
-      <div class="pinyin-text">Nǚ: Nín zhème niánqīng jiù huòdé le zhème dà de chénggōng, néng bù néng gěi wǒmen jièshào yīxià jīngyàn?<br>Nán: Zuò zìjǐ xǐhuān de shìqing, bìngqiě bù yào fàngqì, jiù yīdìng huì chénggōng.<br>Wèn: Nán de néng chénggōng de yuányīn shì shénme?</div>
+      <div class="chinese-text"><span class="zh-dialogue">女：您这么年轻就获得了这么大的成功，能不能给我们介绍一下经验？</span><br><span class="zh-dialogue">男：做自己喜欢的事情，并且<span class="keyword" onclick="playChinese('不要放弃', this)">不要放弃<span class="keyword-tooltip">💡 (انقر للنطق) 💡 عدم الاستسلام = المثابرة</span></span>，就一定会成功。</span><br><span class="zh-question">问：男的能成功的原因是什么？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nǚ: Nín zhème niánqīng jiù huòdé le zhème dà de chénggōng, néng bù néng gěi wǒmen jièshào yīxià jīngyàn?</span><br><span class="zh-dialogue">Nán: Zuò zìjǐ xǐhuān de shìqing, bìngqiě bù yào fàngqì, jiù yīdìng huì chénggōng.</span><br><span class="zh-question">Wèn: Nán de néng chénggōng de yuányīn shì shénme?</span></div>
     </div>
 
     <div class="trans-box">
@@ -2417,8 +2417,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：今天孙子来咱们家，<span class="keyword" onclick="playChinese('进门也不打招呼', this)">进门也不打招呼<span class="keyword-tooltip">💡 (انقر للنطق) 💡 عدم التحية = قلة أدب</span></span>，就问了我一句上网密码是多少。<br>女：太不应该了！过会儿好好跟他谈谈。<br>问：男的对孙子的哪方面不满意？</div>
-      <div class="pinyin-text">Nán: Jīntiān sūnzi lái zánmen jiā, jìnmén yě bù dǎ zhāohū, jiù wèn le wǒ yī jù shàngwǎng mìmǎ shì duōshao.<br>Nǚ: Tài bù yīnggāi le! Guò huìr hǎohǎo gēn tā tántan.<br>Wèn: Nán de duì sūnzi de nǎ fāngmiàn bù mǎnyì?</div>
+      <div class="chinese-text"><span class="zh-dialogue">男：今天孙子来咱们家，<span class="keyword" onclick="playChinese('进门也不打招呼', this)">进门也不打招呼<span class="keyword-tooltip">💡 (انقر للنطق) 💡 عدم التحية = قلة أدب</span></span>，就问了我一句上网密码是多少。</span><br><span class="zh-dialogue">女：太不应该了！过会儿好好跟他谈谈。</span><br><span class="zh-question">问：男的对孙子的哪方面不满意？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nán: Jīntiān sūnzi lái zánmen jiā, jìnmén yě bù dǎ zhāohū, jiù wèn le wǒ yī jù shàngwǎng mìmǎ shì duōshao.</span><br><span class="zh-dialogue">Nǚ: Tài bù yīnggāi le! Guò huìr hǎohǎo gēn tā tántan.</span><br><span class="zh-question">Wèn: Nán de duì sūnzi de nǎ fāngmiàn bù mǎnyì?</span></div>
     </div>
 
     <div class="trans-box">
@@ -2479,8 +2479,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：高老师的《<span class="keyword" onclick="playChinese('世界经济', this)">世界经济<span class="keyword-tooltip">💡 (انقر للنطق) 💡 اسم المادة</span></span>》你上学期上过了吧？怎么样？<br>男：挺好的，但是需要有一些经济学的基础知识，否则很难听懂。<br>问：他们在讨论什么？</div>
-      <div class="pinyin-text">Nǚ: Gāo lǎoshī de "Shìjiè Jīngjì" nǐ shàng xuéqī shàng guò le ba? Zěnmeyàng?<br>Nán: Tǐng hǎo de, dànshì xūyào yǒu yīxiē jīngjìxué de jīchǔ zhīshi, fǒuzé hěn nán tīng dǒng.<br>Wèn: Tāmen zài tǎolùn shénme?</div>
+      <div class="chinese-text"><span class="zh-dialogue">女：高老师的《<span class="keyword" onclick="playChinese('世界经济', this)">世界经济<span class="keyword-tooltip">💡 (انقر للنطق) 💡 اسم المادة</span></span>》你上学期上过了吧？怎么样？</span><br><span class="zh-dialogue">男：挺好的，但是需要有一些经济学的基础知识，否则很难听懂。</span><br><span class="zh-question">问：他们在讨论什么？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nǚ: Gāo lǎoshī de "Shìjiè Jīngjì" nǐ shàng xuéqī shàng guò le ba? Zěnmeyàng?</span><br><span class="zh-dialogue">Nán: Tǐng hǎo de, dànshì xūyào yǒu yīxiē jīngjìxué de jīchǔ zhīshi, fǒuzé hěn nán tīng dǒng.</span><br><span class="zh-question">Wèn: Tāmen zài tǎolùn shénme?</span></div>
     </div>
 
     <div class="trans-box">
@@ -2544,8 +2544,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：这件衣服您穿着大小合适，而且无论价格还是质量都很不错。<br>女：样子也挺好，但<span class="keyword" onclick="playChinese('这个颜色太深了', this)">这个颜色太深了<span class="keyword-tooltip">💡 (انقر للنطق) 💡 اللون الذي لا يعجب</span></span>。<br>问：女的对什么不满意？</div>
-      <div class="pinyin-text">Nán: Zhè jiàn yīfu nín chuān zhe dàxiǎo héshì, érqiě wúlùn jiàgé háishi zhìliàng dōu hěn bùcuò.<br>Nǚ: Yàngzi yě tǐng hǎo, dàn zhège yánsè tài shēn le.<br>Wèn: Nǚ de duì shénme bù mǎnyì?</div>
+      <div class="chinese-text"><span class="zh-dialogue">男：这件衣服您穿着大小合适，而且无论价格还是质量都很不错。</span><br><span class="zh-dialogue">女：样子也挺好，但<span class="keyword" onclick="playChinese('这个颜色太深了', this)">这个颜色太深了<span class="keyword-tooltip">💡 (انقر للنطق) 💡 اللون الذي لا يعجب</span></span>。</span><br><span class="zh-question">问：女的对什么不满意？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nán: Zhè jiàn yīfu nín chuān zhe dàxiǎo héshì, érqiě wúlùn jiàgé háishi zhìliàng dōu hěn bùcuò.</span><br><span class="zh-dialogue">Nǚ: Yàngzi yě tǐng hǎo, dàn zhège yánsè tài shēn le.</span><br><span class="zh-question">Wèn: Nǚ de duì shénme bù mǎnyì?</span></div>
     </div>
 
     <div class="trans-box">
@@ -2624,8 +2624,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：我想申请读历史专业的研究生，请问需要什么条件？<br>男：您要提供大学四年的成绩，而且需要通过我们的考试。<br>女：好的。<span class="keyword" onclick="playChinese('现在可以报名吗', this)">现在可以报名吗<span class="keyword-tooltip">💡 (انقر للنطق) 💡 تريد التسجيل</span></span>？<br>男：研究生报名还没开始，请您关注我们网站上的通知。<br>问：女的想做什么？</div>
-      <div class="pinyin-text">Nǚ: Wǒ xiǎng shēnqǐng dú lìshǐ zhuānyè de yánjiūshēng, qǐng wèn xūyào shénme tiáojiàn?<br>Nán: Nín yào tígōng dàxué sì nián de chéngjì, érqiě xūyào tōngguò wǒmen de kǎoshì.<br>Nǚ: Hǎo de. Xiànzài kěyǐ bàomíng ma?<br>Nán: Yánjiūshēng bàomíng hái méi kāishǐ, qǐng nín guānzhù wǒmen wǎngzhàn shàng de tōngzhī.</div>
+      <div class="chinese-text"><span class="zh-dialogue">女：我想申请读历史专业的研究生，请问需要什么条件？</span><br><span class="zh-dialogue">男：您要提供大学四年的成绩，而且需要通过我们的考试。</span><br><span class="zh-dialogue">女：好的。<span class="keyword" onclick="playChinese('现在可以报名吗', this)">现在可以报名吗<span class="keyword-tooltip">💡 (انقر للنطق) 💡 تريد التسجيل</span></span>？</span><br><span class="zh-dialogue">男：研究生报名还没开始，请您关注我们网站上的通知。</span><br><span class="zh-question">问：女的想做什么？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nǚ: Wǒ xiǎng shēnqǐng dú lìshǐ zhuānyè de yánjiūshēng, qǐng wèn xūyào shénme tiáojiàn?</span><br><span class="zh-dialogue">Nán: Nín yào tígōng dàxué sì nián de chéngjì, érqiě xūyào tōngguò wǒmen de kǎoshì.</span><br><span class="zh-dialogue">Nǚ: Hǎo de. Xiànzài kěyǐ bàomíng ma?</span><br><span class="zh-dialogue">Nán: Yánjiūshēng bàomíng hái méi kāishǐ, qǐng nín guānzhù wǒmen wǎngzhàn shàng de tōngzhī.</span></div>
     </div>
 
     <div class="trans-box">
@@ -2692,8 +2692,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：我昨天晚上九点多给你打了好几个电话，你都没接，睡觉了吗？<br>女：我昨天睡得很晚，可是手机一直都没有响啊。<br>男：怎么可能，你看，这是你的号码吧？<br>女：我看看，啊呀！<span class="keyword" onclick="playChinese('最后三位数字是二六八', this)">最后三位数字是二六八<span class="keyword-tooltip">💡 (انقر للنطق) 💡 رقم خاطئ</span></span>，不是二八六。<br>问：电话为什么没打通？</div>
-      <div class="pinyin-text">Nán: Wǒ zuótiān wǎnshang jiǔ diǎn duō gěi nǐ dǎ le hǎo jǐ gè diànhuà, nǐ dōu méi jiē, shuìjiào le ma?<br>Nǚ: Wǒ zuótiān shuì de hěn wǎn, kěshì shǒujī yīzhí dōu méiyǒu xiǎng a.<br>Nán: Zěnme kěnéng, nǐ kàn, zhè shì nǐ de hàomǎ ba?<br>Nǚ: Wǒ kànkan, āyā! Zuìhòu sān wèi shùzì shì èr-liù-bā, bùshì èr-bā-liù.</div>
+      <div class="chinese-text"><span class="zh-dialogue">男：我昨天晚上九点多给你打了好几个电话，你都没接，睡觉了吗？</span><br><span class="zh-dialogue">女：我昨天睡得很晚，可是手机一直都没有响啊。</span><br><span class="zh-dialogue">男：怎么可能，你看，这是你的号码吧？</span><br><span class="zh-dialogue">女：我看看，啊呀！<span class="keyword" onclick="playChinese('最后三位数字是二六八', this)">最后三位数字是二六八<span class="keyword-tooltip">💡 (انقر للنطق) 💡 رقم خاطئ</span></span>，不是二八六。</span><br><span class="zh-question">问：电话为什么没打通？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nán: Wǒ zuótiān wǎnshang jiǔ diǎn duō gěi nǐ dǎ le hǎo jǐ gè diànhuà, nǐ dōu méi jiē, shuìjiào le ma?</span><br><span class="zh-dialogue">Nǚ: Wǒ zuótiān shuì de hěn wǎn, kěshì shǒujī yīzhí dōu méiyǒu xiǎng a.</span><br><span class="zh-dialogue">Nán: Zěnme kěnéng, nǐ kàn, zhè shì nǐ de hàomǎ ba?</span><br><span class="zh-dialogue">Nǚ: Wǒ kànkan, āyā! Zuìhòu sān wèi shùzì shì èr-liù-bā, bùshì èr-bā-liù.</span></div>
     </div>
 
     <div class="trans-box">
@@ -2760,8 +2760,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：这条路不太对啊，你打开手机地图看看我们在哪儿？<br>男：我来看看，我们现在在长江路上。<br>女：坏了，刚才的<span class="keyword" onclick="playChinese('路口应该左转的', this)">路口应该左转的<span class="keyword-tooltip">💡 (انقر للنطق) 💡 أخطأوا الطريق</span></span>。<br>男：没事，时间还早，聚会八点才开始呢。<br>问：他们遇到了什么问题？</div>
-      <div class="pinyin-text">Nǚ: Zhè tiáo lù bù tài duì a, nǐ dǎkāi shǒujī dìtú kànkan wǒmen zài nǎr?<br>Nán: Wǒ lái kànkan, wǒmen xiànzài zài Chángjiāng lù shàng.<br>Nǚ: Huài le, gāngcái de lùkǒu yīnggāi zuǒ zhuǎn de.<br>Nán: Méi shì, shíjiān hái zǎo, jùhuì bā diǎn cái kāishǐ ne.</div>
+      <div class="chinese-text"><span class="zh-dialogue">女：这条路不太对啊，你打开手机地图看看我们在哪儿？</span><br><span class="zh-dialogue">男：我来看看，我们现在在长江路上。</span><br><span class="zh-dialogue">女：坏了，刚才的<span class="keyword" onclick="playChinese('路口应该左转的', this)">路口应该左转的<span class="keyword-tooltip">💡 (انقر للنطق) 💡 أخطأوا الطريق</span></span>。</span><br><span class="zh-dialogue">男：没事，时间还早，聚会八点才开始呢。</span><br><span class="zh-question">问：他们遇到了什么问题？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nǚ: Zhè tiáo lù bù tài duì a, nǐ dǎkāi shǒujī dìtú kànkan wǒmen zài nǎr?</span><br><span class="zh-dialogue">Nán: Wǒ lái kànkan, wǒmen xiànzài zài Chángjiāng lù shàng.</span><br><span class="zh-dialogue">Nǚ: Huài le, gāngcái de lùkǒu yīnggāi zuǒ zhuǎn de.</span><br><span class="zh-dialogue">Nán: Méi shì, shíjiān hái zǎo, jùhuì bā diǎn cái kāishǐ ne.</span></div>
     </div>
 
     <div class="trans-box">
@@ -2827,8 +2827,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：谢老师，您好！我是蓝天科技公司的小钱，经理让我来接您。<br>女：小钱你好，<span class="keyword" onclick="playChinese('飞机刚降落', this)">飞机刚降落<span class="keyword-tooltip">💡 (انقر للنطق) 💡 لم يلتقيا بعد</span></span>，可能还要等我一会儿。<br>男：好的，我举着公司的牌子，您一出来就能看到我。<br>女：谢谢你，一会儿见。<br>问：下面哪个是正确的？</div>
-      <div class="pinyin-text">Nán: Xiè lǎoshī, nín hǎo! Wǒ shì Lántiān Kējì Gōngsī de Xiǎo Qián, jīnglǐ ràng wǒ lái jiē nín.<br>Nǚ: Xiǎo Qián nǐ hǎo, fēijī gāng jiàngluò, kěnéng hái yào děng wǒ yīhuìr.<br>Nán: Hǎo de, wǒ jǔ zhe gōngsī de páizi, nín yī chūlái jiù néng kàn dào wǒ.<br>Nǚ: Xièxiè nǐ, yīhuìr jiàn.</div>
+      <div class="chinese-text"><span class="zh-dialogue">男：谢老师，您好！我是蓝天科技公司的小钱，经理让我来接您。</span><br><span class="zh-dialogue">女：小钱你好，<span class="keyword" onclick="playChinese('飞机刚降落', this)">飞机刚降落<span class="keyword-tooltip">💡 (انقر للنطق) 💡 لم يلتقيا بعد</span></span>，可能还要等我一会儿。</span><br><span class="zh-dialogue">男：好的，我举着公司的牌子，您一出来就能看到我。</span><br><span class="zh-dialogue">女：谢谢你，一会儿见。</span><br><span class="zh-question">问：下面哪个是正确的？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nán: Xiè lǎoshī, nín hǎo! Wǒ shì Lántiān Kējì Gōngsī de Xiǎo Qián, jīnglǐ ràng wǒ lái jiē nín.</span><br><span class="zh-dialogue">Nǚ: Xiǎo Qián nǐ hǎo, fēijī gāng jiàngluò, kěnéng hái yào děng wǒ yīhuìr.</span><br><span class="zh-dialogue">Nán: Hǎo de, wǒ jǔ zhe gōngsī de páizi, nín yī chūlái jiù néng kàn dào wǒ.</span><br><span class="zh-dialogue">Nǚ: Xièxiè nǐ, yīhuìr jiàn.</span></div>
     </div>
 
     <div class="trans-box">
@@ -2902,8 +2902,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：各位观众晚上好，今晚我们请来了第一医院的孙海医生，欢迎您，孙医生。<br>男：大家晚上好。<br>女：今晚您会给我们带来哪方面的<span class="keyword" onclick="playChinese('健康知识', this)">健康知识<span class="keyword-tooltip">💡 (انقر للنطق) 💡 صحة</span></span>呢？<br>男：我们来谈谈运动对健康的好处。<br>问：这可能是什么节目？</div>
-      <div class="pinyin-text">Nǚ: Gèwèi guānzhòng wǎnshang hǎo, jīn wǎn wǒmen qǐng lái le Dì-yī Yīyuàn de Sūn Hǎi yīshēng, huānyíng nín, Sūn yīshēng.<br>Nán: Dàjiā wǎnshang hǎo.<br>Nǚ: Jīn wǎn nín huì gěi wǒmen dài lái nǎ fāngmiàn de jiànkāng zhīshi ne?<br>Nán: Wǒmen lái tántan yùndòng duì jiànkāng de hǎochù.</div>
+      <div class="chinese-text"><span class="zh-dialogue">女：各位观众晚上好，今晚我们请来了第一医院的孙海医生，欢迎您，孙医生。</span><br><span class="zh-dialogue">男：大家晚上好。</span><br><span class="zh-dialogue">女：今晚您会给我们带来哪方面的<span class="keyword" onclick="playChinese('健康知识', this)">健康知识<span class="keyword-tooltip">💡 (انقر للنطق) 💡 صحة</span></span>呢？</span><br><span class="zh-dialogue">男：我们来谈谈运动对健康的好处。</span><br><span class="zh-question">问：这可能是什么节目？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nǚ: Gèwèi guānzhòng wǎnshang hǎo, jīn wǎn wǒmen qǐng lái le Dì-yī Yīyuàn de Sūn Hǎi yīshēng, huānyíng nín, Sūn yīshēng.</span><br><span class="zh-dialogue">Nán: Dàjiā wǎnshang hǎo.</span><br><span class="zh-dialogue">Nǚ: Jīn wǎn nín huì gěi wǒmen dài lái nǎ fāngmiàn de jiànkāng zhīshi ne?</span><br><span class="zh-dialogue">Nán: Wǒmen lái tántan yùndòng duì jiànkāng de hǎochù.</span></div>
     </div>
 
     <div class="trans-box">
@@ -2971,8 +2971,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：你猜一猜这个盒子里面是什么？<br>女：我猜不出来，是什么呢？<br>男：是<span class="keyword" onclick="playChinese('一条裙子', this)">一条裙子<span class="keyword-tooltip">💡 (انقر للنطق) 💡 هدية تنورة لأمه</span></span>，我用自己赚的钱给你买的。<br>女：啊，谢谢你，我的孩子。妈妈太感动了！<br>问：关于男的，下面哪个正确？</div>
-      <div class="pinyin-text">Nán: Nǐ cāi yī cāi zhège hézi lǐmiàn shì shénme?<br>Nǚ: Wǒ cāi bù chūlái, shì shénme ne?<br>Nán: Shì yī tiáo qúnzi, wǒ yòng zìjǐ zhuàn de qián gěi nǐ mǎi de.<br>Nǚ: Ā, xièxiè nǐ, wǒ de háizi. Māma tài gǎndòng le!</div>
+      <div class="chinese-text"><span class="zh-dialogue">男：你猜一猜这个盒子里面是什么？</span><br><span class="zh-dialogue">女：我猜不出来，是什么呢？</span><br><span class="zh-dialogue">男：是<span class="keyword" onclick="playChinese('一条裙子', this)">一条裙子<span class="keyword-tooltip">💡 (انقر للنطق) 💡 هدية تنورة لأمه</span></span>，我用自己赚的钱给你买的。</span><br><span class="zh-dialogue">女：啊，谢谢你，我的孩子。妈妈太感动了！</span><br><span class="zh-question">问：关于男的，下面哪个正确？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nán: Nǐ cāi yī cāi zhège hézi lǐmiàn shì shénme?</span><br><span class="zh-dialogue">Nǚ: Wǒ cāi bù chūlái, shì shénme ne?</span><br><span class="zh-dialogue">Nán: Shì yī tiáo qúnzi, wǒ yòng zìjǐ zhuàn de qián gěi nǐ mǎi de.</span><br><span class="zh-dialogue">Nǚ: Ā, xièxiè nǐ, wǒ de háizi. Māma tài gǎndòng le!</span></div>
     </div>
 
     <div class="trans-box">
@@ -3042,8 +3042,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：<span class="keyword" onclick="playChinese('明天晚上有个音乐会', this)">明天晚上有个音乐会<span class="keyword-tooltip">💡 (انقر للنطق) 💡 سيلتقيان غداً مساءً</span></span>，听说很不错，我们一起去吧？<br>男：我正好也想约你呢！<br>女：开始前顺便在附近吃个晚饭，怎么样？<br>男：好啊，竟然都想到一块儿去了。<br>问：根据对话，可以知道什么？</div>
-      <div class="pinyin-text">Nǚ: Míngtiān wǎnshang yǒu gè yīnyuèhuì, tīngshuō hěn bùcuò, wǒmen yīqǐ qù ba?<br>Nán: Wǒ zhènghǎo yě xiǎng yuē nǐ ne!<br>Nǚ: Kāishǐ qián shùnbiàn zài fùjìn chī gè wǎnfàn, zěnmeyàng?<br>Nán: Hǎo a, jìngrán dōu xiǎng dào yīkuàir qù le.</div>
+      <div class="chinese-text"><span class="zh-dialogue">女：<span class="keyword" onclick="playChinese('明天晚上有个音乐会', this)">明天晚上有个音乐会<span class="keyword-tooltip">💡 (انقر للنطق) 💡 سيلتقيان غداً مساءً</span></span>，听说很不错，我们一起去吧？</span><br><span class="zh-dialogue">男：我正好也想约你呢！</span><br><span class="zh-dialogue">女：开始前顺便在附近吃个晚饭，怎么样？</span><br><span class="zh-dialogue">男：好啊，竟然都想到一块儿去了。</span><br><span class="zh-question">问：根据对话，可以知道什么？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nǚ: Míngtiān wǎnshang yǒu gè yīnyuèhuì, tīngshuō hěn bùcuò, wǒmen yīqǐ qù ba?</span><br><span class="zh-dialogue">Nán: Wǒ zhènghǎo yě xiǎng yuē nǐ ne!</span><br><span class="zh-dialogue">Nǚ: Kāishǐ qián shùnbiàn zài fùjìn chī gè wǎnfàn, zěnmeyàng?</span><br><span class="zh-dialogue">Nán: Hǎo a, jìngrán dōu xiǎng dào yīkuàir qù le.</span></div>
     </div>
 
     <div class="trans-box">
@@ -3109,8 +3109,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：你在我们北京的公司干了有好几年了吧？<br>女：有三四年了。<br>男：公司想安排你去上海的公司，负责那儿的技术工作。<br>女：太好了，<span class="keyword" onclick="playChinese('我这个上海人', this)">我这个上海人<span class="keyword-tooltip">💡 (انقر للنطق) 💡 تصريح بأنها من شانغهاي</span></span>终于可以回家了。<br>问：关于女的，下面哪个是对的？</div>
-      <div class="pinyin-text">Nán: Nǐ zài wǒmen Běijīng de gōngsī gàn le yǒu hǎo jǐ nián le ba?<br>Nǚ: Yǒu sān-sì nián le.<br>Nán: Gōngsī xiǎng ānpái nǐ qù Shànghǎi de gōngsī, fùzé nàr de jìshù gōngzuò.<br>Nǚ: Tài hǎo le, wǒ zhège Shànghǎi rén zhōngyú kěyǐ huí jiā le.</div>
+      <div class="chinese-text"><span class="zh-dialogue">男：你在我们北京的公司干了有好几年了吧？</span><br><span class="zh-dialogue">女：有三四年了。</span><br><span class="zh-dialogue">男：公司想安排你去上海的公司，负责那儿的技术工作。</span><br><span class="zh-dialogue">女：太好了，<span class="keyword" onclick="playChinese('我这个上海人', this)">我这个上海人<span class="keyword-tooltip">💡 (انقر للنطق) 💡 تصريح بأنها من شانغهاي</span></span>终于可以回家了。</span><br><span class="zh-question">问：关于女的，下面哪个是对的？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nán: Nǐ zài wǒmen Běijīng de gōngsī gàn le yǒu hǎo jǐ nián le ba?</span><br><span class="zh-dialogue">Nǚ: Yǒu sān-sì nián le.</span><br><span class="zh-dialogue">Nán: Gōngsī xiǎng ānpái nǐ qù Shànghǎi de gōngsī, fùzé nàr de jìshù gōngzuò.</span><br><span class="zh-dialogue">Nǚ: Tài hǎo le, wǒ zhège Shànghǎi rén zhōngyú kěyǐ huí jiā le.</span></div>
     </div>
 
     <div class="trans-box">
@@ -3176,8 +3176,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">女：这个肉汤的味道有点儿奇怪。<br>男：我尝尝，啊，坏了！我<span class="keyword" onclick="playChinese('把糖当成盐', this)">把糖当成盐<span class="keyword-tooltip">💡 (انقر للنطق) 💡 وضع السكر بدل الملح</span></span>了！<br>女：我说怎么那么甜呢？<br>男：不好意思，我去厨房重新做一个汤吧，等我一会儿啊。<br>问：根据对话，可以知道什么？</div>
-      <div class="pinyin-text">Nǚ: Zhège ròutāng de wèidao yǒudiǎnr qíguài.<br>Nán: Wǒ chángchang, ā, huài le! Wǒ bǎ táng dàngchéng yán le!<br>Nǚ: Wǒ shuō zěnme nàme tián ne?<br>Nán: Bù hǎoyìsi, wǒ qù chúfáng chóngxīn zuò yī gè tāng ba, děng wǒ yīhuìr a.</div>
+      <div class="chinese-text"><span class="zh-dialogue">女：这个肉汤的味道有点儿奇怪。</span><br><span class="zh-dialogue">男：我尝尝，啊，坏了！我<span class="keyword" onclick="playChinese('把糖当成盐', this)">把糖当成盐<span class="keyword-tooltip">💡 (انقر للنطق) 💡 وضع السكر بدل الملح</span></span>了！</span><br><span class="zh-dialogue">女：我说怎么那么甜呢？</span><br><span class="zh-dialogue">男：不好意思，我去厨房重新做一个汤吧，等我一会儿啊。</span><br><span class="zh-question">问：根据对话，可以知道什么？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nǚ: Zhège ròutāng de wèidao yǒudiǎnr qíguài.</span><br><span class="zh-dialogue">Nán: Wǒ chángchang, ā, huài le! Wǒ bǎ táng dàngchéng yán le!</span><br><span class="zh-dialogue">Nǚ: Wǒ shuō zěnme nàme tián ne?</span><br><span class="zh-dialogue">Nán: Bù hǎoyìsi, wǒ qù chúfáng chóngxīn zuò yī gè tāng ba, děng wǒ yīhuìr a.</span></div>
     </div>
 
     <div class="trans-box">
@@ -3254,8 +3254,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">男：听说你得到了去英国留学的机会，祝贺你啊！<br>女：谢谢，我也很兴奋呢。<br>男：你是学英语的，应该到英语的语言环境中去锻炼锻炼。<br>女：是啊，不仅是语言，<span class="keyword" onclick="playChinese('最关键的是可以了解', this)">最关键的是可以了解<span class="keyword-tooltip">💡 (انقر للنطق) 💡 الأهم فهم الثقافة</span></span>语言中那些丰富的社会文化。<br>问：女的认为去英国学习的最大好处是什么？</div>
-      <div class="pinyin-text">Nán: Tīngshuō nǐ dédào le qù Yīngguó liúxué de jīhuì, zhùhè nǐ a!<br>Nǚ: Xièxiè, wǒ yě hěn xīngfèn ne.<br>Nán: Nǐ shì xué Yīngyǔ de, yīnggāi dào Yīngyǔ de yǔyán huánjìng zhōng qù duànliàn duànliàn.<br>Nǚ: Shì a, bùjǐn shì yǔyán, zuì guānjiàn de shì kěyǐ liǎojiě yǔyán zhōng nàxiē fēngfù de shèhuì wénhuà.</div>
+      <div class="chinese-text"><span class="zh-dialogue">男：听说你得到了去英国留学的机会，祝贺你啊！</span><br><span class="zh-dialogue">女：谢谢，我也很兴奋呢。</span><br><span class="zh-dialogue">男：你是学英语的，应该到英语的语言环境中去锻炼锻炼。</span><br><span class="zh-dialogue">女：是啊，不仅是语言，<span class="keyword" onclick="playChinese('最关键的是可以了解', this)">最关键的是可以了解<span class="keyword-tooltip">💡 (انقر للنطق) 💡 الأهم فهم الثقافة</span></span>语言中那些丰富的社会文化。</span><br><span class="zh-question">问：女的认为去英国学习的最大好处是什么？</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">Nán: Tīngshuō nǐ dédào le qù Yīngguó liúxué de jīhuì, zhùhè nǐ a!</span><br><span class="zh-dialogue">Nǚ: Xièxiè, wǒ yě hěn xīngfèn ne.</span><br><span class="zh-dialogue">Nán: Nǐ shì xué Yīngyǔ de, yīnggāi dào Yīngyǔ de yǔyán huánjìng zhōng qù duànliàn duànliàn.</span><br><span class="zh-dialogue">Nǚ: Shì a, bùjǐn shì yǔyán, zuì guānjiàn de shì kěyǐ liǎojiě yǔyán zhōng nàxiē fēngfù de shèhuì wénhuà.</span></div>
     </div>
 
     <div class="trans-box">
@@ -4040,8 +4040,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">— 谢清平时学习挺认真的，这次考试怎么没通过呢？<br>— 是挺奇怪的，所有人听到这个消息都很 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">吃惊</span><span class="fill-blank-placeholder">_____</span>)。</div>
-      <div class="pinyin-text">— Xiè Qīng píngshí xuéxí tǐng rènzhēn de, zhè cì kǎoshì zěnme méi tōngguò ne?<br>— Shì tǐng qíguài de, suǒyǒu rén tīngdào zhège xiāoxi dōu hěn <b>chījīng</b>.</div>
+      <div class="chinese-text"><span class="zh-dialogue">— 谢清平时学习挺认真的，这次考试怎么没通过呢？</span><br><span class="zh-dialogue">— 是挺奇怪的，所有人听到这个消息都很 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">吃惊</span><span class="fill-blank-placeholder">_____</span>)。</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">— Xiè Qīng píngshí xuéxí tǐng rènzhēn de, zhè cì kǎoshì zěnme méi tōngguò ne?</span><br><span class="zh-dialogue">— Shì tǐng qíguài de, suǒyǒu rén tīngdào zhège xiāoxi dōu hěn <b>chījīng</b>.</span></div>
     </div>
 
     
@@ -4079,8 +4079,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">— 先生，加油站里不 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">允许</span><span class="fill-blank-placeholder">_____</span>) 打电话，这样很危险。<br>— 对不起！我马上挂掉。</div>
-      <div class="pinyin-text">— Xiānsheng, jiāyóu zhàn lǐ bù <b>yǔnxǔ</b> dǎ diànhuà, zhèyàng hěn wēixiǎn.<br>— Duìbuqǐ! Wǒ mǎshàng guà diào.</div>
+      <div class="chinese-text"><span class="zh-dialogue">— 先生，加油站里不 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">允许</span><span class="fill-blank-placeholder">_____</span>) 打电话，这样很危险。</span><br><span class="zh-dialogue">— 对不起！我马上挂掉。</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">— Xiānsheng, jiāyóu zhàn lǐ bù <b>yǔnxǔ</b> dǎ diànhuà, zhèyàng hěn wēixiǎn.</span><br><span class="zh-dialogue">— Duìbuqǐ! Wǒ mǎshàng guà diào.</span></div>
     </div>
 
     
@@ -4121,8 +4121,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">— 今天的面试顺利吗？结果怎么样？<br>— 挺顺利的，明天就 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">正式</span><span class="fill-blank-placeholder">_____</span>) 上班了。</div>
-      <div class="pinyin-text">— Jīntiān de miànshì shùnlì ma? Jiéguǒ zěnmeyàng?<br>— Tǐng shùnlì de, míngtiān jiù <b>zhèngshì</b> shàngbān le.</div>
+      <div class="chinese-text"><span class="zh-dialogue">— 今天的面试顺利吗？结果怎么样？</span><br><span class="zh-dialogue">— 挺顺利的，明天就 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">正式</span><span class="fill-blank-placeholder">_____</span>) 上班了。</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">— Jīntiān de miànshì shùnlì ma? Jiéguǒ zěnmeyàng?</span><br><span class="zh-dialogue">— Tǐng shùnlì de, míngtiān jiù <b>zhèngshì</b> shàngbān le.</span></div>
     </div>
 
     
@@ -4172,8 +4172,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">— 这家烤鸭店的生意特别好，每天都有人 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">排队</span><span class="fill-blank-placeholder">_____</span>)，有时候要等半小时才能买到。<br>— 你说得我都想吃了。</div>
-      <div class="pinyin-text">— Zhè jiā kǎoyā diàn de shēngyi tèbié hǎo, měitiān dōu yǒu rén <b>páiduì</b>, yǒu shíhou yào děng bàn xiǎoshí cái néng mǎi dào.<br>— Nǐ shuō de wǒ dōu xiǎng chī le.</div>
+      <div class="chinese-text"><span class="zh-dialogue">— 这家烤鸭店的生意特别好，每天都有人 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">排队</span><span class="fill-blank-placeholder">_____</span>)，有时候要等半小时才能买到。</span><br><span class="zh-dialogue">— 你说得我都想吃了。</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">— Zhè jiā kǎoyā diàn de shēngyi tèbié hǎo, měitiān dōu yǒu rén <b>páiduì</b>, yǒu shíhou yào děng bàn xiǎoshí cái néng mǎi dào.</span><br><span class="zh-dialogue">— Nǐ shuō de wǒ dōu xiǎng chī le.</span></div>
     </div>
 
     
@@ -4219,8 +4219,8 @@ body.answer-hidden .q-card:not(.revealed) .opt-item .opt-arabic{display:none}
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">— 你好！我想把这些衣服寄到北京。<br>— 好的，请你在这里填一下姓名和 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">地址</span><span class="fill-blank-placeholder">_____</span>)。</div>
-      <div class="pinyin-text">— Nǐ hǎo! Wǒ xiǎng bǎ zhèxiē yīfu jì dào Běijīng.<br>— Hǎo de, qǐng nǐ zài zhèlǐ tián yīxià xìngmíng hé <b>dìzhǐ</b>.</div>
+      <div class="chinese-text"><span class="zh-dialogue">— 你好！我想把这些衣服寄到北京。</span><br><span class="zh-dialogue">— 好的，请你在这里填一下姓名和 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">地址</span><span class="fill-blank-placeholder">_____</span>)。</span></div>
+      <div class="pinyin-text"><span class="zh-dialogue">— Nǐ hǎo! Wǒ xiǎng bǎ zhèxiē yīfu jì dào Běijīng.</span><br><span class="zh-dialogue">— Hǎo de, qǐng nǐ zài zhèlǐ tián yīxià xìngmíng hé <b>dìzhǐ</b>.</span></div>
     </div>
 
     
@@ -9048,7 +9048,7 @@ function attachOptionClicks(){
           // إظهار صناديق الشرح وترجمات الخيارات
           card.querySelectorAll('.why-box, .explain-box, .memory-box, .trans-box, .vocab-section, .opt-arabic').forEach(b => b.style.display = '');
           // إظهار النص المسموع
-          card.querySelectorAll('.chinese-text, .pinyin-text').forEach(b => b.style.display = '');
+          card.querySelectorAll('.chinese-text, .pinyin-text, .zh-dialogue').forEach(b => b.style.display = '');
         } else {
           this.classList.add('user-wrong');
           const m = document.createElement('span');
@@ -9120,7 +9120,7 @@ function attachTFClicks(){
           if (card){
             card.classList.add('revealed');
             card.querySelectorAll('.why-box, .explain-box, .memory-box, .trans-box, .vocab-section, .opt-arabic').forEach(b => b.style.display = '');
-            card.querySelectorAll('.chinese-text, .pinyin-text').forEach(b => b.style.display = '');
+            card.querySelectorAll('.chinese-text, .pinyin-text, .zh-dialogue').forEach(b => b.style.display = '');
           }
         } else {
           this.classList.add('user-wrong');
