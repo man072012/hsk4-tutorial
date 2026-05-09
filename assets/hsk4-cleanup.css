@@ -218,77 +218,68 @@ body:not([data-active-tab]) #listening{display:block !important}
 [class*="tools-frame"],
 [class*="floating-tools"]{display:none !important}
 
-/* === FLASHCARD GRID FIX - prevent stretching and uneven heights === */
-.flashcard-grid{
-  display:grid;
-  /* اعرض كثير، يتحكم بالعرض حسب الشاشة */
+/* === FLASHCARD GRID FIX - prevent stretching and uneven heights ===
+   IMPORTANT: Selectors below use `body.mock6-redesign` AND `html body` chains
+   to overcome specificity of `body.mock6-redesign .flashcard-grid` rule
+   in hsk4-mock6-redesign.css that uses minmax(270px, 1fr).
+*/
+html body .flashcard-grid,
+body.mock6-redesign .flashcard-grid,
+body.mk9-redesign .flashcard-grid{
+  display:grid !important;
   grid-template-columns:repeat(auto-fit, minmax(min(100%, 240px), 1fr)) !important;
   gap:16px !important;
   align-items:start !important;
   justify-content:start !important;
-  width:100%;
+  width:100% !important;
 }
-/* على الشاشات الكبيرة - لا تمدد البطاقات */
-@media (min-width:600px){
-  .flashcard-grid{
+
+/* Desktop ≥601px: each card capped at 280px max - prevents stretching */
+@media (min-width:901px){
+  html body .flashcard-grid,
+  body.mock6-redesign .flashcard-grid,
+  body.mk9-redesign .flashcard-grid{
     grid-template-columns:repeat(auto-fit, minmax(240px, 280px)) !important;
   }
 }
 
-.flashcard{
-  /* البطاقة لا تمتد - حجمها حسب محتواها فقط */
-  height:auto !important;
-  align-self:start !important;
-  /* padding أصغر */
-  padding:14px !important;
-}
-
-/* الصورة داخل البطاقة - حجم ثابت لا يمتد */
-.flashcard .hsk-card-image-wrap{
-  max-height:160px !important;
-  max-width:240px !important;
-  margin:0 auto 12px !important;
-}
-.flashcard .hsk-card-image{
-  max-height:160px !important;
-  object-fit:cover;
-}
-
-/* البطاقات بدون صورة - ارتفاع طبيعي */
-.flashcard:not(:has(.hsk-card-image-wrap)){
-  min-height:auto !important;
-}
-
-/* على الشاشات الكبيرة - حدد عدد الأعمدة */
-@media (min-width:1200px){
-  .flashcard-grid{
-    max-width:1280px !important;
-    margin:0 auto !important;
+/* Tablet 601-900px: exactly 2 columns */
+@media (min-width:601px) and (max-width:900px){
+  html body .flashcard-grid,
+  body.mock6-redesign .flashcard-grid,
+  body.mk9-redesign .flashcard-grid{
+    grid-template-columns:repeat(2, 1fr) !important;
   }
 }
 
-/* Mobile: 1 column */
+/* Mobile ≤600px: single column */
 @media (max-width:600px){
-  .flashcard-grid{
+  html body .flashcard-grid,
+  body.mock6-redesign .flashcard-grid,
+  body.mk9-redesign .flashcard-grid{
     grid-template-columns:1fr !important;
     gap:14px !important;
-    padding:0 4px;
+    padding:0 4px !important;
   }
-  .flashcard{
+  html body .flashcard,
+  body.mock6-redesign .flashcard{
     padding:14px !important;
     width:100% !important;
     max-width:100% !important;
   }
-  .flashcard .hsk-card-image-wrap{
+  html body .flashcard .hsk-card-image-wrap{
     max-width:100% !important;
     max-height:200px !important;
   }
-  .flashcard .hsk-card-image{max-height:200px !important}
+  html body .flashcard .hsk-card-image{max-height:200px !important}
 }
 
-/* Tablet: 2 columns */
-@media (min-width:601px) and (max-width:900px){
-  .flashcard-grid{
-    grid-template-columns:repeat(2, 1fr) !important;
-  }
+/* Card itself - never stretch height, content-driven */
+html body .flashcard,
+body.mock6-redesign .flashcard{
+  height:auto !important;
+  align-self:start !important;
+  padding:14px !important;
 }
+
+/* Image insid
