@@ -145,10 +145,16 @@
       }
     });
 
-    // Skip-nav: add class on focus (works around :focus pseudo edge cases)
-    document.querySelectorAll('.skip-nav, .skip-link').forEach(function(el){
-      el.addEventListener('focus', function(){ this.classList.add('skip-nav-shown'); });
-      el.addEventListener('blur', function(){ this.classList.remove('skip-nav-shown'); });
+    // Skip-nav: use focusin (bubbles) on body to catch focus reliably
+    document.body.addEventListener('focusin', function(e){
+      if (e.target && e.target.matches && e.target.matches('.skip-nav, .skip-link')){
+        e.target.classList.add('skip-nav-shown');
+      }
+    });
+    document.body.addEventListener('focusout', function(e){
+      if (e.target && e.target.classList && e.target.classList.contains('skip-nav-shown')){
+        e.target.classList.remove('skip-nav-shown');
+      }
     });
   });
 })();
