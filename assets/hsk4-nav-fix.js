@@ -87,18 +87,26 @@
   function forcePinyinPosition(){
     const pinyin = document.getElementById('pinyinToggle') || document.getElementById('togglePinyin');
     if (!pinyin) return;
-    // CRITICAL ORDER: shorthand 'inset' includes top/right/bottom/left
-    // Set 'inset' FIRST to clear, then individual properties
+    const isMk9 = document.body.classList.contains('mk9-redesign');
+    // CRITICAL ORDER: shorthand 'inset' first, then individual properties
     pinyin.style.setProperty('inset', 'auto', 'important');
     pinyin.style.setProperty('inset-inline-start', 'auto', 'important');
     pinyin.style.setProperty('inset-inline-end', 'auto', 'important');
     pinyin.style.setProperty('inset-inline', 'auto', 'important');
     pinyin.style.setProperty('top', 'auto', 'important');
-    pinyin.style.setProperty('right', 'auto', 'important');
-    pinyin.style.setProperty('bottom', '78px', 'important');
-    pinyin.style.setProperty('left', '20px', 'important');
     pinyin.style.setProperty('position', 'fixed', 'important');
     pinyin.style.setProperty('z-index', '1000', 'important');
+    if (isMk9){
+      // Mock9: physical right, lifted higher
+      pinyin.style.setProperty('left', 'auto', 'important');
+      pinyin.style.setProperty('right', '20px', 'important');
+      pinyin.style.setProperty('bottom', '120px', 'important');
+    } else {
+      // Mock6 / index: physical left
+      pinyin.style.setProperty('right', 'auto', 'important');
+      pinyin.style.setProperty('left', '20px', 'important');
+      pinyin.style.setProperty('bottom', '78px', 'important');
+    }
   }
 
   ready(function(){

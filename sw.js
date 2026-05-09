@@ -1,5 +1,5 @@
 /* HSK4 service worker — Network-First for HTML/CSS/JS to avoid stale content. */
-const CACHE_NAME = 'hsk4-release-v27';
+const CACHE_NAME = 'hsk4-release-v28';
 const CORE_ASSETS = [
   './assets/icons/icon.svg',
   './site.webmanifest'
