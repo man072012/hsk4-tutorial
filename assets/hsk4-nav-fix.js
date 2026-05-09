@@ -1,5 +1,97 @@
 /* HSK4 Navigation: tab-based + mobile hamburger + nav-toggle injection */
 (function(){
+  // === Mock9 button function patches (define if missing or override broken) ===
+  // Bug 1: checkTF - add revealed class + correct/wrong
+  if (typeof window.checkTF !== 'function' || !window.__hsk4_checkTF_patched){
+    window.checkTF = function(btn, userAns, correctAns){
+      const q = btn.closest('.question, .q-card');
+      if (!q) return;
+      q.classList.add('revealed');
+      const isCorrect = userAns === correctAns;
+      btn.classList.add(isCorrect ? 'user-correct' : 'user-wrong');
+      // Also disable other TF buttons in same question
+      q.querySelectorAll('.tf-btn, .tf-choices button').forEach(function(b){
+        if (b === btn) return;
+        b.disabled = true;
+        b.classList.add('disabled');
+        // Highlight correct one
+        const bAns = b.getAttribute('data-answer') || (b.textContent.includes('صح') ? 'T' : 'F');
+        if (bAns === correctAns) b.classList.add('is-correct');
+      });
+    };
+    window.__hsk4_checkTF_patched = true;
+  }
+
+  // Bug 2: toggleExplain - actually reveal explanation
+  if (typeof window.toggleExplain !== 'function' || !window.__hsk4_toggleExplain_patched){
+    window.toggleExplain = function(btn){
+      const q = btn.closest('.question, .q-card');
+      if (!q) return;
+      const isRevealing = !q.classList.contains('revealed');
+      q.classList.toggle('revealed', isRevealing);
+      btn.textContent = isRevealing ? '🙈 إخفاء الشرح' : '💡 إظهار الشرح';
+    };
+    window.__hsk4_toggleExplain_patched = true;
+  }
+
+  // Bug 3: recordAndCompare - simple stub using browser SpeechRecognition / fallback
+  if (typeof window.recordAndCompare !== 'function'){
+    window.recordAndCompare = function(btn){
+      const card = btn.closest('.flashcard, .question, .q-card, .vocab-item');
+      const target = card ? (card.querySelector('.chinese, .hanzi, .fc-front, [lang="zh"]') || card).textContent.trim() : '';
+      if (!target){
+        alert('لم أجد نصاً صينياً للمقارنة');
+        return;
+      }
+      // Try Web Speech API
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SR){
+        alert('متصفحك لا يدعم التسجيل الصوتي. استخدم Chrome/Edge.');
+        return;
+      }
+      btn.disabled = true;
+      const oldText = btn.innerHTML;
+      btn.innerHTML = '🎤 جاري التسجيل...';
+      const rec = new SR();
+      rec.lang = 'zh-CN';
+      rec.interimResults = false;
+      rec.continuous = false;
+      rec.onresult = function(e){
+        const said = e.results[0][0].transcript;
+        const matches = said.replace(/\s/g, '').includes(target.replace(/\s/g, '').slice(0, 3));
+        alert((matches ? '✅ ممتاز! نطقك صحيح:\n' : '⚠️ حاول مرة أخرى. سمعتك تقول:\n') + said + '\n\nالنص: ' + target);
+        btn.innerHTML = oldText;
+        btn.disabled = false;
+      };
+      rec.onerror = function(e){
+        alert('خطأ في التسجيل: ' + e.error);
+        btn.innerHTML = oldText;
+        btn.disabled = false;
+      };
+      rec.onend = function(){
+        btn.innerHTML = oldText;
+        btn.disabled = false;
+      };
+      try { rec.start(); } catch(err){
+        alert('فشل بدء التسجيل: ' + err.message);
+        btn.innerHTML = oldText;
+        btn.disabled = false;
+      }
+    };
+  }
+
+  // Mock6/Mock9 enhancement: when wrong answer chosen, also reveal correct
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.tf-btn, .opt-item, [class*="user-wrong"], [class*="user-correct"]');
+    if (!btn) return;
+    setTimeout(function(){
+      if (btn.classList.contains('user-wrong')){
+        const q = btn.closest('.q-card, .question');
+        if (q) q.classList.add('revealed');
+      }
+    }, 50);
+  }, false);
+
   // Skip-nav: register early at document level (capturing) to catch ALL focus events
   document.addEventListener('focusin', function(e){
     if (e.target && e.target.matches && e.target.matches('.skip-nav, .skip-link')){
