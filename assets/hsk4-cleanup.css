@@ -150,3 +150,82 @@ body.hsk-landing-page .hsk-section-title{
   display:none !important;
 }
 body.hsk-landing-page #tests{margin-top:24px !important;padding-top:8px !important}
+
+/* ============================================================
+   === GEOMETRY FIXES (from engineering audit, 9 issues) ===
+   ============================================================ */
+
+/* FIX 1+5: Header flex layout + 44x44 touch target */
+html body .hsk-topbar,
+html body .m6-topbar,
+html body .mk9-topbar{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:12px !important;
+  grid-template-columns:unset !important;
+}
+html body .hsk-brand{
+  flex:1 1 auto !important;
+  max-width:calc(100% - 60px) !important;
+  min-width:0 !important;
+}
+html body .nav-toggle-btn{
+  position:static !important;
+  flex-shrink:0 !important;
+  width:44px !important;
+  height:44px !important;
+  min-width:44px !important;
+  min-height:44px !important;
+}
+
+/* FIX 3+4: stat-strip 3-cols on mobile + card height auto */
+@media (max-width:768px){
+  html body .hsk-stat-strip{
+    grid-template-columns:repeat(3, 1fr) !important;
+    height:auto !important;
+    gap:6px !important;
+  }
+  html body .hsk-stat{
+    height:auto !important;
+    padding:10px 4px !important;
+  }
+  html body .hsk-stat b{font-size:18px !important}
+  html body .hsk-stat span{font-size:11px !important}
+  html body .hsk-card-body{
+    gap:12px !important;
+    padding:14px !important;
+  }
+  html body .hsk-test-card{min-height:0 !important}
+  html body .hsk-card-art{min-height:160px !important}
+}
+
+/* FIX 8: Unified breakpoint for nav toggle (860px) */
+@media (max-width:860px){
+  html body .nav-toggle-btn{display:flex !important}
+}
+@media (min-width:861px){
+  html body .nav-toggle-btn{display:none !important}
+  html body .hsk-nav{
+    display:flex !important;
+    position:static !important;
+    box-shadow:none !important;
+    border:none !important;
+    background:transparent !important;
+    padding:0 !important;
+    flex-direction:row !important;
+  }
+}
+
+/* FIX 7: Index page - hide nav toggle entirely (no internal pages to navigate) */
+body.hsk-landing-page .nav-toggle-btn,
+body.hsk-landing-page .hsk-mobile-menu-btn{
+  display:none !important;
+}
+
+/* FIX 9: Remove duplicate grid-template on test card (keep final-polish minmax) */
+html body .hsk-test-card{
+  grid-template-columns:minmax(200px, 0.82fr) minmax(300px, 1.18fr);
+}
+@media (max-width:1100px){
+  html body .hsk-
