@@ -52,20 +52,40 @@
   }
   
   ready(function(){
-    // === Add hamburger button for mobile ===
-    const topbar = document.querySelector('.m6-topbar, .mk9-topbar, .hsk-topbar');
-    if (topbar && !topbar.querySelector('.nav-toggle-btn')){
+    // === Add hamburger button for mobile (with retry for late-injected topbars) ===
+    function injectNavToggle(){
+      // Prefer the inner container (m6-topbar-inner) for proper flex layout
+      const target = document.querySelector('.m6-topbar-inner, .mk9-topbar-inner') ||
+                     document.querySelector('.m6-topbar, .mk9-topbar, .hsk-topbar');
+      if (!target) return false;
+      if (target.querySelector('.nav-toggle-btn')) return true;
       const btn = document.createElement('button');
       btn.className = 'nav-toggle-btn';
+      btn.type = 'button';
       btn.setAttribute('aria-label', 'القائمة');
       btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-controls', 'main-nav-menu');
       btn.innerHTML = '☰';
       btn.onclick = function(){
         const isOpen = document.body.classList.toggle('nav-open');
         this.setAttribute('aria-expanded', String(isOpen));
         this.innerHTML = isOpen ? '✕' : '☰';
       };
-      topbar.appendChild(btn);
+      target.appendChild(btn);
+      return true;
+    }
+    // Try immediately
+    if (!injectNavToggle()){
+      // Topbar may be created later by mock6-redesign.js - retry a few times
+      let tries = 0;
+      const retry = setInterval(() => {
+        if (injectNavToggle() || ++tries > 20) clearInterval(retry);
+      }, 200);
+      // Also observe DOM changes
+      const obs = new MutationObserver(() => {
+        if (injectNavToggle()){ obs.disconnect(); clearInterval(retry); }
+      });
+      obs.observe(document.body, {childList: true, subtree: true});
     }
     
     // === Convert nav links to tab switchers ===
@@ -98,30 +118,4 @@
     // Check if it exists, fallback to listening
     if (!document.getElementById(initialTab)){
       // Try first available tab
-      const first = document.querySelector('.tab-content, .tab');
-      if (first && first.id) initialTab = first.id;
-    }
-    
-    activateTab(initialTab);
-    
-    // Listen to back/forward
-    window.addEventListener('popstate', function(){
-      const newTab = TAB_MAP[location.hash] || 'listening';
-      activateTab(newTab);
-    });
-    
-    // Close mobile nav when clicking outside
-    document.addEventListener('click', function(e){
-      const isToggle = e.target.classList.contains('nav-toggle-btn');
-      const inNav = e.target.closest('.m6-mini-nav, .mk9-mini-nav, .hsk-nav');
-      if (!isToggle && !inNav && document.body.classList.contains('nav-open')){
-        document.body.classList.remove('nav-open');
-        const btn = document.querySelector('.nav-toggle-btn');
-        if (btn){
-          btn.setAttribute('aria-expanded', 'false');
-          btn.innerHTML = '☰';
-        }
-      }
-    });
-  });
-})();
+      const first = document.querySelect

@@ -408,3 +408,75 @@ html[dir="rtl"] body .pinyin-toggle-floating{
   right:auto !important;
   bottom:78px !important;
 }
+
+/* ============================================================
+   === MOCK6 ROUND 3 PATCHES ===
+   ============================================================ */
+
+/* R3-2: Pinyin floating button - LEFT corner (better RTL ergonomics) */
+html body #pinyinToggle,
+html body #togglePinyin,
+html body .pinyin-toggle-floating{
+  inset-inline-start:auto !important;
+  inset-inline-end:auto !important;
+  right:auto !important;
+  left:20px !important;
+  bottom:78px !important;
+  width:auto !important;
+  min-width:64px !important;
+  height:44px !important;
+  min-height:44px !important;
+}
+
+/* R3-3: Tip banner compact on mobile */
+@media (max-width:768px){
+  html body .hsk-tip-banner,
+  html body .listening-tip-banner,
+  html body [class*="tip-banner"]{
+    max-height:140px !important;
+    overflow:auto !important;
+    padding:10px 14px !important;
+    font-size:12px !important;
+    margin:8px 0 12px !important;
+  }
+}
+
+/* R3-4: Skip-nav visible when focused */
+html body .skip-nav,
+html body .skip-link{
+  position:absolute !important;
+  top:-40px !important;
+  left:8px !important;
+  background:#0f172a !important;
+  color:#fff !important;
+  padding:10px 16px !important;
+  border-radius:0 0 12px 12px !important;
+  z-index:10002 !important;
+  transition:top 0.2s ease;
+  text-decoration:none !important;
+  font-weight:bold !important;
+}
+html body .skip-nav:focus,
+html body .skip-link:focus{
+  top:0 !important;
+  outline:3px solid #facc15 !important;
+}
+
+/* R3-5: Q-header tighter padding (was 188-184px → ~140px) */
+@media (max-width:768px){
+  html body .q-header{
+    padding:12px 14px !important;
+    gap:6px !important;
+  }
+}
+@media (min-width:769px){
+  html body .q-header{
+    padding:14px 18px !important;
+    gap:10px !important;
+  }
+}
+
+/* R3-6: Force-load images on tab activation (CSS hint via content-visibility) */
+html body .tab-content img{
+  content-visibility:auto !important;
+}
