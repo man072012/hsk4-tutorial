@@ -361,3 +361,50 @@ html body .options-list li{
   width:100% !important;
   box-sizing:border-box !important;
 }
+
+/* === M6-FIX-2 PATCH: progress-text fully repositioned === */
+html body #progress-text,
+body.mock6-redesign #progress-text,
+body.mk9-redesign #progress-text{
+  position:fixed !important;
+  top:10px !important;
+  inset-inline-end:14px !important;
+  right:auto !important;
+  left:auto !important;
+  transform:none !important;
+  z-index:10001 !important;
+  font-size:11px !important;
+  background:rgba(255,255,255,0.95) !important;
+  border:1px solid rgba(11,99,206,0.3) !important;
+  border-radius:10px !important;
+  padding:3px 8px !important;
+  color:#0b63ce !important;
+  font-weight:bold !important;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1) !important;
+}
+
+/* === M6-FIX-4 PATCH: pinyin FAB at RTL right (inline-start) === */
+html body #pinyinToggle,
+html body #togglePinyin,
+html body .pinyin-toggle-floating{
+  right:auto !important;
+  left:auto !important;
+  inset-inline-start:auto !important;
+  inset-inline-end:auto !important;
+}
+/* Use position via direction-aware logical property */
+[dir="rtl"] #pinyinToggle,
+[dir="rtl"] #togglePinyin,
+[dir="rtl"] .pinyin-toggle-floating,
+html[dir="rtl"] body #pinyinToggle,
+html[dir="rtl"] body .pinyin-toggle-floating{
+  right:20px !important;
+  left:auto !important;
+  bottom:78px !important;
+}
+[dir="ltr"] #pinyinToggle,
+[dir="ltr"] .pinyin-toggle-floating{
+  left:20px !important;
+  right:auto !important;
+  bottom:78px !important;
+}
