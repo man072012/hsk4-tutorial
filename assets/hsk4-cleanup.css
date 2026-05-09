@@ -726,3 +726,37 @@ html body .mock9-redesign .mk9-topbar,
 body.mock9-redesign .mk9-topbar{
   z-index:9000 !important;
 }
+
+/* ============================================================
+   === FINAL POLISH ===
+   ============================================================ */
+
+/* Skip-nav: ABSOLUTE last word - force visible on focus via maximum specificity */
+html body a.skip-nav:focus,
+html body a.skip-link:focus,
+html body .skip-nav:focus,
+html body .skip-link:focus,
+html[lang] body a.skip-nav:focus,
+html[dir] body a.skip-nav:focus{
+  top:0 !important;
+  outline:3px solid #facc15 !important;
+}
+
+/* Mock9 hero compact on mobile - reveal tabs above fold */
+@media (max-width:620px){
+  body.mock9-redesign .mk9-hero,
+  body.mk9-redesign .mk9-hero{
+    padding:14px 10px 12px !important;
+  }
+  body.mock9-redesign .mk9-hero-note,
+  body.mk9-redesign .mk9-hero-note,
+  body.mock9-redesign .mk9-hero p,
+  body.mock9-redesign .mk9-hero .subtitle{
+    display:none !important;
+  }
+  body.mock9-redesign .mk9-hero h1,
+  body.mock9-redesign .mk9-hero h2{
+    font-size:22px !important;
+    margin:6px 0 !important;
+  }
+}

@@ -88,23 +88,25 @@
     const pinyin = document.getElementById('pinyinToggle') || document.getElementById('togglePinyin');
     if (!pinyin) return;
     const isMk9 = document.body.classList.contains('mk9-redesign') || document.body.classList.contains('mock9-redesign');
-    // Detach pinyin from any sticky/positioned parent that would constrain its fixed positioning
+    // Detach pinyin from any sticky/positioned parent that would constrain fixed positioning
     if (pinyin.parentElement && pinyin.parentElement !== document.body){
       const parentCS = getComputedStyle(pinyin.parentElement);
       if (parentCS.position === 'sticky' || parentCS.transform !== 'none' || parentCS.willChange !== 'auto'){
         document.body.appendChild(pinyin);
       }
     }
-    // CRITICAL ORDER: shorthand 'inset' first, then individual properties
-    pinyin.style.setProperty('inset', 'auto', 'important');
-    pinyin.style.setProperty('inset-inline-start', 'auto', 'important');
-    pinyin.style.setProperty('inset-inline-end', 'auto', 'important');
-    pinyin.style.setProperty('inset-inline', 'auto', 'important');
-    pinyin.style.setProperty('top', 'auto', 'important');
+    // Remove ALL shorthand properties first to avoid conflicts (inset overrides individual)
+    pinyin.style.removeProperty('inset');
+    pinyin.style.removeProperty('inset-inline');
+    pinyin.style.removeProperty('inset-inline-start');
+    pinyin.style.removeProperty('inset-inline-end');
+    pinyin.style.removeProperty('inset-block');
+    // Set ONLY individual properties (predictable cascade)
     pinyin.style.setProperty('position', 'fixed', 'important');
     pinyin.style.setProperty('z-index', '1000', 'important');
+    pinyin.style.setProperty('top', 'auto', 'important');
     if (isMk9){
-      // Mock9: physical right, lifted higher
+      // Mock9: physical right (RTL), lifted higher to clear bottom controls
       pinyin.style.setProperty('left', 'auto', 'important');
       pinyin.style.setProperty('right', '20px', 'important');
       pinyin.style.setProperty('bottom', '120px', 'important');
