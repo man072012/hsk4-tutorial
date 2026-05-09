@@ -760,3 +760,15 @@ html[dir] body a.skip-nav:focus{
     margin:6px 0 !important;
   }
 }
+
+/* === Final touch: #preloadAudio button + all mk9-toolbar buttons 44px === */
+html body #preloadAudio,
+html body .controls.mk9-toolbar button,
+body.mock9-redesign .controls button,
+body.mk9-redesign .controls button{
+  min-height:44px !important;
+  padding-block:10px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
