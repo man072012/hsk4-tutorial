@@ -54,8 +54,8 @@ audio{direction:ltr}
 .answer-hidden .question:not(.revealed) .reveal-btn{background:#3498db}
 body:not(.answer-hidden) .reveal-btn{display:none}
 /* إخفاء الإجابات افتراضياً */
-.answer-hidden{filter:blur(6px);background:#94a3b8 !important;cursor:pointer;user-select:none;transition:0.3s}
-.answer-hidden:hover{filter:blur(3px)}
+span.answer.answer-hidden{filter:blur(6px);background:#94a3b8 !important;cursor:pointer;user-select:none;transition:0.3s;display:inline-block}
+span.answer.answer-hidden:hover{filter:blur(3px)}
 .answer-revealed{filter:none;cursor:default}
 .option-correct-hidden{background:#f8f9fa !important;border-right-color:#ddd !important;font-weight:normal !important}
 .option-correct-hidden::after{content:""}
