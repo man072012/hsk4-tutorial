@@ -772,3 +772,38 @@ body.mk9-redesign .controls button{
   align-items:center !important;
   justify-content:center !important;
 }
+
+/* === TF/MC answer button coloring (mock9 + mock6) === */
+html body .tf-choices .show-answer-btn.user-wrong,
+html body .tf-choices button.user-wrong,
+html body .tf-btn.user-wrong,
+html body .opt-item.user-wrong,
+body.mock9-redesign .show-answer-btn.user-wrong,
+body.mock6-redesign .tf-btn.user-wrong{
+  background:linear-gradient(135deg, #dc2626, #b91c1c) !important;
+  color:#fff !important;
+  border-color:#dc2626 !important;
+}
+html body .tf-choices .show-answer-btn.user-correct,
+html body .tf-choices .show-answer-btn.is-correct,
+html body .tf-choices button.user-correct,
+html body .tf-choices button.is-correct,
+html body .tf-btn.user-correct,
+html body .tf-btn.is-correct,
+html body .opt-item.user-correct,
+html body .opt-item.is-correct,
+body.mock9-redesign .show-answer-btn.user-correct,
+body.mock9-redesign .show-answer-btn.is-correct,
+body.mock6-redesign .tf-btn.user-correct,
+body.mock6-redesign .tf-btn.is-correct{
+  background:linear-gradient(135deg, #16a34a, #15803d) !important;
+  color:#fff !important;
+  border-color:#16a34a !important;
+}
+html body .tf-choices .show-answer-btn.disabled,
+html body .tf-btn.disabled,
+html body .opt-item.disabled{
+  opacity:0.65 !important;
+  pointer-events:none !important;
+  cursor:not-allowed !important;
+}

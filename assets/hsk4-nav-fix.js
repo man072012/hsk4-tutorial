@@ -80,6 +80,36 @@
     };
   }
 
+  // speakChinese - Web Speech Synthesis (used by flashcard speak buttons)
+  if (typeof window.speakChinese !== 'function'){
+    window.speakChinese = function(text, btn){
+      if (!text){
+        // Try to extract from button context
+        const ctx = btn?.closest('.flashcard, .vocab-item, .q-card, .question, .fc-front, .fc-back');
+        if (ctx){
+          const zh = ctx.querySelector('.chinese, .hanzi, .fc-front, [lang="zh"]');
+          text = zh ? zh.textContent.trim() : ctx.textContent.trim().slice(0, 30);
+        }
+      }
+      if (!text) return;
+      if (!window.speechSynthesis){
+        alert('متصفحك لا يدعم تشغيل الصوت');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'zh-CN';
+      u.rate = 0.85;
+      u.pitch = 1;
+      // Try Chinese voice
+      const voices = window.speechSynthesis.getVoices();
+      const zhVoice = voices.find(function(v){ return /zh|chinese|cmn/i.test(v.lang) || /chinese|mandarin/i.test(v.name); });
+      if (zhVoice) u.voice = zhVoice;
+      window.speechSynthesis.speak(u);
+    };
+  }
+
+
   // Mock6/Mock9 enhancement: when wrong answer chosen, also reveal correct
   document.addEventListener('click', function(e){
     const btn = e.target.closest('.tf-btn, .opt-item, [class*="user-wrong"], [class*="user-correct"]');
