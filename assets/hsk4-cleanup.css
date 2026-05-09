@@ -681,6 +681,9 @@ html body .show-answer-btn,
 body.mk9-redesign .recbtn,
 body.mk9-redesign .ttseng,
 body.mk9-redesign .show-answer-btn,
+body.mock9-redesign .recbtn,
+body.mock9-redesign .ttseng,
+body.mock9-redesign .show-answer-btn,
 body.mock6-redesign .recbtn,
 body.mock6-redesign .show-answer-btn{
   min-height:44px !important;
@@ -705,4 +708,21 @@ body.mk9-redesign .pinyin-toggle-floating{
   inset-inline-end:unset !important;
   bottom:120px !important;
   top:auto !important;
+}
+
+
+/* M9 patch: also match mock9-redesign body class */
+body.mock9-redesign #pinyinToggle,
+body.mock9-redesign #togglePinyin,
+body.mock9-redesign .pinyin-toggle-floating{
+  right:20px !important;
+  left:auto !important;
+  inset-inline-start:auto !important;
+  inset-inline-end:unset !important;
+  bottom:120px !important;
+  top:auto !important;
+}
+html body .mock9-redesign .mk9-topbar,
+body.mock9-redesign .mk9-topbar{
+  z-index:9000 !important;
 }

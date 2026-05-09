@@ -87,7 +87,7 @@
   function forcePinyinPosition(){
     const pinyin = document.getElementById('pinyinToggle') || document.getElementById('togglePinyin');
     if (!pinyin) return;
-    const isMk9 = document.body.classList.contains('mk9-redesign');
+    const isMk9 = document.body.classList.contains('mk9-redesign') || document.body.classList.contains('mock9-redesign');
     // CRITICAL ORDER: shorthand 'inset' first, then individual properties
     pinyin.style.setProperty('inset', 'auto', 'important');
     pinyin.style.setProperty('inset-inline-start', 'auto', 'important');
