@@ -1,0 +1,400 @@
+
+/* HSK4 Stage 9 — Visual Consistency QA Polish
+   Goal: make landing, mock6, mock9 closer to the provided premium reference:
+   soft educational Chinese visual identity, unified glass cards, consistent image ratios,
+   without changing academic content.
+*/
+
+:root{
+  --s9-blue:#0b63ce;
+  --s9-blue-dark:#064aa3;
+  --s9-red:#d21f32;
+  --s9-red-dark:#a91524;
+  --s9-ink:#101827;
+  --s9-muted:#64748b;
+  --s9-paper:#fffaf1;
+  --s9-card:rgba(255,255,255,.86);
+  --s9-line:rgba(148,163,184,.22);
+  --s9-gold:#d7a441;
+  --s9-shadow:0 24px 70px rgba(15,23,42,.10);
+  --s9-soft-shadow:0 12px 34px rgba(15,23,42,.08);
+  --s9-radius:26px;
+  --s9-radius-sm:18px;
+}
+
+html{scroll-behavior:smooth}
+
+body.hsk-premium-body,
+body.mock6-redesign,
+body.mock9-redesign{
+  background:
+    radial-gradient(circle at 8% 10%, rgba(11,99,206,.11), transparent 28rem),
+    radial-gradient(circle at 94% 8%, rgba(215,164,65,.13), transparent 25rem),
+    radial-gradient(circle at 80% 92%, rgba(210,31,50,.075), transparent 24rem),
+    linear-gradient(135deg,#fffdf8 0%,#fff8ee 48%,#fffdf9 100%) !important;
+  color:var(--s9-ink);
+  text-rendering:optimizeLegibility;
+}
+
+body.hsk-premium-body:before,
+body.mock6-redesign:before,
+body.mock9-redesign:before{
+  opacity:.52 !important;
+  filter:saturate(.9);
+}
+
+body.hsk-premium-body:after,
+body.mock6-redesign:after,
+body.mock9-redesign:after{
+  opacity:.38 !important;
+}
+
+/* ===== Shared top navigation ===== */
+.hsk-topbar,
+.mk9-topbar,
+.mock6-redesign .top-nav{
+  background:rgba(255,255,255,.90) !important;
+  border:1px solid rgba(226,232,240,.78) !important;
+  box-shadow:0 12px 32px rgba(15,23,42,.07) !important;
+  backdrop-filter:blur(18px);
+}
+
+.hsk-nav a,
+.mk9-nav a,
+.mock6-redesign .top-nav a{
+  border-radius:999px !important;
+  transition:background .22s ease, color .22s ease, transform .22s ease;
+  font-weight:800 !important;
+}
+
+.hsk-nav a:hover,
+.mk9-nav a:hover,
+.mock6-redesign .top-nav a:hover{
+  background:rgba(11,99,206,.08) !important;
+  color:var(--s9-blue) !important;
+  transform:translateY(-1px);
+}
+
+.hsk-nav a.active,
+.mk9-nav a.active,
+.mock6-redesign .top-nav a.active{
+  color:var(--s9-blue) !important;
+  background:linear-gradient(180deg,rgba(11,99,206,.10),rgba(11,99,206,.04)) !important;
+  box-shadow:inset 0 -2px 0 var(--s9-blue);
+}
+
+/* ===== Landing page ===== */
+.hsk-landing-page .hsk-hero{
+  margin-top:26px !important;
+  padding:34px 18px 22px !important;
+}
+
+.hsk-landing-page .hsk-title{
+  letter-spacing:-.02em;
+  text-shadow:0 10px 35px rgba(15,23,42,.08);
+}
+
+.hsk-landing-page .latin{
+  color:var(--s9-blue);
+  font-weight:1000;
+}
+
+.hsk-badge{
+  border:1px solid rgba(215,164,65,.25) !important;
+  background:linear-gradient(135deg,rgba(255,247,214,.9),rgba(255,255,255,.80)) !important;
+  color:#6b4511 !important;
+  box-shadow:0 12px 24px rgba(215,164,65,.10);
+}
+
+.hsk-choice-grid{
+  align-items:stretch !important;
+  gap:28px !important;
+}
+
+.hsk-test-card{
+  border-radius:var(--s9-radius) !important;
+  overflow:hidden !important;
+  background:rgba(255,255,255,.82) !important;
+  border:1px solid rgba(148,163,184,.23) !important;
+  box-shadow:var(--s9-shadow) !important;
+  min-height:330px;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease !important;
+}
+
+.hsk-test-card:hover{
+  transform:translateY(-5px) !important;
+  box-shadow:0 30px 90px rgba(15,23,42,.15) !important;
+}
+
+.hsk-test-card.blue{border-color:rgba(11,99,206,.28) !important}
+.hsk-test-card.red{border-color:rgba(210,31,50,.28) !important}
+
+.hsk-card-art{
+  min-height:235px !important;
+  background-size:cover !important;
+  position:relative;
+}
+.hsk-test-card.blue .hsk-card-art{
+  background:
+    linear-gradient(135deg,rgba(239,246,255,.74),rgba(255,255,255,.54)),
+    radial-gradient(circle at 18% 22%,rgba(11,99,206,.18),transparent 42%),
+    linear-gradient(135deg,#eef6ff,#fffaf1) !important;
+}
+.hsk-test-card.red .hsk-card-art{
+  background:
+    linear-gradient(135deg,rgba(254,242,242,.78),rgba(255,255,255,.50)),
+    radial-gradient(circle at 20% 24%,rgba(210,31,50,.18),transparent 42%),
+    linear-gradient(135deg,#fff1f2,#fffaf1) !important;
+}
+
+.hsk-num-wrap span{
+  filter:drop-shadow(0 14px 18px rgba(15,23,42,.18));
+}
+
+.hsk-card-body{
+  padding:26px 30px !important;
+}
+
+.hsk-features li{
+  border-radius:12px;
+}
+
+.hsk-cta{
+  border-radius:16px !important;
+  box-shadow:0 12px 26px rgba(11,99,206,.18);
+}
+
+/* ===== Image vocabulary cards: mock6 + mock9 ===== */
+.hsk-card-image-wrap{
+  position:relative;
+  border-radius:22px !important;
+  background:linear-gradient(135deg,#ffffff,#fff7ed) !important;
+  border:1px solid rgba(148,163,184,.20) !important;
+  box-shadow:
+    0 18px 42px rgba(15,23,42,.10),
+    inset 0 1px 0 rgba(255,255,255,.92) !important;
+  overflow:hidden !important;
+}
+
+.hsk-card-image-wrap:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,transparent 58%,rgba(15,23,42,.08));
+  pointer-events:none;
+}
+
+.hsk-card-image{
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center !important;
+  filter:saturate(1.02) contrast(1.01);
+}
+
+/* Mock6 visual cards */
+.mock6-redesign .flashcard-grid{
+  gap:22px !important;
+}
+
+.mock6-redesign .flashcard{
+  border-radius:26px !important;
+  overflow:hidden !important;
+  background:rgba(255,255,255,.84) !important;
+  border:1px solid rgba(148,163,184,.22) !important;
+  box-shadow:var(--s9-soft-shadow) !important;
+  padding:16px !important;
+  transition:transform .24s ease, box-shadow .24s ease, border-color .24s ease;
+}
+
+.mock6-redesign .flashcard:hover{
+  transform:translateY(-4px);
+  box-shadow:0 24px 60px rgba(15,23,42,.13) !important;
+  border-color:rgba(11,99,206,.28) !important;
+}
+
+.mock6-redesign .flashcard .fc-svg.hsk-card-image-wrap{
+  height:185px !important;
+  aspect-ratio:16/10 !important;
+  width:100% !important;
+  margin:0 0 16px !important;
+  padding:0 !important;
+}
+
+.mock6-redesign .fc-char-row{
+  align-items:center !important;
+  justify-content:center !important;
+  gap:8px !important;
+  padding:4px 4px 0 !important;
+}
+
+.mock6-redesign .fc-char{
+  color:var(--s9-ink) !important;
+  font-weight:1000 !important;
+  font-size:clamp(25px,2.2vw,34px) !important;
+  letter-spacing:.01em;
+}
+
+.mock6-redesign .fc-pinyin{
+  color:var(--s9-blue) !important;
+  font-weight:850 !important;
+}
+
+.mock6-redesign .fc-meaning{
+  color:#17324d !important;
+  font-weight:900 !important;
+  margin-top:3px !important;
+}
+
+.mock6-redesign .fc-story,
+.mock6-redesign .fc-example{
+  border-radius:18px !important;
+  border:1px solid rgba(148,163,184,.17) !important;
+  background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(248,250,252,.75)) !important;
+}
+
+/* Mock9 runtime flashcards */
+.mock9-redesign .fc-grid{
+  gap:20px !important;
+}
+
+.mock9-redesign .fc,
+.fc{
+  border-radius:24px !important;
+  background:rgba(255,255,255,.86) !important;
+  border:1px solid rgba(148,163,184,.22) !important;
+  box-shadow:var(--s9-soft-shadow) !important;
+  overflow:hidden !important;
+  padding:14px !important;
+  transition:transform .24s ease, box-shadow .24s ease, border-color .24s ease !important;
+}
+
+.mock9-redesign .fc:hover,
+.fc:hover{
+  transform:translateY(-4px);
+  box-shadow:0 24px 60px rgba(15,23,42,.13) !important;
+  border-color:rgba(11,99,206,.28) !important;
+}
+
+.mock9-redesign .fc .hsk-card-image-wrap,
+.fc .hsk-card-image-wrap{
+  max-width:none !important;
+  width:100% !important;
+  height:170px !important;
+  aspect-ratio:16/10 !important;
+  margin:0 0 14px !important;
+}
+
+.mock9-redesign .fc-zh,
+.fc-zh{
+  color:var(--s9-ink) !important;
+  font-size:clamp(24px,2.1vw,32px) !important;
+  font-weight:1000 !important;
+  margin-top:4px !important;
+}
+
+.mock9-redesign .fc-py,
+.fc-py{
+  color:var(--s9-blue) !important;
+  font-weight:850 !important;
+  letter-spacing:.01em;
+}
+
+/* ===== Mock pages panels and questions ===== */
+.mock6-redesign .q-card,
+.mock9-redesign .question,
+.mock9-redesign .intro-card,
+.mock6-redesign .intro-section,
+.mock6-redesign .welcome-card{
+  border-radius:var(--s9-radius) !important;
+  background:rgba(255,255,255,.84) !important;
+  border:1px solid rgba(148,163,184,.22) !important;
+  box-shadow:var(--s9-soft-shadow) !important;
+  backdrop-filter:blur(18px);
+}
+
+.mock6-redesign .q-header,
+.mock9-redesign .qheader{
+  background:linear-gradient(135deg,rgba(255,255,255,.92),rgba(255,250,241,.72)) !important;
+}
+
+.mock6-redesign .chinese-box,
+.mock6-redesign .trans-box,
+.mock6-redesign .vocab-section,
+.mock6-redesign .explain-box,
+.mock6-redesign .why-box,
+.mock6-redesign .memory-box,
+.mock9-redesign .chinese,
+.mock9-redesign .explanation,
+.mock9-redesign .option{
+  border-radius:20px !important;
+}
+
+/* Writing image blocks */
+.mock6-redesign .visual-card{
+  background:rgba(255,255,255,.86) !important;
+  box-shadow:var(--s9-soft-shadow) !important;
+  padding:16px !important;
+}
+
+.mock6-redesign .visual-card .hsk-card-image-wrap,
+.mock6-redesign .visual-card img.hsk-card-image{
+  border-radius:22px !important;
+}
+
+.mock6-redesign .visual-desc{
+  font-weight:800 !important;
+  color:var(--s9-muted) !important;
+  margin-top:12px !important;
+}
+
+/* Controls */
+.mock9-redesign .controls,
+.mock6-redesign .tab-container,
+.mock6-redesign .controls{
+  background:rgba(255,255,255,.78) !important;
+  border:1px solid rgba(148,163,184,.22) !important;
+  box-shadow:0 10px 28px rgba(15,23,42,.07) !important;
+  backdrop-filter:blur(18px);
+  border-radius:22px !important;
+}
+
+/* Accessibility and mobile */
+:focus-visible{
+  outline:3px solid rgba(11,99,206,.55) !important;
+  outline-offset:3px !important;
+  border-radius:12px;
+}
+
+@media (max-width:900px){
+  .mock6-redesign .flashcard .fc-svg.hsk-card-image-wrap,
+  .mock9-redesign .fc .hsk-card-image-wrap,
+  .fc .hsk-card-image-wrap{
+    height:160px !important;
+  }
+  .hsk-test-card{min-height:auto}
+}
+
+@media (max-width:600px){
+  .hsk-title{font-size:clamp(32px,10vw,48px) !important}
+  .hsk-card-body{padding:20px !important}
+  .mock6-redesign .flashcard,
+  .mock9-redesign .fc,
+  .fc{padding:12px !important;border-radius:20px !important}
+  .mock6-redesign .flashcard .fc-svg.hsk-card-image-wrap,
+  .mock9-redesign .fc .hsk-card-image-wrap,
+  .fc .hsk-card-image-wrap{
+    height:148px !important;
+    border-radius:18px !important;
+  }
+}
+
+@media print{
+  .hsk-card-image-wrap,
+  .hsk-test-card,
+  .mock6-redesign .flashcard,
+  .mock9-redesign .fc{
+    box-shadow:none !important;
+  }
+}

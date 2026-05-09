@@ -1,0 +1,76 @@
+/* =====================================================================
+   HSK4 Release Hardening — Stage 5
+   Purpose: production polish, installability, mobile resilience, print,
+   and safe deployment readiness. Academic content is not modified.
+   ===================================================================== */
+:root{
+  --hsk5-ink:#0f172a;
+  --hsk5-muted:#64748b;
+  --hsk5-blue:#0b63ce;
+  --hsk5-red:#dc2626;
+  --hsk5-gold:#d9a441;
+  --hsk5-card:rgba(255,255,255,.82);
+  --hsk5-line:rgba(148,163,184,.22);
+  --hsk5-shadow:0 26px 80px rgba(15,23,42,.12);
+}
+html{scroll-padding-top:96px}
+body.hsk-stage5-ready{min-height:100svh}
+body.hsk-stage5-ready :where(img,svg,video,canvas){max-width:100%}
+body.hsk-stage5-ready :where(.hsk-page-shell,.mk9-container,.wrapper){position:relative}
+
+/* Ultra-light release layer: adds depth without replacing page-specific design. */
+body.hsk-stage5-ready:where(.hsk-premium-body,.mock9-redesign,.mock6-redesign)::before{
+  content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;
+  background:
+    radial-gradient(circle at 8% 16%,rgba(11,99,206,.10),transparent 34%),
+    radial-gradient(circle at 92% 12%,rgba(220,38,38,.08),transparent 30%),
+    radial-gradient(circle at 50% 105%,rgba(217,164,65,.10),transparent 38%);
+}
+body.hsk-stage5-ready:where(.hsk-premium-body,.mock9-redesign,.mock6-redesign)::after{
+  content:"学习";position:fixed;left:min(3vw,40px);bottom:-.38em;z-index:-2;pointer-events:none;
+  font-family:"Microsoft YaHei","Noto Sans SC",sans-serif;font-size:clamp(150px,22vw,360px);font-weight:950;
+  color:rgba(15,23,42,.035);letter-spacing:-.08em;
+}
+
+/* Floating release tools */
+.hsk-stage5-tools{position:fixed;inset-inline-end:18px;bottom:18px;z-index:9000;display:grid;gap:10px;justify-items:end}
+.hsk-stage5-tool-main,.hsk-stage5-tool-action{
+  border:1px solid var(--hsk5-line);background:rgba(255,255,255,.86);color:#0f172a;
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 14px 38px rgba(15,23,42,.12);
+  border-radius:999px;font-weight:950;cursor:pointer;transition:transform .22s ease,box-shadow .22s ease,opacity .22s ease;
+}
+.hsk-stage5-tool-main{min-width:52px;height:52px;padding:0 18px;display:inline-flex;align-items:center;gap:9px;font-size:14px}
+.hsk-stage5-tool-main span{font-size:18px}
+.hsk-stage5-tool-action{height:42px;padding:0 14px;display:flex;align-items:center;gap:8px;font-size:13px;opacity:0;transform:translateY(8px);pointer-events:none}
+.hsk-stage5-tools.is-open .hsk-stage5-tool-action{opacity:1;transform:translateY(0);pointer-events:auto}
+.hsk-stage5-tool-main:hover,.hsk-stage5-tool-action:hover{transform:translateY(-2px);box-shadow:0 22px 52px rgba(15,23,42,.16)}
+.hsk-stage5-toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(18px);z-index:9500;opacity:0;pointer-events:none;background:#0f172a;color:#fff;padding:10px 14px;border-radius:999px;box-shadow:0 16px 40px rgba(0,0,0,.22);font-weight:900;font-size:13px;transition:.25s ease}
+.hsk-stage5-toast.is-visible{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Smart current-section highlights */
+.hsk-stage5-ready a[aria-current="page"],.hsk-stage5-ready a[aria-current="true"]{box-shadow:inset 0 -2px 0 currentColor}
+.hsk-stage5-ready :target{animation:hskTargetPulse 1.2s ease 1}
+@keyframes hskTargetPulse{0%{outline:0 solid rgba(217,164,65,.55)}45%{outline:8px solid rgba(217,164,65,.18)}100%{outline:0 solid transparent}}
+
+/* Better dense-content reading on small screens */
+@media(max-width:760px){
+  html{scroll-padding-top:78px}
+  .hsk-stage5-tools{inset-inline:12px;bottom:12px;justify-items:stretch}
+  .hsk-stage5-tool-main{justify-content:center;width:100%;height:48px}
+  .hsk-stage5-tool-action{justify-content:center;width:100%;background:rgba(255,255,255,.94)}
+  .hsk-stage5-toast{width:min(92vw,420px);text-align:center;border-radius:18px}
+  body.hsk-stage5-ready :where(.mk9-hero,.hero,.hsk-hero){overflow:hidden}
+}
+
+/* Production print: keep academic content clean and printable. */
+@media print{
+  body{background:#fff!important;color:#111827!important}
+  .hsk-stage5-tools,.hsk-stage5-toast,.hsk-mobile-menu-btn,.mk9-topbar,.m6-topbar,.hsk-topbar,#progress-bar,#backTop,.dark-mode-btn,.toggle-answers-btn,.pinyin-toggle-floating{display:none!important}
+  a{color:#111827!important;text-decoration:none!important}
+  .q-card,.mk9-question-shell,.mk9-side-card,.hsk-test-card,.hsk-panel,.flashcard,.fc{break-inside:avoid;box-shadow:none!important;border:1px solid #e5e7eb!important;background:#fff!important}
+  .mk9-hero,.mock6-redesign .hero,.hsk-hero{box-shadow:none!important;background:#fff!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .hsk-stage5-ready *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}

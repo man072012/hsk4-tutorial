@@ -1,0 +1,45 @@
+/* HSK4 real card images integration — confirmed-ready images only */
+.hsk-card-image-wrap{
+  width:100%;
+  aspect-ratio: 16 / 10;
+  overflow:hidden;
+  border-radius:18px;
+  background:linear-gradient(135deg,#f8fafc,#fff7ed);
+  border:1px solid rgba(148,163,184,.24);
+  box-shadow:0 14px 34px rgba(15,23,42,.10), inset 0 1px 0 rgba(255,255,255,.82);
+  margin:0 auto 14px;
+}
+.hsk-card-image{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center;
+}
+.flashcard .hsk-card-image-wrap{
+  border-radius:22px;
+  margin:0 0 16px;
+}
+.mock9-redesign .fc .hsk-card-image-wrap,
+.fc .hsk-card-image-wrap{
+  width:100%;
+  max-width:260px;
+  aspect-ratio: 16 / 10;
+  margin:0 auto 12px;
+  border-radius:16px;
+}
+.visual-card .hsk-card-image{
+  border-radius:18px;
+  max-width:100%;
+  height:auto;
+  aspect-ratio:auto;
+  object-fit:contain;
+  background:#fff;
+}
+.visual-card .hsk-card-image-wrap{
+  aspect-ratio:auto;
+  background:#fff;
+}
+@media (max-width:600px){
+  .hsk-card-image-wrap{border-radius:14px}
+}

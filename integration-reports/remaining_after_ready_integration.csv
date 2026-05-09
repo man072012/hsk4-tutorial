@@ -1,0 +1,42 @@
+﻿global_id,source,source_card_no,type,term,pinyin,arabic,duplicate_group,audit_status,candidate_image,image_exists,suggested_filename,audit_note_ar,must_integrate
+M6-FC-22,mock6.html,22,flashcard,健康,jiànkāng,صحة,,review,healthy_choices_in_a_sunny_kitchen.png,True,m6-fc-22-健康.webp,مرشح قريب للصحة، لكنه يميل إلى الحمية أكثر؛ الأفضل توليد صحة عامة.,no_html_integration_yet
+M6-FC-23,mock6.html,23,flashcard,医院,yīyuàn,مستشفى,,review,friendly_nurse_in_a_bright_clinic.png,True,m6-fc-23-医院.webp,مرشح قريب للمستشفى، لكنه يوضح عيادة/ممرضة لا مستشفى كامل.,no_html_integration_yet
+M6-FC-30,mock6.html,30,flashcard,知识,zhīshi,معرفة,,review,eureka_moment_in_a_cozy_study.png,True,m6-fc-30-知识.webp,مرشح قريب للمعرفة لكنه أقرب إلى الفهم/الإدراك.,no_html_integration_yet
+M6-FC-37,mock6.html,37,flashcard,已经,yǐjīng,بالفعل / من قبل,,review,successful_study_session_in_a_cozy_room.png,True,m6-fc-37-已经.webp,مرشح قريب لفكرة أن الشيء صار منجزاً بالفعل، لكنه غير مباشر.,no_html_integration_yet
+M6-FC-38,mock6.html,38,flashcard,本来,běnlái,أصلاً / في الأصل,,missing,,False,m6-fc-38-本来.webp,لا توجد صورة دقيقة لفكرة الخطة الأصلية/في الأصل.,no_html_integration_yet
+M6-FC-40,mock6.html,40,flashcard,水果,shuǐguǒ,فاكهة,,review,healthy_choices_in_a_sunny_kitchen.png,True,m6-fc-40-水果.webp,مرشح قريب لأنه يظهر فاكهة، لكنه ليس بطاقة فاكهة واضحة.,no_html_integration_yet
+M6-FC-41,mock6.html,41,flashcard,一直,yīzhí,دائماً / باستمرار,,missing,,False,m6-fc-41-一直.webp,لا توجد صورة دقيقة لفكرة الاستمرارية/دائماً.,no_html_integration_yet
+M6-FC-42,mock6.html,42,flashcard,流行,liúxíng,شائع / دارج,,missing,,False,m6-fc-42-流行.webp,لا توجد صورة دقيقة لفكرة الشيء الشائع/الرائج.,no_html_integration_yet
+M6-FC-43,mock6.html,43,flashcard,浪费,làngfèi,يهدر / إسراف,,missing,,False,m6-fc-43-浪费.webp,لا توجد صورة دقيقة لفكرة الهدر/الإسراف.,no_html_integration_yet
+M6-FC-44,mock6.html,44,flashcard,性格,xìnggé,شخصية / طبع,,missing,,False,m6-fc-44-性格.webp,لا توجد صورة دقيقة لفكرة الشخصية/الطبع.,no_html_integration_yet
+M6-FC-46,mock6.html,46,flashcard,节约,jiéyuē,يوفّر / اقتصادي,,missing,,False,m6-fc-46-节约.webp,لا توجد صورة دقيقة لفكرة التوفير/الاقتصاد في الموارد.,no_html_integration_yet
+M6-FC-48,mock6.html,48,flashcard,经济,jīngjì,اقتصاد,,missing,,False,m6-fc-48-经济.webp,لا توجد صورة دقيقة للاقتصاد.,no_html_integration_yet
+M6-FC-49,mock6.html,49,flashcard,信心,xìnxīn,ثقة بالنفس,,review,successful_study_session_in_a_cozy_room.png,True,m6-fc-49-信心.webp,مرشح قريب للثقة، لكنه ليس واضحاً بصرياً بما يكفي.,no_html_integration_yet
+M6-FC-51,mock6.html,51,flashcard,法律,fǎlǜ,قانون,,missing,,False,m6-fc-51-法律.webp,لا توجد صورة دقيقة للقانون.,no_html_integration_yet
+M6-FC-52,mock6.html,52,flashcard,危险,wēixiǎn,خطر / خطير,,review,crisis_management_in_the_calm_center.png,True,m6-fc-52-危险.webp,مرشح قريب للخطر، لكنه يركز على الهدوء لا الخطر نفسه.,no_html_integration_yet
+M6-FC-53,mock6.html,53,flashcard,批评,pīpíng,ينتقد / يوبّخ,,missing,,False,m6-fc-53-批评.webp,لا توجد صورة دقيقة للانتقاد/التوبيخ.,no_html_integration_yet
+M6-WR-096,mock6.html,96,writing_image,座位,,مقعد,,missing,,False,m6-wr-096-座位.webp,لا توجد صورة دقيقة للمقاعد/座位.,no_html_integration_yet
+M6-WR-097,mock6.html,97,writing_image,印象,,انطباع,,missing,,False,m6-wr-097-印象.webp,لا توجد صورة دقيقة للانطباع/印象.,no_html_integration_yet
+M6-WR-099,mock6.html,99,writing_image,挂,,يُعلّق,,missing,,False,m6-wr-099-挂.webp,لا توجد صورة دقيقة لفعل التعليق/挂.,no_html_integration_yet
+M9-FC-19,mock9.html,19,flashcard,排队,páiduì,يصطف,,review,friendly_service_desk_in_a_cozy_lobby.png,True,m9-fc-19-排队.webp,مرشح قريب لفكرة الاصطفاف، لكنه ليس صفاً واضحاً كفاية.,no_html_integration_yet
+M9-FC-28,mock9.html,28,flashcard,免费,miǎnfèi,مجاناً,,review,friendly_exchange_at_a_cozy_market_counter.png,True,m9-fc-28-免费.webp,مرشح قريب لفكرة مجاني/عينة مجانية، لكنه لا يوضح المجانية بما يكفي.,no_html_integration_yet
+M9-FC-31,mock9.html,31,flashcard,公共汽车,gōnggòng qìchē,حافلة عامة,,missing,,False,m9-fc-31-公共汽车.webp,لا توجد صورة حافلة عامة دقيقة.,no_html_integration_yet
+M9-FC-32,mock9.html,32,flashcard,搬家,bānjiā,ينقل البيت,,missing,,False,m9-fc-32-搬家.webp,لا توجد صورة دقيقة لنقل البيت.,no_html_integration_yet
+M9-FC-33,mock9.html,33,flashcard,礼拜天,lǐbàitiān,الأحد,,missing,,False,m9-fc-33-礼拜天.webp,لا توجد صورة دقيقة للأحد/礼拜天.,no_html_integration_yet
+M9-FC-34,mock9.html,34,flashcard,周日,zhōurì,الأحد,,missing,,False,m9-fc-34-周日.webp,لا توجد صورة دقيقة للأحد/周日.,no_html_integration_yet
+M9-FC-35,mock9.html,35,flashcard,邀请,yāoqǐng,يدعو,,missing,,False,m9-fc-35-邀请.webp,لا توجد صورة دقيقة للدعوة/بطاقة دعوة.,no_html_integration_yet
+M9-FC-37,mock9.html,37,flashcard,吸引,xīyǐn,يجذب,,missing,,False,m9-fc-37-吸引.webp,لا توجد صورة دقيقة للجذب/مغناطيس أو جذب انتباه.,no_html_integration_yet
+M9-FC-39,mock9.html,39,flashcard,服务区,fúwùqū,محطة خدمات,,missing,,False,m9-fc-39-服务区.webp,لا توجد صورة دقيقة لمحطة خدمات.,no_html_integration_yet
+M9-FC-40,mock9.html,40,flashcard,马虎,mǎhu,مهمل,,missing,,False,m9-fc-40-马虎.webp,لا توجد صورة دقيقة للمهمل/马虎.,no_html_integration_yet
+M9-FC-41,mock9.html,41,flashcard,仔细,zǐxì,دقيق,,review,investigator_at_work_in_cozy_office.png,True,m9-fc-41-仔细.webp,مرشح قريب للدقة/التحقق، لكنه ليس مخصصاً لكلمة 仔细.,no_html_integration_yet
+M9-FC-42,mock9.html,42,flashcard,错误,cuòwù,خطأ,,missing,,False,m9-fc-42-错误.webp,لا توجد صورة دقيقة للخطأ.,no_html_integration_yet
+M9-FC-43,mock9.html,43,flashcard,酸,suān,حامض,,missing,,False,m9-fc-43-酸.webp,لا توجد صورة دقيقة للحامض.,no_html_integration_yet
+M9-FC-44,mock9.html,44,flashcard,甜,tián,حلو,,missing,,False,m9-fc-44-甜.webp,لا توجد صورة دقيقة للحلو.,no_html_integration_yet
+M9-FC-46,mock9.html,46,flashcard,咖啡,kāfēi,قهوة,,review,bitter_sip_in_a_cozy_café.png,True,m9-fc-46-咖啡.webp,مرشح للقهوة لكنه يركز على المرارة أكثر من القهوة.,no_html_integration_yet
+M9-FC-47,mock9.html,47,flashcard,杂志,zázhì,مجلة,,missing,,False,m9-fc-47-杂志.webp,لا توجد صورة دقيقة للمجلة.,no_html_integration_yet
+M9-FC-48,mock9.html,48,flashcard,爷爷,yéye,جد,,missing,,False,m9-fc-48-爷爷.webp,لا توجد صورة دقيقة للجد.,no_html_integration_yet
+M9-FC-49,mock9.html,49,flashcard,孙子,sūnzi,حفيد,,missing,,False,m9-fc-49-孙子.webp,لا توجد صورة دقيقة للحفيد.,no_html_integration_yet
+M9-FC-50,mock9.html,50,flashcard,打印,dǎyìn,يطبع,,missing,,False,m9-fc-50-打印.webp,لا توجد صورة دقيقة للطباعة.,no_html_integration_yet
+M9-FC-52,mock9.html,52,flashcard,报名,bàomíng,يسجل,,missing,,False,m9-fc-52-报名.webp,لا توجد صورة دقيقة للتسجيل/报名.,no_html_integration_yet
+M9-FC-53,mock9.html,53,flashcard,规定,guīdìng,قاعدة,,missing,,False,m9-fc-53-规定.webp,لا توجد صورة دقيقة للقاعدة/التنظيم.,no_html_integration_yet
+M9-FC-54,mock9.html,54,flashcard,解释,jiěshì,يفسّر,,review,eureka_moment_in_a_cozy_study.png,True,m9-fc-54-解释.webp,مرشح قريب للشرح/الفهم، لكنه ليس مشهد معلم يشرح.,no_html_integration_yet

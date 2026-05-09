@@ -1,0 +1,114 @@
+﻿global_id,source,source_card_no,type,term,pinyin,arabic,suggested_filename,integrated_path,stage,source_image,final_status,audit_note_ar
+M6-FC-01,mock6.html,1,flashcard,宾馆,bīnguǎn,فندق,m6-fc-01-宾馆.webp,assets/card-images/m6-fc-01-宾馆.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: فندق/استقبال/مسافر.
+M6-FC-02,mock6.html,2,flashcard,地铁,dìtiě,مترو الأنفاق,m6-fc-02-地铁.webp,assets/card-images/m6-fc-02-地铁.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: مترو تحت الأرض.
+M6-FC-03,mock6.html,3,flashcard,公园,gōngyuán,حديقة عامة,m6-fc-03-公园.webp,assets/card-images/m6-fc-03-公园.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: حديقة عامة.
+M6-FC-04,mock6.html,4,flashcard,办公室,bàngōngshì,مكتب (غرفة العمل),m6-fc-04-办公室.webp,assets/card-images/m6-fc-04-办公室.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: مكتب وعمل.
+M6-FC-05,mock6.html,5,flashcard,饺子,jiǎozi,جياوزي (زلابية),m6-fc-05-饺子.webp,assets/card-images/m6-fc-05-饺子.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: جياوزي.
+M6-FC-06,mock6.html,6,flashcard,汤,tāng,حساء / شوربة,m6-fc-06-汤.webp,assets/card-images/m6-fc-06-汤.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: شوربة ساخنة.
+M6-FC-07,mock6.html,7,flashcard,葡萄,pútao,عنب,m6-fc-07-葡萄.webp,assets/card-images/m6-fc-07-葡萄.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: عنب.
+M6-FC-08,mock6.html,8,flashcard,苦,kǔ,مرّ (للطعم) / صعب (للحياة),m6-fc-08-苦.webp,assets/card-images/m6-fc-08-苦.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: طعم مر.
+M6-FC-09,mock6.html,9,flashcard,糖/盐,táng/yán,سكّر / ملح,m6-fc-09-糖-盐.webp,assets/card-images/m6-fc-09-糖-盐.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: خلط السكر والملح.
+M6-FC-10,mock6.html,10,flashcard,冷静,lěngjìng,هادئ,m6-fc-10-冷静.webp,assets/card-images/m6-fc-10-冷静.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة لفكرة الهدوء وقت الخطر.
+M6-FC-11,mock6.html,11,flashcard,吃惊,chījīng,يندهش,m6-fc-11-吃惊.webp,assets/card-images/m6-fc-11-吃惊.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: الاندهاش.
+M6-FC-12,mock6.html,12,flashcard,感动,gǎndòng,متأثّر عاطفياً,m6-fc-12-感动.webp,assets/card-images/m6-fc-12-感动.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: تأثر عاطفي.
+M6-FC-13,mock6.html,13,flashcard,坚持,jiānchí,يثابر,m6-fc-13-坚持.webp,assets/card-images/m6-fc-13-坚持.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: المثابرة.
+M6-FC-14,mock6.html,14,flashcard,勇敢,yǒnggǎn,شجاع,m6-fc-14-勇敢.webp,assets/card-images/m6-fc-14-勇敢.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: الشجاعة.
+M6-FC-15,mock6.html,15,flashcard,微信,Wēixìn,WeChat,m6-fc-15-微信.webp,assets/card-images/m6-fc-15-微信.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: WeChat/مراسلة.
+M6-FC-16,mock6.html,16,flashcard,互联网,hùliánwǎng,الإنترنت,m6-fc-16-互联网.webp,assets/card-images/m6-fc-16-互联网.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: الإنترنت.
+M6-FC-17,mock6.html,17,flashcard,联系,liánxì,يتواصل,m6-fc-17-联系.webp,assets/card-images/m6-fc-17-联系.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: تواصل.
+M6-FC-18,mock6.html,18,flashcard,推迟,tuīchí,يؤجّل,m6-fc-18-推迟.webp,assets/card-images/m6-fc-18-推迟.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: تأجيل.
+M6-FC-19,mock6.html,19,flashcard,行李,xíngli,حقائب السفر,m6-fc-19-行李.webp,assets/card-images/m6-fc-19-行李.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: أمتعة سفر.
+M6-FC-20,mock6.html,20,flashcard,终于,zhōngyú,أخيراً,m6-fc-20-终于.webp,assets/card-images/m6-fc-20-终于.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: أخيراً وصل/عودة.
+M6-FC-21,mock6.html,21,flashcard,商量,shāngliang,يتشاور,m6-fc-21-商量.webp,assets/card-images/m6-fc-21-商量.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: تشاور.
+M6-FC-24,mock6.html,24,flashcard,面试,miànshì,مقابلة عمل,m6-fc-24-面试.webp,assets/card-images/m6-fc-24-面试.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: مقابلة عمل.
+M6-FC-25,mock6.html,25,flashcard,成功,chénggōng,نجاح,m6-fc-25-成功.webp,assets/card-images/m6-fc-25-成功.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: نجاح/فوز.
+M6-FC-26,mock6.html,26,flashcard,留学,liúxué,الدراسة بالخارج,m6-fc-26-留学.webp,assets/card-images/m6-fc-26-留学.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: دراسة بالخارج.
+M6-FC-27,mock6.html,27,flashcard,签证,qiānzhèng,تأشيرة,m6-fc-27-签证.webp,assets/card-images/m6-fc-27-签证.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: تأشيرة.
+M6-FC-28,mock6.html,28,flashcard,堵车,dǔchē,زحام مروري,m6-fc-28-堵车.webp,assets/card-images/m6-fc-28-堵车.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: زحام مروري.
+M6-FC-29,mock6.html,29,flashcard,毕业,bìyè,يتخرّج,m6-fc-29-毕业.webp,assets/card-images/m6-fc-29-毕业.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: تخرج.
+M6-FC-31,mock6.html,31,flashcard,考试,kǎoshì,امتحان,m6-fc-31-考试.webp,assets/card-images/m6-fc-31-考试.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: امتحان.
+M6-FC-32,mock6.html,32,flashcard,了解,liǎojiě,يفهم بعمق,m6-fc-32-了解.webp,assets/card-images/m6-fc-32-了解.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: فهم/إدراك.
+M6-FC-33,mock6.html,33,flashcard,礼物,lǐwù,هدية,m6-fc-33-礼物.webp,assets/card-images/m6-fc-33-礼物.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: هدية.
+M6-FC-34,mock6.html,34,flashcard,家人,jiārén,أفراد العائلة,m6-fc-34-家人.webp,assets/card-images/m6-fc-34-家人.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: العائلة.
+M6-FC-35,mock6.html,35,flashcard,鼓励,gǔlì,يشجّع,m6-fc-35-鼓励.webp,assets/card-images/m6-fc-35-鼓励.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: تشجيع.
+M6-FC-36,mock6.html,36,flashcard,尊重,zūnzhòng,يحترم,m6-fc-36-尊重.webp,assets/card-images/m6-fc-36-尊重.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: احترام/مساعدة الكبير.
+M6-FC-39,mock6.html,39,flashcard,护士,hùshi,ممرضة,m6-fc-39-护士.webp,assets/card-images/m6-fc-39-护士.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: ممرضة.
+M6-FC-45,mock6.html,45,flashcard,减肥,jiǎnféi,إنقاص الوزن,m6-fc-45-减肥.webp,assets/card-images/m6-fc-45-减肥.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: إنقاص الوزن/حمية.
+M6-FC-47,mock6.html,47,flashcard,环境污染,huánjìng wūrǎn,تلوث البيئة,m6-fc-47-环境污染.webp,assets/card-images/m6-fc-47-环境污染.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: تلوث البيئة.
+M6-FC-50,mock6.html,50,flashcard,应聘者,yìngpìnzhě,المتقدّم للوظيفة,m6-fc-50-应聘者.webp,assets/card-images/m6-fc-50-应聘者.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: متقدم للوظيفة.
+M6-FC-54,mock6.html,54,flashcard,压力,yālì,ضغط (نفسي),m6-fc-54-压力.webp,assets/card-images/m6-fc-54-压力.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: ضغط نفسي.
+M6-WR-098,mock6.html,98,writing_image,商量,,يتشاور / يناقش,m6-wr-098-商量.webp,assets/card-images/m6-wr-098-商量.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: يتشاور.
+M6-WR-100,mock6.html,100,writing_image,苦,,مرّ,m6-wr-100-苦.webp,assets/card-images/m6-wr-100-苦.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: مر.
+M9-FC-01,mock9.html,1,flashcard,打针,dǎzhēn,حقنة,m9-fc-01-打针.webp,assets/card-images/m9-fc-01-打针.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: حقنة.
+M9-FC-02,mock9.html,2,flashcard,演出,yǎnchū,عرض,m9-fc-02-演出.webp,assets/card-images/m9-fc-02-演出.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: عرض.
+M9-FC-03,mock9.html,3,flashcard,行李箱,xínglǐxiāng,حقيبة سفر,m9-fc-03-行李箱.webp,assets/card-images/m9-fc-03-行李箱.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: حقيبة سفر.
+M9-FC-04,mock9.html,4,flashcard,葡萄,pútáo,عنب,m9-fc-04-葡萄.webp,assets/card-images/m9-fc-04-葡萄.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: عنب.
+M9-FC-05,mock9.html,5,flashcard,沙发,shāfā,أريكة,m9-fc-05-沙发.webp,assets/card-images/m9-fc-05-沙发.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: أريكة.
+M9-FC-06,mock9.html,6,flashcard,镜子,jìngzi,مرآة,m9-fc-06-镜子.webp,assets/card-images/m9-fc-06-镜子.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: مرآة.
+M9-FC-07,mock9.html,7,flashcard,护士,hùshi,ممرضة,m9-fc-07-护士.webp,assets/card-images/m9-fc-07-护士.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: ممرضة.
+M9-FC-08,mock9.html,8,flashcard,包子,bāozi,باوزي,m9-fc-08-包子.webp,assets/card-images/m9-fc-08-包子.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: باوزي.
+M9-FC-09,mock9.html,9,flashcard,购物车,gòuwùchē,عربة تسوق,m9-fc-09-购物车.webp,assets/card-images/m9-fc-09-购物车.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: عربة تسوق.
+M9-FC-10,mock9.html,10,flashcard,飞机,fēijī,طائرة,m9-fc-10-飞机.webp,assets/card-images/m9-fc-10-飞机.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: طائرة.
+M9-FC-11,mock9.html,11,flashcard,翻译,fānyì,يترجم,m9-fc-11-翻译.webp,assets/card-images/m9-fc-11-翻译.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: ترجمة.
+M9-FC-12,mock9.html,12,flashcard,减肥,jiǎnféi,حمية,m9-fc-12-减肥.webp,assets/card-images/m9-fc-12-减肥.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: حمية.
+M9-FC-13,mock9.html,13,flashcard,调查,diàochá,تحقيق,m9-fc-13-调查.webp,assets/card-images/m9-fc-13-调查.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: تحقيق.
+M9-FC-14,mock9.html,14,flashcard,窗户,chuānghu,نافذة,m9-fc-14-窗户.webp,assets/card-images/m9-fc-14-窗户.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: نافذة.
+M9-FC-15,mock9.html,15,flashcard,奖学金,jiǎngxuéjīn,منحة,m9-fc-15-奖学金.webp,assets/card-images/m9-fc-15-奖学金.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: منحة/تكريم.
+M9-FC-16,mock9.html,16,flashcard,互联网,hùliánwǎng,إنترنت,m9-fc-16-互联网.webp,assets/card-images/m9-fc-16-互联网.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: إنترنت.
+M9-FC-17,mock9.html,17,flashcard,博士,bóshì,دكتوراه,m9-fc-17-博士.webp,assets/card-images/m9-fc-17-博士.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: دكتوراه/تخرج.
+M9-FC-18,mock9.html,18,flashcard,感冒,gǎnmào,زكام,m9-fc-18-感冒.webp,assets/card-images/m9-fc-18-感冒.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: زكام.
+M9-FC-20,mock9.html,20,flashcard,污染,wūrǎn,تلوث,m9-fc-20-污染.webp,assets/card-images/m9-fc-20-污染.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: تلوث.
+M9-FC-21,mock9.html,21,flashcard,功夫,gōngfū,كونغ فو,m9-fc-21-功夫.webp,assets/card-images/m9-fc-21-功夫.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: كونغ فو.
+M9-FC-22,mock9.html,22,flashcard,地址,dìzhǐ,عنوان,m9-fc-22-地址.webp,assets/card-images/m9-fc-22-地址.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: عنوان.
+M9-FC-23,mock9.html,23,flashcard,环境,huánjìng,بيئة,m9-fc-23-环境.webp,assets/card-images/m9-fc-23-环境.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: بيئة.
+M9-FC-24,mock9.html,24,flashcard,愉快,yúkuài,سعيد,m9-fc-24-愉快.webp,assets/card-images/m9-fc-24-愉快.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: سعيد/مرح.
+M9-FC-25,mock9.html,25,flashcard,压力,yālì,ضغط,m9-fc-25-压力.webp,assets/card-images/m9-fc-25-压力.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: ضغط.
+M9-FC-26,mock9.html,26,flashcard,幽默,yōumò,فكاهي,m9-fc-26-幽默.webp,assets/card-images/m9-fc-26-幽默.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: فكاهي.
+M9-FC-27,mock9.html,27,flashcard,紧张,jǐnzhāng,متوتر,m9-fc-27-紧张.webp,assets/card-images/m9-fc-27-紧张.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: متوتر.
+M9-FC-29,mock9.html,29,flashcard,乒乓球,pīngpāngqiú,كرة طاولة,m9-fc-29-乒乓球.webp,assets/card-images/m9-fc-29-乒乓球.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: كرة طاولة.
+M9-FC-30,mock9.html,30,flashcard,足球,zúqiú,كرة قدم,m9-fc-30-足球.webp,assets/card-images/m9-fc-30-足球.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: كرة قدم.
+M9-FC-36,mock9.html,36,flashcard,提供,tígōng,يقدّم,m9-fc-36-提供.webp,assets/card-images/m9-fc-36-提供.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: يقدم/يوفر شيئاً.
+M9-FC-38,mock9.html,38,flashcard,应聘,yìngpìn,يتقدم لوظيفة,m9-fc-38-应聘.webp,assets/card-images/m9-fc-38-应聘.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: يتقدم لوظيفة.
+M9-FC-45,mock9.html,45,flashcard,苦,kǔ,مر,m9-fc-45-苦.webp,assets/card-images/m9-fc-45-苦.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: مر.
+M9-FC-51,mock9.html,51,flashcard,毕业,bìyè,يتخرج,m9-fc-51-毕业.webp,assets/card-images/m9-fc-51-毕业.webp,stage7_ready_confirmed,,integrated,مطابقة جيدة: يتخرج.
+M6-FC-22,mock6.html,22,flashcard,健康,jiànkāng,صحة,m6-fc-22-健康.webp,assets/card-images/m6-fc-22-健康.webp,stage8_remaining_generated,morning_stretch_in_a_healthy_home.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M6-FC-23,mock6.html,23,flashcard,医院,yīyuàn,مستشفى,m6-fc-23-医院.webp,assets/card-images/m6-fc-23-医院.webp,stage8_remaining_generated,modern_hospital_lobby_with_vibrant_light.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M6-FC-30,mock6.html,30,flashcard,知识,zhīshi,معرفة,m6-fc-30-知识.webp,assets/card-images/m6-fc-30-知识.webp,stage8_remaining_generated,the_glow_of_study_and_ideas.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M6-FC-37,mock6.html,37,flashcard,已经,yǐjīng,بالفعل / من قبل,m6-fc-37-已经.webp,assets/card-images/m6-fc-37-已经.webp,stage8_remaining_generated,positive_vibes_in_a_cozy_office.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M6-FC-38,mock6.html,38,flashcard,本来,běnlái,أصلاً / في الأصل,m6-fc-38-本来.webp,assets/card-images/m6-fc-38-本来.webp,stage8_remaining_generated,architectural_design_presentation_in_a_studio.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M6-FC-40,mock6.html,40,flashcard,水果,shuǐguǒ,فاكهة,m6-fc-40-水果.webp,assets/card-images/m6-fc-40-水果.webp,stage8_remaining_generated,summer_harvest_fruit_bounty_on_wood.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M6-FC-41,mock6.html,41,flashcard,一直,yīzhí,دائماً / باستمرار,m6-fc-41-一直.webp,assets/card-images/m6-fc-41-一直.webp,stage8_remaining_generated,daily_study_progress_through_time.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M6-FC-42,mock6.html,42,flashcard,流行,liúxíng,شائع / دارج,m6-fc-42-流行.webp,assets/card-images/m6-fc-42-流行.webp,stage8_remaining_generated,exciting_product_reveal_in_stylish_space.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M6-FC-43,mock6.html,43,flashcard,浪费,làngfèi,يهدر / إسراف,m6-fc-43-浪费.webp,assets/card-images/m6-fc-43-浪费.webp,stage8_remaining_generated,a_casual_wasteful_moment_at_home.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M6-FC-44,mock6.html,44,flashcard,性格,xìnggé,شخصية / طبع,m6-fc-44-性格.webp,assets/card-images/m6-fc-44-性格.webp,stage8_remaining_generated,exploring_every_side_of_me.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M6-FC-46,mock6.html,46,flashcard,节约,jiéyuē,يوفّر / اقتصادي,m6-fc-46-节约.webp,assets/card-images/m6-fc-46-节约.webp,stage8_remaining_generated,eco_friendly_savings_in_a_cozy_home.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M6-FC-48,mock6.html,48,flashcard,经济,jīngjì,اقتصاد,m6-fc-48-经济.webp,assets/card-images/m6-fc-48-经济.webp,stage8_remaining_generated,global_growth_in_a_modern_economy.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M6-FC-49,mock6.html,49,flashcard,信心,xìnxīn,ثقة بالنفس,m6-fc-49-信心.webp,assets/card-images/m6-fc-49-信心.webp,stage8_remaining_generated,confident_presentation_in_bright_surroundings.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M6-FC-51,mock6.html,51,flashcard,法律,fǎlǜ,قانون,m6-fc-51-法律.webp,assets/card-images/m6-fc-51-法律.webp,stage8_remaining_generated,symbols_of_justice_and_authority.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M6-FC-52,mock6.html,52,flashcard,危险,wēixiǎn,خطر / خطير,m6-fc-52-危险.webp,assets/card-images/m6-fc-52-危险.webp,stage8_remaining_generated,alert_at_the_industrial_hazard_zone.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M6-FC-53,mock6.html,53,flashcard,批评,pīpíng,ينتقد / يوبّخ,m6-fc-53-批评.webp,assets/card-images/m6-fc-53-批评.webp,stage8_remaining_generated,a_moment_of_learning_and_guidance.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M6-WR-096,mock6.html,96,writing_image,座位,,مقعد,m6-wr-096-座位.webp,assets/card-images/m6-wr-096-座位.webp,stage8_remaining_generated,highlighted_seat_in_a_peaceful_train_carriage.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M6-WR-097,mock6.html,97,writing_image,印象,,انطباع,m6-wr-097-印象.webp,assets/card-images/m6-wr-097-印象.webp,stage8_remaining_generated,a_warm_first_meeting_moment.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M6-WR-099,mock6.html,99,writing_image,挂,,يُعلّق,m6-wr-099-挂.webp,assets/card-images/m6-wr-099-挂.webp,stage8_remaining_generated,hanging_a_coat_in_a_sunlit_entryway.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-19,mock9.html,19,flashcard,排队,páiduì,يصطف,m9-fc-19-排队.webp,assets/card-images/m9-fc-19-排队.webp,stage8_remaining_generated,calm_service_counter_scene_with_queue.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-28,mock9.html,28,flashcard,免费,miǎnfèi,مجاناً,m9-fc-28-免费.webp,assets/card-images/m9-fc-28-免费.webp,stage8_remaining_generated,friendly_counter_exchange_with_free_sample.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-31,mock9.html,31,flashcard,公共汽车,gōnggòng qìchē,حافلة عامة,m9-fc-31-公共汽车.webp,assets/card-images/m9-fc-31-公共汽车.webp,stage8_remaining_generated,urban_bus_stop_in_bright_cityscape.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-32,mock9.html,32,flashcard,搬家,bānjiā,ينقل البيت,m9-fc-32-搬家.webp,assets/card-images/m9-fc-32-搬家.webp,stage8_remaining_generated,bright_moving_day_at_a_new_home.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-33,mock9.html,33,flashcard,礼拜天,lǐbàitiān,الأحد,m9-fc-33-礼拜天.webp,assets/card-images/m9-fc-33-礼拜天.webp,stage8_remaining_generated,sunny_family_picnic_by_the_lake.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-34,mock9.html,34,flashcard,周日,zhōurì,الأحد,m9-fc-34-周日.webp,assets/card-images/m9-fc-34-周日.webp,stage8_remaining_generated,cozy_brunch_in_a_sunlit_apartment.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-35,mock9.html,35,flashcard,邀请,yāoqǐng,يدعو,m9-fc-35-邀请.webp,assets/card-images/m9-fc-35-邀请.webp,stage8_remaining_generated,inviting_warmth_at_the_doorstep.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-37,mock9.html,37,flashcard,吸引,xīyǐn,يجذب,m9-fc-37-吸引.webp,assets/card-images/m9-fc-37-吸引.webp,stage8_remaining_generated,magnetic_allure_of_a_sparkling_pendant.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-39,mock9.html,39,flashcard,服务区,fúwùqū,محطة خدمات,m9-fc-39-服务区.webp,assets/card-images/m9-fc-39-服务区.webp,stage8_remaining_generated,sunny_roadside_rest_area_with_mountains.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-40,mock9.html,40,flashcard,马虎,mǎhu,مهمل,m9-fc-40-马虎.webp,assets/card-images/m9-fc-40-马虎.webp,stage8_remaining_generated,spilled_coffee_in_the_study_chaos.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-41,mock9.html,41,flashcard,仔细,zǐxì,دقيق,m9-fc-41-仔细.webp,assets/card-images/m9-fc-41-仔细.webp,stage8_remaining_generated,focused_on_the_details_of_timepieces.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-42,mock9.html,42,flashcard,错误,cuòwù,خطأ,m9-fc-42-错误.webp,assets/card-images/m9-fc-42-错误.webp,stage8_remaining_generated,mug_shattered_on_a_sunlit_floor.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-43,mock9.html,43,flashcard,酸,suān,حامض,m9-fc-43-酸.webp,assets/card-images/m9-fc-43-酸.webp,stage8_remaining_generated,fresh_lemonade_and_vibrant_lemons_setup.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-44,mock9.html,44,flashcard,甜,tián,حلو,m9-fc-44-甜.webp,assets/card-images/m9-fc-44-甜.webp,stage8_remaining_generated,strawberry_shortcake_slice_on_cozy_table.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-46,mock9.html,46,flashcard,咖啡,kāfēi,قهوة,m9-fc-46-咖啡.webp,assets/card-images/m9-fc-46-咖啡.webp,stage8_remaining_generated,cozy_morning_coffee_on_wooden_table.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-47,mock9.html,47,flashcard,杂志,zázhì,مجلة,m9-fc-47-杂志.webp,assets/card-images/m9-fc-47-杂志.webp,stage8_remaining_generated,cozy_reading_nook_with_magazines_and_greenery.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-48,mock9.html,48,flashcard,爷爷,yéye,جد,m9-fc-48-爷爷.webp,assets/card-images/m9-fc-48-爷爷.webp,stage8_remaining_generated,cozy_moment_in_a_warm_living_room.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-49,mock9.html,49,flashcard,孙子,sūnzi,حفيد,m9-fc-49-孙子.webp,assets/card-images/m9-fc-49-孙子.webp,stage8_remaining_generated,building_memories_with_grandpa.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-50,mock9.html,50,flashcard,打印,dǎyìn,يطبع,m9-fc-50-打印.webp,assets/card-images/m9-fc-50-打印.webp,stage8_remaining_generated,modern_office_with_printer_and_printout.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-52,mock9.html,52,flashcard,报名,bàomíng,يسجل,m9-fc-52-报名.webp,assets/card-images/m9-fc-52-报名.webp,stage8_remaining_generated,filling_out_paperwork_in_a_modern_office.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-53,mock9.html,53,flashcard,规定,guīdìng,قاعدة,m9-fc-53-规定.webp,assets/card-images/m9-fc-53-规定.webp,stage8_remaining_generated,public_rules_and_guidelines_signage.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.
+M9-FC-54,mock9.html,54,flashcard,解释,jiěshì,يفسّر,m9-fc-54-解释.webp,assets/card-images/m9-fc-54-解释.webp,stage8_remaining_generated,cozy_study_session_by_lamp_light.png,integrated,تمت مراجعتها كصورة مستقلة؛ ليست شبكة أو ملصقاً تعليمياً.

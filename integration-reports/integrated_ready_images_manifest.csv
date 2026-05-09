@@ -1,0 +1,73 @@
+﻿global_id,source,source_card_no,type,term,pinyin,arabic,suggested_filename,integrated_path,audit_note_ar
+M6-FC-01,mock6.html,1,flashcard,宾馆,bīnguǎn,فندق,m6-fc-01-宾馆.webp,assets/card-images/m6-fc-01-宾馆.webp,مطابقة جيدة: فندق/استقبال/مسافر.
+M6-FC-02,mock6.html,2,flashcard,地铁,dìtiě,مترو الأنفاق,m6-fc-02-地铁.webp,assets/card-images/m6-fc-02-地铁.webp,مطابقة جيدة: مترو تحت الأرض.
+M6-FC-03,mock6.html,3,flashcard,公园,gōngyuán,حديقة عامة,m6-fc-03-公园.webp,assets/card-images/m6-fc-03-公园.webp,مطابقة جيدة: حديقة عامة.
+M6-FC-04,mock6.html,4,flashcard,办公室,bàngōngshì,مكتب (غرفة العمل),m6-fc-04-办公室.webp,assets/card-images/m6-fc-04-办公室.webp,مطابقة جيدة: مكتب وعمل.
+M6-FC-05,mock6.html,5,flashcard,饺子,jiǎozi,جياوزي (زلابية),m6-fc-05-饺子.webp,assets/card-images/m6-fc-05-饺子.webp,مطابقة جيدة: جياوزي.
+M6-FC-06,mock6.html,6,flashcard,汤,tāng,حساء / شوربة,m6-fc-06-汤.webp,assets/card-images/m6-fc-06-汤.webp,مطابقة جيدة: شوربة ساخنة.
+M6-FC-07,mock6.html,7,flashcard,葡萄,pútao,عنب,m6-fc-07-葡萄.webp,assets/card-images/m6-fc-07-葡萄.webp,مطابقة جيدة: عنب.
+M6-FC-08,mock6.html,8,flashcard,苦,kǔ,مرّ (للطعم) / صعب (للحياة),m6-fc-08-苦.webp,assets/card-images/m6-fc-08-苦.webp,مطابقة جيدة: طعم مر.
+M6-FC-09,mock6.html,9,flashcard,糖/盐,táng/yán,سكّر / ملح,m6-fc-09-糖-盐.webp,assets/card-images/m6-fc-09-糖-盐.webp,مطابقة جيدة: خلط السكر والملح.
+M6-FC-10,mock6.html,10,flashcard,冷静,lěngjìng,هادئ,m6-fc-10-冷静.webp,assets/card-images/m6-fc-10-冷静.webp,مطابقة جيدة لفكرة الهدوء وقت الخطر.
+M6-FC-11,mock6.html,11,flashcard,吃惊,chījīng,يندهش,m6-fc-11-吃惊.webp,assets/card-images/m6-fc-11-吃惊.webp,مطابقة جيدة: الاندهاش.
+M6-FC-12,mock6.html,12,flashcard,感动,gǎndòng,متأثّر عاطفياً,m6-fc-12-感动.webp,assets/card-images/m6-fc-12-感动.webp,مطابقة جيدة: تأثر عاطفي.
+M6-FC-13,mock6.html,13,flashcard,坚持,jiānchí,يثابر,m6-fc-13-坚持.webp,assets/card-images/m6-fc-13-坚持.webp,مطابقة جيدة: المثابرة.
+M6-FC-14,mock6.html,14,flashcard,勇敢,yǒnggǎn,شجاع,m6-fc-14-勇敢.webp,assets/card-images/m6-fc-14-勇敢.webp,مطابقة جيدة: الشجاعة.
+M6-FC-15,mock6.html,15,flashcard,微信,Wēixìn,WeChat,m6-fc-15-微信.webp,assets/card-images/m6-fc-15-微信.webp,مطابقة جيدة: WeChat/مراسلة.
+M6-FC-16,mock6.html,16,flashcard,互联网,hùliánwǎng,الإنترنت,m6-fc-16-互联网.webp,assets/card-images/m6-fc-16-互联网.webp,مطابقة جيدة: الإنترنت.
+M6-FC-17,mock6.html,17,flashcard,联系,liánxì,يتواصل,m6-fc-17-联系.webp,assets/card-images/m6-fc-17-联系.webp,مطابقة جيدة: تواصل.
+M6-FC-18,mock6.html,18,flashcard,推迟,tuīchí,يؤجّل,m6-fc-18-推迟.webp,assets/card-images/m6-fc-18-推迟.webp,مطابقة جيدة: تأجيل.
+M6-FC-19,mock6.html,19,flashcard,行李,xíngli,حقائب السفر,m6-fc-19-行李.webp,assets/card-images/m6-fc-19-行李.webp,مطابقة جيدة: أمتعة سفر.
+M6-FC-20,mock6.html,20,flashcard,终于,zhōngyú,أخيراً,m6-fc-20-终于.webp,assets/card-images/m6-fc-20-终于.webp,مطابقة جيدة: أخيراً وصل/عودة.
+M6-FC-21,mock6.html,21,flashcard,商量,shāngliang,يتشاور,m6-fc-21-商量.webp,assets/card-images/m6-fc-21-商量.webp,مطابقة جيدة: تشاور.
+M6-FC-24,mock6.html,24,flashcard,面试,miànshì,مقابلة عمل,m6-fc-24-面试.webp,assets/card-images/m6-fc-24-面试.webp,مطابقة جيدة: مقابلة عمل.
+M6-FC-25,mock6.html,25,flashcard,成功,chénggōng,نجاح,m6-fc-25-成功.webp,assets/card-images/m6-fc-25-成功.webp,مطابقة جيدة: نجاح/فوز.
+M6-FC-26,mock6.html,26,flashcard,留学,liúxué,الدراسة بالخارج,m6-fc-26-留学.webp,assets/card-images/m6-fc-26-留学.webp,مطابقة جيدة: دراسة بالخارج.
+M6-FC-27,mock6.html,27,flashcard,签证,qiānzhèng,تأشيرة,m6-fc-27-签证.webp,assets/card-images/m6-fc-27-签证.webp,مطابقة جيدة: تأشيرة.
+M6-FC-28,mock6.html,28,flashcard,堵车,dǔchē,زحام مروري,m6-fc-28-堵车.webp,assets/card-images/m6-fc-28-堵车.webp,مطابقة جيدة: زحام مروري.
+M6-FC-29,mock6.html,29,flashcard,毕业,bìyè,يتخرّج,m6-fc-29-毕业.webp,assets/card-images/m6-fc-29-毕业.webp,مطابقة جيدة: تخرج.
+M6-FC-31,mock6.html,31,flashcard,考试,kǎoshì,امتحان,m6-fc-31-考试.webp,assets/card-images/m6-fc-31-考试.webp,مطابقة جيدة: امتحان.
+M6-FC-32,mock6.html,32,flashcard,了解,liǎojiě,يفهم بعمق,m6-fc-32-了解.webp,assets/card-images/m6-fc-32-了解.webp,مطابقة جيدة: فهم/إدراك.
+M6-FC-33,mock6.html,33,flashcard,礼物,lǐwù,هدية,m6-fc-33-礼物.webp,assets/card-images/m6-fc-33-礼物.webp,مطابقة جيدة: هدية.
+M6-FC-34,mock6.html,34,flashcard,家人,jiārén,أفراد العائلة,m6-fc-34-家人.webp,assets/card-images/m6-fc-34-家人.webp,مطابقة جيدة: العائلة.
+M6-FC-35,mock6.html,35,flashcard,鼓励,gǔlì,يشجّع,m6-fc-35-鼓励.webp,assets/card-images/m6-fc-35-鼓励.webp,مطابقة جيدة: تشجيع.
+M6-FC-36,mock6.html,36,flashcard,尊重,zūnzhòng,يحترم,m6-fc-36-尊重.webp,assets/card-images/m6-fc-36-尊重.webp,مطابقة جيدة: احترام/مساعدة الكبير.
+M6-FC-39,mock6.html,39,flashcard,护士,hùshi,ممرضة,m6-fc-39-护士.webp,assets/card-images/m6-fc-39-护士.webp,مطابقة جيدة: ممرضة.
+M6-FC-45,mock6.html,45,flashcard,减肥,jiǎnféi,إنقاص الوزن,m6-fc-45-减肥.webp,assets/card-images/m6-fc-45-减肥.webp,مطابقة جيدة: إنقاص الوزن/حمية.
+M6-FC-47,mock6.html,47,flashcard,环境污染,huánjìng wūrǎn,تلوث البيئة,m6-fc-47-环境污染.webp,assets/card-images/m6-fc-47-环境污染.webp,مطابقة جيدة: تلوث البيئة.
+M6-FC-50,mock6.html,50,flashcard,应聘者,yìngpìnzhě,المتقدّم للوظيفة,m6-fc-50-应聘者.webp,assets/card-images/m6-fc-50-应聘者.webp,مطابقة جيدة: متقدم للوظيفة.
+M6-FC-54,mock6.html,54,flashcard,压力,yālì,ضغط (نفسي),m6-fc-54-压力.webp,assets/card-images/m6-fc-54-压力.webp,مطابقة جيدة: ضغط نفسي.
+M6-WR-098,mock6.html,98,writing_image,商量,,يتشاور / يناقش,m6-wr-098-商量.webp,assets/card-images/m6-wr-098-商量.webp,مطابقة جيدة: يتشاور.
+M6-WR-100,mock6.html,100,writing_image,苦,,مرّ,m6-wr-100-苦.webp,assets/card-images/m6-wr-100-苦.webp,مطابقة جيدة: مر.
+M9-FC-01,mock9.html,1,flashcard,打针,dǎzhēn,حقنة,m9-fc-01-打针.webp,assets/card-images/m9-fc-01-打针.webp,مطابقة جيدة: حقنة.
+M9-FC-02,mock9.html,2,flashcard,演出,yǎnchū,عرض,m9-fc-02-演出.webp,assets/card-images/m9-fc-02-演出.webp,مطابقة جيدة: عرض.
+M9-FC-03,mock9.html,3,flashcard,行李箱,xínglǐxiāng,حقيبة سفر,m9-fc-03-行李箱.webp,assets/card-images/m9-fc-03-行李箱.webp,مطابقة جيدة: حقيبة سفر.
+M9-FC-04,mock9.html,4,flashcard,葡萄,pútáo,عنب,m9-fc-04-葡萄.webp,assets/card-images/m9-fc-04-葡萄.webp,مطابقة جيدة: عنب.
+M9-FC-05,mock9.html,5,flashcard,沙发,shāfā,أريكة,m9-fc-05-沙发.webp,assets/card-images/m9-fc-05-沙发.webp,مطابقة جيدة: أريكة.
+M9-FC-06,mock9.html,6,flashcard,镜子,jìngzi,مرآة,m9-fc-06-镜子.webp,assets/card-images/m9-fc-06-镜子.webp,مطابقة جيدة: مرآة.
+M9-FC-07,mock9.html,7,flashcard,护士,hùshi,ممرضة,m9-fc-07-护士.webp,assets/card-images/m9-fc-07-护士.webp,مطابقة جيدة: ممرضة.
+M9-FC-08,mock9.html,8,flashcard,包子,bāozi,باوزي,m9-fc-08-包子.webp,assets/card-images/m9-fc-08-包子.webp,مطابقة جيدة: باوزي.
+M9-FC-09,mock9.html,9,flashcard,购物车,gòuwùchē,عربة تسوق,m9-fc-09-购物车.webp,assets/card-images/m9-fc-09-购物车.webp,مطابقة جيدة: عربة تسوق.
+M9-FC-10,mock9.html,10,flashcard,飞机,fēijī,طائرة,m9-fc-10-飞机.webp,assets/card-images/m9-fc-10-飞机.webp,مطابقة جيدة: طائرة.
+M9-FC-11,mock9.html,11,flashcard,翻译,fānyì,يترجم,m9-fc-11-翻译.webp,assets/card-images/m9-fc-11-翻译.webp,مطابقة جيدة: ترجمة.
+M9-FC-12,mock9.html,12,flashcard,减肥,jiǎnféi,حمية,m9-fc-12-减肥.webp,assets/card-images/m9-fc-12-减肥.webp,مطابقة جيدة: حمية.
+M9-FC-13,mock9.html,13,flashcard,调查,diàochá,تحقيق,m9-fc-13-调查.webp,assets/card-images/m9-fc-13-调查.webp,مطابقة جيدة: تحقيق.
+M9-FC-14,mock9.html,14,flashcard,窗户,chuānghu,نافذة,m9-fc-14-窗户.webp,assets/card-images/m9-fc-14-窗户.webp,مطابقة جيدة: نافذة.
+M9-FC-15,mock9.html,15,flashcard,奖学金,jiǎngxuéjīn,منحة,m9-fc-15-奖学金.webp,assets/card-images/m9-fc-15-奖学金.webp,مطابقة جيدة: منحة/تكريم.
+M9-FC-16,mock9.html,16,flashcard,互联网,hùliánwǎng,إنترنت,m9-fc-16-互联网.webp,assets/card-images/m9-fc-16-互联网.webp,مطابقة جيدة: إنترنت.
+M9-FC-17,mock9.html,17,flashcard,博士,bóshì,دكتوراه,m9-fc-17-博士.webp,assets/card-images/m9-fc-17-博士.webp,مطابقة جيدة: دكتوراه/تخرج.
+M9-FC-18,mock9.html,18,flashcard,感冒,gǎnmào,زكام,m9-fc-18-感冒.webp,assets/card-images/m9-fc-18-感冒.webp,مطابقة جيدة: زكام.
+M9-FC-20,mock9.html,20,flashcard,污染,wūrǎn,تلوث,m9-fc-20-污染.webp,assets/card-images/m9-fc-20-污染.webp,مطابقة جيدة: تلوث.
+M9-FC-21,mock9.html,21,flashcard,功夫,gōngfū,كونغ فو,m9-fc-21-功夫.webp,assets/card-images/m9-fc-21-功夫.webp,مطابقة جيدة: كونغ فو.
+M9-FC-22,mock9.html,22,flashcard,地址,dìzhǐ,عنوان,m9-fc-22-地址.webp,assets/card-images/m9-fc-22-地址.webp,مطابقة جيدة: عنوان.
+M9-FC-23,mock9.html,23,flashcard,环境,huánjìng,بيئة,m9-fc-23-环境.webp,assets/card-images/m9-fc-23-环境.webp,مطابقة جيدة: بيئة.
+M9-FC-24,mock9.html,24,flashcard,愉快,yúkuài,سعيد,m9-fc-24-愉快.webp,assets/card-images/m9-fc-24-愉快.webp,مطابقة جيدة: سعيد/مرح.
+M9-FC-25,mock9.html,25,flashcard,压力,yālì,ضغط,m9-fc-25-压力.webp,assets/card-images/m9-fc-25-压力.webp,مطابقة جيدة: ضغط.
+M9-FC-26,mock9.html,26,flashcard,幽默,yōumò,فكاهي,m9-fc-26-幽默.webp,assets/card-images/m9-fc-26-幽默.webp,مطابقة جيدة: فكاهي.
+M9-FC-27,mock9.html,27,flashcard,紧张,jǐnzhāng,متوتر,m9-fc-27-紧张.webp,assets/card-images/m9-fc-27-紧张.webp,مطابقة جيدة: متوتر.
+M9-FC-29,mock9.html,29,flashcard,乒乓球,pīngpāngqiú,كرة طاولة,m9-fc-29-乒乓球.webp,assets/card-images/m9-fc-29-乒乓球.webp,مطابقة جيدة: كرة طاولة.
+M9-FC-30,mock9.html,30,flashcard,足球,zúqiú,كرة قدم,m9-fc-30-足球.webp,assets/card-images/m9-fc-30-足球.webp,مطابقة جيدة: كرة قدم.
+M9-FC-36,mock9.html,36,flashcard,提供,tígōng,يقدّم,m9-fc-36-提供.webp,assets/card-images/m9-fc-36-提供.webp,مطابقة جيدة: يقدم/يوفر شيئاً.
+M9-FC-38,mock9.html,38,flashcard,应聘,yìngpìn,يتقدم لوظيفة,m9-fc-38-应聘.webp,assets/card-images/m9-fc-38-应聘.webp,مطابقة جيدة: يتقدم لوظيفة.
+M9-FC-45,mock9.html,45,flashcard,苦,kǔ,مر,m9-fc-45-苦.webp,assets/card-images/m9-fc-45-苦.webp,مطابقة جيدة: مر.
+M9-FC-51,mock9.html,51,flashcard,毕业,bìyè,يتخرج,m9-fc-51-毕业.webp,assets/card-images/m9-fc-51-毕业.webp,مطابقة جيدة: يتخرج.

@@ -1,0 +1,17 @@
+{
+  "name": "HSK4 - دليل الاختبارات المحاكية بالعربية",
+  "short_name": "HSK4 Arabic",
+  "description": "دليل تعليمي تفاعلي بالعربية لاختبارات HSK4 المحاكية.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fffaf2",
+  "theme_color": "#0b63ce",
+  "orientation": "any",
+  "icons": [
+    {"src":"assets/icons/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"},
+    {"src":"assets/icons/maskable-icon.svg","sizes":"any","type":"image/svg+xml","purpose":"maskable"}
+  ]
+}
