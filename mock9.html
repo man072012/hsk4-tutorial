@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HSK4 Mock 9 - Arabic Tutorial</title>
+<style>
+:root{--primary:#c0392b;--secondary:#e74c3c;--accent:#f39c12;--bg:#fdf6f0;--card:#fff;--text:#2c3e50;--green:#27ae60;--blue:#2980b9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Tahoma','Arial',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:20px}
+.container{max-width:1100px;margin:auto}
+header{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;padding:30px;border-radius:15px;text-align:center;margin-bottom:25px}
+header h1{font-size:2em;margin-bottom:10px}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;background:#fff;padding:15px;border-radius:12px;position:sticky;top:0;z-index:100}
+nav button{background:#ecf0f1;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:bold}
+nav button.active{background:var(--primary);color:#fff}
+.tab{display:none}.tab.active{display:block}
+.question{background:var(--card);padding:25px;border-radius:12px;margin-bottom:20px;box-shadow:0 4px 12px rgba(0,0,0,0.08);border-right:5px solid var(--primary)}
+.qheader{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;flex-wrap:wrap;gap:10px}
+.qnum{background:var(--primary);color:#fff;padding:5px 15px;border-radius:20px;font-weight:bold}
+.answer{background:var(--green);color:#fff;padding:5px 15px;border-radius:20px;font-weight:bold}
+.chinese{background:#fff8e1;padding:12px 15px;border-radius:8px;margin:10px 0;border-right:3px solid var(--accent);font-size:1.15em;line-height:2.2;direction:ltr;text-align:left;unicode-bidi:isolate}
+.pinyin{color:#e67e22;font-size:0.85em;display:block;margin-top:3px;font-style:italic;direction:ltr;text-align:left;unicode-bidi:isolate}
+.options{margin:15px 0}
+.option{padding:8px 12px;margin:5px 0;background:#f8f9fa;border-radius:6px;border-right:3px solid #ddd;direction:ltr;text-align:left;unicode-bidi:isolate}
+.option.correct{background:#d4edda;border-right-color:var(--green);font-weight:bold}
+.explanation{background:#e8f4f8;padding:15px;border-radius:8px;margin-top:12px;border-right:3px solid var(--blue)}
+.explanation h4{color:var(--blue);margin-bottom:8px}
+.clickable{cursor:pointer;color:var(--primary);font-weight:bold;padding:1px 3px;border-radius:3px;direction:ltr;unicode-bidi:isolate;display:inline-block}
+.clickable:hover{background:#ffe5e0}
+audio{direction:ltr}
+.fc-zh,.fc-py{direction:ltr;text-align:center;unicode-bidi:isolate}
+/* محاذاة الكلمات الصينية في قوائم الكلمات المفتاحية */
+.explanation div span.clickable{direction:ltr;display:inline-block;unicode-bidi:isolate}
+.explanation div em{direction:ltr;display:inline-block;unicode-bidi:isolate}
+/* مزج RTL+LTR في نفس السطر */
+.qheader{direction:rtl}
+.qheader .qnum,.qheader .answer{direction:ltr;display:inline-block;unicode-bidi:isolate}
+.controls{position:sticky;top:80px;background:#fff;padding:12px;border-radius:8px;margin-bottom:15px;display:flex;gap:10px;flex-wrap:wrap;z-index:90}
+.controls button{padding:8px 14px;border:1px solid #ddd;background:#f8f9fa;border-radius:6px;cursor:pointer}
+.controls button.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.hide-pinyin .pinyin{display:none}
+.intro-card{background:#fff;padding:30px;border-radius:12px;margin-bottom:20px}
+.intro-card h2{color:var(--primary);margin-bottom:15px}
+.note{background:#fffde7;padding:15px;border-radius:8px;margin:15px 0;border-right:4px solid var(--accent)}
+.recbtn{background:#27ae60;color:#fff;padding:6px 12px;border:none;border-radius:6px;cursor:pointer;margin-right:8px}
+.recbtn.recording{background:#e74c3c}
+.rec-result{padding:8px;display:none;margin-top:8px}
+.rec-result.show{display:block}
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin:20px 0}
+.fc{background:#fff;padding:20px;border-radius:12px;text-align:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.08);border:2px solid #ddd}
+.fc-zh{font-size:1.5em;margin:8px 0}
+.fc-py{color:#888;font-size:0.85em}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>📚 شرح اختبار HSK4 المحاكي رقم 9</h1>
+<p>دليل تعليمي بالعربية - 100 سؤال مع شروحات وكلمات مفتاحية</p>
+</header>
+<nav id="mainNav">
+<button class="active" data-tab="intro">🏠 مقدمة</button>
+<button data-tab="listening">🎧 الاستماع</button>
+<button data-tab="reading">📖 القراءة</button>
+<button data-tab="writing">✏️ الكتابة</button>
+<button data-tab="grammar">📐 القواعد + البطاقات</button>
+</nav>
+<div class="controls">
+<button id="togglePinyin">👁️ Pinyin</button>
+<button id="preloadAudio" style="background:#16a34a;color:#fff">⚡ تحميل الأصوات مسبقاً</button>
+<span style="padding:8px;font-size:0.9em">المحرك:</span>
+<button class="ttseng" data-eng="iflytek">iFlytek 🇨🇳</button>
+<button class="ttseng active" data-eng="youdao">Youdao</button>
+<button class="ttseng" data-eng="google">Google</button>
+<button class="ttseng" data-eng="webspeech">Web Speech</button>
+<label style="font-size:0.9em">السرعة: <input type="range" id="rateSlider" min="0.5" max="1.2" step="0.1" value="0.85" style="width:80px;vertical-align:middle"></label>
+<span id="preloadStatus" style="font-size:0.85em;color:#16a34a"></span>
+</div>
+<div class="tab active" id="tab-intro">
+<div class="intro-card">
+<h2>🌟 مرحباً بك</h2>
+<p>هذا الدليل يشرح اختبار HSK4 المحاكي رقم 9 بأسلوب الفهم بدون حفظ.</p>
+<div class="note"><strong>📌 نصيحة:</strong> اضغط على أي كلمة صينية حمراء لسماع نطقها. زر iFlytek يعطي أفضل جودة.</div>
+<p><strong>📊 المحتوى:</strong></p>
+<ul style="margin:10px 20px">
+<li>🎧 الاستماع: 30 سؤال مفصّل</li>
+<li>📖 القراءة: 28 سؤال مع شروحات</li>
+<li>✏️ الكتابة: 10 جمل نموذجية</li>
+<li>🎨 27 بطاقة ذاكرة بصرية</li>
+<li>📐 10 قواعد نحوية</li>
+</ul>
+<div class="note"><strong>🔗 المصدر:</strong> <a href="https://www.hskmock.cn/hsk/simulation?paperId=62" target="_blank">hskmock.cn - Mock 9</a></div>
+<div class="note"><strong>🔗 دليل Mock 6 المرجعي:</strong> <a href="https://man072012.github.io/hsk4-tutorial/" target="_blank">man072012.github.io/hsk4-tutorial</a></div>
+</div>
+</div>
+<div class="tab" id="tab-listening"><div id="listeningQuestions"></div></div>
+<div class="tab" id="tab-reading"><div id="readingQuestions"></div></div>
+<div class="tab" id="tab-writing"><div id="writingQuestions"></div></div>
+<div class="tab" id="tab-grammar">
+<div class="intro-card">
+<h2>🎨 بطاقات الذاكرة البصرية (27 بطاقة)</h2>
+<div class="fc-grid" id="fcGrid"></div>
+</div>
+<div class="intro-card">
+<h2>📐 القواعد المفتاحية</h2>
+<div id="grammarList"></div>
+</div>
+</div>
+</div>
+<script>
+const IFLYTEK_DEFAULT = {appid:'91bdfee7', apiKey:'d4887abe7b2b6ceddb4688d64ad447c3', apiSecret:'ZThkMDM2ZDUwMmQ3NDYxMTUwMjIyNzZm'};
+let iflytekConfig = JSON.parse(localStorage.getItem('iflytekConfig') || 'null');
+if (!iflytekConfig || !iflytekConfig.appid){ iflytekConfig = IFLYTEK_DEFAULT; localStorage.setItem('iflytekConfig', JSON.stringify(IFLYTEK_DEFAULT)); }
+let speechRate = parseFloat(localStorage.getItem('mock9Rate') || '0.85');
+let currentEngine = localStorage.getItem('mock9TtsEngine') || 'youdao';
+
+async function hmacSha256Base64(secret, message){
+  const enc = new TextEncoder();
+  const key = await crypto.subtle.importKey('raw', enc.encode(secret), {name:'HMAC', hash:'SHA-256'}, false, ['sign']);
+  const sig = await crypto.subtle.sign('HMAC', key, enc.encode(message));
+  return btoa(String.fromCharCode(...new Uint8Array(sig)));
+}
+function utf8ToBase64(str){ return btoa(unescape(encodeURIComponent(str))); }
+async function buildIflytekUrl(){
+  const date = new Date().toUTCString();
+  const host = 'tts-api.xfyun.cn', path = '/v2/tts';
+  const sigOrigin = 'host: ' + host + '\ndate: ' + date + '\nGET ' + path + ' HTTP/1.1';
+  const signature = await hmacSha256Base64(iflytekConfig.apiSecret, sigOrigin);
+  const authOrigin = 'api_key="' + iflytekConfig.apiKey + '", algorithm="hmac-sha256", headers="host date request-line", signature="' + signature + '"';
+  return 'wss://' + host + path + '?authorization=' + encodeURIComponent(btoa(authOrigin)) + '&date=' + encodeURIComponent(date) + '&host=' + host;
+}
+async function iflytekTTS(text, btn){
+  return new Promise(async (resolve) => {
+    try {
+      const url = await buildIflytekUrl();
+      const ws = new WebSocket(url);
+      const chunks = [];
+      const tid = setTimeout(()=>{ try{ws.close();}catch(e){} resolve(false); }, 4000);
+      ws.onopen = () => {
+        ws.send(JSON.stringify({
+          common:{app_id:iflytekConfig.appid},
+          business:{aue:'lame', sfl:1, vcn:'xiaoyan', speed:Math.round(speechRate*50), volume:50, pitch:50, tte:'utf8'},
+          data:{status:2, text:utf8ToBase64(text)}
+        }));
+      };
+      ws.onmessage = (e) => {
+        const r = JSON.parse(e.data);
+        if (r.code !== 0){ clearTimeout(tid); ws.close(); resolve(false); return; }
+        if (r.data && r.data.audio) chunks.push(Uint8Array.from(atob(r.data.audio), c=>c.charCodeAt(0)));
+        if (r.data && r.data.status === 2){
+          clearTimeout(tid); ws.close();
+          const total = chunks.reduce((s,c)=>s+c.length, 0);
+          const full = new Uint8Array(total);
+          let off = 0;
+          for (const c of chunks){ full.set(c, off); off += c.length; }
+          const blob = new Blob([full], {type:'audio/mpeg'});
+          const audio = new Audio(URL.createObjectURL(blob));
+          audio.playbackRate = speechRate;
+          audio.onended = () => { if(btn) btn.style.background=''; resolve(true); };
+          audio.onerror = () => resolve(false);
+          audio.play().catch(() => resolve(false));
+        }
+      };
+      ws.onerror = () => { clearTimeout(tid); resolve(false); };
+    } catch(e){ resolve(false); }
+  });
+}
+
+async function speak(text, btn){
+  if (!text) return;
+  if (btn) btn.style.background = '#fff59d';
+  if (currentEngine === 'iflytek'){
+    const ok = await iflytekTTS(text, btn);
+    if (ok) return;
+  }
+  if (currentEngine === 'webspeech'){
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'zh-CN'; u.rate = speechRate;
+    u.onend = () => { if (btn) btn.style.background = ''; };
+    speechSynthesis.cancel(); speechSynthesis.speak(u); return;
+  }
+  let url;
+  if (currentEngine === 'google'){
+    url = 'https://translate.google.com/translate_tts?ie=UTF-8&q=' + encodeURIComponent(text) + '&tl=zh-CN&client=tw-ob';
+  } else {
+    url = 'https://dict.youdao.com/dictvoice?type=2&audio=' + encodeURIComponent(text);
+  }
+  try {
+    const audio = new Audio(url);
+    audio.playbackRate = speechRate;
+    audio.onended = () => { if (btn) btn.style.background = ''; };
+    audio.onerror = () => {
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'zh-CN'; u.rate = speechRate;
+      speechSynthesis.cancel(); speechSynthesis.speak(u);
+      if (btn) btn.style.background = '';
+    };
+    await audio.play();
+  } catch(e){ if (btn) btn.style.background = ''; }
+}
+
+document.getElementById('rateSlider').oninput = (e) => { speechRate = parseFloat(e.target.value); localStorage.setItem('mock9Rate', speechRate); };
+
+function markupChinese(text){
+  return text.replace(/[一-鿿]+/g, m => '<span class="clickable" onclick="speak(\'' + m + '\', this)">' + m + '</span>');
+}
+
+// روابط الصوت الأصلية المستخرجة من hskmock.cn
+const AUDIO_BASE = 'https://public.hskmock.cn/hsk-examination/hsk4/891e0db07b831452/';
+const audioUrls = {
+  1:'1fc934a9-e9bd-4203-9b01-b165235df999',2:'f1d3f3cb-9a38-4c0e-81cf-c3649d4846b4',
+  3:'84c7e791-c3fa-4f42-a822-90537054bdf8',4:'bf1c8e5f-750c-46d1-8fc3-a3348c1aeba3',
+  5:'902c1305-1b84-4f2b-80f3-ae32783c3fab',6:'003036eb-ddc4-40bd-b384-b7af519fd447',
+  7:'6f7fa489-7bce-43e2-b599-6874318c0e70',8:'a6773bba-463d-480f-ab76-3d4c794ca201',
+  9:'2616b1bf-1f7c-4569-8317-da8fa67a1943',10:'7f2602ab-1e20-43ef-8a37-8c28d2490734',
+  11:'24e0bd8a-e4ec-4daf-8070-4c3039bc5293',12:'528724f7-9b2e-4c36-bd6c-6a78c23fd1f1',
+  13:'0c3023bc-2942-4ed9-83ed-052874884638',14:'b08dc04e-f471-4949-a481-6ce3c1717332',
+  15:'e941a5c7-8484-4647-b8df-e18f157132d0',16:'d83374df-be03-4719-89e2-2aad0e9a0013',
+  17:'f0a2e87c-9116-4187-8002-c24758052c2a',18:'bbb32091-4838-4807-8df6-49f95215dd56',
+  19:'f24f841e-085a-4485-87ed-4f4cf5aa006f',20:'a970843e-69ea-4d7c-8399-d3847cd4a8c5',
+  21:'da22387e-4318-4b9f-8974-d84ec46d176d',22:'fb7f6015-00dd-4e31-aaa0-bd3e762f858e',
+  23:'dbecc407-3b68-429d-93b6-b095c6ccfa8c',24:'23b4c0d7-7b32-494f-828a-87486ff7a110',
+  25:'57bf379f-e3dc-4794-997f-43d95b1d9bb7',26:'99965f00-d780-4a7f-ad99-80871fec83aa',
+  27:'4481e767-b669-4d2d-a673-234b3301443a',28:'14b0b2fc-b6b4-4ea2-9b30-ff223eaa0c60',
+  29:'aad801a5-1337-4570-b8bd-258f97e4751c',30:'4b8fb965-d871-4a0f-9eca-9c224bfc056c',
+  31:'f85b2c2b-a4a2-4507-989c-feea27eb2d3f',32:'132c29c8-966a-4237-b135-15c36e1a004c',
+  33:'1f353c43-80f3-4fae-9b7e-070940920dea',34:'58fba715-0e7f-4a04-a443-0fb84de26d84',
+  35:'d3686836-06f4-419d-8759-449524f33aa4',36:'7fdc2c49-23ed-454a-a179-65379d9dc05c',
+  37:'7fdc2c49-23ed-454a-a179-65379d9dc05c',38:'3679e76a-af26-4db9-a9dd-e43b0d0e7198',
+  39:'3679e76a-af26-4db9-a9dd-e43b0d0e7198',40:'f7d57032-d177-4df1-8f57-ef6d236d4c57',
+  41:'f7d57032-d177-4df1-8f57-ef6d236d4c57',42:'9e93bd68-af93-4938-af36-2a90fcecf765',
+  43:'9e93bd68-af93-4938-af36-2a90fcecf765',44:'262f45e6-1508-4677-bc47-af64d807aeb5',
+  45:'262f45e6-1508-4677-bc47-af64d807aeb5'
+};
+function getAudioUrl(qNum){ return audioUrls[qNum] ? (AUDIO_BASE + audioUrls[qNum] + '.mp3') : null; }
+
+const listeningData = {
+  1:{type:'TF',ans:'F',audio:'他们俩有着共同的兴趣爱好，都喜欢打乒乓球，所以很快成为了好朋友。',star:'他们俩都喜欢踢足球。',explain:'النص: كلاهما يحبان <u>乒乓球 (كرة طاولة)</u>. السؤال: <u>足球 (كرة قدم)</u>. <strong>خطأ ✗</strong>',keywords:[['乒乓球','كرة طاولة','pīngpāngqiú'],['足球','كرة قدم','zúqiú'],['爱好','هواية','àihào']]},
+  2:{type:'TF',ans:'T',audio:'按照最新的规定，超过六十五岁的人可以免费乘坐公共汽车。',star:'七十岁的老人坐公共汽车是免费的。',explain:'من تجاوز 65 سنة يركب مجاناً، 70 > 65. <strong>صحيح ✓</strong>',keywords:[['按照','وفقاً','ànzhào'],['免费','مجاناً','miǎnfèi'],['超过','تجاوز','chāoguò']]},
+  3:{type:'TF',ans:'T',audio:'陈希的感冒很严重，昨晚因为突然发高烧被送到了医院。护士小姐给她打了一针后，她才好了些。',star:'陈希昨晚由于发烧去医院打针了。',explain:'النص ذكر الحمى والحقنة. <strong>صحيح ✓</strong>',keywords:[['感冒','زكام','gǎnmào'],['发烧','حمى','fāshāo'],['打针','حقنة','dǎzhēn'],['护士','ممرضة','hùshi']]},
+  4:{type:'TF',ans:'F',audio:'为了这场演出，演员们认真准备了好几个月，现在距离正式开始还有十分钟，他们既紧张又兴奋。',star:'正式演出的时间推迟了10分钟。',explain:'النص: <u>باقي 10 دقائق</u>. السؤال: <u>تأجل 10 دقائق</u> - تحريف! <strong>خطأ ✗</strong>',keywords:[['演出','عرض','yǎnchū'],['推迟','يؤجل','tuīchí'],['紧张','متوتر','jǐnzhāng']]},
+  5:{type:'TF',ans:'F',audio:'李雨的中文成绩很好，可她太害羞了，从来不敢在中国人面前说中文。',star:'李雨喜欢用中文和中国人聊天儿。',explain:'هي خجولة ولا تجرؤ، لكن السؤال يقول إنها تحب الدردشة - عكس النص. <strong>خطأ ✗</strong>',keywords:[['害羞','خجول','hàixiū'],['敢','يجرؤ','gǎn']]},
+  6:{type:'TF',ans:'T',audio:'这家公司可以为年轻人提供很好的发展机会，因此吸引了很多人去应聘。',star:'很多人想在那家公司工作。',explain:'الشركة تجذب كثيرين للتقديم. <strong>صحيح ✓</strong>',keywords:[['提供','يقدّم','tígōng'],['吸引','يجذب','xīyǐn']]},
+  7:{type:'TF',ans:'T',audio:'我刚搬了新家，这是我的新地址，这个礼拜天你们有空儿过来一起吃饭吗？',star:'他邀请别人周日去他家吃饭。',explain:'礼拜天 = 周日 = الأحد. <strong>صحيح ✓</strong>',keywords:[['搬家','ينتقل','bānjiā'],['地址','عنوان','dìzhǐ'],['邀请','يدعو','yāoqǐng']]},
+  11:{type:'MC',ans:'B',options:['吃烤鸭','吃包子','逛超市','看电视'],audio:'男：我们中午去哪里吃饭？\n女：来了天津，怎么能不带你去尝尝有名的狗不理包子呢？',explain:'في تيانجين تجرّب الباوزي. <strong>B - 吃包子</strong>',keywords:[['包子','باوزي','bāozi'],['尝','يتذوق','cháng']]},
+  12:{type:'MC',ans:'D',options:['银行','邮局','大使馆','警察局'],audio:'女：卡里的钱被人取光了。\n男：把过程详细说一遍，对我们的调查有帮助。',explain:'调查 (تحقيق) = شرطة. <strong>D - 警察局</strong>',keywords:[['调查','تحقيق','diàochá'],['警察局','شرطة','jǐngchájú']]},
+  13:{type:'MC',ans:'B',options:['看报纸','擦窗户','弹钢琴','洗衣服'],audio:'男：我都擦了三遍了，可窗户还是很脏。',explain:'يمسح النوافذ. <strong>B - 擦窗户</strong>',keywords:[['擦','يمسح','cā'],['窗户','نافذة','chuānghu']]},
+  16:{type:'MC',ans:'B',options:['不太努力','特别优秀','十分幽默','有点儿骄傲'],audio:'女：我获得了校长奖学金。\n男：你在各个方面都很棒。',explain:'حصلت على المنحة. <strong>B - 特别优秀</strong>',keywords:[['奖学金','منحة','jiǎngxuéjīn'],['优秀','ممتاز','yōuxiù']]},
+  19:{type:'MC',ans:'C',options:['越早越好','师傅最重要','努力最重要','开始很容易'],audio:'男：现在学画画儿太晚了？\n女：只要你肯努力。',explain:'الاجتهاد أهم. <strong>C - 努力最重要</strong>',keywords:[['只要','طالما','zhǐyào'],['努力','يجتهد','nǔlì']]},
+  20:{type:'MC',ans:'D',options:['加油站','火车站','服务区','高速公路上'],audio:'女：我想上厕所。\n男：等到了前面的服务区我就停车。',explain:'محطة خدمات على طريق سريع. <strong>D - 高速公路上</strong>',keywords:[['服务区','محطة خدمات','fúwùqū'],['高速公路','طريق سريع','gāosù gōnglù']]},
+  21:{type:'MC',ans:'A',options:['比较马虎','特别勇敢','性格活泼','成绩不好'],audio:'男：你的作业总出现相同的语法错误。',explain:'تكرر نفس الأخطاء = مهملة. <strong>A - 比较马虎</strong>',keywords:[['错误','خطأ','cuòwù'],['马虎','مهمل','mǎhu']]},
+  22:{type:'MC',ans:'D',options:['生气','随便','同意','反对'],audio:'女：我在减肥。\n男：你本来就很瘦，别减肥了。',explain:'يقول لها لا تتبعي حمية = يعارض. <strong>D - 反对</strong>',keywords:[['减肥','حمية','jiǎnféi'],['反对','يعارض','fǎnduì']]},
+  26:{type:'MC',ans:'C',options:['景色很一般','汽车不太多','参观的人多','空气不新鲜'],audio:'女：来玩儿的人太多了。',explain:'الزوار كثيرون. <strong>C - 参观的人多</strong>',keywords:[['空气','هواء','kōngqì'],['参观','يزور','cānguān']]},
+  27:{type:'MC',ans:'D',options:['太香了','很卫生','很美味','不干净'],audio:'男：路边的小吃不卫生。',explain:'غير صحي = غير نظيف. <strong>D - 不干净</strong>',keywords:[['小吃','أكلة شعبية','xiǎochī'],['卫生','صحي','wèishēng']]},
+  28:{type:'MC',ans:'A',options:['受学生欢迎','上课很严格','知识很丰富','是法律博士'],audio:'男：王教授的课人一直很多。',explain:'دائماً مزدحم = محبوب. <strong>A</strong>',keywords:[['教授','بروفيسور','jiàoshòu'],['受欢迎','محبوب','shòu huānyíng']]},
+  29:{type:'MC',ans:'D',options:['颜色不好看','保修期太短','价格不便宜','大小很合适'],audio:'男：颜色我很喜欢，大小也很适合带上飞机。',explain:'الحجم مناسب. <strong>D</strong>',keywords:[['行李箱','حقيبة سفر','xínglǐxiāng'],['合适','مناسب','héshì']]},
+  30:{type:'MC',ans:'B',options:['人很骄傲','功夫厉害','个子不高','电影很少'],audio:'男：他是个很厉害的功夫演员。',explain:'بروس لي ماهر. <strong>B - 功夫厉害</strong>',keywords:[['功夫','كونغ فو','gōngfū'],['厉害','ماهر','lìhài']]},
+  31:{type:'MC',ans:'D',options:['去上课','去加班','打电话','翻译文章'],audio:'女：我有一篇文章没翻译完。',explain:'ستترجم المقال. <strong>D</strong>',keywords:[['翻译','يترجم','fānyì'],['文章','مقال','wénzhāng']]},
+  32:{type:'MC',ans:'B',options:['吃得完','又酸又甜','超市买的','味道一般'],audio:'女：酸酸甜甜的。',explain:'حلو وحامض. <strong>B</strong>',keywords:[['葡萄','عنب','pútáo'],['酸','حامض','suān'],['甜','حلو','tián']]},
+  33:{type:'MC',ans:'C',options:['刚发工资','女的喜欢','旧沙发破了','椅子不舒服'],audio:'男：客厅里的沙发用了十几年了，有点儿破了。',explain:'الأريكة قديمة. <strong>C</strong>',keywords:[['沙发','أريكة','shāfā'],['破','تالف','pò']]},
+  34:{type:'MC',ans:'D',options:['时间早晚','穿衣打扮','镜子质量','心情好坏'],audio:'男：这和你的心情有关。',explain:'المزاج يؤثر. <strong>D</strong>',keywords:[['镜子','مرآة','jìngzi'],['心情','مزاج','xīnqíng']]},
+  35:{type:'MC',ans:'D',audio:'男：这是我第一次见到这么聪明的小鸟。',explain:'الطائر ذكي. <strong>D</strong>',keywords:[['鸟','طائر','niǎo'],['聪明','ذكي','cōngmíng']]},
+  36:{type:'MC',ans:'A',audio:'喜欢喝茶的人很多，但很少有人知道茶叶的不同、水的质量都会影响茶的味道。',explain:'النص: نوع الشاي وجودة الماء يؤثران. <strong>A</strong>',keywords:[['茶叶','شاي','cháyè'],['影响','يؤثر','yǐngxiǎng']]},
+  38:{type:'MC',ans:'C',audio:'管理时间的目的是减少时间的浪费，按时完成各个任务。',explain:'إدارة الوقت = تقليل الإسراف. <strong>C</strong>',keywords:[['管理','إدارة','guǎnlǐ'],['浪费','إسراف','làngfèi']]},
+  40:{type:'MC',ans:'D',audio:'网上点餐：选择菜+地址+付款。',explain:'الطلب أونلاين له خطوات. <strong>D</strong>',keywords:[['点餐','يطلب طعام','diǎncān']]},
+  42:{type:'MC',ans:'D',audio:'购物车里到处都是塑料垃圾。',explain:'نفايات بلاستيكية. <strong>D</strong>',keywords:[['购物车','عربة تسوق','gòuwùchē'],['塑料','بلاستيك','sùliào']]},
+  44:{type:'MC',ans:'C',audio:'用筷子敲碗都是不礼貌的行为。',explain:'سلوك غير مهذب. <strong>C</strong>',keywords:[['筷子','عيدان','kuàizi'],['礼貌','أدب','lǐmào']]},
+  37:{type:'MC',ans:'A',audio:'比如绿茶，如果水的温度太高，味道就会变苦。',explain:'حرارة الماء العالية تجعل الشاي مراً. <strong>A</strong>',keywords:[['绿茶','شاي أخضر','lǜchá'],['苦','مر','kǔ']]},
+  39:{type:'MC',ans:'C',audio:'按计划做事，千万不要总把今天的任务留到明天。',explain:'لا تؤجل عمل اليوم للغد. <strong>C</strong>',keywords:[['计划','خطة','jìhuà'],['任务','مهمة','rènwu']]},
+  41:{type:'MC',ans:'D',audio:'网上点餐有很多优点，节约了很多时间。',explain:'الطلب أونلاين يوفر الوقت. <strong>D</strong>',keywords:[['节约','يوفر','jiéyuē'],['优点','ميزة','yōudiǎn']]},
+  43:{type:'MC',ans:'D',audio:'那些塑料垃圾严重污染了海洋环境。',explain:'البلاستيك يلوث البحر. <strong>D</strong>',keywords:[['污染','تلوث','wūrǎn'],['海洋','بحر','hǎiyáng']]},
+  45:{type:'MC',ans:'C',audio:'中国人使用筷子的历史至少有三千年。',explain:'تاريخ العيدان 3000 سنة على الأقل. <strong>C</strong>',keywords:[['历史','تاريخ','lìshǐ'],['至少','على الأقل','zhìshǎo']]}
+};
+
+const readingData = {
+  37:{ans:'A',text:'喜欢喝茶的人很多，但很少有人知道茶叶的不同、水的质量都会影响茶的味道。另外，水的温度也很关键。',q:'下列哪一个不会影响茶的味道？',explain:'النص: نوع الشاي + جودة الماء + حرارة الماء كلها تؤثر. <strong>A</strong>',keywords:[['茶叶','أوراق الشاي','cháyè'],['温度','حرارة','wēndù']]},
+  38:{ans:'C',text:'管理时间的目的是减少时间的浪费，按时完成各个任务。',q:'管理时间的目的是什么？',explain:'الهدف: تقليل الإسراف + إنجاز في الموعد. <strong>C</strong>',keywords:[['管理','إدارة','guǎnlǐ'],['任务','مهمة','rènwu']]},
+  40:{ans:'D',text:'网上点餐：首先选择菜；其次选择地址；最后完成付款。',q:'上网点餐需要做什么？',explain:'3 خطوات: طبق + عنوان + دفع. <strong>D</strong>',keywords:[['付款','يدفع','fùkuǎn']]},
+  42:{ans:'D',text:'"海底购物"的照片：购物车里和身体周围都是塑料垃圾。',q:'购物车里有什么？',explain:'نفايات بلاستيكية. <strong>D</strong>',keywords:[['海底','قاع البحر','hǎidǐ'],['污染','تلوث','wūrǎn']]},
+  44:{ans:'C',text:'用筷子吃饭时不能用筷子敲碗，这些都是不礼貌的行为。',q:'用筷子敲碗会让人感觉怎么样？',explain:'سلوك غير مهذب. <strong>C</strong>',keywords:[['餐具','أدوات مائدة','cānjù'],['行为','سلوك','xíngwéi']]},
+  74:{ans:'D',text:'相信每个人都知道美国的莱特兄弟，他们是世界上第一架飞机的发明者。',q:'关于莱特兄弟，可以知道什么？',explain:'الأخوان رايت اخترعا أول طائرة. <strong>D</strong>',keywords:[['美国','أمريكا','měiguó'],['发明','يخترع','fāmíng']]},
+  76:{ans:'B',text:'任何事情都可以试着慢慢来，急不一定能解决问题。',q:'对于做事，作者的态度是什么？',explain:'افعل ببطء، الاستعجال لا يحل. <strong>B</strong>',keywords:[['慢慢','ببطء','mànman'],['解决','يحل','jiějué']]},
+  78:{ans:'D',text:'猫有很多种，他们一般可以活十几年。猫是很聪明的动物。',q:'关于猫，下列哪个是正确的？',explain:'القطط ذكية وتعيش 10+ سنوات. <strong>D</strong>',keywords:[['猫','قطة','māo'],['聪明','ذكي','cōngmíng']]},
+  79:{ans:'D',text:'有计划地做事不仅效率高，而且效果好。',q:'有计划做事的好处是什么？',explain:'كفاءة + نتائج. <strong>D</strong>',keywords:[['计划','خطة','jìhuà'],['效率','كفاءة','xiàolǜ']]},
+  80:{ans:'C',text:'尽管调查能帮助我们了解顾客，但调查的结果不一定完全准确。',q:'关于调查，下列哪个是正确的？',explain:'محدودية الدقة. <strong>C</strong>',keywords:[['调查','استطلاع','diàochá'],['准确','دقيق','zhǔnquè']]},
+  84:{ans:'D',text:'笑能够减轻压力，让人变得更健康。',q:'笑有什么好处？',explain:'تقليل الضغط + صحة. <strong>D</strong>',keywords:[['笑','يضحك','xiào'],['压力','ضغط','yālì'],['健康','صحة','jiànkāng']]},
+  66:{ans:'D',text:'读书是一件很愉快的事情，特别是在安静的环境中。',q:'作者认为什么是愉快的？',explain:'القراءة في البيئة الهادئة ممتعة. <strong>D</strong>',keywords:[['读书','يقرأ','dúshū'],['愉快','مسرور','yúkuài'],['安静','هادئ','ānjìng']]},
+  68:{ans:'B',text:'要想学好一门外语，每天的练习很重要。',q:'学好外语最重要的是什么？',explain:'التدريب اليومي أهم شيء. <strong>B</strong>',keywords:[['外语','لغة أجنبية','wàiyǔ'],['练习','تدريب','liànxí']]},
+  70:{ans:'C',text:'锻炼身体不仅能保持健康，还能让心情变好。',q:'锻炼有什么好处？',explain:'الرياضة = صحة + مزاج جيد. <strong>C</strong>',keywords:[['锻炼','يمارس الرياضة','duànliàn'],['保持','يحافظ','bǎochí']]},
+  72:{ans:'A',text:'孩子们从小就应该学会与人合作。',q:'文章的主要内容是什么？',explain:'الأطفال يحتاجون تعلم التعاون. <strong>A</strong>',keywords:[['合作','تعاون','hézuò'],['从小','منذ الصغر','cóngxiǎo']]},
+  82:{ans:'C',text:'在中国，很多人喜欢饭后喝茶，认为这样有利于消化。',q:'喝茶的好处是什么？',explain:'الشاي يساعد الهضم. <strong>C</strong>',keywords:[['消化','هضم','xiāohuà'],['有利于','مفيد لـ','yǒulìyú']]},
+  85:{ans:'D',text:'幽默的人在生活中更受欢迎，他们能给别人带来快乐。',q:'幽默的人有什么特点？',explain:'الفكاهيون محبوبون ويجلبون السعادة. <strong>D</strong>',keywords:[['幽默','فكاهي','yōumò'],['受欢迎','محبوب','shòu huānyíng'],['快乐','سعادة','kuàilè']]}
+};
+
+const readingFillData = {46:{ans:'C'},47:{ans:'C'},48:{ans:'C'},49:{ans:'C'},50:{ans:'C'},51:{ans:'D'},52:{ans:'D'},53:{ans:'D'},54:{ans:'D'},55:{ans:'D'}};
+const readingOrderData = {56:{ans:'C-A-B'},57:{ans:'C-A-B'},58:{ans:'A-C-B'},59:{ans:'A-C-B'},61:{ans:'B-A-C'},62:{ans:'C-A-B'},63:{ans:'C-A-B'}};
+
+const writingData = {
+  86:{s:'我建议咱们先预习语法知识',py:'wǒ jiànyì zánmen xiān yùxí yǔfǎ zhīshi',tr:'أقترح أن نراجع قواعد النحو أولاً',gr:'建议 + شخص + 先 + فعل',kw:[['建议','يقترح','jiànyì'],['预习','يحضّر','yùxí'],['语法','نحو','yǔfǎ']]},
+  87:{s:'这次的错误比之前的严重多了',py:'zhè cì de cuòwù bǐ zhīqián de yánzhòng duōle',tr:'خطأ هذه المرة أشد بكثير',gr:'A + 比 + B + صفة + 多了',kw:[['错误','خطأ','cuòwù'],['严重','شديد','yánzhòng']]},
+  88:{s:'互联网使我们的生活更方便了',py:'hùliánwǎng shǐ wǒmen de shēnghuó gèng fāngbiàn le',tr:'الإنترنت جعل حياتنا أكثر سهولة',gr:'A + 使 + B + صفة',kw:[['互联网','إنترنت','hùliánwǎng'],['使','يجعل','shǐ']]},
+  89:{s:'小伙子的心情既兴奋又激动',py:'xiǎohuǒzi de xīnqíng jì xīngfèn yòu jīdòng',tr:'مشاعر الشاب متحمسة ومنفعلة',gr:'既...又...',kw:[['小伙子','شاب','xiǎohuǒzi'],['兴奋','متحمس','xīngfèn']]},
+  90:{s:'咖啡的味道挺苦的',py:'kāfēi de wèidào tǐng kǔ de',tr:'طعم القهوة مرّ نوعاً ما',gr:'挺...的',kw:[['咖啡','قهوة','kāfēi'],['苦','مر','kǔ']]},
+  91:{s:'加油站里有不少顾客在排队',py:'jiāyóuzhàn lǐ yǒu bùshǎo gùkè zài páiduì',tr:'كثيرون يصطفون في محطة الوقود',gr:'在 + فعل = حال مستمر',kw:[['加油站','محطة وقود','jiāyóuzhàn'],['排队','يصطف','páiduì']]},
+  92:{s:'只有百分之五十的博士能按时毕业',py:'zhǐyǒu bǎifēnzhī wǔshí de bóshì néng ànshí bìyè',tr:'فقط 50% من الدكاترة يتخرجون في الموعد',gr:'百分之 + رقم',kw:[['博士','دكتوراه','bóshì'],['毕业','يتخرج','bìyè']]},
+  93:{s:'所有的报名材料都得打印',py:'suǒyǒu de bàomíng cáiliào dōu děi dǎyìn',tr:'كل مستندات التسجيل يجب طباعتها',gr:'所有...都 + 得',kw:[['报名','يسجل','bàomíng'],['打印','يطبع','dǎyìn']]},
+  94:{s:'大夫让护士给父亲打了一针',py:'dàifu ràng hùshi gěi fùqīn dǎ le yī zhēn',tr:'الطبيب طلب من الممرضة أن تعطي والدي حقنة',gr:'让 + شخص + فعل',kw:[['大夫','طبيب','dàifu'],['让','يجعل','ràng']]},
+  95:{s:'爷爷刚把杂志寄给了孙子',py:'yéye gāng bǎ zázhì jì gěi le sūnzi',tr:'الجد أرسل المجلة إلى الحفيد',gr:'A + 把 + شيء + 寄给 + B',kw:[['爷爷','جد','yéye'],['寄','يرسل','jì'],['孙子','حفيد','sūnzi']]}
+};
+
+const flashcards = [
+  ['打针','dǎzhēn','حقنة','#ffcdd2','#c62828'],['演出','yǎnchū','عرض','#c8e6c9','#1b5e20'],
+  ['行李箱','xínglǐxiāng','حقيبة سفر','#bbdefb','#1565c0'],['葡萄','pútáo','عنب','#d1c4e9','#7b1fa2'],
+  ['沙发','shāfā','أريكة','#ffe0b2','#e65100'],['镜子','jìngzi','مرآة','#b2dfdb','#00695c'],
+  ['护士','hùshi','ممرضة','#f8bbd0','#c2185b'],['包子','bāozi','باوزي','#fff9c4','#f57f17'],
+  ['购物车','gòuwùchē','عربة تسوق','#cfd8dc','#37474f'],['飞机','fēijī','طائرة','#b3e5fc','#01579b'],
+  ['翻译','fānyì','يترجم','#e1bee7','#6a1b9a'],['减肥','jiǎnféi','حمية','#ffccbc','#bf360c'],
+  ['调查','diàochá','تحقيق','#c5cae9','#283593'],['窗户','chuānghu','نافذة','#b2ebf2','#00838f'],
+  ['奖学金','jiǎngxuéjīn','منحة','#fff59d','#f57f17'],['互联网','hùliánwǎng','إنترنت','#b2dfdb','#00695c'],
+  ['博士','bóshì','دكتوراه','#d7ccc8','#3e2723'],['感冒','gǎnmào','زكام','#e0e0e0','#424242'],
+  ['排队','páiduì','يصطف','#ffe082','#e65100'],['污染','wūrǎn','تلوث','#c5e1a5','#33691e'],
+  ['功夫','gōngfū','كونغ فو','#ef9a9a','#c62828'],['地址','dìzhǐ','عنوان','#80deea','#ad1457'],
+  ['环境','huánjìng','بيئة','#a5d6a7','#1b5e20'],['愉快','yúkuài','سعيد','#fff176','#f57f17'],
+  ['压力','yālì','ضغط','#b0bec5','#263238'],['幽默','yōumò','فكاهي','#ce93d8','#6a1b9a'],
+  ['紧张','jǐnzhāng','متوتر','#ffab91','#bf360c'],
+  ['免费','miǎnfèi','مجاناً','#a5d6a7','#1b5e20'],
+  ['乒乓球','pīngpāngqiú','كرة طاولة','#fff59d','#f57f17'],
+  ['足球','zúqiú','كرة قدم','#c5e1a5','#33691e'],
+  ['公共汽车','gōnggòng qìchē','حافلة عامة','#bbdefb','#1565c0'],
+  ['搬家','bānjiā','ينقل البيت','#ffe0b2','#e65100'],
+  ['礼拜天','lǐbàitiān','الأحد','#f8bbd0','#c2185b'],
+  ['周日','zhōurì','الأحد','#e1bee7','#6a1b9a'],
+  ['邀请','yāoqǐng','يدعو','#ffccbc','#bf360c'],
+  ['提供','tígōng','يقدّم','#b3e5fc','#01579b'],
+  ['吸引','xīyǐn','يجذب','#d1c4e9','#7b1fa2'],
+  ['应聘','yìngpìn','يتقدم لوظيفة','#cfd8dc','#37474f'],
+  ['服务区','fúwùqū','محطة خدمات','#b2dfdb','#00695c'],
+  ['马虎','mǎhu','مهمل','#ffab91','#bf360c'],
+  ['仔细','zǐxì','دقيق','#80deea','#ad1457'],
+  ['错误','cuòwù','خطأ','#ef9a9a','#c62828'],
+  ['酸','suān','حامض','#fff176','#f57f17'],
+  ['甜','tián','حلو','#ffcdd2','#c62828'],
+  ['苦','kǔ','مر','#a5d6a7','#1b5e20'],
+  ['咖啡','kāfēi','قهوة','#d7ccc8','#3e2723'],
+  ['杂志','zázhì','مجلة','#bbdefb','#1565c0'],
+  ['爷爷','yéye','جد','#ffe0b2','#e65100'],
+  ['孙子','sūnzi','حفيد','#fff9c4','#f57f17'],
+  ['打印','dǎyìn','يطبع','#cfd8dc','#37474f'],
+  ['毕业','bìyè','يتخرج','#fff176','#f57f17'],
+  ['报名','bàomíng','يسجل','#b3e5fc','#01579b'],
+  ['规定','guīdìng','قاعدة','#c5cae9','#283593'],
+  ['解释','jiěshì','يفسّر','#e0f2f1','#004d40']
+];
+
+const grammar = [
+  ['因为...所以...','لأن... لذا...','因为下雨，所以我没出门。','yīnwèi xiàyǔ, suǒyǐ wǒ méi chūmén'],
+  ['既...又...','في نفس الوقت كذا وكذا','他们既紧张又兴奋。','tāmen jì jǐnzhāng yòu xīngfèn'],
+  ['既然...就...','طالما... فـ...','既然喜欢，什么时候学都来得及。','jìrán xǐhuān, shénme shíhòu xué dōu láidejí'],
+  ['只要...就...','طالما... سيـ...','只要你肯努力就能成功。','zhǐyào nǐ kěn nǔlì jiù néng chénggōng'],
+  ['比 (المقارنة)','A + 比 + B + صفة','比我在超市买的好吃多了。','bǐ wǒ zài chāoshì mǎi de hǎochī duōle'],
+  ['把 (تقديم المفعول)','الفاعل + 把 + المفعول + الفعل','把重要的材料按顺序排列。','bǎ zhòngyào de cáiliào àn shùnxù páiliè'],
+  ['被 (المبني للمجهول)','تعرّض لـ...','陈希被送到了医院。','chén xī bèi sòng dào le yīyuàn'],
+  ['由于 (بسبب)','أكثر رسمية من 因为','陈希由于发烧去医院。','chén xī yóuyú fāshāo qù yīyuàn'],
+  ['按照 (وفقاً)','按照 + قاعدة','按照最新的规定','ànzhào zuìxīn de guīdìng'],
+  ['使 (يجعل)','A + 使 + B + صفة','互联网使我们的生活更方便了。','hùliánwǎng shǐ wǒmen de shēnghuó gèng fāngbiàn le'],
+  ['让 (يطلب من)','A + 让 + B + فعل','大夫让护士给父亲打了一针。','dàifu ràng hùshi gěi fùqīn dǎ le yī zhēn'],
+  ['尽管 (رغم أن)','尽管 + جملة، 但 + جملة أخرى','尽管调查能帮助我们，但结果不一定准确。','jǐnguǎn diàochá néng bāngzhù wǒmen, dàn jiéguǒ bùyīdìng zhǔnquè'],
+  ['不仅...而且... (ليس فقط... بل أيضاً)','للجمع بين فائدتين','有计划地做事不仅效率高，而且效果好。','yǒu jìhuà de zuòshì bùjǐn xiàolǜ gāo, érqiě xiàoguǒ hǎo'],
+  ['挺...的 (نوعاً ما)','تعبير محبب عن الدرجة','咖啡的味道挺苦的。','kāfēi de wèidào tǐng kǔ de'],
+  ['百分之 + رقم (نسبة مئوية)','百分之五十 = 50%','只有百分之五十的博士能按时毕业。','zhǐyǒu bǎifēnzhī wǔshí de bóshì néng ànshí bìyè'],
+  ['只有...才...','الحصرية: لا يحدث X إلا بـ Y','只有努力才能成功。','zhǐyǒu nǔlì cáinéng chénggōng'],
+  ['越...越... (كلما...كلما...)','للتدرج المتلازم','越早越好。','yuè zǎo yuè hǎo'],
+  ['为了 (من أجل)','هدف الفعل','为了这场演出，演员们认真准备了好几个月。','wèile zhè chǎng yǎnchū, yǎnyuánmen rènzhēn zhǔnbèi le hǎo jǐ gè yuè'],
+  ['距离 + شيء + باقي','للإشارة إلى الوقت/المسافة المتبقية','距离正式开始还有十分钟。','jùlí zhèngshì kāishǐ hái yǒu shí fēnzhōng']
+];
+
+function buildListening(){
+  const c = document.getElementById('listeningQuestions');
+  let lastPart = '';
+  for (const num in listeningData){
+    const q = listeningData[num];
+    const part = num <= 10 ? '🎯 الجزء 1: صحيح/خطأ' : (num <= 25 ? '🎯 الجزء 2: حوار قصير' : '🎯 الجزء 3: حوار طويل');
+    if (part !== lastPart){
+      const h = document.createElement('h2');
+      h.style.cssText = 'color:var(--primary);margin:20px 0 10px;padding:10px;background:#fff;border-radius:8px;border-right:5px solid var(--accent)';
+      h.textContent = part;
+      c.appendChild(h); lastPart = part;
+    }
+    const div = document.createElement('div');
+    div.className = 'question';
+    let html = '<div class="qheader"><span class="qnum">السؤال ' + num + '</span><span class="answer">الإجابة: ' + q.ans + '</span></div>';
+    const audioUrl = getAudioUrl(num);
+    if (audioUrl){
+      html += '<div style="background:#e8f5e9;padding:10px;border-radius:8px;margin-bottom:10px"><strong>🔊 الصوت الأصلي للاختبار:</strong><br><audio controls preload="auto" style="width:100%;margin-top:5px" src="' + audioUrl + '" data-q="' + num + '"></audio></div>';
+    }
+    if (q.type === 'TF'){
+      html += '<div class="chinese">' + markupChinese(q.audio) + '</div>';
+      html += '<div class="chinese" style="background:#fff3e0;border-right-color:#ff6f00;direction:rtl"><strong>★ السؤال:</strong> <span style="direction:ltr;display:inline-block;unicode-bidi:isolate">' + markupChinese(q.star) + '</span></div>';
+    } else {
+      html += '<div class="chinese">' + markupChinese(q.audio).replace(/\n/g,'<br>') + '</div>';
+      if (q.options){
+        html += '<div class="options">';
+        ['A','B','C','D'].forEach((letter, i) => {
+          const isCorrect = q.ans === letter;
+          html += '<div class="option ' + (isCorrect?'correct':'') + '"><span style="font-weight:bold;color:var(--primary)">' + letter + '.</span> ' + markupChinese(q.options[i]) + '</div>';
+        });
+        html += '</div>';
+      }
+    }
+    html += '<div class="explanation"><h4>💡 الشرح:</h4>' + q.explain + '</div>';
+    if (q.keywords){
+      html += '<div class="explanation" style="background:#fce4ec;border-right-color:#c2185b"><h4>🔑 الكلمات:</h4>';
+      q.keywords.forEach(kw => { html += '<div>• <span class="clickable" onclick="speak(\'' + kw[0] + '\', this)">' + kw[0] + '</span> <em>(' + kw[2] + ')</em> = ' + kw[1] + '</div>'; });
+      html += '</div>';
+    }
+    html += '<div style="margin-top:10px"><button class="recbtn" onclick="recordAndCompare(this)">🎤 سجّل صوتك</button><div class="rec-result"></div></div>';
+    div.innerHTML = html;
+    c.appendChild(div);
+  }
+}
+
+function buildReading(){
+  const c = document.getElementById('readingQuestions');
+  let h = '<h2 style="color:var(--primary);margin:20px 0 10px;padding:10px;background:#fff;border-radius:8px;border-right:5px solid var(--accent)">📚 الجزء 1: ملء الفراغ (46-55)</h2>';
+  for (const n in readingFillData){ h += '<div class="question"><div class="qheader"><span class="qnum">سؤال ' + n + '</span><span class="answer">' + readingFillData[n].ans + '</span></div></div>'; }
+  h += '<h2 style="color:var(--primary);margin:20px 0 10px;padding:10px;background:#fff;border-radius:8px;border-right:5px solid var(--accent)">🔄 الجزء 2: ترتيب الجمل (56-65)</h2>';
+  for (const n in readingOrderData){ h += '<div class="question"><div class="qheader"><span class="qnum">سؤال ' + n + '</span><span class="answer">' + readingOrderData[n].ans + '</span></div></div>'; }
+  h += '<h2 style="color:var(--primary);margin:20px 0 10px;padding:10px;background:#fff;border-radius:8px;border-right:5px solid var(--accent)">📖 الجزء 3: نصوص + أسئلة (66-85)</h2>';
+  for (const n in readingData){
+    const q = readingData[n];
+    h += '<div class="question"><div class="qheader"><span class="qnum">سؤال ' + n + '</span><span class="answer">' + q.ans + '</span></div>';
+    h += '<div class="chinese">' + markupChinese(q.text) + '</div>';
+    h += '<div class="chinese" style="background:#fff3e0;border-right-color:#ff6f00;direction:rtl"><strong>السؤال:</strong> <span style="direction:ltr;display:inline-block;unicode-bidi:isolate">' + markupChinese(q.q) + '</span></div>';
+    h += '<div class="explanation"><h4>💡 الشرح:</h4>' + q.explain + '</div>';
+    if (q.keywords){
+      h += '<div class="explanation" style="background:#fce4ec;border-right-color:#c2185b"><h4>🔑 الكلمات:</h4>';
+      q.keywords.forEach(kw => { h += '<div style="margin:4px 0">• <span class="clickable" onclick="speak(\'' + kw[0] + '\', this)">' + kw[0] + '</span> <em style="color:#666;font-style:italic">(' + kw[2] + ')</em> = ' + kw[1] + '</div>'; });
+      h += '</div>';
+    }
+    h += '</div>';
+  }
+  c.innerHTML = h;
+}
+
+function buildWriting(){
+  const c = document.getElementById('writingQuestions');
+  let h = '<h2 style="color:var(--primary);margin:20px 0 10px;padding:10px;background:#fff;border-radius:8px;border-right:5px solid var(--accent)">📝 ترتيب الكلمات (86-95)</h2>';
+  for (const n in writingData){
+    const q = writingData[n];
+    h += '<div class="question"><div class="qheader"><span class="qnum">سؤال ' + n + '</span><span class="answer">جملة صحيحة</span></div>';
+    h += '<div class="chinese">' + markupChinese(q.s) + '<span class="pinyin">' + q.py + '</span></div>';
+    h += '<div class="explanation"><h4>🌐 الترجمة:</h4>' + q.tr + '</div>';
+    h += '<div class="explanation" style="background:#fff8e1;border-right-color:#f57f17"><h4>📐 القاعدة:</h4>' + q.gr + '</div>';
+    h += '<div class="explanation" style="background:#fce4ec;border-right-color:#c2185b"><h4>🔑 الكلمات:</h4>';
+    q.kw.forEach(kw => { h += '<div>• <span class="clickable" onclick="speak(\'' + kw[0] + '\', this)">' + kw[0] + '</span> <em>(' + kw[2] + ')</em> = ' + kw[1] + '</div>'; });
+    h += '</div><div style="margin-top:10px"><button class="recbtn" onclick="recordAndCompare(this)">🎤 سجّل</button><div class="rec-result"></div></div></div>';
+  }
+  c.innerHTML = h;
+}
+
+// رسومات SVG للبطاقات - كل كلمة لها صورة معبّرة
+const fcSvgs = {
+  '打针':'<svg viewBox="0 0 200 140"><rect x="80" y="40" width="40" height="60" fill="#f8fafc" stroke="#475569" stroke-width="2"/><line x1="100" y1="100" x2="100" y2="120" stroke="#475569" stroke-width="3"/><line x1="100" y1="120" x2="95" y2="125" stroke="#475569" stroke-width="2"/><line x1="100" y1="120" x2="105" y2="125" stroke="#475569" stroke-width="2"/><rect x="85" y="35" width="30" height="8" fill="#dc2626"/><rect x="85" y="50" width="30" height="20" fill="#fee2e2"/><circle cx="60" cy="80" r="3" fill="#dc2626"/><circle cx="55" cy="90" r="2" fill="#dc2626"/></svg>',
+
+  '演出':'<svg viewBox="0 0 200 140"><rect x="20" y="20" width="160" height="100" fill="#fef3c7"/><polygon points="20,20 100,5 180,20" fill="#7c2d12"/><rect x="60" y="50" width="80" height="60" fill="#dc2626"/><circle cx="80" cy="80" r="8" fill="#fef3c7"/><circle cx="120" cy="80" r="8" fill="#fef3c7"/><text x="100" y="125" font-size="14" text-anchor="middle" fill="#7c2d12">🎭</text></svg>',
+
+  '行李箱':'<svg viewBox="0 0 200 140"><rect x="50" y="50" width="100" height="80" fill="#1e40af" stroke="#1e3a8a" stroke-width="2" rx="5"/><rect x="80" y="35" width="40" height="20" fill="none" stroke="#1e3a8a" stroke-width="3" rx="3"/><line x1="100" y1="50" x2="100" y2="130" stroke="#fbbf24" stroke-width="2"/><line x1="65" y1="90" x2="135" y2="90" stroke="#fbbf24" stroke-width="2"/><circle cx="80" cy="80" r="3" fill="#fbbf24"/><circle cx="120" cy="80" r="3" fill="#fbbf24"/></svg>',
+
+  '葡萄':'<svg viewBox="0 0 200 140"><circle cx="80" cy="60" r="12" fill="#7c3aed"/><circle cx="100" cy="60" r="12" fill="#7c3aed"/><circle cx="120" cy="60" r="12" fill="#7c3aed"/><circle cx="90" cy="80" r="12" fill="#7c3aed"/><circle cx="110" cy="80" r="12" fill="#7c3aed"/><circle cx="100" cy="100" r="12" fill="#7c3aed"/><path d="M100 30 Q 110 20 130 25" stroke="#16a34a" stroke-width="3" fill="none"/><ellipse cx="125" cy="20" rx="8" ry="4" fill="#16a34a" transform="rotate(-30 125 20)"/></svg>',
+
+  '沙发':'<svg viewBox="0 0 200 140"><rect x="20" y="60" width="160" height="60" fill="#a16207" rx="8"/><rect x="20" y="50" width="160" height="20" fill="#92400e"/><rect x="20" y="60" width="25" height="60" fill="#78350f" rx="5"/><rect x="155" y="60" width="25" height="60" fill="#78350f" rx="5"/><rect x="50" y="75" width="40" height="35" fill="#fbbf24" rx="5"/><rect x="110" y="75" width="40" height="35" fill="#fbbf24" rx="5"/></svg>',
+
+  '镜子':'<svg viewBox="0 0 200 140"><ellipse cx="100" cy="60" rx="40" ry="50" fill="#7dd3fc" stroke="#0c4a6e" stroke-width="4"/><ellipse cx="100" cy="60" rx="32" ry="42" fill="#bae6fd"/><line x1="80" y1="40" x2="90" y2="50" stroke="#fff" stroke-width="3"/><rect x="95" y="115" width="10" height="15" fill="#0c4a6e"/></svg>',
+
+  '护士':'<svg viewBox="0 0 200 140"><circle cx="100" cy="50" r="20" fill="#fbcfe8"/><polygon points="80,40 100,25 120,40" fill="#fff" stroke="#dc2626"/><line x1="98" y1="32" x2="102" y2="32" stroke="#dc2626" stroke-width="3"/><line x1="100" y1="30" x2="100" y2="34" stroke="#dc2626" stroke-width="3"/><rect x="75" y="70" width="50" height="55" fill="#fff"/><rect x="75" y="70" width="50" height="55" fill="none" stroke="#dc2626" stroke-width="2"/><line x1="100" y1="80" x2="100" y2="100" stroke="#dc2626" stroke-width="3"/><line x1="90" y1="90" x2="110" y2="90" stroke="#dc2626" stroke-width="3"/></svg>',
+
+  '包子':'<svg viewBox="0 0 200 140"><ellipse cx="100" cy="80" rx="55" ry="40" fill="#fef9c3"/><ellipse cx="100" cy="75" rx="55" ry="35" fill="#fef08a"/><circle cx="100" cy="55" r="6" fill="#a16207"/><path d="M70 80 Q 85 65 100 80" stroke="#a16207" stroke-width="2" fill="none"/><path d="M100 80 Q 115 65 130 80" stroke="#a16207" stroke-width="2" fill="none"/><path d="M55 85 Q 75 95 100 90" stroke="#a16207" stroke-width="2" fill="none"/><path d="M100 90 Q 125 95 145 85" stroke="#a16207" stroke-width="2" fill="none"/></svg>',
+
+  '购物车':'<svg viewBox="0 0 200 140"><rect x="50" y="40" width="90" height="50" fill="#9ca3af" stroke="#374151" stroke-width="2"/><line x1="55" y1="45" x2="55" y2="85" stroke="#374151" stroke-width="1"/><line x1="75" y1="45" x2="75" y2="85" stroke="#374151" stroke-width="1"/><line x1="95" y1="45" x2="95" y2="85" stroke="#374151" stroke-width="1"/><line x1="115" y1="45" x2="115" y2="85" stroke="#374151" stroke-width="1"/><line x1="135" y1="45" x2="135" y2="85" stroke="#374151" stroke-width="1"/><circle cx="65" cy="105" r="10" fill="#1f2937"/><circle cx="125" cy="105" r="10" fill="#1f2937"/><line x1="35" y1="35" x2="50" y2="40" stroke="#374151" stroke-width="3"/><polyline points="35,35 30,30 25,32" stroke="#374151" stroke-width="3" fill="none"/></svg>',
+
+  '飞机':'<svg viewBox="0 0 200 140"><polygon points="20,80 100,30 180,80 160,90 110,75 100,100 90,75 40,90" fill="#0284c7" stroke="#075985" stroke-width="2"/><circle cx="100" cy="65" r="4" fill="#fff"/><circle cx="115" cy="65" r="4" fill="#fff"/><circle cx="130" cy="65" r="4" fill="#fff"/><line x1="100" y1="100" x2="100" y2="115" stroke="#075985" stroke-width="2"/></svg>',
+
+  '翻译':'<svg viewBox="0 0 200 140"><text x="50" y="55" font-size="32" fill="#7c3aed" font-weight="bold">A</text><text x="55" y="105" font-size="28" fill="#dc2626" font-weight="bold">中</text><line x1="80" y1="65" x2="100" y2="85" stroke="#374151" stroke-width="2"/><polygon points="100,85 95,80 95,90" fill="#374151"/><circle cx="140" cy="60" r="20" fill="#fef3c7" stroke="#a16207" stroke-width="2"/><text x="135" y="68" font-size="16" fill="#a16207">🌐</text></svg>',
+
+  '减肥':'<svg viewBox="0 0 200 140"><circle cx="100" cy="35" r="15" fill="#fda4af"/><rect x="92" y="50" width="16" height="40" fill="#fda4af"/><rect x="80" y="55" width="40" height="25" fill="#fda4af" rx="5"/><line x1="60" y1="105" x2="140" y2="105" stroke="#374151" stroke-width="2"/><rect x="60" y="100" width="80" height="15" fill="#e5e7eb" stroke="#374151"/><text x="100" y="113" font-size="10" text-anchor="middle">⬇️ 60kg</text></svg>',
+
+  '调查':'<svg viewBox="0 0 200 140"><circle cx="80" cy="60" r="30" fill="none" stroke="#3730a3" stroke-width="5"/><circle cx="80" cy="60" r="22" fill="#e0e7ff"/><line x1="100" y1="80" x2="135" y2="115" stroke="#3730a3" stroke-width="6" stroke-linecap="round"/><line x1="70" y1="60" x2="90" y2="60" stroke="#3730a3" stroke-width="2"/><line x1="80" y1="50" x2="80" y2="70" stroke="#3730a3" stroke-width="2"/></svg>',
+
+  '窗户':'<svg viewBox="0 0 200 140"><rect x="50" y="20" width="100" height="100" fill="#bae6fd" stroke="#0c4a6e" stroke-width="4"/><line x1="100" y1="20" x2="100" y2="120" stroke="#0c4a6e" stroke-width="3"/><line x1="50" y1="70" x2="150" y2="70" stroke="#0c4a6e" stroke-width="3"/><circle cx="75" cy="45" r="3" fill="#fde047"/><line x1="68" y1="38" x2="62" y2="32" stroke="#fde047" stroke-width="2"/><line x1="82" y1="38" x2="88" y2="32" stroke="#fde047" stroke-width="2"/></svg>',
+
+  '奖学金':'<svg viewBox="0 0 200 140"><circle cx="100" cy="60" r="30" fill="#fde047" stroke="#a16207" stroke-width="3"/><polygon points="100,40 105,55 120,55 108,65 113,80 100,72 87,80 92,65 80,55 95,55" fill="#a16207"/><rect x="85" y="95" width="30" height="30" fill="#dc2626"/><polyline points="80,95 100,105 120,95" stroke="#a16207" stroke-width="2" fill="none"/><text x="100" y="135" font-size="10" text-anchor="middle" fill="#a16207">$</text></svg>',
+
+  '互联网':'<svg viewBox="0 0 200 140"><circle cx="100" cy="70" r="40" fill="none" stroke="#0891b2" stroke-width="3"/><ellipse cx="100" cy="70" rx="40" ry="15" fill="none" stroke="#0891b2" stroke-width="2"/><line x1="60" y1="70" x2="140" y2="70" stroke="#0891b2" stroke-width="2"/><line x1="100" y1="30" x2="100" y2="110" stroke="#0891b2" stroke-width="2"/><circle cx="100" cy="70" r="4" fill="#0891b2"/><circle cx="60" cy="70" r="3" fill="#0891b2"/><circle cx="140" cy="70" r="3" fill="#0891b2"/><circle cx="100" cy="30" r="3" fill="#0891b2"/><circle cx="100" cy="110" r="3" fill="#0891b2"/></svg>',
+
+  '博士':'<svg viewBox="0 0 200 140"><polygon points="50,55 100,30 150,55 100,80" fill="#1f2937"/><rect x="80" y="80" width="40" height="35" fill="#374151"/><circle cx="100" cy="100" r="8" fill="#fde047"/><line x1="150" y1="55" x2="160" y2="75" stroke="#1f2937" stroke-width="3"/><circle cx="160" cy="80" r="5" fill="#fbbf24"/><text x="100" y="130" font-size="10" text-anchor="middle" fill="#1f2937">PhD</text></svg>',
+
+  '感冒':'<svg viewBox="0 0 200 140"><circle cx="100" cy="65" r="35" fill="#a7f3d0"/><circle cx="85" cy="60" r="3" fill="#000"/><circle cx="115" cy="60" r="3" fill="#000"/><path d="M80 80 Q 100 75 120 80" stroke="#000" stroke-width="2" fill="none"/><line x1="100" y1="95" x2="98" y2="115" stroke="#3b82f6" stroke-width="3"/><line x1="100" y1="95" x2="102" y2="115" stroke="#3b82f6" stroke-width="3"/><text x="100" y="40" font-size="20" text-anchor="middle">🤧</text></svg>',
+
+  '排队':'<svg viewBox="0 0 200 140"><circle cx="40" cy="50" r="10" fill="#fb923c"/><rect x="32" y="60" width="16" height="35" fill="#fb923c"/><circle cx="75" cy="50" r="10" fill="#3b82f6"/><rect x="67" y="60" width="16" height="35" fill="#3b82f6"/><circle cx="110" cy="50" r="10" fill="#22c55e"/><rect x="102" y="60" width="16" height="35" fill="#22c55e"/><circle cx="145" cy="50" r="10" fill="#a855f7"/><rect x="137" y="60" width="16" height="35" fill="#a855f7"/><line x1="20" y1="105" x2="180" y2="105" stroke="#374151" stroke-width="2"/><text x="170" y="55" font-size="14">→</text></svg>',
+
+  '污染':'<svg viewBox="0 0 200 140"><rect x="40" y="60" width="30" height="60" fill="#525252"/><polygon points="40,60 55,30 70,60" fill="#737373"/><circle cx="90" cy="40" r="6" fill="#737373" opacity="0.7"/><circle cx="110" cy="30" r="5" fill="#737373" opacity="0.6"/><circle cx="130" cy="45" r="7" fill="#737373" opacity="0.7"/><circle cx="150" cy="35" r="5" fill="#737373" opacity="0.5"/><line x1="20" y1="120" x2="180" y2="120" stroke="#16a34a" stroke-width="3"/></svg>',
+
+  '功夫':'<svg viewBox="0 0 200 140"><circle cx="100" cy="35" r="14" fill="#fed7aa"/><rect x="92" y="48" width="16" height="35" fill="#fff"/><line x1="92" y1="55" x2="60" y2="60" stroke="#fff" stroke-width="6"/><line x1="108" y1="55" x2="140" y2="40" stroke="#fff" stroke-width="6"/><rect x="85" y="83" width="30" height="35" fill="#1f2937"/><line x1="92" y1="118" x2="80" y2="135" stroke="#1f2937" stroke-width="6"/><line x1="108" y1="118" x2="120" y2="135" stroke="#1f2937" stroke-width="6"/><circle cx="155" cy="40" r="3" fill="#dc2626"/><circle cx="55" cy="60" r="3" fill="#dc2626"/></svg>',
+
+  '地址':'<svg viewBox="0 0 200 140"><path d="M100 25 C 75 25 60 45 60 65 C 60 90 100 125 100 125 C 100 125 140 90 140 65 C 140 45 125 25 100 25 Z" fill="#dc2626"/><circle cx="100" cy="60" r="14" fill="#fff"/><rect x="93" y="55" width="14" height="14" fill="#dc2626"/></svg>',
+
+  '环境':'<svg viewBox="0 0 200 140"><circle cx="100" cy="70" r="45" fill="#22c55e"/><path d="M70 50 L 100 35 L 130 50 L 100 65 Z" fill="#15803d"/><path d="M70 80 L 100 65 L 130 80 L 100 95 Z" fill="#15803d"/><circle cx="60" cy="40" r="5" fill="#fbbf24"/><circle cx="65" cy="38" r="3" fill="#fff"/></svg>',
+
+  '愉快':'<svg viewBox="0 0 200 140"><circle cx="100" cy="65" r="40" fill="#fbbf24" stroke="#a16207" stroke-width="3"/><circle cx="85" cy="55" r="4" fill="#1f2937"/><circle cx="115" cy="55" r="4" fill="#1f2937"/><path d="M75 75 Q 100 100 125 75" stroke="#1f2937" stroke-width="4" fill="none"/><circle cx="65" cy="50" r="3" fill="#fb923c"/><circle cx="135" cy="50" r="3" fill="#fb923c"/></svg>',
+
+  '压力':'<svg viewBox="0 0 200 140"><polygon points="50,50 150,50 145,70 55,70" fill="#7f1d1d"/><polygon points="40,70 160,70 155,90 45,90" fill="#991b1b"/><rect x="60" y="90" width="80" height="40" fill="#dc2626"/><polygon points="80,40 100,20 120,40" fill="#1f2937"/><line x1="100" y1="40" x2="100" y2="20" stroke="#fff" stroke-width="2"/></svg>',
+
+  '幽默':'<svg viewBox="0 0 200 140"><circle cx="100" cy="70" r="40" fill="#c084fc" stroke="#6b21a8" stroke-width="3"/><circle cx="85" cy="60" r="3" fill="#000"/><circle cx="115" cy="60" r="3" fill="#000"/><path d="M70 80 Q 100 110 130 80" stroke="#000" stroke-width="4" fill="#fff"/><line x1="75" y1="50" x2="80" y2="55" stroke="#000" stroke-width="2"/><line x1="125" y1="50" x2="120" y2="55" stroke="#000" stroke-width="2"/><text x="155" y="45" font-size="20">😄</text></svg>',
+
+  '紧张':'<svg viewBox="0 0 200 140"><circle cx="100" cy="60" r="35" fill="#fef3c7" stroke="#a16207" stroke-width="2"/><line x1="80" y1="50" x2="90" y2="55" stroke="#000" stroke-width="3"/><line x1="120" y1="50" x2="110" y2="55" stroke="#000" stroke-width="3"/><circle cx="85" cy="55" r="3" fill="#000"/><circle cx="115" cy="55" r="3" fill="#000"/><ellipse cx="100" cy="80" rx="8" ry="4" fill="#000"/><line x1="60" y1="90" x2="50" y2="95" stroke="#3b82f6" stroke-width="2"/><line x1="140" y1="90" x2="150" y2="95" stroke="#3b82f6" stroke-width="2"/></svg>',
+
+  '免费':'<svg viewBox="0 0 200 140"><rect x="40" y="40" width="120" height="60" fill="#fef3c7" stroke="#a16207" stroke-width="3" rx="8"/><text x="100" y="80" font-size="36" text-anchor="middle" fill="#dc2626" font-weight="bold">FREE</text><line x1="60" y1="120" x2="140" y2="120" stroke="#16a34a" stroke-width="3"/><polygon points="55,115 65,120 55,125" fill="#16a34a"/><polygon points="145,115 135,120 145,125" fill="#16a34a"/></svg>',
+
+  '乒乓球':'<svg viewBox="0 0 200 140"><circle cx="100" cy="65" r="20" fill="#fff" stroke="#dc2626" stroke-width="3"/><line x1="80" y1="65" x2="120" y2="65" stroke="#dc2626" stroke-width="2" stroke-dasharray="3"/><rect x="40" y="105" width="120" height="6" fill="#16a34a"/><rect x="95" y="100" width="10" height="20" fill="#16a34a"/><line x1="40" y1="80" x2="160" y2="80" stroke="#1f2937" stroke-width="2"/></svg>',
+
+  '足球':'<svg viewBox="0 0 200 140"><circle cx="100" cy="70" r="35" fill="#fff" stroke="#000" stroke-width="3"/><polygon points="100,50 110,60 105,75 95,75 90,60" fill="#000"/><polygon points="80,55 75,70 80,80 70,75 75,60" fill="#000"/><polygon points="120,55 125,70 120,80 130,75 125,60" fill="#000"/><rect x="20" y="105" width="160" height="3" fill="#16a34a"/></svg>',
+
+  '公共汽车':'<svg viewBox="0 0 200 140"><rect x="20" y="50" width="160" height="55" fill="#1d4ed8" rx="8"/><rect x="35" y="60" width="25" height="20" fill="#bae6fd"/><rect x="65" y="60" width="25" height="20" fill="#bae6fd"/><rect x="95" y="60" width="25" height="20" fill="#bae6fd"/><rect x="125" y="60" width="25" height="20" fill="#bae6fd"/><circle cx="50" cy="115" r="10" fill="#1f2937"/><circle cx="150" cy="115" r="10" fill="#1f2937"/><rect x="155" y="55" width="20" height="40" fill="#dc2626"/></svg>',
+
+  '搬家':'<svg viewBox="0 0 200 140"><rect x="20" y="80" width="100" height="40" fill="#a16207"/><rect x="120" y="60" width="60" height="60" fill="#451a03"/><polygon points="120,60 150,30 180,60" fill="#7c2d12"/><rect x="155" y="80" width="15" height="40" fill="#fbbf24"/><circle cx="40" cy="125" r="5" fill="#1f2937"/><circle cx="100" cy="125" r="5" fill="#1f2937"/><rect x="50" y="60" width="20" height="20" fill="#fbbf24"/><polygon points="80,75 90,85 100,75" fill="#dc2626"/></svg>',
+
+  '邀请':'<svg viewBox="0 0 200 140"><rect x="50" y="35" width="100" height="70" fill="#fef9c3" stroke="#a16207" stroke-width="2"/><polygon points="50,35 100,75 150,35" fill="#fef3c7" stroke="#a16207" stroke-width="2"/><text x="100" y="95" font-size="14" text-anchor="middle" fill="#dc2626" font-weight="bold">您 好</text><text x="100" y="125" font-size="22" text-anchor="middle">💌</text></svg>',
+
+  '文章':'<svg viewBox="0 0 200 140"><rect x="50" y="25" width="100" height="100" fill="#fff" stroke="#1f2937" stroke-width="2"/><line x1="60" y1="40" x2="140" y2="40" stroke="#1f2937" stroke-width="2"/><line x1="60" y1="55" x2="140" y2="55" stroke="#9ca3af"/><line x1="60" y1="65" x2="140" y2="65" stroke="#9ca3af"/><line x1="60" y1="75" x2="140" y2="75" stroke="#9ca3af"/><line x1="60" y1="85" x2="120" y2="85" stroke="#9ca3af"/><line x1="60" y1="95" x2="140" y2="95" stroke="#9ca3af"/><line x1="60" y1="105" x2="125" y2="105" stroke="#9ca3af"/></svg>',
+
+  '咖啡':'<svg viewBox="0 0 200 140"><rect x="60" y="50" width="80" height="65" fill="#92400e" rx="3"/><rect x="60" y="50" width="80" height="15" fill="#fef3c7"/><circle cx="100" cy="55" r="3" fill="#a16207"/><circle cx="90" cy="58" r="2" fill="#a16207"/><circle cx="110" cy="58" r="2" fill="#a16207"/><path d="M140 65 Q 160 75 140 95" stroke="#92400e" stroke-width="4" fill="none"/><line x1="80" y1="35" x2="80" y2="45" stroke="#9ca3af" stroke-width="2"/><line x1="100" y1="30" x2="100" y2="45" stroke="#9ca3af" stroke-width="2"/><line x1="120" y1="35" x2="120" y2="45" stroke="#9ca3af" stroke-width="2"/></svg>',
+
+  '杂志':'<svg viewBox="0 0 200 140"><rect x="40" y="25" width="60" height="95" fill="#dc2626"/><rect x="100" y="25" width="60" height="95" fill="#fff" stroke="#1f2937" stroke-width="1"/><line x1="100" y1="25" x2="100" y2="120" stroke="#1f2937" stroke-width="2"/><text x="70" y="55" font-size="10" text-anchor="middle" fill="#fff" font-weight="bold">VOGUE</text><rect x="50" y="65" width="40" height="35" fill="#fbbf24"/><line x1="110" y1="35" x2="150" y2="35" stroke="#1f2937"/><line x1="110" y1="45" x2="150" y2="45" stroke="#9ca3af"/><line x1="110" y1="55" x2="150" y2="55" stroke="#9ca3af"/></svg>',
+
+  '爷爷':'<svg viewBox="0 0 200 140"><circle cx="100" cy="50" r="22" fill="#fde68a"/><rect x="78" y="38" width="44" height="8" fill="#9ca3af"/><circle cx="92" cy="48" r="3" fill="#1f2937"/><circle cx="108" cy="48" r="3" fill="#1f2937"/><path d="M88 60 Q 100 65 112 60" stroke="#1f2937" stroke-width="2" fill="none"/><path d="M75 55 Q 80 80 75 95" stroke="#fff" stroke-width="3" fill="none"/><path d="M125 55 Q 120 80 125 95" stroke="#fff" stroke-width="3" fill="none"/><rect x="78" y="72" width="44" height="40" fill="#7c2d12"/></svg>',
+
+  '孙子':'<svg viewBox="0 0 200 140"><circle cx="100" cy="55" r="18" fill="#fcd34d"/><circle cx="92" cy="52" r="2" fill="#1f2937"/><circle cx="108" cy="52" r="2" fill="#1f2937"/><path d="M93 62 Q 100 67 107 62" stroke="#1f2937" stroke-width="2" fill="none"/><rect x="85" y="73" width="30" height="40" fill="#3b82f6"/><line x1="85" y1="83" x2="115" y2="83" stroke="#fff" stroke-width="1"/><text x="100" y="98" font-size="12" text-anchor="middle" fill="#fff">★</text></svg>',
+
+  '打印':'<svg viewBox="0 0 200 140"><rect x="40" y="50" width="120" height="50" fill="#9ca3af" rx="5"/><rect x="55" y="35" width="90" height="20" fill="#fff" stroke="#9ca3af"/><rect x="55" y="100" width="90" height="25" fill="#fff" stroke="#9ca3af"/><line x1="60" y1="110" x2="140" y2="110" stroke="#1f2937"/><line x1="60" y1="118" x2="120" y2="118" stroke="#9ca3af"/><circle cx="50" cy="60" r="3" fill="#22c55e"/><circle cx="50" cy="70" r="3" fill="#dc2626"/></svg>',
+
+  '毕业':'<svg viewBox="0 0 200 140"><polygon points="50,55 100,35 150,55 100,75" fill="#1f2937"/><rect x="85" y="75" width="30" height="35" fill="#374151"/><line x1="150" y1="55" x2="160" y2="80" stroke="#1f2937" stroke-width="3"/><circle cx="160" cy="85" r="6" fill="#fde047"/><rect x="80" y="115" width="40" height="6" fill="#fbbf24"/><text x="100" y="135" font-size="11" text-anchor="middle" fill="#16a34a" font-weight="bold">2025</text></svg>',
+
+  '报名':'<svg viewBox="0 0 200 140"><rect x="50" y="25" width="100" height="100" fill="#fff" stroke="#1f2937" stroke-width="2"/><text x="100" y="45" font-size="14" text-anchor="middle" fill="#dc2626" font-weight="bold">报名表</text><line x1="60" y1="60" x2="140" y2="60" stroke="#9ca3af"/><line x1="60" y1="75" x2="140" y2="75" stroke="#9ca3af"/><line x1="60" y1="90" x2="140" y2="90" stroke="#9ca3af"/><line x1="60" y1="105" x2="140" y2="105" stroke="#9ca3af"/><polygon points="120,108 132,108 132,118 122,118 118,122 118,118" fill="#dc2626"/><text x="125" y="115" font-size="9" fill="#fff">✓</text></svg>',
+
+  '规定':'<svg viewBox="0 0 200 140"><rect x="50" y="25" width="100" height="100" fill="#fef3c7" stroke="#a16207" stroke-width="2"/><text x="100" y="45" font-size="12" text-anchor="middle" fill="#a16207" font-weight="bold">📜 法律</text><line x1="60" y1="60" x2="140" y2="60" stroke="#a16207"/><line x1="60" y1="73" x2="140" y2="73" stroke="#a16207"/><line x1="60" y1="86" x2="140" y2="86" stroke="#a16207"/><line x1="60" y1="99" x2="140" y2="99" stroke="#a16207"/><line x1="60" y1="112" x2="120" y2="112" stroke="#a16207"/></svg>',
+
+  '解释':'<svg viewBox="0 0 200 140"><circle cx="80" cy="60" r="22" fill="#bae6fd"/><circle cx="80" cy="55" r="3" fill="#1f2937"/><circle cx="80" cy="65" r="3" fill="#1f2937"/><text x="76" y="68" font-size="20" fill="#1f2937">?</text><line x1="100" y1="70" x2="125" y2="80" stroke="#1f2937" stroke-width="2"/><polygon points="125,80 120,75 120,85" fill="#1f2937"/><circle cx="140" cy="85" r="22" fill="#a7f3d0"/><text x="135" y="93" font-size="20" fill="#1f2937">!</text></svg>',
+
+  '服务区':'<svg viewBox="0 0 200 140"><rect x="40" y="40" width="120" height="60" fill="#3b82f6"/><text x="100" y="55" font-size="11" text-anchor="middle" fill="#fff" font-weight="bold">服务区</text><text x="100" y="75" font-size="20" text-anchor="middle">⛽ 🍴 🚻</text><polygon points="100,100 95,115 105,115" fill="#3b82f6"/><line x1="40" y1="120" x2="160" y2="120" stroke="#1f2937" stroke-width="3"/></svg>',
+
+  '马虎':'<svg viewBox="0 0 200 140"><circle cx="100" cy="60" r="35" fill="#fde68a"/><line x1="78" y1="50" x2="92" y2="58" stroke="#1f2937" stroke-width="3"/><line x1="108" y1="58" x2="122" y2="50" stroke="#1f2937" stroke-width="3"/><line x1="80" y1="80" x2="120" y2="85" stroke="#1f2937" stroke-width="3"/><text x="50" y="50" font-size="14" fill="#dc2626">✗</text><text x="140" y="50" font-size="14" fill="#dc2626">✗</text><text x="50" y="115" font-size="14" fill="#dc2626">✗</text><text x="140" y="115" font-size="14" fill="#dc2626">✗</text></svg>',
+
+  '仔细':'<svg viewBox="0 0 200 140"><circle cx="80" cy="60" r="20" fill="none" stroke="#1f2937" stroke-width="3"/><line x1="95" y1="75" x2="115" y2="95" stroke="#1f2937" stroke-width="4"/><circle cx="80" cy="60" r="6" fill="#16a34a"/><text x="135" y="50" font-size="14" fill="#16a34a">✓</text><text x="135" y="70" font-size="14" fill="#16a34a">✓</text><text x="135" y="90" font-size="14" fill="#16a34a">✓</text></svg>',
+
+  '错误':'<svg viewBox="0 0 200 140"><rect x="50" y="30" width="100" height="80" fill="#fff" stroke="#1f2937"/><line x1="60" y1="45" x2="140" y2="45" stroke="#9ca3af"/><line x1="60" y1="60" x2="140" y2="60" stroke="#9ca3af"/><circle cx="100" cy="60" r="15" fill="none" stroke="#dc2626" stroke-width="4"/><line x1="90" y1="50" x2="110" y2="70" stroke="#dc2626" stroke-width="4"/><line x1="110" y1="50" x2="90" y2="70" stroke="#dc2626" stroke-width="4"/><line x1="60" y1="85" x2="140" y2="85" stroke="#9ca3af"/><line x1="60" y1="100" x2="120" y2="100" stroke="#9ca3af"/></svg>',
+
+  '酸':'<svg viewBox="0 0 200 140"><ellipse cx="100" cy="70" rx="35" ry="40" fill="#fde047"/><line x1="100" y1="30" x2="100" y2="50" stroke="#16a34a" stroke-width="3"/><circle cx="85" cy="65" r="3" fill="#1f2937"/><circle cx="115" cy="65" r="3" fill="#1f2937"/><path d="M85 90 Q 100 80 115 90" stroke="#1f2937" stroke-width="3" fill="none"/><text x="100" y="125" font-size="11" text-anchor="middle">🍋 LEMON</text></svg>',
+
+  '甜':'<svg viewBox="0 0 200 140"><rect x="50" y="60" width="100" height="50" fill="#fbcfe8" rx="5"/><rect x="50" y="55" width="100" height="15" fill="#f9a8d4"/><circle cx="80" cy="80" r="5" fill="#dc2626"/><circle cx="100" cy="80" r="5" fill="#dc2626"/><circle cx="120" cy="80" r="5" fill="#dc2626"/><polygon points="100,40 105,55 95,55" fill="#fde047"/><text x="100" y="125" font-size="11" text-anchor="middle">🎂 cake</text></svg>',
+
+  '苦':'<svg viewBox="0 0 200 140"><circle cx="100" cy="70" r="35" fill="#5b21b6"/><circle cx="85" cy="60" r="3" fill="#fff"/><circle cx="115" cy="60" r="3" fill="#fff"/><path d="M85 85 Q 100 75 115 85" stroke="#fff" stroke-width="3" fill="none"/><text x="100" y="125" font-size="11" text-anchor="middle">🍵 苦茶</text></svg>',
+
+  '礼拜天':'<svg viewBox="0 0 200 140"><rect x="40" y="30" width="120" height="80" fill="#fff" stroke="#1f2937" stroke-width="2"/><rect x="40" y="30" width="120" height="20" fill="#dc2626"/><text x="100" y="45" font-size="11" text-anchor="middle" fill="#fff" font-weight="bold">星期日</text><text x="100" y="80" font-size="32" text-anchor="middle" fill="#dc2626" font-weight="bold">日</text><circle cx="100" cy="100" r="3" fill="#dc2626"/></svg>',
+
+  '周日':'<svg viewBox="0 0 200 140"><rect x="40" y="30" width="120" height="80" fill="#fff" stroke="#1f2937" stroke-width="2"/><rect x="40" y="30" width="120" height="20" fill="#dc2626"/><text x="100" y="45" font-size="11" text-anchor="middle" fill="#fff">周日 SUN</text><text x="100" y="85" font-size="36" text-anchor="middle" fill="#dc2626" font-weight="bold">7</text></svg>',
+
+  '吸引':'<svg viewBox="0 0 200 140"><polygon points="100,40 110,55 130,55 115,68 120,85 100,75 80,85 85,68 70,55 90,55" fill="#fde047" stroke="#a16207" stroke-width="2"/><line x1="50" y1="70" x2="80" y2="65" stroke="#dc2626" stroke-width="2"/><polygon points="80,65 75,60 75,70" fill="#dc2626"/><line x1="150" y1="70" x2="120" y2="65" stroke="#dc2626" stroke-width="2"/><polygon points="120,65 125,60 125,70" fill="#dc2626"/><line x1="100" y1="100" x2="100" y2="120" stroke="#dc2626" stroke-width="2"/><polygon points="100,120 95,115 105,115" fill="#dc2626"/></svg>',
+
+  '应聘':'<svg viewBox="0 0 200 140"><rect x="60" y="30" width="80" height="100" fill="#fff" stroke="#1f2937" stroke-width="2"/><circle cx="100" cy="55" r="12" fill="#fde68a"/><line x1="70" y1="80" x2="130" y2="80" stroke="#9ca3af"/><line x1="70" y1="92" x2="130" y2="92" stroke="#9ca3af"/><line x1="70" y1="104" x2="130" y2="104" stroke="#9ca3af"/><line x1="70" y1="116" x2="120" y2="116" stroke="#9ca3af"/><text x="100" y="40" font-size="9" text-anchor="middle" fill="#dc2626">CV</text></svg>',
+
+  '提供':'<svg viewBox="0 0 200 140"><rect x="50" y="60" width="40" height="60" fill="#3b82f6"/><circle cx="70" cy="50" r="14" fill="#fde68a"/><line x1="90" y1="80" x2="115" y2="80" stroke="#1f2937" stroke-width="3"/><polygon points="115,80 110,75 110,85" fill="#1f2937"/><rect x="120" y="55" width="50" height="40" fill="#fbbf24"/><polygon points="120,55 145,40 170,55" fill="#dc2626"/><text x="145" y="80" font-size="14" text-anchor="middle" fill="#1f2937">✋</text></svg>',
+
+  '机会':'<svg viewBox="0 0 200 140"><circle cx="100" cy="65" r="40" fill="#fbbf24" stroke="#a16207" stroke-width="3"/><polygon points="100,40 110,55 130,55 115,68 120,85 100,75 80,85 85,68 70,55 90,55" fill="#a16207"/><circle cx="60" cy="100" r="5" fill="#dc2626"/><circle cx="140" cy="100" r="5" fill="#16a34a"/></svg>',
+
+  '高速公路':'<svg viewBox="0 0 200 140"><polygon points="20,120 180,120 130,40 70,40" fill="#374151"/><line x1="55" y1="60" x2="65" y2="60" stroke="#fbbf24" stroke-width="3"/><line x1="55" y1="80" x2="65" y2="80" stroke="#fbbf24" stroke-width="3"/><line x1="55" y1="100" x2="65" y2="100" stroke="#fbbf24" stroke-width="3"/><line x1="135" y1="60" x2="145" y2="60" stroke="#fbbf24" stroke-width="3"/><line x1="135" y1="80" x2="145" y2="80" stroke="#fbbf24" stroke-width="3"/><line x1="135" y1="100" x2="145" y2="100" stroke="#fbbf24" stroke-width="3"/><line x1="98" y1="60" x2="102" y2="60" stroke="#fff" stroke-width="3"/><line x1="98" y1="80" x2="102" y2="80" stroke="#fff" stroke-width="3"/><line x1="98" y1="100" x2="102" y2="100" stroke="#fff" stroke-width="3"/></svg>'
+};
+
+function buildFlashcards(){
+  const grid = document.getElementById('fcGrid');
+  let h = '';
+  flashcards.forEach(fc => {
+    const svg = fcSvgs[fc[0]];
+    h += '<div class="fc" style="border-color:' + fc[3] + '" onclick="speak(\'' + fc[0] + '\', this)">';
+    if (svg){
+      h += '<div style="background:' + fc[3] + ';border-radius:8px;padding:8px;margin:auto;width:140px;height:90px;display:flex;align-items:center;justify-content:center">' + svg.replace('<svg', '<svg style="width:100%;height:100%"') + '</div>';
+    } else {
+      h += '<div style="width:60px;height:60px;margin:auto;background:' + fc[3] + ';border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8em;color:' + fc[4] + '">📌</div>';
+    }
+    h += '<div class="fc-zh" style="color:' + fc[4] + '">' + fc[0] + '</div>';
+    h += '<div class="fc-py">' + fc[1] + '</div>';
+    h += '<div>' + fc[2] + '</div></div>';
+  });
+  grid.innerHTML = h;
+}
+
+function buildGrammar(){
+  const c = document.getElementById('grammarList');
+  let h = '';
+  grammar.forEach((g, i) => {
+    h += '<div class="question"><h3 style="color:var(--primary)">' + (i+1) + '. ' + g[0] + '</h3>';
+    h += '<p>' + g[1] + '</p>';
+    h += '<div class="chinese">' + markupChinese(g[2]) + '<span class="pinyin">' + g[3] + '</span></div></div>';
+  });
+  c.innerHTML = h;
+}
+
+document.querySelectorAll('.ttseng').forEach(b => {
+  if (b.dataset.eng === currentEngine) b.classList.add('active');
+  b.onclick = () => {
+    document.querySelectorAll('.ttseng').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    currentEngine = b.dataset.eng;
+    localStorage.setItem('mock9TtsEngine', currentEngine);
+  };
+});
+
+document.querySelectorAll('#mainNav button').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('#mainNav button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.getElementById('tab-' + b.dataset.tab).classList.add('active');
+  };
+});
+
+document.getElementById('togglePinyin').onclick = () => { document.body.classList.toggle('hide-pinyin'); };
+
+// تحميل جميع ملفات الصوت مسبقاً لإلغاء التأخير
+document.getElementById('preloadAudio').onclick = async () => {
+  const btn = document.getElementById('preloadAudio');
+  const statusEl = document.getElementById('preloadStatus');
+  btn.disabled = true;
+  btn.textContent = '⏳ جاري التحميل...';
+
+  // استخراج الـ UUIDs الفريدة فقط (40 ملف بدلاً من 45)
+  const uniqueUuids = [...new Set(Object.values(audioUrls))];
+  let loaded = 0, failed = 0;
+
+  // تحميل بالتوازي بحد أقصى 8 ملفات في نفس الوقت
+  const batchSize = 8;
+  for (let i = 0; i < uniqueUuids.length; i += batchSize){
+    const batch = uniqueUuids.slice(i, i + batchSize);
+    await Promise.all(batch.map(uuid => {
+      return new Promise(resolve => {
+        const url = AUDIO_BASE + uuid + '.mp3';
+        const audio = new Audio();
+        audio.preload = 'auto';
+        audio.src = url;
+        audio.oncanplaythrough = () => { loaded++; resolve(); };
+        audio.onerror = () => { failed++; resolve(); };
+        // تأمين بـ timeout
+        setTimeout(() => resolve(), 8000);
+      });
+    }));
+    statusEl.textContent = `✓ ${loaded}/${uniqueUuids.length} ملف جاهز`;
+  }
+
+  btn.textContent = '✅ تم التحميل (' + loaded + ' ملف)';
+  btn.style.background = '#22c55e';
+  setTimeout(() => { btn.disabled = false; btn.textContent = '⚡ إعادة التحميل'; }, 2000);
+};
+
+let mediaStream = null, mediaRecorder = null, audioChunks = [];
+async function recordAndCompare(btn){
+  const resultDiv = btn.parentElement.querySelector('.rec-result');
+  if (btn.classList.contains('recording')){ mediaRecorder.stop(); btn.classList.remove('recording'); btn.textContent = '🎤 سجّل صوتك'; return; }
+  try {
+    if (!mediaStream) mediaStream = await navigator.mediaDevices.getUserMedia({audio:true});
+    audioChunks = [];
+    mediaRecorder = new MediaRecorder(mediaStream);
+    mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+    mediaRecorder.onstop = async () => {
+      const blob = new Blob(audioChunks, {type:'audio/webm'});
+      const url = URL.createObjectURL(blob);
+      resultDiv.innerHTML = '<audio controls src="' + url + '"></audio><br>✅ تم التسجيل!';
+      resultDiv.classList.add('show');
+    };
+    mediaRecorder.start();
+    btn.classList.add('recording');
+    btn.textContent = '⏹️ إيقاف';
+  } catch(e){
+    resultDiv.innerHTML = '❌ يحتاج HTTP';
+    resultDiv.classList.add('show');
+  }
+}
+
+buildListening();
+buildReading();
+buildWriting();
+buildFlashcards();
+buildGrammar();
+</script>
+</body>
+</html>
