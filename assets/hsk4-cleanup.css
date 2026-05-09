@@ -118,3 +118,67 @@ button[aria-label*="نهاري"],
 [class*="prompt-banner"]{
   display:none !important;
 }
+
+/* === إخفاء شريط التبويبات الزائد في Mock 6 === */
+/* الـ topbar الجديد يحتوي على نفس الروابط، فلا داعي للـ tabs السفلي */
+.tabs{
+  display:none !important;
+}
+
+/* عند إخفاء التبويبات نظهر كل المحتوى بترتيبه (الاستماع → القراءة → الكتابة → المرجع) */
+.tab-content{
+  display:block !important;
+  margin-bottom:30px !important;
+  padding-top:20px;
+  border-top:3px solid rgba(11,99,206,0.15);
+}
+.tab-content:first-of-type{
+  border-top:none;
+  padding-top:0;
+}
+
+/* عنوان كل قسم يصبح بارزاً */
+.tab-content > .section-title,
+#intro h2,
+#listening h2,
+#reading h2,
+#writing h2,
+#flashcards h2,
+#grammar h2{
+  background:linear-gradient(135deg,#0b63ce,#064aa3);
+  color:#fff;
+  padding:14px 20px;
+  border-radius:14px;
+  margin:20px 0 12px;
+  text-align:center;
+  font-size:1.3em;
+  box-shadow:0 6px 18px rgba(11,99,206,0.2);
+  position:sticky;
+  top:0;
+  z-index:30;
+}
+
+/* فاصل أنيق بين الأقسام */
+.tab-content::before{
+  content:'';
+  display:block;
+  height:2px;
+  background:linear-gradient(90deg,transparent,rgba(11,99,206,0.3),transparent);
+  margin:30px auto 20px;
+  max-width:300px;
+}
+.tab-content:first-of-type::before{
+  display:none;
+}
+
+/* topbar links - اجعل الكليك يعمل scroll بدلاً من showTab */
+.m6-mini-nav a,
+.mk9-mini-nav a,
+.hsk-nav a{
+  scroll-behavior:smooth;
+}
+
+/* "ابدأ هنا" - intro tab content يبقى مخفي للحفاظ على التركيز */
+#intro{
+  display:none !important;
+}
