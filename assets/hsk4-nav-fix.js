@@ -60,15 +60,32 @@
     return true;
   }
 
+
+  function forcePinyinPosition(){
+    const pinyin = document.getElementById('pinyinToggle') || document.getElementById('togglePinyin');
+    if (!pinyin) return;
+    pinyin.style.setProperty('right', 'auto', 'important');
+    pinyin.style.setProperty('left', '20px', 'important');
+    pinyin.style.setProperty('top', 'auto', 'important');
+    pinyin.style.setProperty('bottom', '78px', 'important');
+    pinyin.style.setProperty('inset', 'auto', 'important');
+    pinyin.style.setProperty('inset-inline-start', 'auto', 'important');
+    pinyin.style.setProperty('inset-inline-end', 'auto', 'important');
+    pinyin.style.setProperty('position', 'fixed', 'important');
+  }
+
   ready(function(){
     // Persistent nav-toggle injection
     injectNavToggle();
+    forcePinyinPosition();
+    setTimeout(forcePinyinPosition, 500);
+    setTimeout(forcePinyinPosition, 2000);
     let tries = 0;
     const retry = setInterval(function(){
       if (injectNavToggle() || ++tries > 20) clearInterval(retry);
     }, 300);
     try {
-      const obs = new MutationObserver(function(){ injectNavToggle(); });
+      const obs = new MutationObserver(function(){ injectNavToggle(); forcePinyinPosition(); });
       obs.observe(document.body, {childList: true, subtree: true});
     } catch(e){}
 
