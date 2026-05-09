@@ -1,6 +1,4 @@
-/* HSK4 Cleanup Layer - Clean UI with tabbed navigation
-   Each section displays as separate "page" via tabs.
-*/
+/* HSK4 Cleanup Layer - Clean UI with tabbed navigation */
 
 /* === HIDE redundant floating elements === */
 .dark-mode-btn,
@@ -20,221 +18,79 @@ button[aria-label*="نهاري"],
   display:none !important;
 }
 
-/* === Show only ONE tab-content at a time (tabbed navigation) === */
-.tab-content{
-  display:none;
-  margin-bottom:30px;
-  padding-top:20px;
-}
-.tab-content.active{
-  display:block !important;
-  animation:fadeInTab 0.3s ease;
-}
-@keyframes fadeInTab{
-  from{opacity:0;transform:translateY(8px)}
-  to{opacity:1;transform:none}
-}
-
-/* If no tab-content has .active, show first non-intro one (listening) */
+/* === Show only ONE tab-content at a time === */
+.tab-content{display:none;margin-bottom:30px;padding-top:20px}
+.tab-content.active{display:block !important;animation:fadeInTab 0.3s ease}
+@keyframes fadeInTab{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 body:not([data-active-tab]) #listening{display:block !important}
+#intro,.tab-content#intro{display:none !important}
+.hero,.welcome-card,.intro-section,.keyword-legend,.tab-content .welcome-card{display:none !important}
 
-/* "ابدأ هنا" intro tab content - hidden permanently */
-#intro,
-.tab-content#intro{
-  display:none !important;
+/* === Pinyin toggle === */
+#pinyinToggle,#togglePinyin{
+  position:fixed !important;top:auto !important;bottom:20px !important;right:20px !important;left:auto !important;
+  z-index:1000;background:linear-gradient(135deg,#0b63ce,#064aa3) !important;color:#fff !important;
+  padding:10px 18px !important;border-radius:25px !important;font-weight:bold !important;
+  box-shadow:0 6px 20px rgba(11,99,206,0.3) !important;border:2px solid #fff !important;font-size:14px !important;
 }
+#toggleAnswers,#toggleAnswersMock6{display:none !important}
 
-/* hide the .hero/.welcome that we already removed but in case they remain */
-.hero,
-.welcome-card,
-.intro-section,
-.keyword-legend,
-.tab-content .welcome-card{
-  display:none !important;
-}
-
-/* === Pinyin toggle - small floating pill bottom-right === */
-#pinyinToggle,
-#togglePinyin{
-  position:fixed !important;
-  top:auto !important;
-  bottom:20px !important;
-  right:20px !important;
-  left:auto !important;
-  z-index:1000;
-  background:linear-gradient(135deg,#0b63ce,#064aa3) !important;
-  color:#fff !important;
-  padding:10px 18px !important;
-  border-radius:25px !important;
-  font-weight:bold !important;
-  box-shadow:0 6px 20px rgba(11,99,206,0.3) !important;
-  border:2px solid #fff !important;
-  font-size:14px !important;
-}
-
-#toggleAnswers,
-#toggleAnswersMock6{
-  display:none !important;
-}
-
-/* Reveal button inline with each question */
-.reveal-btn,
-.reveal-answer-btn{
-  display:inline-flex !important;
-  align-items:center;
-  gap:6px;
-  background:linear-gradient(135deg,#3b82f6,#2563eb) !important;
-  color:#fff !important;
-  padding:8px 16px !important;
-  border-radius:8px !important;
-  font-weight:bold !important;
-  border:none !important;
-  cursor:pointer !important;
-  margin:8px 4px !important;
-  font-size:14px !important;
+/* === Reveal button === */
+.reveal-btn,.reveal-answer-btn{
+  display:inline-flex !important;align-items:center;gap:6px;
+  background:linear-gradient(135deg,#3b82f6,#2563eb) !important;color:#fff !important;
+  padding:8px 16px !important;border-radius:8px !important;font-weight:bold !important;
+  border:none !important;cursor:pointer !important;margin:8px 4px !important;font-size:14px !important;
   box-shadow:0 2px 8px rgba(59,130,246,0.3) !important;
 }
-.reveal-btn:hover,
-.reveal-answer-btn:hover{transform:scale(1.03);box-shadow:0 4px 12px rgba(59,130,246,0.4) !important}
-.reveal-btn.shown,
-.reveal-answer-btn.shown{background:linear-gradient(135deg,#16a34a,#15803d) !important}
+.reveal-btn:hover,.reveal-answer-btn:hover{transform:scale(1.03);box-shadow:0 4px 12px rgba(59,130,246,0.4) !important}
+.reveal-btn.shown,.reveal-answer-btn.shown{background:linear-gradient(135deg,#16a34a,#15803d) !important}
 
-/* === MOBILE NAV (hamburger) === */
+/* === MOBILE NAV === */
 @media (max-width:768px){
-  /* Hide nav links by default on mobile */
-  .m6-mini-nav,
-  .mk9-mini-nav,
-  .hsk-nav{
-    display:none !important;
-    flex-direction:column;
-    position:absolute;
-    top:60px;
-    right:8px;
-    left:8px;
-    background:#fff;
-    border:2px solid rgba(11,99,206,0.2);
-    border-radius:12px;
-    padding:10px;
-    z-index:200;
-    gap:6px;
-    box-shadow:0 8px 24px rgba(0,0,0,0.15);
+  .m6-mini-nav,.mk9-mini-nav,.hsk-nav{
+    display:none !important;flex-direction:column;position:absolute;top:60px;right:8px;left:8px;
+    background:#fff;border:2px solid rgba(11,99,206,0.2);border-radius:12px;padding:10px;z-index:200;
+    gap:6px;box-shadow:0 8px 24px rgba(0,0,0,0.15);
   }
-  body.nav-open .m6-mini-nav,
-  body.nav-open .mk9-mini-nav,
-  body.nav-open .hsk-nav{
-    display:flex !important;
+  body.nav-open .m6-mini-nav,body.nav-open .mk9-mini-nav,body.nav-open .hsk-nav{display:flex !important}
+  .m6-mini-nav a,.mk9-mini-nav a,.hsk-nav a{
+    padding:12px 14px !important;border-radius:8px;width:100%;text-align:right;font-size:15px !important;
   }
-  .m6-mini-nav a,
-  .mk9-mini-nav a,
-  .hsk-nav a{
-    padding:12px 14px !important;
-    border-radius:8px;
-    width:100%;
-    text-align:right;
-    font-size:15px !important;
-  }
-
-  /* Hamburger button */
   .nav-toggle-btn{
-    display:flex !important;
-    position:absolute;
-    top:14px;
-    right:12px;
-    background:linear-gradient(135deg,#0b63ce,#064aa3);
-    color:#fff;
-    border:none;
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    cursor:pointer;
-    z-index:201;
-    align-items:center;
-    justify-content:center;
-    font-size:20px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    display:flex !important;position:absolute;top:14px;right:12px;
+    background:linear-gradient(135deg,#0b63ce,#064aa3);color:#fff;border:none;width:42px;height:42px;
+    border-radius:50%;cursor:pointer;z-index:201;align-items:center;justify-content:center;
+    font-size:20px;box-shadow:0 4px 12px rgba(0,0,0,0.15);
   }
-
-  /* Hide language selector on mobile (cluttering) */
-  .m6-lang,
-  .mk9-lang,
-  .hsk-lang{
-    display:none !important;
-  }
-
-  /* Topbar smaller padding on mobile */
-  .m6-topbar,
-  .mk9-topbar,
-  .hsk-topbar{
-    padding:10px 14px !important;
-  }
-
-  /* Brand smaller on mobile */
-  .m6-brand,
-  .hsk-brand{
-    font-size:14px !important;
-  }
+  .m6-lang,.mk9-lang,.hsk-lang{display:none !important}
+  .m6-topbar,.mk9-topbar,.hsk-topbar{padding:10px 14px !important}
+  .m6-brand,.hsk-brand{font-size:14px !important}
 }
+@media (min-width:769px){.nav-toggle-btn{display:none !important}}
 
-@media (min-width:769px){
-  .nav-toggle-btn{display:none !important}
-}
-
-/* Tip banner - normal flow, not sticky */
-.hsk-tip-banner{
-  position:relative !important;
-  top:auto !important;
-  margin:12px 0 18px !important;
-}
-
-/* Section title - prominent at top */
+/* === Tip + Section title === */
+.hsk-tip-banner{position:relative !important;top:auto !important;margin:12px 0 18px !important}
 .tab-content > .section-title,
 .tab-content > h2,
 .tab-content > h1{
-  background:linear-gradient(135deg,#0b63ce,#064aa3);
-  color:#fff !important;
-  padding:14px 20px;
-  border-radius:14px;
-  margin:10px 0 18px;
-  text-align:center;
-  font-size:1.3em;
-  box-shadow:0 6px 18px rgba(11,99,206,0.2);
+  background:linear-gradient(135deg,#0b63ce,#064aa3);color:#fff !important;
+  padding:14px 20px;border-radius:14px;margin:10px 0 18px;text-align:center;
+  font-size:1.3em;box-shadow:0 6px 18px rgba(11,99,206,0.2);
 }
-.tab-content > .section-title h2,
-.tab-content > .section-title h1{
-  color:#fff !important;
-  margin:0;
-}
+.tab-content > .section-title h2,.tab-content > .section-title h1{color:#fff !important;margin:0}
+#progress-bar{height:4px !important}#progress-text{font-size:10px !important;padding:1px 6px !important}
+[class*="install"]:not(input):not(button[type]),[class*="prompt-banner"]{display:none !important}
+.hsk-stage5-tools-frame,[class*="tools-frame"],[class*="floating-tools"]{display:none !important}
 
-/* Progress bar smaller */
-#progress-bar{height:4px !important}
-#progress-text{font-size:10px !important;padding:1px 6px !important}
-
-/* Hide install/prompt banners */
-[class*="install"]:not(input):not(button[type]),
-[class*="prompt-banner"]{display:none !important}
-
-/* Hide redundant tools */
-.hsk-stage5-tools-frame,
-[class*="tools-frame"],
-[class*="floating-tools"]{display:none !important}
-
-/* === FLASHCARD GRID FIX - prevent stretching and uneven heights ===
-   IMPORTANT: Selectors below use `body.mock6-redesign` AND `html body` chains
-   to overcome specificity of `body.mock6-redesign .flashcard-grid` rule
-   in hsk4-mock6-redesign.css that uses minmax(270px, 1fr).
-*/
+/* === FLASHCARD GRID FIX - high specificity overrides === */
 html body .flashcard-grid,
 body.mock6-redesign .flashcard-grid,
 body.mk9-redesign .flashcard-grid{
   display:grid !important;
   grid-template-columns:repeat(auto-fit, minmax(min(100%, 240px), 1fr)) !important;
-  gap:16px !important;
-  align-items:start !important;
-  justify-content:start !important;
-  width:100% !important;
+  gap:16px !important;align-items:start !important;justify-content:start !important;width:100% !important;
 }
-
-/* Desktop ≥901px: each card capped at 280px max - prevents stretching */
 @media (min-width:901px){
   html body .flashcard-grid,
   body.mock6-redesign .flashcard-grid,
@@ -242,8 +98,6 @@ body.mk9-redesign .flashcard-grid{
     grid-template-columns:repeat(auto-fit, minmax(240px, 280px)) !important;
   }
 }
-
-/* Tablet 601-900px: exactly 2 columns */
 @media (min-width:601px) and (max-width:900px){
   html body .flashcard-grid,
   body.mock6-redesign .flashcard-grid,
@@ -251,72 +105,48 @@ body.mk9-redesign .flashcard-grid{
     grid-template-columns:repeat(2, 1fr) !important;
   }
 }
-
-/* Mobile ≤600px: single column */
 @media (max-width:600px){
   html body .flashcard-grid,
   body.mock6-redesign .flashcard-grid,
   body.mk9-redesign .flashcard-grid{
-    grid-template-columns:1fr !important;
-    gap:14px !important;
-    padding:0 4px !important;
+    grid-template-columns:1fr !important;gap:14px !important;padding:0 4px !important;
   }
-  html body .flashcard,
-  body.mock6-redesign .flashcard{
-    padding:14px !important;
-    width:100% !important;
-    max-width:100% !important;
+  html body .flashcard,body.mock6-redesign .flashcard{
+    padding:14px !important;width:100% !important;max-width:100% !important;
   }
-  html body .flashcard .hsk-card-image-wrap{
-    max-width:100% !important;
-    max-height:200px !important;
-  }
+  html body .flashcard .hsk-card-image-wrap{max-width:100% !important;max-height:200px !important}
   html body .flashcard .hsk-card-image{max-height:200px !important}
 }
-
-/* Card itself - never stretch height, content-driven */
-html body .flashcard,
-body.mock6-redesign .flashcard{
-  height:auto !important;
-  align-self:start !important;
-  padding:14px !important;
+html body .flashcard,body.mock6-redesign .flashcard{
+  height:auto !important;align-self:start !important;padding:14px !important;
 }
-
-/* Image inside card - fixed size, no stretch */
 html body .flashcard .hsk-card-image-wrap{
-  max-height:160px !important;
-  max-width:240px !important;
-  margin:0 auto 12px !important;
+  max-height:160px !important;max-width:240px !important;margin:0 auto 12px !important;
 }
-html body .flashcard .hsk-card-image{
-  max-height:160px !important;
-  object-fit:cover !important;
-}
-
-html body .flashcard:not(:has(.hsk-card-image-wrap)){
-  min-height:auto !important;
-}
-
-/* Container max-width on very wide screens */
+html body .flashcard .hsk-card-image{max-height:160px !important;object-fit:cover !important}
+html body .flashcard:not(:has(.hsk-card-image-wrap)){min-height:auto !important}
 @media (min-width:1200px){
-  html body .flashcard-grid,
-  body.mock6-redesign .flashcard-grid{
-    max-width:1280px !important;
-    margin:0 auto !important;
+  html body .flashcard-grid,body.mock6-redesign .flashcard-grid{
+    max-width:1280px !important;margin:0 auto !important;
   }
 }
 
-/* === Writing section original images - cap height to prevent huge scroll === */
+/* === Writing section original images - cap height === */
 html body img.hsk-original-image{
-  max-height:520px !important;
-  width:auto !important;
-  max-width:100% !important;
-  object-fit:contain !important;
-  display:block !important;
-  margin:10px auto !important;
+  max-height:520px !important;width:auto !important;max-width:100% !important;
+  object-fit:contain !important;display:block !important;margin:10px auto !important;
 }
 @media (max-width:600px){
-  html body img.hsk-original-image{
-    max-height:340px !important;
-  }
+  html body img.hsk-original-image{max-height:340px !important}
 }
+
+/* === Index page minimal cleanup === */
+body.hsk-landing-page .hsk-final-status,
+body.hsk-landing-page .hsk-hero,
+body.hsk-landing-page .hsk-deep-row,
+body.hsk-landing-page #introTip,
+body.hsk-landing-page .hsk-intro-note,
+body.hsk-landing-page .hsk-section-title{
+  display:none !important;
+}
+body.hsk-landing-page #tests{margin-top:24px !important;padding-top:8px !important}
