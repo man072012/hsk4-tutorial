@@ -612,3 +612,52 @@ html[lang] body .skip-nav:focus{
   top:0 !important;
   outline:3px solid #facc15 !important;
 }
+
+/* ============================================================
+   === FINAL CRITICAL PATCHES (Round 6) ===
+   ============================================================ */
+
+/* R6-1: Pinyin scale removal (transform:scale(.92) shrinks 44px→40.48px) */
+html body .pinyin-toggle-floating,
+html body #pinyinToggle,
+html body #togglePinyin,
+body.mock6-redesign .pinyin-toggle-floating{
+  transform:none !important;
+  transform-origin:initial !important;
+  zoom:1 !important;
+}
+/* Also override scaled neighbors for consistency */
+html body .summary-float-btn,
+html body #backTop,
+html body .back-top{
+  transform:none !important;
+}
+
+/* R6-2: skip-nav - SINGLE definitive rule (override all previous) */
+html body a.skip-nav,
+html body .skip-nav,
+html body .skip-link{
+  position:fixed !important;
+  top:-120px !important;
+  left:50% !important;
+  right:auto !important;
+  transform:translateX(-50%) !important;
+  z-index:99999 !important;
+  background:#0f172a !important;
+  color:#fff !important;
+  padding:10px 20px !important;
+  border-radius:0 0 12px 12px !important;
+  text-decoration:none !important;
+  font-weight:bold !important;
+  border:2px solid #facc15 !important;
+  transition:top 0.2s ease !important;
+}
+html body a.skip-nav:focus,
+html body .skip-nav:focus,
+html body .skip-link:focus,
+html body a.skip-nav:focus-visible,
+html body .skip-nav:focus-within{
+  top:0 !important;
+  outline:3px solid #facc15 !important;
+  outline-offset:0 !important;
+}
