@@ -227,3 +227,13 @@ main > .hero,
 .tab-content > .welcome-card{
   display:none !important;
 }
+
+/* === تأكيد إخفاء كامل لزر "ابدأ هنا" === */
+button.tab-btn.active[onclick*="intro"],
+button[onclick*="showTab('intro'"],
+.tab-btn[onclick*="intro"]{
+  display:none !important;
+}
+
+/* بعض الـ themes الأخرى تستخدم نصوصاً مختلفة */
+*[class*="tab-btn"]:not([class*="active"]):empty{display:none}
