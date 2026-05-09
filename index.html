@@ -112,6 +112,8 @@ footer a:hover{text-decoration:underline}
 .skip-link{position:absolute;top:-100px;right:0;background:#c0392b;color:#fff;padding:8px 16px;border-radius:0 0 0 8px;z-index:10000;text-decoration:none;transition:top 0.2s;font-weight:bold}
 .skip-link:focus{top:0;outline:3px solid #fbbf24}
 </style>
+<link rel="stylesheet" href="assets/hsk4-visual-upgrade.css">
+<script src="assets/hsk4-visual-upgrade.js" defer></script>
 </head>
 <body>
 <a href="#main" class="skip-link">⏭️ تخطي إلى المحتوى الرئيسي</a>
@@ -191,4 +193,19 @@ footer a:hover{text-decoration:underline}
 
 <script>
 (function(){
-  var tip = document.getElementById('introTip')
+  var tip = document.getElementById('introTip');
+  var btn = document.getElementById('closeTip');
+  var KEY = 'hsk4_intro_dismissed';
+  if (localStorage.getItem(KEY) === '1' && tip){
+    tip.style.display = 'none';
+  }
+  if (btn){
+    btn.addEventListener('click', function(){
+      if (tip) tip.style.display = 'none';
+      localStorage.setItem(KEY, '1');
+    });
+  }
+})();
+</script>
+</body>
+</html>
