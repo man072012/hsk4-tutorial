@@ -748,9 +748,92 @@ body.hide-pinyin .zh-pny-inner::before {
   .flashcard-grid { grid-template-columns: 1fr; }
   .fc-char { font-size: 40px; }
 }
+
+/* وضع إخفاء الإجابات (Hide Answers Mode) */
+body.answer-hidden .q-header span[style*="10b981"],
+body.answer-hidden .q-header span[style*="dc2626"]{visibility:hidden !important}
+body.answer-hidden .q-card.revealed .q-header span[style*="10b981"],
+body.answer-hidden .q-card.revealed .q-header span[style*="dc2626"]{visibility:visible !important}
+body.answer-hidden .opt-item.correct{background:white !important;border-right-color:#cbd5e1 !important;color:inherit !important}
+body.answer-hidden .opt-item.correct .opt-letter{background:#e2e8f0 !important;color:#475569 !important}
+body.answer-hidden .opt-item.correct .opt-arabic{color:#64748b !important}
+body.answer-hidden .answer-mark{display:none}
+body.answer-hidden .q-card.revealed .opt-item.correct{background:#d1fae5 !important;border-right-color:#10b981 !important}
+body.answer-hidden .q-card.revealed .opt-item.correct .opt-letter{background:#10b981 !important;color:white !important}
+body.answer-hidden .q-card.revealed .answer-mark{display:inline}
+body.answer-hidden .q-card:not(.revealed) .why-box,
+body.answer-hidden .q-card:not(.revealed) .explain-box,
+body.answer-hidden .q-card:not(.revealed) .memory-box,
+body.answer-hidden .q-card:not(.revealed) .trans-box,
+body.answer-hidden .q-card:not(.revealed) .vocab-section{display:none}
+/* إخفاء النص المسموع في أسئلة TF (يبقى المختبَر فقط) */
+body.answer-hidden .q-card:not(.revealed) .has-heard .heard-label,
+body.answer-hidden .q-card:not(.revealed) .has-heard .heard-label + .chinese-text,
+body.answer-hidden .q-card:not(.revealed) .has-heard .heard-label + .chinese-text + .pinyin-text{display:none}
+/* رسالة دلالية بدلاً من النص المسموع */
+body.answer-hidden .q-card:not(.revealed) .has-heard::before{
+  content:'🎧 استمع للصوت أعلاه أولاً ثم احكم على الجملة التالية:';
+  display:block;color:#854d0e;background:#fef9c3;padding:8px;border-radius:6px;
+  font-size:13px;margin-bottom:8px;font-weight:bold
+}
+/* إخفاء الإجابة المكشوفة في أسئلة ملء الفراغ */
+body.answer-hidden .q-card:not(.revealed) .fill-blank-answer{display:none}
+body.answer-hidden .q-card:not(.revealed) .fill-blank-placeholder{display:inline}
+body:not(.answer-hidden) .fill-blank-placeholder,
+.q-card.revealed .fill-blank-placeholder{display:none}
+.q-card.revealed .fill-blank-answer{display:inline}
+.fill-blank-placeholder{display:none;color:#9ca3af;font-style:italic;font-size:0.9em}
+.fill-options-list{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;padding:12px;background:#f8fafc;border-radius:8px;border:2px dashed #cbd5e1}
+.fill-option{padding:6px 12px;background:#fff;border:2px solid #e2e8f0;border-radius:6px;cursor:pointer;font-family:'Microsoft YaHei',sans-serif;font-size:15px;transition:0.2s}
+.fill-option:hover{border-color:#3b82f6;background:#eff6ff}
+.fill-option.user-correct{background:#d1fae5 !important;border-color:#16a34a !important;color:#14532d}
+.fill-option.user-wrong{background:#fee2e2 !important;border-color:#dc2626 !important;color:#7f1d1d}
+.fill-option-letter{display:inline-block;font-weight:bold;color:#3b82f6;margin-left:4px}
+/* مؤشر بصري على وجود محتوى مخفي */
+body.answer-hidden .q-card:not(.revealed)::after{
+  content:'🔒 الترجمة، المفردات، الشرح، والقاعدة مخفية - اختر إجابتك أو اضغط زر الكشف';
+  display:block;background:#fef3c7;color:#854d0e;padding:8px 12px;
+  border-radius:8px;margin-top:10px;font-size:13px;text-align:center;
+  border:1px dashed #d97706
+}
+
+.reveal-answer-btn{background:#3498db;color:#fff;padding:8px 16px;border:none;border-radius:6px;cursor:pointer;font-size:0.95em;margin:10px 5px;font-weight:bold}
+.reveal-answer-btn:hover{background:#2980b9}
+.reveal-answer-btn.shown{background:#27ae60}
+body:not(.answer-hidden) .reveal-answer-btn{display:none}
+.toggle-answers-btn{position:fixed;top:130px;left:20px;background:#9333ea;color:#fff;padding:10px 18px;border:none;border-radius:25px;cursor:pointer;font-weight:bold;z-index:200;box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:0.2s}
+.toggle-answers-btn:hover{transform:scale(1.05)}
+@media (max-width:600px){.toggle-answers-btn{top:auto;bottom:140px;left:15px;padding:10px 14px;font-size:12px}}
+.toggle-answers-btn.shown{background:#16a34a}
+
+
+/* تفاعل مع الخيارات (Click to Answer) */
+.opt-item{cursor:pointer;transition:0.2s;position:relative}
+.opt-item:hover{transform:translateX(-3px);box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.opt-item.user-wrong{background:#fee2e2 !important;border-right-color:#dc2626 !important;color:#7f1d1d !important;animation:shake-wrong 0.4s}
+.opt-item.user-correct{background:#d1fae5 !important;border-right-color:#16a34a !important;animation:pulse-success 0.5s}
+.opt-item.user-correct .opt-letter{background:#16a34a !important;color:white !important}
+.opt-item.user-wrong .opt-letter{background:#dc2626 !important;color:white !important}
+.user-mark{font-weight:bold;margin-right:8px;font-size:1.1em}
+@keyframes pulse-success{0%{transform:scale(1)}50%{transform:scale(1.03);box-shadow:0 0 20px rgba(22,163,74,0.4)}100%{transform:scale(1)}}
+@keyframes shake-wrong{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+
+
+/* أزرار صح/خطأ التفاعلية لأسئلة TF */
+.tf-buttons{display:flex;gap:12px;margin:15px 0;justify-content:center}
+.tf-btn{flex:1;max-width:200px;padding:14px 20px;border:3px solid;border-radius:12px;cursor:pointer;font-size:18px;font-weight:bold;background:white;transition:0.2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.tf-btn.tf-true{border-color:#16a34a;color:#16a34a}
+.tf-btn.tf-true:hover{background:#d1fae5;transform:scale(1.03)}
+.tf-btn.tf-false{border-color:#dc2626;color:#dc2626}
+.tf-btn.tf-false:hover{background:#fee2e2;transform:scale(1.03)}
+.tf-btn.user-correct{background:#16a34a !important;color:white !important;border-color:#15803d !important;animation:pulse-success 0.5s}
+.tf-btn.user-wrong{background:#dc2626 !important;color:white !important;border-color:#991b1b !important;animation:shake-wrong 0.4s}
+
 </style>
 </head>
 <body>
+<button class="toggle-answers-btn" id="toggleAnswersMock6">🔒 الإجابات مخفية</button>
+
 <div class="wrapper">
 
 <div class="hero">
@@ -765,7 +848,7 @@ body.hide-pinyin .zh-pny-inner::before {
 </div>
 
 <div class="welcome-card">
-  <h2>👋 مرحباً يا منصور! اقرأ هذا أولاً</h2>
+  <h2>👋 أهلاً بك! اقرأ هذا أولاً</h2>
   <p>هذا الدليل ليس للحفظ! نحن نتعلم الصينية مثل ما يتعلم الطفل لغته الأم: من خلال <b>القصص</b> و<b>الصور الذهنية</b> و<b>السياق</b>. كل سؤال هنا سنفككه إلى:</p>
   <p style="margin-top: 10px">✨ <b>الجملة الصينية كاملة</b> + النطق بالـ Pinyin + الترجمة العربية<br>
   ✨ <b>كل كلمة وحدها</b> مع معناها وحكاية صغيرة لتذكرها<br>
@@ -860,8 +943,8 @@ body.hide-pinyin .zh-pny-inner::before {
       <audio controls preload="none" style="flex:1;min-width:280px;max-width:420px;height:40px"><source src="https://public.hskmock.cn/hsk-examination/hsk4/32884d140ae8da50/f33ae2f8-70e0-4ca2-a278-27b9d5471d79.mp3" type="audio/mpeg">متصفحك لا يدعم الصوت</audio>
     </div>
 
-    <div class="chinese-box">
-      <span class="label">📝 النص المسموع:</span>
+    <div class="chinese-box has-heard">
+      <span class="label heard-label">📝 النص المسموع:</span>
       <div class="chinese-text">我拿的是学生签证，<span class="keyword" onclick="playChinese('换成工作签证以后', this)">换成工作签证以后<span class="keyword-tooltip">💡 (انقر للنطق) 💡 هذا يعني لم يحصل عليها بعد</span></span>，才能申请这份工作。</div>
       <div class="pinyin-text">Wǒ ná de shì xuéshēng qiānzhèng, huànchéng gōngzuò qiānzhèng yǐhòu, cái néng shēnqǐng zhè fèn gōngzuò.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
@@ -871,7 +954,11 @@ body.hide-pinyin .zh-pny-inner::before {
       </div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="tf-buttons" data-q="1" data-correct="T">
+      <button class="tf-btn tf-true" data-ans="T">✓ صح (对)</button>
+      <button class="tf-btn tf-false" data-ans="F">✗ خطأ (错)</button>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p><b>المسموع:</b> "ما لديّ هو تأشيرة طالب، وبعد ما أحوّلها إلى تأشيرة عمل، أستطيع التقديم لهذه الوظيفة."</p>
       <p style="margin-top:8px"><b>الجملة المختبرة:</b> "هو لم يحصل بعد على تأشيرة العمل."</p>
@@ -918,8 +1005,8 @@ body.hide-pinyin .zh-pny-inner::before {
       <audio controls preload="none" style="flex:1;min-width:280px;max-width:420px;height:40px"><source src="https://public.hskmock.cn/hsk-examination/hsk4/32884d140ae8da50/6219f0fe-9d67-45dc-ae99-c7faad08ce9f.mp3" type="audio/mpeg">متصفحك لا يدعم الصوت</audio>
     </div>
 
-    <div class="chinese-box">
-      <span class="label">📝 النص المسموع:</span>
+    <div class="chinese-box has-heard">
+      <span class="label heard-label">📝 النص المسموع:</span>
       <div class="chinese-text">这个活动本来<span class="keyword" onclick="playChinese('已经推迟了', this)">已经推迟了<span class="keyword-tooltip">💡 (انقر للنطق) 💡 كلمة 已经 = بالفعل، أي التأجيل حدث في الماضي</span></span>两周了，现在负责活动的经理又病了，怎么办呢？</div>
       <div class="pinyin-text">Zhège huódòng běnlái yǐjīng tuīchí le liǎng zhōu le, xiànzài fùzé huódòng de jīnglǐ yòu bìng le, zěnme bàn ne?</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
@@ -929,7 +1016,11 @@ body.hide-pinyin .zh-pny-inner::before {
       </div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="tf-buttons" data-q="2" data-correct="F">
+      <button class="tf-btn tf-true" data-ans="T">✓ صح (对)</button>
+      <button class="tf-btn tf-false" data-ans="F">✗ خطأ (错)</button>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p><b>المسموع:</b> "هذا الحدث في الأصل تم تأجيله أسبوعين بالفعل، والآن المدير المسؤول عنه مرض أيضاً، كيف نتصرف؟"</p>
       <p style="margin-top:8px"><b>الجملة المختبرة:</b> "هذا الحدث سيتم تأجيله أسبوعين."</p>
@@ -979,8 +1070,8 @@ body.hide-pinyin .zh-pny-inner::before {
       <audio controls preload="none" style="flex:1;min-width:280px;max-width:420px;height:40px"><source src="https://public.hskmock.cn/hsk-examination/hsk4/32884d140ae8da50/eb4b92c9-9147-4733-a621-4c73543f47ab.mp3" type="audio/mpeg">متصفحك لا يدعم الصوت</audio>
     </div>
 
-    <div class="chinese-box">
-      <span class="label">📝 النص المسموع:</span>
+    <div class="chinese-box has-heard">
+      <span class="label heard-label">📝 النص المسموع:</span>
       <div class="chinese-text">宾馆房间里有电脑，可以上网，<span class="keyword" onclick="playChinese('早七点到晚十点', this)">早七点到晚十点<span class="keyword-tooltip">💡 (انقر للنطق) 💡 ساعات محدودة، ليس طوال اليوم</span></span>有热水，早上还提供免费早餐。</div>
       <div class="pinyin-text">Bīnguǎn fángjiān lǐ yǒu diànnǎo, kěyǐ shàngwǎng, zǎo qī diǎn dào wǎn shí diǎn yǒu rèshuǐ, zǎoshang hái tígōng miǎnfèi zǎocān.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
@@ -990,7 +1081,11 @@ body.hide-pinyin .zh-pny-inner::before {
       </div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="tf-buttons" data-q="3" data-correct="F">
+      <button class="tf-btn tf-true" data-ans="T">✓ صح (对)</button>
+      <button class="tf-btn tf-false" data-ans="F">✗ خطأ (错)</button>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p><b>المسموع:</b> "غرفة الفندق فيها كمبيوتر، يمكن استخدام الإنترنت، الماء الساخن متوفر من السابعة صباحاً حتى العاشرة مساءً، ويقدّم الفطور مجاناً."</p>
       <p style="margin-top:8px"><b>المختبرة:</b> "هذا الفندق يوفر ماء ساخن طوال اليوم."</p>
@@ -1037,8 +1132,8 @@ body.hide-pinyin .zh-pny-inner::before {
       <audio controls preload="none" style="flex:1;min-width:280px;max-width:420px;height:40px"><source src="https://public.hskmock.cn/hsk-examination/hsk4/32884d140ae8da50/0d450e15-52d4-4888-b7d0-beb0e9ca5399.mp3" type="audio/mpeg">متصفحك لا يدعم الصوت</audio>
     </div>
 
-    <div class="chinese-box">
-      <span class="label">📝 النص المسموع:</span>
+    <div class="chinese-box has-heard">
+      <span class="label heard-label">📝 النص المسموع:</span>
       <div class="chinese-text">我和李月差不多三年没有联系了，我<span class="keyword" onclick="playChinese('哪儿知道', this)">哪儿知道<span class="keyword-tooltip">💡 (انقر للنطق) 💡 سؤال بلاغي = لا أعرف!</span></span>她现在在哪儿啊？</div>
       <div class="pinyin-text">Wǒ hé Lǐ Yuè chàbuduō sān nián méiyǒu liánxì le, wǒ nǎr zhīdào tā xiànzài zài nǎr a?</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
@@ -1048,7 +1143,11 @@ body.hide-pinyin .zh-pny-inner::before {
       </div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="tf-buttons" data-q="4" data-correct="F">
+      <button class="tf-btn tf-true" data-ans="T">✓ صح (对)</button>
+      <button class="tf-btn tf-false" data-ans="F">✗ خطأ (错)</button>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p><b>المسموع:</b> "أنا و"لي يوي" تقريباً 3 سنوات لم نتواصل، من أين لي أن أعرف أين هي الآن؟"</p>
       <p style="margin-top:8px"><b>المختبرة:</b> "هو يعرف أين تكون لي يوي."</p>
@@ -1095,8 +1194,8 @@ body.hide-pinyin .zh-pny-inner::before {
       <audio controls preload="none" style="flex:1;min-width:280px;max-width:420px;height:40px"><source src="https://public.hskmock.cn/hsk-examination/hsk4/32884d140ae8da50/2d1a0736-779f-4db1-bcab-d0fc2f1b3fc9.mp3" type="audio/mpeg">متصفحك لا يدعم الصوت</audio>
     </div>
 
-    <div class="chinese-box">
-      <span class="label">📝 النص المسموع:</span>
+    <div class="chinese-box has-heard">
+      <span class="label heard-label">📝 النص المسموع:</span>
       <div class="chinese-text">这个新的法律规定可以<span class="keyword" onclick="playChinese('更好地保护儿童', this)">更好地保护儿童<span class="keyword-tooltip">💡 (انقر للنطق) 💡 تعبير صريح بأن القانون لحماية الأطفال</span></span>，他们不仅是父母的孩子，更是国家的希望。</div>
       <div class="pinyin-text">Zhège xīn de fǎlǜ guīdìng kěyǐ gèng hǎo de bǎohù értóng, tāmen bùjǐn shì fùmǔ de háizi, gèng shì guójiā de xīwàng.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
@@ -1106,7 +1205,11 @@ body.hide-pinyin .zh-pny-inner::before {
       </div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="tf-buttons" data-q="5" data-correct="T">
+      <button class="tf-btn tf-true" data-ans="T">✓ صح (对)</button>
+      <button class="tf-btn tf-false" data-ans="F">✗ خطأ (错)</button>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p><b>المسموع:</b> "هذا القانون الجديد يستطيع حماية الأطفال بشكل أفضل، فهم ليسوا فقط أبناء آبائهم، بل أيضاً أمل الوطن."</p>
       <p style="margin-top:8px"><b>المختبرة:</b> "ذلك القانون لحماية الأطفال."</p>
@@ -1155,8 +1258,8 @@ body.hide-pinyin .zh-pny-inner::before {
       <audio controls preload="none" style="flex:1;min-width:280px;max-width:420px;height:40px"><source src="https://public.hskmock.cn/hsk-examination/hsk4/32884d140ae8da50/c4f9173e-1837-4984-aaad-60a43d124d4e.mp3" type="audio/mpeg">متصفحك لا يدعم الصوت</audio>
     </div>
 
-    <div class="chinese-box">
-      <span class="label">📝 النص المسموع:</span>
+    <div class="chinese-box has-heard">
+      <span class="label heard-label">📝 النص المسموع:</span>
       <div class="chinese-text">我是北方人，特别喜欢吃饺子，平时也经常在家<span class="keyword" onclick="playChinese('自己包饺子吃', this)">自己包饺子吃<span class="keyword-tooltip">💡 (انقر للنطق) 💡 يحضرها بنفسه في البيت، ليس في المطعم</span></span>。</div>
       <div class="pinyin-text">Wǒ shì běifāng rén, tèbié xǐhuān chī jiǎozi, píngshí yě jīngcháng zài jiā zìjǐ bāo jiǎozi chī.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
@@ -1166,7 +1269,11 @@ body.hide-pinyin .zh-pny-inner::before {
       </div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="tf-buttons" data-q="6" data-correct="F">
+      <button class="tf-btn tf-true" data-ans="T">✓ صح (对)</button>
+      <button class="tf-btn tf-false" data-ans="F">✗ خطأ (错)</button>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p><b>المسموع:</b> "أنا من الشمال، أحبّ جداً أكل الجياوزي (الزلابية الصينية)، وعادةً أيضاً أحضّرها في البيت بنفسي وآكلها."</p>
       <p style="margin-top:8px"><b>المختبرة:</b> "هو دائماً يذهب إلى المطعم ليأكل الجياوزي."</p>
@@ -1214,8 +1321,8 @@ body.hide-pinyin .zh-pny-inner::before {
       <audio controls preload="none" style="flex:1;min-width:280px;max-width:420px;height:40px"><source src="https://public.hskmock.cn/hsk-examination/hsk4/32884d140ae8da50/8c25fb29-2a51-4a1f-aaf7-8dbd534235a0.mp3" type="audio/mpeg">متصفحك لا يدعم الصوت</audio>
     </div>
 
-    <div class="chinese-box">
-      <span class="label">📝 النص المسموع:</span>
+    <div class="chinese-box has-heard">
+      <span class="label heard-label">📝 النص المسموع:</span>
       <div class="chinese-text">去年有五十万中国学生出国留学，其中<span class="keyword" onclick="playChinese('超过百分之五十', this)">超过百分之五十<span class="keyword-tooltip">💡 (انقر للنطق) 💡 أكثر من 50% = أكثر من النصف</span></span>的人是高中生。</div>
       <div class="pinyin-text">Qùnián yǒu wǔshí wàn Zhōngguó xuéshēng chūguó liúxué, qízhōng chāoguò bǎi fēn zhī wǔshí de rén shì gāozhōng shēng.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
@@ -1225,7 +1332,11 @@ body.hide-pinyin .zh-pny-inner::before {
       </div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="tf-buttons" data-q="7" data-correct="T">
+      <button class="tf-btn tf-true" data-ans="T">✓ صح (对)</button>
+      <button class="tf-btn tf-false" data-ans="F">✗ خطأ (错)</button>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p><b>المسموع:</b> "في السنة الماضية، 500,000 طالب صيني سافروا للدراسة بالخارج، من بينهم أكثر من 50% هم طلاب ثانوية."</p>
       <p style="margin-top:8px"><b>المختبرة:</b> "في السنة الماضية، أكثر من نصف الذين سافروا للدراسة بالخارج هم طلاب ثانوية."</p>
@@ -1285,8 +1396,8 @@ body.hide-pinyin .zh-pny-inner::before {
       <audio controls preload="none" style="flex:1;min-width:280px;max-width:420px;height:40px"><source src="https://public.hskmock.cn/hsk-examination/hsk4/32884d140ae8da50/34a28d4e-e370-46cd-8842-408eb9182e9c.mp3" type="audio/mpeg">متصفحك لا يدعم الصوت</audio>
     </div>
 
-    <div class="chinese-box">
-      <span class="label">📝 النص المسموع:</span>
+    <div class="chinese-box has-heard">
+      <span class="label heard-label">📝 النص المسموع:</span>
       <div class="chinese-text">人们常说遇到危险时要冷静，可是当它发生在自己身上时，<span class="keyword" onclick="playChinese('却很难做到', this)">却很难做到<span class="keyword-tooltip">💡 (انقر للنطق) 💡 كلمة 难 = صعب</span></span>。</div>
       <div class="pinyin-text">Rénmen cháng shuō yùdào wēixiǎn shí yào lěngjìng, kěshì dāng tā fāshēng zài zìjǐ shēn shàng shí, què hěn nán zuòdào.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
@@ -1296,7 +1407,11 @@ body.hide-pinyin .zh-pny-inner::before {
       </div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="tf-buttons" data-q="8" data-correct="T">
+      <button class="tf-btn tf-true" data-ans="T">✓ صح (对)</button>
+      <button class="tf-btn tf-false" data-ans="F">✗ خطأ (错)</button>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p><b>المسموع:</b> "يقول الناس دائماً إنه يجب البقاء هادئاً عند مواجهة الخطر، لكن عندما يحدث الأمر لك أنت شخصياً، يصعب جداً تحقيق ذلك."</p>
       <p style="margin-top:8px"><b>المختبرة:</b> "عند مواجهة الخطر، من الصعب البقاء هادئاً."</p>
@@ -1346,8 +1461,8 @@ body.hide-pinyin .zh-pny-inner::before {
       <audio controls preload="none" style="flex:1;min-width:280px;max-width:420px;height:40px"><source src="https://public.hskmock.cn/hsk-examination/hsk4/32884d140ae8da50/b6eab52e-8b2d-4029-883f-47ef74189e34.mp3" type="audio/mpeg">متصفحك لا يدعم الصوت</audio>
     </div>
 
-    <div class="chinese-box">
-      <span class="label">📝 النص المسموع:</span>
+    <div class="chinese-box has-heard">
+      <span class="label heard-label">📝 النص المسموع:</span>
       <div class="chinese-text">儿子，<span class="keyword" onclick="playChinese('祝贺你大学毕业', this)">祝贺你大学毕业<span class="keyword-tooltip">💡 (انقر للنطق) 💡 كلمة 祝贺 = تهنئة، تخرج فعلاً</span></span>。你现在比爸妈有知识，如果再增加一些社会经验，你会更优秀的。</div>
       <div class="pinyin-text">Érzi, zhùhè nǐ dàxué bìyè. Nǐ xiànzài bǐ bàmā yǒu zhīshi, rúguǒ zài zēngjiā yīxiē shèhuì jīngyàn, nǐ huì gèng yōuxiù de.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
@@ -1357,7 +1472,11 @@ body.hide-pinyin .zh-pny-inner::before {
       </div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="tf-buttons" data-q="9" data-correct="F">
+      <button class="tf-btn tf-true" data-ans="T">✓ صح (对)</button>
+      <button class="tf-btn tf-false" data-ans="F">✗ خطأ (错)</button>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p><b>المسموع:</b> "يا بني، تهانينا على تخرّجك من الجامعة. أنت الآن أكثر علماً من أبيك وأمك، وإذا اكتسبت بعض الخبرة الاجتماعية، ستكون أكثر تميزاً."</p>
       <p style="margin-top:8px"><b>المختبرة:</b> "الابن على وشك التخرج من الجامعة."</p>
@@ -1410,8 +1529,8 @@ body.hide-pinyin .zh-pny-inner::before {
       <audio controls preload="none" style="flex:1;min-width:280px;max-width:420px;height:40px"><source src="https://public.hskmock.cn/hsk-examination/hsk4/32884d140ae8da50/6a76dc02-8fa4-4848-ac8c-0a4390fc5bd2.mp3" type="audio/mpeg">متصفحك لا يدعم الصوت</audio>
     </div>
 
-    <div class="chinese-box">
-      <span class="label">📝 النص المسموع:</span>
+    <div class="chinese-box has-heard">
+      <span class="label heard-label">📝 النص المسموع:</span>
       <div class="chinese-text">小周真是挺努力的，连礼拜天都不放松一下，<span class="keyword" onclick="playChinese('现在还在办公室', this)">现在还在办公室<span class="keyword-tooltip">💡 (انقر للنطق) 💡 在 + المكان = موجود هناك الآن</span></span>呢。</div>
       <div class="pinyin-text">Xiǎo Zhōu zhēn shì tǐng nǔlì de, lián lǐbàitiān dōu bù fàngsōng yīxià, xiànzài hái zài bàngōngshì ne.</div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #ca8a04">
@@ -1421,7 +1540,11 @@ body.hide-pinyin .zh-pny-inner::before {
       </div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="tf-buttons" data-q="10" data-correct="T">
+      <button class="tf-btn tf-true" data-ans="T">✓ صح (对)</button>
+      <button class="tf-btn tf-false" data-ans="F">✗ خطأ (错)</button>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p><b>المسموع:</b> "شياو جو حقاً مجتهد جداً، حتى يوم الأحد لا يرتاح، وهو الآن لا يزال في المكتب."</p>
       <p style="margin-top:8px"><b>المختبرة:</b> "شياو جو يوم الأحد لا يزال يعمل."</p>
@@ -1504,7 +1627,7 @@ body.hide-pinyin .zh-pny-inner::before {
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">书</span><span class="opt-arabic">- كتب</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">包</span><span class="opt-arabic">- حقيبة</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">鞋</span><span class="opt-arabic">- أحذية</span></div>
-      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">衣服</span><span class="opt-arabic">- ملابس ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">衣服</span><span class="opt-arabic">- ملابس<span class="answer-mark"> ✓</span></span></div>
     </div>
 
     <div class="vocab-section">
@@ -1566,7 +1689,7 @@ body.hide-pinyin .zh-pny-inner::before {
     </div>
 
     <div class="options-list">
-      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">很严格</span><span class="opt-arabic">- صارم جداً ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">很严格</span><span class="opt-arabic">- صارم جداً<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">很粗心</span><span class="opt-arabic">- مهمل / غير مدقق</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">很友好</span><span class="opt-arabic">- ودود</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">很努力</span><span class="opt-arabic">- مجتهد</span></div>
@@ -1633,7 +1756,7 @@ body.hide-pinyin .zh-pny-inner::before {
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">机场</span><span class="opt-arabic">- مطار</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">公园</span><span class="opt-arabic">- حديقة</span></div>
-      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">地铁上</span><span class="opt-arabic">- في المترو ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">地铁上</span><span class="opt-arabic">- في المترو<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">出租车上</span><span class="opt-arabic">- في تاكسي</span></div>
     </div>
 
@@ -1694,7 +1817,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">妈妈和儿子</span><span class="opt-arabic">- أم وابن</span></div>
-      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">妻子和丈夫</span><span class="opt-arabic">- زوجة وزوج ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">妻子和丈夫</span><span class="opt-arabic">- زوجة وزوج<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">警察和司机</span><span class="opt-arabic">- شرطي وسائق</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">经理和顾客</span><span class="opt-arabic">- مدير وعميل</span></div>
     </div>
@@ -1763,7 +1886,7 @@ body.hide-pinyin .zh-pny-inner::before {
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">二十多岁</span><span class="opt-arabic">- في العشرينيات (فخ!)</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">准备搬家</span><span class="opt-arabic">- تستعد للانتقال</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">还住在这里</span><span class="opt-arabic">- لا تزال تسكن هنا</span></div>
-      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">很熟悉这儿</span><span class="opt-arabic">- تعرف هذا المكان جيداً ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">很熟悉这儿</span><span class="opt-arabic">- تعرف هذا المكان جيداً<span class="answer-mark"> ✓</span></span></div>
     </div>
 
     <div class="vocab-section">
@@ -1826,7 +1949,7 @@ body.hide-pinyin .zh-pny-inner::before {
     </div>
 
     <div class="options-list">
-      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">生活态度</span><span class="opt-arabic">- موقف من الحياة ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">生活态度</span><span class="opt-arabic">- موقف من الحياة<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">人的性格</span><span class="opt-arabic">- شخصية الإنسان</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">社会变化</span><span class="opt-arabic">- التغيرات الاجتماعية</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">工作情况</span><span class="opt-arabic">- وضع العمل</span></div>
@@ -1893,7 +2016,7 @@ body.hide-pinyin .zh-pny-inner::before {
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">批评一下</span><span class="opt-arabic">- يوبَّخ قليلاً</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">多多鼓励</span><span class="opt-arabic">- يُشجَّع كثيراً</span></div>
-      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">找到原因</span><span class="opt-arabic">- إيجاد السبب ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">找到原因</span><span class="opt-arabic">- إيجاد السبب<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">请老师帮忙</span><span class="opt-arabic">- طلب مساعدة المعلم</span></div>
     </div>
 
@@ -1958,7 +2081,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">经济条件好</span><span class="opt-arabic">- وضع مادي جيد</span></div>
-      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">家人很健康</span><span class="opt-arabic">- الأسرة بصحة جيدة ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">家人很健康</span><span class="opt-arabic">- الأسرة بصحة جيدة<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">工作有意思</span><span class="opt-arabic">- العمل ممتع</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">每天很愉快</span><span class="opt-arabic">- كل يوم سعيد</span></div>
     </div>
@@ -2021,7 +2144,7 @@ body.hide-pinyin .zh-pny-inner::before {
     </div>
 
     <div class="options-list">
-      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">病人</span><span class="opt-arabic">- مريض ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">病人</span><span class="opt-arabic">- مريض<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">大夫</span><span class="opt-arabic">- طبيب</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">服务员</span><span class="opt-arabic">- نادل/خادم</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">修空调的</span><span class="opt-arabic">- فنّي مكيفات</span></div>
@@ -2093,7 +2216,7 @@ body.hide-pinyin .zh-pny-inner::before {
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">等人</span><span class="opt-arabic">- ينتظرون شخصاً</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">买药</span><span class="opt-arabic">- يشترون دواء</span></div>
-      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">喝酒</span><span class="opt-arabic">- يشربون / احتفال ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">喝酒</span><span class="opt-arabic">- يشربون / احتفال<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">加班</span><span class="opt-arabic">- يعملون إضافياً</span></div>
     </div>
 
@@ -2154,7 +2277,7 @@ body.hide-pinyin .zh-pny-inner::before {
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">被弄丢了</span><span class="opt-arabic">- ضاعت</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">是黄色的</span><span class="opt-arabic">- صفراء (فخ! هي حمراء)</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">在沙发上</span><span class="opt-arabic">- على الأريكة (كانت بالأمس!)</span></div>
-      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">洗干净了</span><span class="opt-arabic">- تم غسلها ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">洗干净了</span><span class="opt-arabic">- تم غسلها<span class="answer-mark"> ✓</span></span></div>
     </div>
 
     <div class="vocab-section">
@@ -2221,7 +2344,7 @@ body.hide-pinyin .zh-pny-inner::before {
     </div>
 
     <div class="options-list">
-      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">能坚持</span><span class="opt-arabic">- يصبر ويثابر ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">能坚持</span><span class="opt-arabic">- يصبر ويثابر<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">有能力</span><span class="opt-arabic">- لديه قدرة</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">经验多</span><span class="opt-arabic">- خبرة كثيرة</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">有热情</span><span class="opt-arabic">- لديه حماس</span></div>
@@ -2289,7 +2412,7 @@ body.hide-pinyin .zh-pny-inner::before {
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">乱花钱</span><span class="opt-arabic">- يصرف بعشوائية</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">浪费时间</span><span class="opt-arabic">- يضيع الوقت</span></div>
-      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">没有礼貌</span><span class="opt-arabic">- قلّة أدب ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">没有礼貌</span><span class="opt-arabic">- قلّة أدب<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">上课迟到</span><span class="opt-arabic">- يتأخر عن الصف</span></div>
     </div>
 
@@ -2350,7 +2473,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">学生的管理</span><span class="opt-arabic">- إدارة الطلاب</span></div>
-      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">经济学的课</span><span class="opt-arabic">- مادة الاقتصاد ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">经济学的课</span><span class="opt-arabic">- مادة الاقتصاد<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">考试的成绩</span><span class="opt-arabic">- نتائج الامتحان</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">办公室的通知</span><span class="opt-arabic">- إعلان من المكتب</span></div>
     </div>
@@ -2417,7 +2540,7 @@ body.hide-pinyin .zh-pny-inner::before {
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">价格</span><span class="opt-arabic">- السعر</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">质量</span><span class="opt-arabic">- الجودة</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">样子</span><span class="opt-arabic">- الموديل</span></div>
-      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">颜色</span><span class="opt-arabic">- اللون ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">颜色</span><span class="opt-arabic">- اللون<span class="answer-mark"> ✓</span></span></div>
     </div>
 
     <div class="vocab-section">
@@ -2496,7 +2619,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">应聘</span><span class="opt-arabic">- يتقدّم لوظيفة</span></div>
-      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">报名</span><span class="opt-arabic">- التسجيل ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">报名</span><span class="opt-arabic">- التسجيل<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">上网</span><span class="opt-arabic">- يدخل النت</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">上课</span><span class="opt-arabic">- يحضر صف</span></div>
     </div>
@@ -2566,7 +2689,7 @@ body.hide-pinyin .zh-pny-inner::before {
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">女的已经睡了</span><span class="opt-arabic">- المرأة كانت نائمة</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">女的没有带手机</span><span class="opt-arabic">- المرأة لم تحمل الهاتف</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">手机一直占线</span><span class="opt-arabic">- الهاتف مشغول</span></div>
-      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">手机号码错了</span><span class="opt-arabic">- رقم الهاتف خاطئ ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">手机号码错了</span><span class="opt-arabic">- رقم الهاتف خاطئ<span class="answer-mark"> ✓</span></span></div>
     </div>
 
     <div class="vocab-section">
@@ -2632,7 +2755,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">手机坏了</span><span class="opt-arabic">- الهاتف معطّل</span></div>
-      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">走错路了</span><span class="opt-arabic">- أخذوا طريقاً خاطئاً ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">走错路了</span><span class="opt-arabic">- أخذوا طريقاً خاطئاً<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">聚会迟到了</span><span class="opt-arabic">- تأخروا عن الحفلة</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">遇到堵车了</span><span class="opt-arabic">- وقعوا في زحام</span></div>
     </div>
@@ -2700,7 +2823,7 @@ body.hide-pinyin .zh-pny-inner::before {
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">飞机晚点了</span><span class="opt-arabic">- الطائرة تأخرت</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">小钱是经理</span><span class="opt-arabic">- شياو تشيان هو المدير</span></div>
-      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">他们还没见面</span><span class="opt-arabic">- لم يلتقيا بعد ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">他们还没见面</span><span class="opt-arabic">- لم يلتقيا بعد<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">女的举着牌子</span><span class="opt-arabic">- المرأة تحمل اللافتة</span></div>
     </div>
 
@@ -2774,7 +2897,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">历史</span><span class="opt-arabic">- تاريخ</span></div>
-      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">健康</span><span class="opt-arabic">- الصحة ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">健康</span><span class="opt-arabic">- الصحة<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">音乐</span><span class="opt-arabic">- موسيقى</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">经济</span><span class="opt-arabic">- اقتصاد</span></div>
     </div>
@@ -2842,7 +2965,7 @@ body.hide-pinyin .zh-pny-inner::before {
     </div>
 
     <div class="options-list">
-      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">送了妈妈礼物</span><span class="opt-arabic">- أعطى أمه هدية ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">送了妈妈礼物</span><span class="opt-arabic">- أعطى أمه هدية<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">自己做了裙子</span><span class="opt-arabic">- صنع التنّورة بنفسه</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">赚了很多的钱</span><span class="opt-arabic">- كسب الكثير من المال</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">觉得非常感动</span><span class="opt-arabic">- شعر بتأثر كبير (الأم!)</span></div>
@@ -2916,7 +3039,7 @@ body.hide-pinyin .zh-pny-inner::before {
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">男的喜欢看书</span><span class="opt-arabic">- الرجل يحب القراءة</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">女的喜欢唱歌</span><span class="opt-arabic">- المرأة تحب الغناء</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">他们吃过饭了</span><span class="opt-arabic">- لقد أكلا</span></div>
-      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">他们明晚见面</span><span class="opt-arabic">- سيلتقيان غداً مساءً ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">他们明晚见面</span><span class="opt-arabic">- سيلتقيان غداً مساءً<span class="answer-mark"> ✓</span></span></div>
     </div>
 
     <div class="vocab-section">
@@ -2980,7 +3103,7 @@ body.hide-pinyin .zh-pny-inner::before {
     </div>
 
     <div class="options-list">
-      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">她是上海人</span><span class="opt-arabic">- هي من شانغهاي ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">她是上海人</span><span class="opt-arabic">- هي من شانغهاي<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">她喜欢北京</span><span class="opt-arabic">- تحب بكين</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">她想出国工作</span><span class="opt-arabic">- تريد العمل بالخارج</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">她是学校校长</span><span class="opt-arabic">- مديرة مدرسة</span></div>
@@ -3049,7 +3172,7 @@ body.hide-pinyin .zh-pny-inner::before {
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">男的饿了</span><span class="opt-arabic">- الرجل جائع</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">女的在吃糖</span><span class="opt-arabic">- المرأة تأكل سكر</span></div>
-      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">汤的味道不对</span><span class="opt-arabic">- طعم الحساء غير صحيح ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">汤的味道不对</span><span class="opt-arabic">- طعم الحساء غير صحيح<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">汤已经喝完了</span><span class="opt-arabic">- شربوا الحساء كله</span></div>
     </div>
 
@@ -3125,7 +3248,7 @@ body.hide-pinyin .zh-pny-inner::before {
     </div>
 
     <div class="options-list">
-      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">能了解文化</span><span class="opt-arabic">- تستطيع فهم الثقافة ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">能了解文化</span><span class="opt-arabic">- تستطيع فهم الثقافة<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">能练习英语</span><span class="opt-arabic">- ممارسة الإنجليزية</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">工作机会多</span><span class="opt-arabic">- فرص العمل كثيرة</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">生活环境好</span><span class="opt-arabic">- بيئة المعيشة جيدة</span></div>
@@ -3222,7 +3345,7 @@ body.hide-pinyin .zh-pny-inner::before {
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">发展速度慢</span><span class="opt-arabic">- نموه بطيء</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">打电话便宜</span><span class="opt-arabic">- المكالمات رخيصة (الفقرة قالت "مجاناً" 免费!)</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">用的人不多</span><span class="opt-arabic">- مستخدموه قليلون (الفقرة قالت "تقريباً كل شخص")</span></div>
-      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">改变了生活</span><span class="opt-arabic">- غيّر الحياة ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">改变了生活</span><span class="opt-arabic">- غيّر الحياة<span class="answer-mark"> ✓</span></span></div>
     </div>
 
     <div class="why-box">
@@ -3246,7 +3369,7 @@ body.hide-pinyin .zh-pny-inner::before {
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">付钱</span><span class="opt-arabic">- الدفع (مذكور في النص)</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">聊天儿</span><span class="opt-arabic">- الدردشة (مذكور)</span></div>
-      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">听广播</span><span class="opt-arabic">- الاستماع للراديو ✓ (غير مذكور)</span></div>
+      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">听广播</span><span class="opt-arabic">- الاستماع للراديو<span class="answer-mark"> ✓</span> (غير مذكور)</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">记事情</span><span class="opt-arabic">- تدوين الأحداث (مذكور)</span></div>
     </div>
 
@@ -3311,7 +3434,7 @@ body.hide-pinyin .zh-pny-inner::before {
     <p style="background:#f1f5f9;padding:10px;border-radius:8px;margin:10px 0"><b>السؤال:</b> ماذا تفعل شياو جيانغ غالباً أثناء السفر؟</p>
 
     <div class="options-list">
-      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">写日记</span><span class="opt-arabic">- كتابة اليوميات ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">写日记</span><span class="opt-arabic">- كتابة اليوميات<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">交朋友</span><span class="opt-arabic">- يصنع أصدقاء</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">学语言</span><span class="opt-arabic">- يتعلم لغات</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">画画儿</span><span class="opt-arabic">- يرسم</span></div>
@@ -3334,7 +3457,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">更有趣</span><span class="opt-arabic">- أكثر إثارة</span></div>
-      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">更勇敢</span><span class="opt-arabic">- أكثر شجاعة ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">更勇敢</span><span class="opt-arabic">- أكثر شجاعة<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">更辛苦</span><span class="opt-arabic">- أكثر تعباً</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">更浪漫</span><span class="opt-arabic">- أكثر رومانسية</span></div>
     </div>
@@ -3402,7 +3525,7 @@ body.hide-pinyin .zh-pny-inner::before {
     <p style="background:#f1f5f9;padding:10px;border-radius:8px;margin:10px 0"><b>السؤال:</b> ما هدف مبادرة "Internet+"؟</p>
 
     <div class="options-list">
-      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">提高生活质量</span><span class="opt-arabic">- رفع جودة الحياة ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">提高生活质量</span><span class="opt-arabic">- رفع جودة الحياة<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">鼓励人们学习</span><span class="opt-arabic">- تشجيع الناس على التعلم</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">减少公司竞争</span><span class="opt-arabic">- تقليل المنافسة بين الشركات</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">加快上网速度</span><span class="opt-arabic">- تسريع الإنترنت</span></div>
@@ -3427,7 +3550,7 @@ body.hide-pinyin .zh-pny-inner::before {
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">提出的时间</span><span class="opt-arabic">- وقت طرحها (2014 - مذكور)</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">提出的地点</span><span class="opt-arabic">- مكان الطرح (جياشينغ - مذكور)</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">计划的内容</span><span class="opt-arabic">- محتوى المبادرة (مذكور)</span></div>
-      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">参加的公司</span><span class="opt-arabic">- الشركات المشاركة ✓ (لم يُذكر بأسمائها)</span></div>
+      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">参加的公司</span><span class="opt-arabic">- الشركات المشاركة<span class="answer-mark"> ✓</span> (لم يُذكر بأسمائها)</span></div>
     </div>
 
     <div class="why-box">
@@ -3486,7 +3609,7 @@ body.hide-pinyin .zh-pny-inner::before {
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">书</span><span class="opt-arabic">- كتاب</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">故事</span><span class="opt-arabic">- قصة</span></div>
-      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">流行歌</span><span class="opt-arabic">- أغنية شعبية ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">流行歌</span><span class="opt-arabic">- أغنية شعبية<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">电视节目</span><span class="opt-arabic">- برنامج تلفزيوني</span></div>
     </div>
 
@@ -3514,7 +3637,7 @@ body.hide-pinyin .zh-pny-inner::before {
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">工作有成绩</span><span class="opt-arabic">- النجاح في العمل</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">经济收入高</span><span class="opt-arabic">- ارتفاع الدخل</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">身体很健康</span><span class="opt-arabic">- صحة جيدة</span></div>
-      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">多陪陪他们</span><span class="opt-arabic">- مرافقتهم أكثر ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">多陪陪他们</span><span class="opt-arabic">- مرافقتهم أكثر<span class="answer-mark"> ✓</span></span></div>
     </div>
 
     <div class="why-box">
@@ -3571,7 +3694,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">价格很便宜</span><span class="opt-arabic">- سعره رخيص (لم يُذكر)</span></div>
-      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">对身体很好</span><span class="opt-arabic">- مفيد للجسم ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">对身体很好</span><span class="opt-arabic">- مفيد للجسم<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">到处都能生长</span><span class="opt-arabic">- ينمو في كل مكان (لم يُذكر)</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">适合所有人吃</span><span class="opt-arabic">- مناسب للجميع (خطأ! السمينون يجب أن يحذروا)</span></div>
     </div>
@@ -3592,7 +3715,7 @@ body.hide-pinyin .zh-pny-inner::before {
     <p style="background:#f1f5f9;padding:10px;border-radius:8px;margin:10px 0"><b>السؤال:</b> هذه الفقرة قد تكون من أي كتاب/برنامج؟</p>
 
     <div class="options-list">
-      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">《水果与健康》</span><span class="opt-arabic">- الفاكهة والصحة ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">《水果与健康》</span><span class="opt-arabic">- الفاكهة والصحة<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">《夏天常见病》</span><span class="opt-arabic">- أمراض الصيف الشائعة</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">《教你种花草》</span><span class="opt-arabic">- يعلّمك زراعة الزهور</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">《怎么保护眼睛》</span><span class="opt-arabic">- كيف تحمي عينيك</span></div>
@@ -3657,11 +3780,20 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الجملة:</span>
-      <div class="chinese-text">使用方法在说明书上写得很 ( <span style="color:#dc2626;font-weight:bold">详细</span> )，你一看就会明白。</div>
+      <div class="chinese-text">使用方法在说明书上写得很 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">详细</span><span class="fill-blank-placeholder">_____</span>)，你一看就会明白。</div>
       <div class="pinyin-text">Shǐyòng fāngfǎ zài shuōmíngshū shàng xiě de hěn <b>xiángxì</b>, nǐ yī kàn jiù huì míngbai.</div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="fill-options-list" data-q="46" data-correct="E">
+      <span style="font-weight:bold;color:#475569;align-self:center">اختر من:</span>
+      <div class="fill-option" data-letter="A" data-word="回忆"><span class="fill-option-letter">A.</span> 回忆</div>
+      <div class="fill-option" data-letter="B" data-word="尤其"><span class="fill-option-letter">B.</span> 尤其</div>
+      <div class="fill-option" data-letter="C" data-word="眼镜"><span class="fill-option-letter">C.</span> 眼镜</div>
+      <div class="fill-option" data-letter="D" data-word="禁止"><span class="fill-option-letter">D.</span> 禁止</div>
+      <div class="fill-option" data-letter="E" data-word="详细"><span class="fill-option-letter">E.</span> 详细</div>
+      <div class="fill-option" data-letter="F" data-word="安排"><span class="fill-option-letter">F.</span> 安排</div>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p>"طريقة الاستخدام مكتوبة <b>بالتفصيل</b> في الكتيّب، بمجرد ما تنظر ستفهم."</p>
     </div>
@@ -3700,11 +3832,20 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الجملة:</span>
-      <div class="chinese-text">这部电影很有趣，让我 ( <span style="color:#dc2626;font-weight:bold">回忆</span> ) 起了美好的大学生活。</div>
+      <div class="chinese-text">这部电影很有趣，让我 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">回忆</span><span class="fill-blank-placeholder">_____</span>) 起了美好的大学生活。</div>
       <div class="pinyin-text">Zhè bù diànyǐng hěn yǒuqù, ràng wǒ <b>huíyì</b> qǐ le měihǎo de dàxué shēnghuó.</div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="fill-options-list" data-q="47" data-correct="A">
+      <span style="font-weight:bold;color:#475569;align-self:center">اختر من:</span>
+      <div class="fill-option" data-letter="A" data-word="回忆"><span class="fill-option-letter">A.</span> 回忆</div>
+      <div class="fill-option" data-letter="B" data-word="尤其"><span class="fill-option-letter">B.</span> 尤其</div>
+      <div class="fill-option" data-letter="C" data-word="眼镜"><span class="fill-option-letter">C.</span> 眼镜</div>
+      <div class="fill-option" data-letter="D" data-word="禁止"><span class="fill-option-letter">D.</span> 禁止</div>
+      <div class="fill-option" data-letter="E" data-word="详细"><span class="fill-option-letter">E.</span> 详细</div>
+      <div class="fill-option" data-letter="F" data-word="安排"><span class="fill-option-letter">F.</span> 安排</div>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p>"هذا الفيلم ممتع، جعلني <b>أتذكّر</b> أيام الجامعة الجميلة."</p>
     </div>
@@ -3733,11 +3874,20 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الجملة:</span>
-      <div class="chinese-text">王教授下午三点坐火车走，麻烦你 ( <span style="color:#dc2626;font-weight:bold">安排</span> ) 一下送他的车。</div>
+      <div class="chinese-text">王教授下午三点坐火车走，麻烦你 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">安排</span><span class="fill-blank-placeholder">_____</span>) 一下送他的车。</div>
       <div class="pinyin-text">Wáng jiàoshòu xiàwǔ sān diǎn zuò huǒchē zǒu, máfan nǐ <b>ānpái</b> yīxià sòng tā de chē.</div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="fill-options-list" data-q="48" data-correct="F">
+      <span style="font-weight:bold;color:#475569;align-self:center">اختر من:</span>
+      <div class="fill-option" data-letter="A" data-word="回忆"><span class="fill-option-letter">A.</span> 回忆</div>
+      <div class="fill-option" data-letter="B" data-word="尤其"><span class="fill-option-letter">B.</span> 尤其</div>
+      <div class="fill-option" data-letter="C" data-word="眼镜"><span class="fill-option-letter">C.</span> 眼镜</div>
+      <div class="fill-option" data-letter="D" data-word="禁止"><span class="fill-option-letter">D.</span> 禁止</div>
+      <div class="fill-option" data-letter="E" data-word="详细"><span class="fill-option-letter">E.</span> 详细</div>
+      <div class="fill-option" data-letter="F" data-word="安排"><span class="fill-option-letter">F.</span> 安排</div>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p>"البروفسور وانغ سيغادر في القطار الساعة 3 بعد الظهر، أرجو منك أن <b>ترتّب</b> سيارة لتوصيله."</p>
     </div>
@@ -3763,11 +3913,20 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الجملة:</span>
-      <div class="chinese-text">我喜欢这个城市，( <span style="color:#dc2626;font-weight:bold">尤其</span> ) 喜欢街道两边的那些大树。</div>
+      <div class="chinese-text">我喜欢这个城市，(<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">尤其</span><span class="fill-blank-placeholder">_____</span>) 喜欢街道两边的那些大树。</div>
       <div class="pinyin-text">Wǒ xǐhuan zhège chéngshì, <b>yóuqí</b> xǐhuan jiēdào liǎng biān de nàxiē dà shù.</div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="fill-options-list" data-q="49" data-correct="B">
+      <span style="font-weight:bold;color:#475569;align-self:center">اختر من:</span>
+      <div class="fill-option" data-letter="A" data-word="回忆"><span class="fill-option-letter">A.</span> 回忆</div>
+      <div class="fill-option" data-letter="B" data-word="尤其"><span class="fill-option-letter">B.</span> 尤其</div>
+      <div class="fill-option" data-letter="C" data-word="眼镜"><span class="fill-option-letter">C.</span> 眼镜</div>
+      <div class="fill-option" data-letter="D" data-word="禁止"><span class="fill-option-letter">D.</span> 禁止</div>
+      <div class="fill-option" data-letter="E" data-word="详细"><span class="fill-option-letter">E.</span> 详细</div>
+      <div class="fill-option" data-letter="F" data-word="安排"><span class="fill-option-letter">F.</span> 安排</div>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p>"أنا أحب هذه المدينة، <b>خصوصاً</b> أحب تلك الأشجار الكبيرة على جانبي الشارع."</p>
     </div>
@@ -3796,11 +3955,20 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الجملة:</span>
-      <div class="chinese-text">我最近上课的时候看不清楚黑板，估计 ( <span style="color:#dc2626;font-weight:bold">眼镜</span> ) 该换了。</div>
+      <div class="chinese-text">我最近上课的时候看不清楚黑板，估计 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">眼镜</span><span class="fill-blank-placeholder">_____</span>) 该换了。</div>
       <div class="pinyin-text">Wǒ zuìjìn shàngkè de shíhou kàn bù qīngchu hēibǎn, gūjì <b>yǎnjìng</b> gāi huàn le.</div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="fill-options-list" data-q="50" data-correct="C">
+      <span style="font-weight:bold;color:#475569;align-self:center">اختر من:</span>
+      <div class="fill-option" data-letter="A" data-word="回忆"><span class="fill-option-letter">A.</span> 回忆</div>
+      <div class="fill-option" data-letter="B" data-word="尤其"><span class="fill-option-letter">B.</span> 尤其</div>
+      <div class="fill-option" data-letter="C" data-word="眼镜"><span class="fill-option-letter">C.</span> 眼镜</div>
+      <div class="fill-option" data-letter="D" data-word="禁止"><span class="fill-option-letter">D.</span> 禁止</div>
+      <div class="fill-option" data-letter="E" data-word="详细"><span class="fill-option-letter">E.</span> 详细</div>
+      <div class="fill-option" data-letter="F" data-word="安排"><span class="fill-option-letter">F.</span> 安排</div>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p>"مؤخراً عند حضور الصف لا أرى السبورة بوضوح، أتوقع أن <b>النظارة</b> يجب تغييرها."</p>
     </div>
@@ -3853,11 +4021,20 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">— 谢清平时学习挺认真的，这次考试怎么没通过呢？<br>— 是挺奇怪的，所有人听到这个消息都很 ( <span style="color:#dc2626;font-weight:bold">吃惊</span> )。</div>
+      <div class="chinese-text">— 谢清平时学习挺认真的，这次考试怎么没通过呢？<br>— 是挺奇怪的，所有人听到这个消息都很 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">吃惊</span><span class="fill-blank-placeholder">_____</span>)。</div>
       <div class="pinyin-text">— Xiè Qīng píngshí xuéxí tǐng rènzhēn de, zhè cì kǎoshì zěnme méi tōngguò ne?<br>— Shì tǐng qíguài de, suǒyǒu rén tīngdào zhège xiāoxi dōu hěn <b>chījīng</b>.</div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="fill-options-list" data-q="51" data-correct="B">
+      <span style="font-weight:bold;color:#475569;align-self:center">اختر من:</span>
+      <div class="fill-option" data-letter="A" data-word="正式"><span class="fill-option-letter">A.</span> 正式</div>
+      <div class="fill-option" data-letter="B" data-word="吃惊"><span class="fill-option-letter">B.</span> 吃惊</div>
+      <div class="fill-option" data-letter="C" data-word="坚持"><span class="fill-option-letter">C.</span> 坚持</div>
+      <div class="fill-option" data-letter="D" data-word="允许"><span class="fill-option-letter">D.</span> 允许</div>
+      <div class="fill-option" data-letter="E" data-word="排队"><span class="fill-option-letter">E.</span> 排队</div>
+      <div class="fill-option" data-letter="F" data-word="地址"><span class="fill-option-letter">F.</span> 地址</div>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p>"— شيه تشينغ عادةً يدرس بجدية، كيف لم ينجح في هذا الامتحان؟<br>— نعم غريب جداً، كل من سمع الخبر <b>اندهش</b>."</p>
     </div>
@@ -3883,11 +4060,20 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">— 先生，加油站里不 ( <span style="color:#dc2626;font-weight:bold">允许</span> ) 打电话，这样很危险。<br>— 对不起！我马上挂掉。</div>
+      <div class="chinese-text">— 先生，加油站里不 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">允许</span><span class="fill-blank-placeholder">_____</span>) 打电话，这样很危险。<br>— 对不起！我马上挂掉。</div>
       <div class="pinyin-text">— Xiānsheng, jiāyóu zhàn lǐ bù <b>yǔnxǔ</b> dǎ diànhuà, zhèyàng hěn wēixiǎn.<br>— Duìbuqǐ! Wǒ mǎshàng guà diào.</div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="fill-options-list" data-q="52" data-correct="D">
+      <span style="font-weight:bold;color:#475569;align-self:center">اختر من:</span>
+      <div class="fill-option" data-letter="A" data-word="正式"><span class="fill-option-letter">A.</span> 正式</div>
+      <div class="fill-option" data-letter="B" data-word="吃惊"><span class="fill-option-letter">B.</span> 吃惊</div>
+      <div class="fill-option" data-letter="C" data-word="坚持"><span class="fill-option-letter">C.</span> 坚持</div>
+      <div class="fill-option" data-letter="D" data-word="允许"><span class="fill-option-letter">D.</span> 允许</div>
+      <div class="fill-option" data-letter="E" data-word="排队"><span class="fill-option-letter">E.</span> 排队</div>
+      <div class="fill-option" data-letter="F" data-word="地址"><span class="fill-option-letter">F.</span> 地址</div>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p>"— سيدي، في محطة الوقود <b>لا يُسمح</b> بالاتصال، هذا خطير جداً.<br>— آسف! سأغلق فوراً."</p>
     </div>
@@ -3916,11 +4102,20 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">— 今天的面试顺利吗？结果怎么样？<br>— 挺顺利的，明天就 ( <span style="color:#dc2626;font-weight:bold">正式</span> ) 上班了。</div>
+      <div class="chinese-text">— 今天的面试顺利吗？结果怎么样？<br>— 挺顺利的，明天就 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">正式</span><span class="fill-blank-placeholder">_____</span>) 上班了。</div>
       <div class="pinyin-text">— Jīntiān de miànshì shùnlì ma? Jiéguǒ zěnmeyàng?<br>— Tǐng shùnlì de, míngtiān jiù <b>zhèngshì</b> shàngbān le.</div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="fill-options-list" data-q="53" data-correct="A">
+      <span style="font-weight:bold;color:#475569;align-self:center">اختر من:</span>
+      <div class="fill-option" data-letter="A" data-word="正式"><span class="fill-option-letter">A.</span> 正式</div>
+      <div class="fill-option" data-letter="B" data-word="吃惊"><span class="fill-option-letter">B.</span> 吃惊</div>
+      <div class="fill-option" data-letter="C" data-word="坚持"><span class="fill-option-letter">C.</span> 坚持</div>
+      <div class="fill-option" data-letter="D" data-word="允许"><span class="fill-option-letter">D.</span> 允许</div>
+      <div class="fill-option" data-letter="E" data-word="排队"><span class="fill-option-letter">E.</span> 排队</div>
+      <div class="fill-option" data-letter="F" data-word="地址"><span class="fill-option-letter">F.</span> 地址</div>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p>"— هل كانت مقابلة العمل اليوم جيدة؟ كيف النتيجة؟<br>— جيدة، غداً سأبدأ العمل <b>رسمياً</b>."</p>
     </div>
@@ -3958,11 +4153,20 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">— 这家烤鸭店的生意特别好，每天都有人 ( <span style="color:#dc2626;font-weight:bold">排队</span> )，有时候要等半小时才能买到。<br>— 你说得我都想吃了。</div>
+      <div class="chinese-text">— 这家烤鸭店的生意特别好，每天都有人 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">排队</span><span class="fill-blank-placeholder">_____</span>)，有时候要等半小时才能买到。<br>— 你说得我都想吃了。</div>
       <div class="pinyin-text">— Zhè jiā kǎoyā diàn de shēngyi tèbié hǎo, měitiān dōu yǒu rén <b>páiduì</b>, yǒu shíhou yào děng bàn xiǎoshí cái néng mǎi dào.<br>— Nǐ shuō de wǒ dōu xiǎng chī le.</div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="fill-options-list" data-q="54" data-correct="E">
+      <span style="font-weight:bold;color:#475569;align-self:center">اختر من:</span>
+      <div class="fill-option" data-letter="A" data-word="正式"><span class="fill-option-letter">A.</span> 正式</div>
+      <div class="fill-option" data-letter="B" data-word="吃惊"><span class="fill-option-letter">B.</span> 吃惊</div>
+      <div class="fill-option" data-letter="C" data-word="坚持"><span class="fill-option-letter">C.</span> 坚持</div>
+      <div class="fill-option" data-letter="D" data-word="允许"><span class="fill-option-letter">D.</span> 允许</div>
+      <div class="fill-option" data-letter="E" data-word="排队"><span class="fill-option-letter">E.</span> 排队</div>
+      <div class="fill-option" data-letter="F" data-word="地址"><span class="fill-option-letter">F.</span> 地址</div>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p>"— تجارة هذا المحل لبط بكين رائعة، كل يوم يكون هناك ناس <b>يصطفّون في طابور</b>، أحياناً تحتاج الانتظار نصف ساعة لتشتري.<br>— تجعلني أرغب في الأكل!"</p>
     </div>
@@ -3996,11 +4200,20 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="chinese-box">
       <span class="label">📝 الحوار:</span>
-      <div class="chinese-text">— 你好！我想把这些衣服寄到北京。<br>— 好的，请你在这里填一下姓名和 ( <span style="color:#dc2626;font-weight:bold">地址</span> )。</div>
+      <div class="chinese-text">— 你好！我想把这些衣服寄到北京。<br>— 好的，请你在这里填一下姓名和 (<span class="fill-blank-answer" style="color:#dc2626;font-weight:bold">地址</span><span class="fill-blank-placeholder">_____</span>)。</div>
       <div class="pinyin-text">— Nǐ hǎo! Wǒ xiǎng bǎ zhèxiē yīfu jì dào Běijīng.<br>— Hǎo de, qǐng nǐ zài zhèlǐ tián yīxià xìngmíng hé <b>dìzhǐ</b>.</div>
     </div>
 
-    <div class="trans-box">
+    
+    <div class="fill-options-list" data-q="55" data-correct="F">
+      <span style="font-weight:bold;color:#475569;align-self:center">اختر من:</span>
+      <div class="fill-option" data-letter="A" data-word="正式"><span class="fill-option-letter">A.</span> 正式</div>
+      <div class="fill-option" data-letter="B" data-word="吃惊"><span class="fill-option-letter">B.</span> 吃惊</div>
+      <div class="fill-option" data-letter="C" data-word="坚持"><span class="fill-option-letter">C.</span> 坚持</div>
+      <div class="fill-option" data-letter="D" data-word="允许"><span class="fill-option-letter">D.</span> 允许</div>
+      <div class="fill-option" data-letter="E" data-word="排队"><span class="fill-option-letter">E.</span> 排队</div>
+      <div class="fill-option" data-letter="F" data-word="地址"><span class="fill-option-letter">F.</span> 地址</div>
+    </div><div class="trans-box">
       <span class="label">🇸🇦 الترجمة:</span>
       <p>"— مرحباً! أريد إرسال هذه الملابس إلى بكين.<br>— حسناً، يُرجى تعبئة الاسم و<b>العنوان</b> هنا."</p>
     </div>
@@ -4445,7 +4658,7 @@ body.hide-pinyin .zh-pny-inner::before {
     </div>
 
     <div class="options-list">
-      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">被很多人接受</span><span class="opt-arabic">- مقبول من كثير من الناس ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">被很多人接受</span><span class="opt-arabic">- مقبول من كثير من الناس<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">租金不太便宜</span><span class="opt-arabic">- الإيجار غير رخيص</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">东西质量很好</span><span class="opt-arabic">- جودة الأشياء جيدة</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">适合很忙的人</span><span class="opt-arabic">- مناسب للمشغولين</span></div>
@@ -4502,7 +4715,7 @@ body.hide-pinyin .zh-pny-inner::before {
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">工作的烦恼</span><span class="opt-arabic">- مشاكل العمل</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">考试的材料</span><span class="opt-arabic">- مواد الامتحان</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">面试的过程</span><span class="opt-arabic">- مسار المقابلة</span></div>
-      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">招聘的要求</span><span class="opt-arabic">- متطلبات التوظيف ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">招聘的要求</span><span class="opt-arabic">- متطلبات التوظيف<span class="answer-mark"> ✓</span></span></div>
     </div>
 
     <div class="vocab-section">
@@ -4543,7 +4756,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">速度比较快</span><span class="opt-arabic">- سرعته أعلى (الطائرة هي الأسرع!)</span></div>
-      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">总是很准时</span><span class="opt-arabic">- دائماً في موعدها ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">总是很准时</span><span class="opt-arabic">- دائماً في موعدها<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">车票很便宜</span><span class="opt-arabic">- التذكرة رخيصة</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">座位更舒服</span><span class="opt-arabic">- المقاعد مريحة</span></div>
     </div>
@@ -4590,7 +4803,7 @@ body.hide-pinyin .zh-pny-inner::before {
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">年龄很大</span><span class="opt-arabic">- كبير في السن (خطأ!)</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">成绩一般</span><span class="opt-arabic">- درجاته متوسطة (خطأ!)</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">正在读博士</span><span class="opt-arabic">- يدرس الدكتوراه الآن (خطأ - أنهاها!)</span></div>
-      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">研究环境污染</span><span class="opt-arabic">- يبحث في تلوّث البيئة ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">研究环境污染</span><span class="opt-arabic">- يبحث في تلوّث البيئة<span class="answer-mark"> ✓</span></span></div>
     </div>
 
     <div class="vocab-section">
@@ -4632,7 +4845,7 @@ body.hide-pinyin .zh-pny-inner::before {
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">叶子更大</span><span class="opt-arabic">- أوراقها أكبر</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">颜色更绿</span><span class="opt-arabic">- لونها أكثر اخضراراً</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">长得比较慢</span><span class="opt-arabic">- ينمو ببطء</span></div>
-      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">受年轻人喜爱</span><span class="opt-arabic">- محبوبة من الشباب ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">受年轻人喜爱</span><span class="opt-arabic">- محبوبة من الشباب<span class="answer-mark"> ✓</span></span></div>
     </div>
 
     <div class="vocab-section">
@@ -4672,7 +4885,7 @@ body.hide-pinyin .zh-pny-inner::before {
     </div>
 
     <div class="options-list">
-      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">多旅行</span><span class="opt-arabic">- السفر كثيراً ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">多旅行</span><span class="opt-arabic">- السفر كثيراً<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">多上网</span><span class="opt-arabic">- استخدام الإنترنت كثيراً</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">多看书</span><span class="opt-arabic">- القراءة كثيراً</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">多交流</span><span class="opt-arabic">- التواصل كثيراً</span></div>
@@ -4710,7 +4923,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">不相信爱情</span><span class="opt-arabic">- لا يؤمنون بالحب</span></div>
-      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">生活压力大</span><span class="opt-arabic">- ضغط الحياة كبير ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">生活压力大</span><span class="opt-arabic">- ضغط الحياة كبير<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">父母不支持</span><span class="opt-arabic">- الوالدان لا يؤيدان</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">工作更重要</span><span class="opt-arabic">- العمل أهم</span></div>
     </div>
@@ -4754,7 +4967,7 @@ body.hide-pinyin .zh-pny-inner::before {
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">找经理解决</span><span class="opt-arabic">- يلجأ للمدير</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">看书找答案</span><span class="opt-arabic">- يبحث في الكتب</span></div>
-      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">请同事帮忙</span><span class="opt-arabic">- يطلب مساعدة الزملاء ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">请同事帮忙</span><span class="opt-arabic">- يطلب مساعدة الزملاء<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">与父母讨论</span><span class="opt-arabic">- يناقش مع الوالدين</span></div>
     </div>
 
@@ -4794,7 +5007,7 @@ body.hide-pinyin .zh-pny-inner::before {
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">照相</span><span class="opt-arabic">- التقاط الصور</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">打车</span><span class="opt-arabic">- طلب تاكسي</span></div>
-      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">付钱</span><span class="opt-arabic">- الدفع ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">付钱</span><span class="opt-arabic">- الدفع<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">玩儿游戏</span><span class="opt-arabic">- اللعب</span></div>
     </div>
 
@@ -4838,7 +5051,7 @@ body.hide-pinyin .zh-pny-inner::before {
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">少开空调</span><span class="opt-arabic">- تشغيل المكيف قليلاً</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">不要外出</span><span class="opt-arabic">- عدم الخروج (متطرف!)</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">洗个冷水澡</span><span class="opt-arabic">- استحمام بماء بارد</span></div>
-      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">午睡一会儿</span><span class="opt-arabic">- القيلولة قليلاً ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">午睡一会儿</span><span class="opt-arabic">- القيلولة قليلاً<span class="answer-mark"> ✓</span></span></div>
     </div>
 
     <div class="vocab-section">
@@ -4880,7 +5093,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">比较卫生</span><span class="opt-arabic">- صحي</span></div>
-      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">不够节约</span><span class="opt-arabic">- غير اقتصادي ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">不够节约</span><span class="opt-arabic">- غير اقتصادي<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">能吸引顾客</span><span class="opt-arabic">- يجذب الزبائن</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">给顾客方便</span><span class="opt-arabic">- يسهّل للزبون</span></div>
     </div>
@@ -4925,7 +5138,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">应尊重老人</span><span class="opt-arabic">- يجب احترام كبار السن</span></div>
-      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">每个人都不相同</span><span class="opt-arabic">- كل شخص مختلف ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">每个人都不相同</span><span class="opt-arabic">- كل شخص مختلف<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">做自己喜欢的事</span><span class="opt-arabic">- افعل ما تحب</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">要努力了解自己</span><span class="opt-arabic">- اجتهد في فهم نفسك</span></div>
     </div>
@@ -4973,7 +5186,7 @@ body.hide-pinyin .zh-pny-inner::before {
     </div>
 
     <div class="options-list">
-      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">周围景色美</span><span class="opt-arabic">- المناظر المحيطة جميلة ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">周围景色美</span><span class="opt-arabic">- المناظر المحيطة جميلة<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">价格很合适</span><span class="opt-arabic">- السعر مناسب (لم يُذكر)</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">房间比较大</span><span class="opt-arabic">- الغرف كبيرة (لم يُذكر)</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">在公园旁边</span><span class="opt-arabic">- بجوار الحديقة</span></div>
@@ -5028,7 +5241,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">有理想</span><span class="opt-arabic">- وجود حلم</span></div>
-      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">有信心</span><span class="opt-arabic">- الثقة بالنفس ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">有信心</span><span class="opt-arabic">- الثقة بالنفس<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">增加经验</span><span class="opt-arabic">- زيادة الخبرة</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">获得机会</span><span class="opt-arabic">- الحصول على فرصة</span></div>
     </div>
@@ -5102,7 +5315,7 @@ body.hide-pinyin .zh-pny-inner::before {
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">票很难买到</span><span class="opt-arabic">- التذكرة صعبة الحصول</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">在北京举行</span><span class="opt-arabic">- في بكين (خطأ - في تيانجين!)</span></div>
-      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">八月底开始</span><span class="opt-arabic">- يبدأ نهاية أغسطس ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">C</span><span class="opt-chinese">八月底开始</span><span class="opt-arabic">- يبدأ نهاية أغسطس<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">参加的人很多</span><span class="opt-arabic">- المشاركون كثر</span></div>
     </div>
 
@@ -5123,7 +5336,7 @@ body.hide-pinyin .zh-pny-inner::before {
 
     <div class="options-list">
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">保证有票</span><span class="opt-arabic">- يضمن وجود التذاكر</span></div>
-      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">节约时间</span><span class="opt-arabic">- توفير الوقت ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">B</span><span class="opt-chinese">节约时间</span><span class="opt-arabic">- توفير الوقت<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">能打八折</span><span class="opt-arabic">- خصم 20%</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">免费送到家</span><span class="opt-arabic">- توصيل مجاني للبيت</span></div>
     </div>
@@ -5179,7 +5392,7 @@ body.hide-pinyin .zh-pny-inner::before {
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">应该完全接受</span><span class="opt-arabic">- يجب القبول الكلي (عكس النص!)</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">试着找出错误</span><span class="opt-arabic">- محاولة إيجاد الأخطاء</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">慢慢进行积累</span><span class="opt-arabic">- التراكم البطيء</span></div>
-      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">不必完全相信</span><span class="opt-arabic">- لا يجب التصديق المطلق ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">不必完全相信</span><span class="opt-arabic">- لا يجب التصديق المطلق<span class="answer-mark"> ✓</span></span></div>
     </div>
 
     <div class="why-box">
@@ -5198,7 +5411,7 @@ body.hide-pinyin .zh-pny-inner::before {
     <p style="background:#f1f5f9;padding:10px;border-radius:8px;margin:10px 0"><b>السؤال:</b> 这段话的意思是... (معنى هذه الفقرة)</p>
 
     <div class="options-list">
-      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">要有自己的看法</span><span class="opt-arabic">- يجب أن يكون لديك رأيك ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">A</span><span class="opt-chinese">要有自己的看法</span><span class="opt-arabic">- يجب أن يكون لديك رأيك<span class="answer-mark"> ✓</span></span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">要主动解决困难</span><span class="opt-arabic">- حل المشاكل بنفسك</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">知识能改变生活</span><span class="opt-arabic">- المعرفة تغيّر الحياة</span></div>
       <div class="opt-item"><span class="opt-letter">D</span><span class="opt-chinese">很多问题没答案</span><span class="opt-arabic">- مشاكل كثيرة بلا حل</span></div>
@@ -5253,7 +5466,7 @@ body.hide-pinyin .zh-pny-inner::before {
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">爱吃甜的</span><span class="opt-arabic">- يحب الحلو</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">是服务员</span><span class="opt-arabic">- نادل (خطأ - طالب جامعة!)</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">在美国当老师</span><span class="opt-arabic">- معلم في أمريكا</span></div>
-      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">更愿意自己做菜吃</span><span class="opt-arabic">- يفضّل طبخ طعامه ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">更愿意自己做菜吃</span><span class="opt-arabic">- يفضّل طبخ طعامه<span class="answer-mark"> ✓</span></span></div>
     </div>
 
     <div class="why-box">
@@ -5275,7 +5488,7 @@ body.hide-pinyin .zh-pny-inner::before {
       <div class="opt-item"><span class="opt-letter">A</span><span class="opt-chinese">自己做饭更健康</span><span class="opt-arabic">- الطبخ المنزلي أصحّ</span></div>
       <div class="opt-item"><span class="opt-letter">B</span><span class="opt-chinese">在国外要注意身体</span><span class="opt-arabic">- الانتباه للصحة بالخارج</span></div>
       <div class="opt-item"><span class="opt-letter">C</span><span class="opt-chinese">美国人很喜欢中国菜</span><span class="opt-arabic">- الأمريكيون يحبون الأكل الصيني</span></div>
-      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">美国的中国菜味道不同</span><span class="opt-arabic">- الطعام الصيني في أمريكا طعمه مختلف ✓</span></div>
+      <div class="opt-item correct"><span class="opt-letter">D</span><span class="opt-chinese">美国的中国菜味道不同</span><span class="opt-arabic">- الطعام الصيني في أمريكا طعمه مختلف<span class="answer-mark"> ✓</span></span></div>
     </div>
 
     <div class="why-box">
@@ -8736,6 +8949,176 @@ window.addEventListener('scroll', function() {
   if (window.scrollY > 400) bt.classList.add('visible');
   else bt.classList.remove('visible');
 });
+
+// =================== HIDE ANSWERS MODE ===================
+document.body.classList.add('answer-hidden');
+
+document.getElementById('toggleAnswersMock6').onclick = function() {
+  const isHidden = document.body.classList.toggle('answer-hidden');
+  if (isHidden) {
+    this.innerHTML = '🔒 الإجابات مخفية';
+    this.classList.remove('shown');
+    document.querySelectorAll('.q-card.revealed').forEach(c => c.classList.remove('revealed'));
+    document.querySelectorAll('.reveal-answer-btn.shown').forEach(b => {
+      b.classList.remove('shown');
+      b.textContent = '🔍 اظهار الإجابة';
+    });
+  } else {
+    this.innerHTML = '🔓 كل الإجابات ظاهرة';
+    this.classList.add('shown');
+  }
+};
+
+function addRevealBtnsMock6(){
+  document.querySelectorAll('.q-card').forEach(card => {
+    if (card.querySelector('.reveal-answer-btn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'reveal-answer-btn';
+    btn.textContent = '🔍 اظهار الإجابة';
+    btn.onclick = function(){
+      card.classList.toggle('revealed');
+      if (card.classList.contains('revealed')){
+        this.textContent = '🙈 إخفاء الإجابة';
+        this.classList.add('shown');
+      } else {
+        this.textContent = '🔍 اظهار الإجابة';
+        this.classList.remove('shown');
+      }
+    };
+    const header = card.querySelector('.q-header');
+    if (header && header.nextSibling){
+      card.insertBefore(btn, header.nextSibling);
+    } else {
+      card.appendChild(btn);
+    }
+  });
+}
+addRevealBtnsMock6();
+
+
+// =================== INTERACTIVE OPTION CLICKING ===================
+function attachOptionClicks(){
+  document.querySelectorAll('.q-card').forEach(card => {
+    const opts = card.querySelectorAll('.opt-item');
+    if (opts.length === 0) return;
+
+    opts.forEach(opt => {
+      if (opt.dataset.clickAttached) return;
+      opt.dataset.clickAttached = 'true';
+
+      opt.addEventListener('click', function(){
+        const isCorrect = this.classList.contains('correct');
+
+        // تنظيف حالات سابقة
+        opts.forEach(o => {
+          o.classList.remove('user-wrong','user-correct');
+          const m = o.querySelector('.user-mark');
+          if (m) m.remove();
+        });
+
+        // إضافة حالة جديدة
+        if (isCorrect){
+          this.classList.add('user-correct');
+          const m = document.createElement('span');
+          m.className = 'user-mark';
+          m.style.color = '#16a34a';
+          m.textContent = ' ✓ صحيح!';
+          this.appendChild(m);
+          // إظهار الشرح بإضافة .revealed
+          card.classList.add('revealed');
+          // إظهار صناديق الشرح كاملة
+          card.querySelectorAll('.why-box, .explain-box, .memory-box, .trans-box, .vocab-section').forEach(b => b.style.display = '');
+        } else {
+          this.classList.add('user-wrong');
+          const m = document.createElement('span');
+          m.className = 'user-mark';
+          m.style.color = '#dc2626';
+          m.textContent = ' ✗ حاول مرة أخرى';
+          this.appendChild(m);
+        }
+      });
+    });
+  });
+}
+attachOptionClicks();
+
+// إعادة الربط بعد أي إعادة بناء (في حال كان هناك)
+const obs = new MutationObserver(() => attachOptionClicks());
+obs.observe(document.body, {childList:true, subtree:true});
+
+
+// تفاعل أسئلة ملء الفراغ (Q46-55)
+function attachFillOptionClicks(){
+  document.querySelectorAll('.fill-options-list').forEach(list => {
+    if (list.dataset.attached) return;
+    list.dataset.attached = '1';
+    const correct = list.dataset.correct;
+    const card = list.closest('.q-card');
+    list.querySelectorAll('.fill-option').forEach(opt => {
+      opt.onclick = function(){
+        const letter = this.dataset.letter;
+        // تنظيف الحالات السابقة
+        list.querySelectorAll('.fill-option').forEach(o => {
+          o.classList.remove('user-correct','user-wrong');
+        });
+        if (letter === correct){
+          this.classList.add('user-correct');
+          if (card){ card.classList.add('revealed'); }
+        } else {
+          this.classList.add('user-wrong');
+          // اهتزاز بسيط
+          this.style.animation = 'shake-wrong 0.4s';
+          setTimeout(() => this.style.animation = '', 400);
+        }
+      };
+    });
+  });
+}
+attachFillOptionClicks();
+const fillObs = new MutationObserver(() => attachFillOptionClicks());
+fillObs.observe(document.body, {childList:true, subtree:true});
+
+
+// تفاعل أزرار صح/خطأ
+function attachTFClicks(){
+  document.querySelectorAll('.tf-buttons').forEach(group => {
+    if (group.dataset.attached) return;
+    group.dataset.attached = '1';
+    const correct = group.dataset.correct; // 'T' or 'F'
+    const card = group.closest('.q-card');
+    group.querySelectorAll('.tf-btn').forEach(btn => {
+      btn.onclick = function(){
+        const userAns = this.dataset.ans;
+        // تنظيف
+        group.querySelectorAll('.tf-btn').forEach(b => {
+          b.classList.remove('user-correct','user-wrong');
+        });
+        if (userAns === correct){
+          this.classList.add('user-correct');
+          this.innerHTML += ' ✓ صحيح!';
+          if (card){
+            card.classList.add('revealed');
+            card.querySelectorAll('.why-box, .explain-box, .memory-box, .trans-box, .vocab-section').forEach(b => b.style.display = '');
+          }
+        } else {
+          this.classList.add('user-wrong');
+          this.innerHTML += ' ✗ حاول مرة أخرى';
+        }
+        // إعادة النص بعد ثانيتين
+        const original = this.dataset.ans === 'T' ? '✓ صح (对)' : '✗ خطأ (错)';
+        setTimeout(() => {
+          if (!this.classList.contains('user-correct') && !this.classList.contains('user-wrong')){
+            this.innerHTML = original;
+          }
+        }, 100);
+      };
+    });
+  });
+}
+attachTFClicks();
+const tfObs = new MutationObserver(() => attachTFClicks());
+tfObs.observe(document.body, {childList:true, subtree:true});
+
 </script>
 </body>
 </html>

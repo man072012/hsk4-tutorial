@@ -39,7 +39,36 @@ audio{direction:ltr}
 .controls{position:sticky;top:80px;background:#fff;padding:12px;border-radius:8px;margin-bottom:15px;display:flex;gap:10px;flex-wrap:wrap;z-index:90}
 .controls button{padding:8px 14px;border:1px solid #ddd;background:#f8f9fa;border-radius:6px;cursor:pointer}
 .controls button.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-.hide-pinyin .pinyin{display:none}
+.hide-pinyin .pinyin,.hide-pinyin .fc-py,.hide-pinyin .keyword-pinyin{display:none}
+.hide-pinyin .explanation em{display:none}
+/* إخفاء الإجابة افتراضياً */
+.answer-hidden .answer{visibility:hidden;background:#9ca3af !important}
+.answer-hidden .option.correct{background:#f8f9fa !important;border-right-color:#ddd !important;font-weight:normal !important}
+.answer-hidden .explanation{display:none}
+.answer-hidden .question.revealed .answer{visibility:visible;background:var(--green) !important}
+.answer-hidden .question.revealed .option.correct{background:#d4edda !important;border-right-color:var(--green) !important;font-weight:bold !important}
+.answer-hidden .question.revealed .explanation{display:block}
+.reveal-btn{background:#3498db;color:#fff;padding:8px 16px;border:none;border-radius:6px;cursor:pointer;font-size:0.95em;margin:10px 5px 0 0;font-weight:bold}
+.reveal-btn:hover{background:#2980b9}
+.reveal-btn.shown{background:#27ae60}
+.answer-hidden .question:not(.revealed) .reveal-btn{background:#3498db}
+body:not(.answer-hidden) .reveal-btn{display:none}
+/* إخفاء الإجابات افتراضياً */
+.answer-hidden{filter:blur(6px);background:#94a3b8 !important;cursor:pointer;user-select:none;transition:0.3s}
+.answer-hidden:hover{filter:blur(3px)}
+.answer-revealed{filter:none;cursor:default}
+.option-correct-hidden{background:#f8f9fa !important;border-right-color:#ddd !important;font-weight:normal !important}
+.option-correct-hidden::after{content:""}
+.explanation-hidden{display:none}
+.show-answer-btn{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:bold;font-size:0.9em;margin:8px 0}
+.show-answer-btn:hover{background:linear-gradient(135deg,#f59e0b,#d97706);transform:scale(1.02)}
+.option-clickable{cursor:pointer;transition:0.2s;position:relative}
+.option-clickable:hover{background:#fff8e1 !important;transform:translateX(-3px)}
+.option-wrong{background:#fee2e2 !important;border-right-color:#dc2626 !important;color:#7f1d1d}
+.option-correct-revealed{background:#d4edda !important;border-right-color:#16a34a !important;font-weight:bold !important}
+.user-selected{outline:3px solid #94a3b8;outline-offset:2px}
+@keyframes pulse-success{0%{transform:scale(1)}50%{transform:scale(1.05);box-shadow:0 0 20px rgba(22,163,74,0.5)}100%{transform:scale(1)}}
+@keyframes shake-wrong{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
 .intro-card{background:#fff;padding:30px;border-radius:12px;margin-bottom:20px}
 .intro-card h2{color:var(--primary);margin-bottom:15px}
 .note{background:#fffde7;padding:15px;border-radius:8px;margin:15px 0;border-right:4px solid var(--accent)}
@@ -67,7 +96,8 @@ audio{direction:ltr}
 <button data-tab="grammar">📐 القواعد + البطاقات</button>
 </nav>
 <div class="controls">
-<button id="togglePinyin">👁️ Pinyin</button>
+<button id="togglePinyin">👁️ Pinyin ظاهر</button>
+<button id="toggleAnswers" style="background:#9333ea;color:#fff">🔒 الإجابات مخفية</button>
 <button id="preloadAudio" style="background:#16a34a;color:#fff">⚡ تحميل الأصوات مسبقاً</button>
 <span style="padding:8px;font-size:0.9em">المحرك:</span>
 <button class="ttseng" data-eng="iflytek">iFlytek 🇨🇳</button>
@@ -389,7 +419,7 @@ function buildListening(){
     }
     const div = document.createElement('div');
     div.className = 'question';
-    let html = '<div class="qheader"><span class="qnum">السؤال ' + num + '</span><span class="answer">الإجابة: ' + q.ans + '</span></div>';
+    let html = '<div class="qheader"><span class="qnum">السؤال ' + num + '</span><span class="answer answer-hidden" data-ans="' + q.ans + '" onclick="revealAnswer(this)">الإجابة: ' + q.ans + '</span></div>';
     const audioUrl = getAudioUrl(num);
     if (audioUrl){
       html += '<div style="background:#e8f5e9;padding:10px;border-radius:8px;margin-bottom:10px"><strong>🔊 الصوت الأصلي للاختبار:</strong><br><audio controls preload="auto" style="width:100%;margin-top:5px" src="' + audioUrl + '" data-q="' + num + '"></audio></div>';
@@ -397,18 +427,24 @@ function buildListening(){
     if (q.type === 'TF'){
       html += '<div class="chinese">' + markupChinese(q.audio) + '</div>';
       html += '<div class="chinese" style="background:#fff3e0;border-right-color:#ff6f00;direction:rtl"><strong>★ السؤال:</strong> <span style="direction:ltr;display:inline-block;unicode-bidi:isolate">' + markupChinese(q.star) + '</span></div>';
+      html += '<div class="tf-choices" data-correct="' + q.ans + '">';
+      html += '<button class="show-answer-btn" style="background:linear-gradient(135deg,#3b82f6,#2563eb);margin:5px" onclick="checkTF(this, \'T\', \'' + q.ans + '\')">✓ صحيح (T)</button>';
+      html += '<button class="show-answer-btn" style="background:linear-gradient(135deg,#dc2626,#b91c1c);margin:5px" onclick="checkTF(this, \'F\', \'' + q.ans + '\')">✗ خطأ (F)</button>';
+      html += '<div class="tf-result" style="display:none;margin-top:8px;padding:10px;border-radius:6px;font-weight:bold"></div>';
+      html += '</div>';
     } else {
       html += '<div class="chinese">' + markupChinese(q.audio).replace(/\n/g,'<br>') + '</div>';
       if (q.options){
-        html += '<div class="options">';
+        html += '<div class="options" data-correct="' + q.ans + '">';
         ['A','B','C','D'].forEach((letter, i) => {
           const isCorrect = q.ans === letter;
-          html += '<div class="option ' + (isCorrect?'correct':'') + '"><span style="font-weight:bold;color:var(--primary)">' + letter + '.</span> ' + markupChinese(q.options[i]) + '</div>';
+          html += '<div class="option option-clickable" data-letter="' + letter + '" data-correct="' + (isCorrect?'1':'0') + '" onclick="checkOption(this)"><span style="font-weight:bold;color:var(--primary)">' + letter + '.</span> ' + markupChinese(q.options[i]) + '</div>';
         });
         html += '</div>';
       }
     }
-    html += '<div class="explanation"><h4>💡 الشرح:</h4>' + q.explain + '</div>';
+    html += '<button class="show-answer-btn" onclick="toggleExplain(this)">💡 إظهار الشرح والإجابة</button>';
+    html += '<div class="explanation explanation-hidden"><h4>💡 الشرح:</h4>' + q.explain + '</div>';
     if (q.keywords){
       html += '<div class="explanation" style="background:#fce4ec;border-right-color:#c2185b"><h4>🔑 الكلمات:</h4>';
       q.keywords.forEach(kw => { html += '<div>• <span class="clickable" onclick="speak(\'' + kw[0] + '\', this)">' + kw[0] + '</span> <em>(' + kw[2] + ')</em> = ' + kw[1] + '</div>'; });
@@ -423,16 +459,17 @@ function buildListening(){
 function buildReading(){
   const c = document.getElementById('readingQuestions');
   let h = '<h2 style="color:var(--primary);margin:20px 0 10px;padding:10px;background:#fff;border-radius:8px;border-right:5px solid var(--accent)">📚 الجزء 1: ملء الفراغ (46-55)</h2>';
-  for (const n in readingFillData){ h += '<div class="question"><div class="qheader"><span class="qnum">سؤال ' + n + '</span><span class="answer">' + readingFillData[n].ans + '</span></div></div>'; }
+  for (const n in readingFillData){ h += '<div class="question"><div class="qheader"><span class="qnum">سؤال ' + n + '</span><span class="answer answer-hidden" onclick="revealAnswer(this)">' + readingFillData[n].ans + '</span></div></div>'; }
   h += '<h2 style="color:var(--primary);margin:20px 0 10px;padding:10px;background:#fff;border-radius:8px;border-right:5px solid var(--accent)">🔄 الجزء 2: ترتيب الجمل (56-65)</h2>';
-  for (const n in readingOrderData){ h += '<div class="question"><div class="qheader"><span class="qnum">سؤال ' + n + '</span><span class="answer">' + readingOrderData[n].ans + '</span></div></div>'; }
+  for (const n in readingOrderData){ h += '<div class="question"><div class="qheader"><span class="qnum">سؤال ' + n + '</span><span class="answer answer-hidden" onclick="revealAnswer(this)">' + readingOrderData[n].ans + '</span></div></div>'; }
   h += '<h2 style="color:var(--primary);margin:20px 0 10px;padding:10px;background:#fff;border-radius:8px;border-right:5px solid var(--accent)">📖 الجزء 3: نصوص + أسئلة (66-85)</h2>';
   for (const n in readingData){
     const q = readingData[n];
-    h += '<div class="question"><div class="qheader"><span class="qnum">سؤال ' + n + '</span><span class="answer">' + q.ans + '</span></div>';
+    h += '<div class="question"><div class="qheader"><span class="qnum">سؤال ' + n + '</span><span class="answer answer-hidden" onclick="revealAnswer(this)">' + q.ans + '</span></div>';
     h += '<div class="chinese">' + markupChinese(q.text) + '</div>';
     h += '<div class="chinese" style="background:#fff3e0;border-right-color:#ff6f00;direction:rtl"><strong>السؤال:</strong> <span style="direction:ltr;display:inline-block;unicode-bidi:isolate">' + markupChinese(q.q) + '</span></div>';
-    h += '<div class="explanation"><h4>💡 الشرح:</h4>' + q.explain + '</div>';
+    h += '<button class="show-answer-btn" onclick="toggleExplain(this)">💡 إظهار الشرح</button>';
+    h += '<div class="explanation explanation-hidden"><h4>💡 الشرح:</h4>' + q.explain + '</div>';
     if (q.keywords){
       h += '<div class="explanation" style="background:#fce4ec;border-right-color:#c2185b"><h4>🔑 الكلمات:</h4>';
       q.keywords.forEach(kw => { h += '<div style="margin:4px 0">• <span class="clickable" onclick="speak(\'' + kw[0] + '\', this)">' + kw[0] + '</span> <em style="color:#666;font-style:italic">(' + kw[2] + ')</em> = ' + kw[1] + '</div>'; });
@@ -624,72 +661,198 @@ document.querySelectorAll('#mainNav button').forEach(b => {
   };
 });
 
-document.getElementById('togglePinyin').onclick = () => { document.body.classList.toggle('hide-pinyin'); };
+// إظهار/إخفاء الإجابة عند النقر على الـ badge
+function revealAnswer(el){
+  el.classList.toggle('answer-hidden');
+  el.classList.toggle('answer-revealed');
+}
 
-// تحميل جميع ملفات الصوت مسبقاً لإلغاء التأخير
-document.getElementById('preloadAudio').onclick = async () => {
-  const btn = document.getElementById('preloadAudio');
-  const statusEl = document.getElementById('preloadStatus');
-  btn.disabled = true;
-  btn.textContent = '⏳ جاري التحميل...';
-
-  // استخراج الـ UUIDs الفريدة فقط (40 ملف بدلاً من 45)
-  const uniqueUuids = [...new Set(Object.values(audioUrls))];
-  let loaded = 0, failed = 0;
-
-  // تحميل بالتوازي بحد أقصى 8 ملفات في نفس الوقت
-  const batchSize = 8;
-  for (let i = 0; i < uniqueUuids.length; i += batchSize){
-    const batch = uniqueUuids.slice(i, i + batchSize);
-    await Promise.all(batch.map(uuid => {
-      return new Promise(resolve => {
-        const url = AUDIO_BASE + uuid + '.mp3';
-        const audio = new Audio();
-        audio.preload = 'auto';
-        audio.src = url;
-        audio.oncanplaythrough = () => { loaded++; resolve(); };
-        audio.onerror = () => { failed++; resolve(); };
-        // تأمين بـ timeout
-        setTimeout(() => resolve(), 8000);
-      });
-    }));
-    statusEl.textContent = `✓ ${loaded}/${uniqueUuids.length} ملف جاهز`;
-  }
-
-  btn.textContent = '✅ تم التحميل (' + loaded + ' ملف)';
-  btn.style.background = '#22c55e';
-  setTimeout(() => { btn.disabled = false; btn.textContent = '⚡ إعادة التحميل'; }, 2000);
-};
-
-let mediaStream = null, mediaRecorder = null, audioChunks = [];
-async function recordAndCompare(btn){
-  const resultDiv = btn.parentElement.querySelector('.rec-result');
-  if (btn.classList.contains('recording')){ mediaRecorder.stop(); btn.classList.remove('recording'); btn.textContent = '🎤 سجّل صوتك'; return; }
-  try {
-    if (!mediaStream) mediaStream = await navigator.mediaDevices.getUserMedia({audio:true});
-    audioChunks = [];
-    mediaRecorder = new MediaRecorder(mediaStream);
-    mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
-    mediaRecorder.onstop = async () => {
-      const blob = new Blob(audioChunks, {type:'audio/webm'});
-      const url = URL.createObjectURL(blob);
-      resultDiv.innerHTML = '<audio controls src="' + url + '"></audio><br>✅ تم التسجيل!';
-      resultDiv.classList.add('show');
-    };
-    mediaRecorder.start();
-    btn.classList.add('recording');
-    btn.textContent = '⏹️ إيقاف';
-  } catch(e){
-    resultDiv.innerHTML = '❌ يحتاج HTTP';
-    resultDiv.classList.add('show');
+// إظهار/إخفاء الشرح
+function toggleExplain(btn){
+  const next = btn.nextElementSibling;
+  if (next && next.classList.contains('explanation-hidden')){
+    next.classList.remove('explanation-hidden');
+    btn.textContent = '🙈 إخفاء الشرح';
+    // أيضاً أظهر الإجابة في نفس السؤال
+    const ans = btn.parentElement.querySelector('.answer');
+    if (ans) { ans.classList.remove('answer-hidden'); ans.classList.add('answer-revealed'); }
+  } else if (next){
+    next.classList.add('explanation-hidden');
+    btn.textContent = '💡 إظهار الشرح';
   }
 }
 
+// تفاعل مع خيارات الـ TF
+function checkTF(btn, choice, correct){
+  const result = btn.parentElement.querySelector('.tf-result');
+  if (choice === correct){
+    result.style.background = '#d4edda';
+    result.style.color = '#16a34a';
+    result.innerHTML = '✓ إجابة صحيحة! الإجابة: ' + (correct === 'T' ? 'صحيح' : 'خطأ');
+  } else {
+    result.style.background = '#fee2e2';
+    result.style.color = '#dc2626';
+    result.innerHTML = '✗ إجابة خاطئة. الإجابة الصحيحة: ' + (correct === 'T' ? 'صحيح ✓' : 'خطأ ✗');
+  }
+  result.style.display = 'block';
+  // كشف الإجابة في الـ badge
+  const ans = btn.closest('.question').querySelector('.answer');
+  if (ans){ ans.classList.remove('answer-hidden'); ans.classList.add('answer-revealed'); }
+}
+
+// تفاعل مع خيارات الـ MC
+function checkOption(opt){
+  const isCorrect = opt.dataset.correct === '1';
+  const question = opt.closest('.question');
+  const allOptions = opt.parentElement.querySelectorAll('.option');
+
+  // إزالة أي حالات سابقة (يسمح بإعادة المحاولة)
+  allOptions.forEach(o => {
+    o.classList.remove('option-wrong','option-correct-revealed','user-selected');
+  });
+  opt.classList.add('user-selected');
+
+  if (isCorrect){
+    opt.classList.add('option-correct-revealed');
+    // اهتزاز نجاح خفيف
+    opt.style.animation = 'pulse-success 0.5s';
+    setTimeout(() => opt.style.animation = '', 500);
+    // إظهار الشرح كاملاً
+    if (question) question.classList.add('revealed');
+    // أيقونة ✓ بجانب
+    const checkmark = opt.querySelector('.user-mark');
+    if (!checkmark){
+      const m = document.createElement('span');
+      m.className = 'user-mark';
+      m.style.cssText = 'color:#16a34a;font-weight:bold;margin-right:8px;font-size:1.2em';
+      m.textContent = ' ✓ صحيح!';
+      opt.appendChild(m);
+    }
+  } else {
+    opt.classList.add('option-wrong');
+    // اهتزاز خطأ
+    opt.style.animation = 'shake-wrong 0.4s';
+    setTimeout(() => opt.style.animation = '', 400);
+    // أيقونة ✗
+    const wrongmark = opt.querySelector('.user-mark');
+    if (!wrongmark){
+      const m = document.createElement('span');
+      m.className = 'user-mark';
+      m.style.cssText = 'color:#dc2626;font-weight:bold;margin-right:8px;font-size:1.2em';
+      m.textContent = ' ✗ حاول مرة أخرى';
+      opt.appendChild(m);
+    }
+    // إزالة العلامات السابقة من الخيارات الأخرى
+    allOptions.forEach(o => {
+      if (o !== opt) {
+        const um = o.querySelector('.user-mark');
+        if (um) um.remove();
+      }
+    });
+  }
+
+  // كشف badge الإجابة
+  const ans = question ? question.querySelector('.answer') : null;
+  if (ans){ ans.classList.remove('answer-hidden'); ans.classList.add('answer-revealed'); }
+}
+
+// إظهار/إخفاء كل الإجابات دفعة واحدة
+let allAnswersShown = false;
+document.getElementById('toggleAnswers').onclick = function(){
+  allAnswersShown = !allAnswersShown;
+  const answers = document.querySelectorAll('.answer');
+  const explanations = document.querySelectorAll('.explanation');
+  const showBtns = document.querySelectorAll('.show-answer-btn');
+  if (allAnswersShown){
+    answers.forEach(a => { a.classList.remove('answer-hidden'); a.classList.add('answer-revealed'); });
+    explanations.forEach(e => e.classList.remove('explanation-hidden'));
+    this.innerHTML = '🙊 إخفاء كل الإجابات';
+    this.style.background = '#dc2626';
+  } else {
+    answers.forEach(a => { a.classList.add('answer-hidden'); a.classList.remove('answer-revealed'); });
+    explanations.forEach(e => e.classList.add('explanation-hidden'));
+    this.innerHTML = '🙈 إظهار كل الإجابات';
+    this.style.background = '#fbbf24';
+  }
+};
+
+document.getElementById('togglePinyin').onclick = function() {
+  document.body.classList.toggle('hide-pinyin');
+  if (document.body.classList.contains('hide-pinyin')) {
+    this.innerHTML = '🙈 Pinyin مخفي';
+    this.style.background = '#fbbf24';
+  } else {
+    this.innerHTML = '👁️ Pinyin ظاهر';
+    this.style.background = '';
+  }
+};
+
+// إخفاء/إظهار جميع الإجابات
+document.body.classList.add('answer-hidden');  // مخفية بشكل افتراضي
+document.getElementById('toggleAnswers').onclick = function() {
+  const isHidden = document.body.classList.toggle('answer-hidden');
+  if (isHidden) {
+    this.innerHTML = '🔒 الإجابات مخفية';
+    this.style.background = '#9333ea';
+    document.querySelectorAll('.question.revealed').forEach(q => q.classList.remove('revealed'));
+    document.querySelectorAll('.reveal-btn.shown').forEach(b => {
+      b.classList.remove('shown');
+      b.textContent = '🔍 اظهار الإجابة';
+    });
+    // إعادة تنظيف خيارات المستخدم
+    document.querySelectorAll('.option').forEach(o => {
+      o.classList.remove('option-wrong','option-correct-revealed','user-selected');
+      const m = o.querySelector('.user-mark');
+      if (m) m.remove();
+    });
+  } else {
+    this.innerHTML = '🔓 كل الإجابات ظاهرة';
+    this.style.background = '#16a34a';
+    // فك .answer-hidden داخل span.answer
+    document.querySelectorAll('span.answer.answer-hidden').forEach(s => {
+      s.classList.remove('answer-hidden');
+      s.classList.add('answer-revealed');
+    });
+  }
+};
+
+// إضافة زر "اظهار الإجابة" لكل سؤال
+function addRevealButtons(){
+  document.querySelectorAll('.question').forEach(q => {
+    if (q.querySelector('.reveal-btn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'reveal-btn';
+    btn.textContent = '🔍 اظهار الإجابة';
+    btn.onclick = function(){
+      q.classList.toggle('revealed');
+      if (q.classList.contains('revealed')){
+        this.textContent = '🙈 إخفاء الإجابة';
+        this.classList.add('shown');
+      } else {
+        this.textContent = '🔍 اظهار الإجابة';
+        this.classList.remove('shown');
+      }
+    };
+    const qheader = q.querySelector('.qheader');
+    if (qheader && qheader.nextSibling){
+      q.insertBefore(btn, qheader.nextSibling);
+    } else {
+      q.appendChild(btn);
+    }
+  });
+}
+
+// تشغيل البناء
 buildListening();
 buildReading();
 buildWriting();
 buildFlashcards();
 buildGrammar();
+addRevealButtons();
+
+// إعادة الربط بعد أي إعادة بناء
+const observer = new MutationObserver(() => addRevealButtons());
+observer.observe(document.body, {childList:true, subtree:true});
 </script>
 </body>
 </html>
