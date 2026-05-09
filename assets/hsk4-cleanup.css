@@ -133,7 +133,7 @@ body:not([data-active-tab]) #listening{display:block !important}
     text-align:right;
     font-size:15px !important;
   }
-  
+
   /* Hamburger button */
   .nav-toggle-btn{
     display:flex !important;
@@ -153,21 +153,21 @@ body:not([data-active-tab]) #listening{display:block !important}
     font-size:20px;
     box-shadow:0 4px 12px rgba(0,0,0,0.15);
   }
-  
+
   /* Hide language selector on mobile (cluttering) */
   .m6-lang,
   .mk9-lang,
   .hsk-lang{
     display:none !important;
   }
-  
+
   /* Topbar smaller padding on mobile */
   .m6-topbar,
   .mk9-topbar,
   .hsk-topbar{
     padding:10px 14px !important;
   }
-  
+
   /* Brand smaller on mobile */
   .m6-brand,
   .hsk-brand{
@@ -234,7 +234,7 @@ body.mk9-redesign .flashcard-grid{
   width:100% !important;
 }
 
-/* Desktop ≥601px: each card capped at 280px max - prevents stretching */
+/* Desktop ≥901px: each card capped at 280px max - prevents stretching */
 @media (min-width:901px){
   html body .flashcard-grid,
   body.mock6-redesign .flashcard-grid,
@@ -282,4 +282,4 @@ body.mock6-redesign .flashcard{
   padding:14px !important;
 }
 
-/* Image insid
+/* Image inside card -
