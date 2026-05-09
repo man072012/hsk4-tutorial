@@ -52,9 +52,8 @@
   }
   
   ready(function(){
-    // === Add hamburger button for mobile (with retry for late-injected topbars) ===
+    // === Add hamburger button for mobile (persistent injection) ===
     function injectNavToggle(){
-      // Prefer the inner container (m6-topbar-inner) for proper flex layout
       const target = document.querySelector('.m6-topbar-inner, .mk9-topbar-inner') ||
                      document.querySelector('.m6-topbar, .mk9-topbar, .hsk-topbar');
       if (!target) return false;
@@ -66,6 +65,7 @@
       btn.setAttribute('aria-expanded', 'false');
       btn.setAttribute('aria-controls', 'main-nav-menu');
       btn.innerHTML = '☰';
+      btn.style.cssText = 'display:flex;width:44px;height:44px;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(135deg,#0b63ce,#064aa3);color:#fff;border:none;cursor:pointer;flex-shrink:0;font-size:20px;box-shadow:0 4px 12px rgba(0,0,0,0.15);font-weight:bold;';
       btn.onclick = function(){
         const isOpen = document.body.classList.toggle('nav-open');
         this.setAttribute('aria-expanded', String(isOpen));
@@ -74,20 +74,20 @@
       target.appendChild(btn);
       return true;
     }
-    // Try immediately
-    if (!injectNavToggle()){
-      // Topbar may be created later by mock6-redesign.js - retry a few times
-      let tries = 0;
-      const retry = setInterval(() => {
-        if (injectNavToggle() || ++tries > 20) clearInterval(retry);
-      }, 200);
-      // Also observe DOM changes
-      const obs = new MutationObserver(() => {
-        if (injectNavToggle()){ obs.disconnect(); clearInterval(retry); }
-      });
+    // Persistent injection: try every 300ms for up to 6 seconds
+    injectNavToggle();
+    let navTries = 0;
+    const navRetry = setInterval(() => {
+      if (injectNavToggle() || ++navTries > 20) clearInterval(navRetry);
+    }, 300);
+    // Re-inject if removed by other scripts (defensive)
+    setTimeout(() => {
+      const obs = new MutationObserver(() => { injectNavToggle(); });
       obs.observe(document.body, {childList: true, subtree: true});
-    }
-    
+      // Final attempt
+      setTimeout(() => injectNavToggle(), 2000);
+    }, 100);
+
     // === Convert nav links to tab switchers ===
     document.querySelectorAll('.m6-mini-nav a, .mk9-mini-nav a, .hsk-nav a').forEach(link => {
       const href = link.getAttribute('href') || '';
@@ -112,10 +112,4 @@
     });
     
     // === Determine initial active tab ===
-    const hash = location.hash;
-    let initialTab = TAB_MAP[hash] || 'listening';
-    
-    // Check if it exists, fallback to listening
-    if (!document.getElementById(initialTab)){
-      // Try first available tab
-      const first = document.querySelect
+    const hash = location.ha

@@ -393,21 +393,7 @@ html body .pinyin-toggle-floating{
   inset-inline-end:auto !important;
 }
 /* Use position via direction-aware logical property */
-[dir="rtl"] #pinyinToggle,
-[dir="rtl"] #togglePinyin,
-[dir="rtl"] .pinyin-toggle-floating,
-html[dir="rtl"] body #pinyinToggle,
-html[dir="rtl"] body .pinyin-toggle-floating{
-  right:20px !important;
-  left:auto !important;
-  bottom:78px !important;
-}
-[dir="ltr"] #pinyinToggle,
-[dir="ltr"] .pinyin-toggle-floating{
-  left:20px !important;
-  right:auto !important;
-  bottom:78px !important;
-}
+
 
 /* ============================================================
    === MOCK6 ROUND 3 PATCHES ===
@@ -479,4 +465,20 @@ html body .skip-link:focus{
 /* R3-6: Force-load images on tab activation (CSS hint via content-visibility) */
 html body .tab-content img{
   content-visibility:auto !important;
+}
+
+/* === FINAL pinyin position override (highest specificity) === */
+html[dir="rtl"] body #pinyinToggle.pinyin-toggle-floating,
+html[dir="rtl"] body #togglePinyin.pinyin-toggle-floating,
+html[dir="rtl"] body #pinyinToggle,
+html[dir="rtl"] body #togglePinyin,
+body.mock6-redesign #pinyinToggle,
+body.mock6-redesign #togglePinyin,
+body.mk9-redesign #pinyinToggle{
+  right:auto !important;
+  left:20px !important;
+  inset-inline:auto !important;
+  bottom:78px !important;
+  height:44px !important;
+  min-height:44px !important;
 }
