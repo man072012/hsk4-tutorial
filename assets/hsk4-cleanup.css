@@ -1,0 +1,120 @@
+/* HSK4 Cleanup Layer - Remove visual clutter
+   Goal: Keep only essential controls (Pinyin toggle + Answer toggle).
+   Remove redundant floating buttons (dark mode, summary, tools).
+*/
+
+/* === HIDE redundant floating elements === */
+.dark-mode-btn,
+button[aria-label*="ملخص"],
+button[aria-label*="ليلي"],
+button[aria-label*="نهاري"],
+.hsk-stage5-tool-main,
+.hsk-stage5-tool-menu,
+.hsk-mobile-menu-btn,
+.mk9-tool-bar,
+.m6-tool-bar,
+.hsk-floating-tools,
+.toggle-answers-btn{
+  display:none !important;
+}
+
+/* "تحليل تعليمي" chip - hide it */
+.q-card .hsk-chip,
+.mk9-question-shell .mk9-chip{
+  display:none !important;
+}
+
+/* === Keep only essential toggles - reposition cleanly === */
+#pinyinToggle,
+#togglePinyin{
+  position:fixed !important;
+  top:auto !important;
+  bottom:20px !important;
+  right:20px !important;
+  left:auto !important;
+  z-index:1000;
+  background:linear-gradient(135deg,#0b63ce,#064aa3) !important;
+  color:#fff !important;
+  padding:10px 18px !important;
+  border-radius:25px !important;
+  font-weight:bold !important;
+  box-shadow:0 6px 20px rgba(11,99,206,0.3) !important;
+  border:2px solid #fff !important;
+  font-size:14px !important;
+}
+
+/* Answer toggle as part of each question instead of floating bar */
+#toggleAnswers,
+#toggleAnswersMock6{
+  display:none !important;
+}
+
+/* Reveal button inline with each question */
+.reveal-btn,
+.reveal-answer-btn{
+  display:inline-flex !important;
+  align-items:center;
+  gap:6px;
+  background:linear-gradient(135deg,#3b82f6,#2563eb) !important;
+  color:#fff !important;
+  padding:8px 16px !important;
+  border-radius:8px !important;
+  font-weight:bold !important;
+  border:none !important;
+  cursor:pointer !important;
+  margin:8px 4px !important;
+  font-size:14px !important;
+  box-shadow:0 2px 8px rgba(59,130,246,0.3) !important;
+}
+
+.reveal-btn:hover,
+.reveal-answer-btn:hover{
+  transform:scale(1.03);
+  box-shadow:0 4px 12px rgba(59,130,246,0.4) !important;
+}
+
+.reveal-btn.shown,
+.reveal-answer-btn.shown{
+  background:linear-gradient(135deg,#16a34a,#15803d) !important;
+  box-shadow:0 2px 8px rgba(22,163,74,0.3) !important;
+}
+
+/* Mobile responsive */
+@media (max-width:600px){
+  #pinyinToggle,
+  #togglePinyin{
+    bottom:14px !important;
+    right:14px !important;
+    padding:8px 14px !important;
+    font-size:13px !important;
+  }
+}
+
+/* Hide the bottom "أدوات" tool bar from release-hardening */
+.hsk-stage5-tools-frame,
+[class*="tools-frame"],
+[class*="floating-tools"]{
+  display:none !important;
+}
+
+/* The yellow tip banner - keep but make less floaty */
+.hsk-tip-banner{
+  position:relative !important;
+  top:auto !important;
+  margin:12px 0 18px !important;
+}
+
+/* progress bar - keep but make subtler */
+#progress-bar{
+  height:4px !important;
+}
+#progress-text{
+  font-size:10px !important;
+  padding:1px 6px !important;
+}
+
+/* Service Worker badge / install prompt - hide if any */
+[class*="install"],
+[class*="prompt-banner"]{
+  display:none !important;
+}
