@@ -566,3 +566,49 @@ html[lang] body .skip-nav:focus{
   top:0 !important;
   outline:3px solid #facc15 !important;
 }
+
+/* ============================================================
+   === ROUND 5 PATCHES ===
+   ============================================================ */
+
+/* R5-1: Nav menu full-width on mobile (override broken inset-inline math) */
+@media (max-width:860px){
+  html body .m6-mini-nav,
+  html body .mk9-mini-nav,
+  html body .hsk-nav,
+  body.nav-open .m6-mini-nav,
+  body.nav-open .mk9-mini-nav,
+  body.nav-open .hsk-nav{
+    inset-inline-start:auto !important;
+    inset-inline-end:auto !important;
+    inset-inline:unset !important;
+    left:12px !important;
+    right:12px !important;
+    width:auto !important;
+    top:100% !important;
+    margin-top:6px !important;
+    z-index:9500 !important;
+  }
+  /* Make m6-topbar the containing block (so absolute children align correctly) */
+  html body .m6-topbar,
+  html body .mk9-topbar,
+  html body .hsk-topbar{
+    position:sticky !important;
+    top:0 !important;
+  }
+}
+
+/* R5-2: Skip-nav fully hidden then fully shown on focus */
+html body a.skip-nav,
+html body .skip-nav,
+html body .skip-link{
+  top:-120px !important;
+}
+html body a.skip-nav:focus,
+html body a.skip-link:focus,
+html body .skip-nav:focus,
+html body .skip-link:focus,
+html[lang] body .skip-nav:focus{
+  top:0 !important;
+  outline:3px solid #facc15 !important;
+}
