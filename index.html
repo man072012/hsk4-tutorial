@@ -107,11 +107,13 @@ footer a:hover{text-decoration:underline}
 .tip-close{position:absolute;top:8px;left:12px;background:transparent;border:none;color:#7c2d12;font-size:24px;font-weight:bold;cursor:pointer;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:0.2s;line-height:1}
 .tip-close:hover{background:rgba(124,45,18,0.15);transform:scale(1.1)}
 .intro-tip{position:relative}
-
+.skip-link{position:absolute;top:-100px;right:0;background:#c0392b;color:#fff;padding:8px 16px;border-radius:0 0 0 8px;z-index:10000;text-decoration:none;transition:top 0.2s;font-weight:bold}
+.skip-link:focus{top:0;outline:3px solid #fbbf24}
 </style>
 </head>
 <body>
-<main id="main">
+<a href="#main" class="skip-link">⏭️ تخطي إلى المحتوى الرئيسي</a>
+<main id="main" tabindex="-1">
 <div class="container">
   <header>
     <h1>📚 HSK4 - دليل بالعربية</h1>
@@ -144,9 +146,9 @@ footer a:hover{text-decoration:underline}
           <li><span class="icon" aria-hidden="true">🎤</span> تسجيل ومقارنة النطق</li>
         </ul>
         <div class="stats" role="group" aria-label="إحصائيات الاختبار 6">
-          <div class="stat"><div class="stat-num">100</div><div class="stat-label">سؤال</div></div>
-          <div class="stat"><div class="stat-num">54</div><div class="stat-label">بطاقة</div></div>
-          <div class="stat"><div class="stat-num">10</div><div class="stat-label">قاعدة</div></div>
+          <div class="stat" aria-label="100 سؤال"><div class="stat-num" aria-hidden="true">100</div><div class="stat-label" aria-hidden="true">سؤال</div></div>
+          <div class="stat" aria-label="54 بطاقة"><div class="stat-num" aria-hidden="true">54</div><div class="stat-label" aria-hidden="true">بطاقة</div></div>
+          <div class="stat" aria-label="10 قاعدة"><div class="stat-num" aria-hidden="true">10</div><div class="stat-label" aria-hidden="true">قاعدة</div></div>
         </div>
         <div class="btn">ابدأ الآن ←</div>
       </div>
@@ -169,9 +171,9 @@ footer a:hover{text-decoration:underline}
           <li><span class="icon" aria-hidden="true">📐</span> 20 قاعدة نحوية (ضعف رقم 6)</li>
         </ul>
         <div class="stats" role="group" aria-label="إحصائيات الاختبار 9">
-          <div class="stat"><div class="stat-num">100</div><div class="stat-label">سؤال</div></div>
-          <div class="stat"><div class="stat-num">57</div><div class="stat-label">بطاقة</div></div>
-          <div class="stat"><div class="stat-num">20</div><div class="stat-label">قاعدة</div></div>
+          <div class="stat" aria-label="100 سؤال"><div class="stat-num" aria-hidden="true">100</div><div class="stat-label" aria-hidden="true">سؤال</div></div>
+          <div class="stat" aria-label="57 بطاقة"><div class="stat-num" aria-hidden="true">57</div><div class="stat-label" aria-hidden="true">بطاقة</div></div>
+          <div class="stat" aria-label="20 قاعدة"><div class="stat-num" aria-hidden="true">20</div><div class="stat-label" aria-hidden="true">قاعدة</div></div>
         </div>
         <div class="btn">ابدأ الآن ←</div>
       </div>
@@ -188,19 +190,4 @@ footer a:hover{text-decoration:underline}
 <script>
 (function(){
   var tip = document.getElementById('introTip');
-  var btn = document.getElementById('closeTip');
-  var KEY = 'hsk4_intro_dismissed';
-  if (localStorage.getItem(KEY) === '1' && tip){
-    tip.style.display = 'none';
-  }
-  if (btn){
-    btn.addEventListener('click', function(){
-      if (tip) tip.style.display = 'none';
-      localStorage.setItem(KEY, '1');
-    });
-  }
-})();
-</script>
-
-</body>
-</html>
+  var bt
