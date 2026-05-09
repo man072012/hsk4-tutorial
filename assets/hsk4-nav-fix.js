@@ -144,5 +144,11 @@
         }
       }
     });
+
+    // Skip-nav: add class on focus (works around :focus pseudo edge cases)
+    document.querySelectorAll('.skip-nav, .skip-link').forEach(function(el){
+      el.addEventListener('focus', function(){ this.classList.add('skip-nav-shown'); });
+      el.addEventListener('blur', function(){ this.classList.remove('skip-nav-shown'); });
+    });
   });
 })();

@@ -661,3 +661,11 @@ html body .skip-nav:focus-within{
   outline:3px solid #facc15 !important;
   outline-offset:0 !important;
 }
+
+/* R6-2 patch: skip-nav-shown class applied via JS focus listener (bypass :focus pseudo issues) */
+html body .skip-nav.skip-nav-shown,
+html body .skip-link.skip-nav-shown,
+html body a.skip-nav.skip-nav-shown{
+  top:0 !important;
+  outline:3px solid #facc15 !important;
+}
