@@ -11,7 +11,7 @@
 <meta property="og:description" content="دليل تعليمي تفاعلي للاختبارات المحاكية رقم 6 و 9 بأسلوب الفهم بدون حفظ - 200 سؤال + بطاقات ذاكرة + نطق صيني">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://man072012.github.io/hsk4-tutorial/">
-<meta property="og:image" content="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630' viewBox='0 0 1200 630'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23667eea'/%3E%3Cstop offset='1' stop-color='%23764ba2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='630' fill='url(%23g)'/%3E%3Ctext x='600' y='280' font-size='180' text-anchor='middle' fill='white' font-weight='bold' font-family='sans-serif'%3E📚 HSK4%3C/text%3E%3Ctext x='600' y='400' font-size='60' text-anchor='middle' fill='white' font-family='sans-serif'%3Eدليل تعليمي بالعربية%3C/text%3E%3Ctext x='600' y='500' font-size='42' text-anchor='middle' fill='%23fbbf24' font-family='sans-serif'%3E200 سؤال + بطاقات + نطق + اختبار ذاتي%3C/text%3E%3C/svg%3E">
+<meta property="og:image" content="https://man072012.github.io/hsk4-tutorial/og-image.png">
 <meta property="og:image:alt" content="HSK4 - دليل تعليمي بالعربية">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -103,6 +103,11 @@ footer a:hover{text-decoration:underline}
   .intro-tip{font-size:0.95em;padding:12px 14px}
   .card-recommended::before,.card-advanced::before{font-size:0.7em;padding:4px 10px}
 }
+
+.tip-close{position:absolute;top:8px;left:12px;background:transparent;border:none;color:#7c2d12;font-size:24px;font-weight:bold;cursor:pointer;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:0.2s;line-height:1}
+.tip-close:hover{background:rgba(124,45,18,0.15);transform:scale(1.1)}
+.intro-tip{position:relative}
+
 </style>
 </head>
 <body>
@@ -114,7 +119,8 @@ footer a:hover{text-decoration:underline}
     <span class="badge" role="note">✨ بأسلوب الفهم بدون حفظ</span>
   </header>
 
-  <div class="intro-tip" role="note" aria-label="إرشاد للمبتدئين">
+  <div class="intro-tip" id="introTip" role="note" aria-label="إرشاد للمبتدئين">
+    <button class="tip-close" id="closeTip" aria-label="إغلاق التلميح" title="إغلاق">×</button>
     💡 <strong>هل أنت جديد على HSK4؟</strong> ابدأ بـ<strong>الاختبار رقم 6</strong> أولاً (شرح أوسع وتفصيل أكبر). بعدها انتقل إلى <strong>الاختبار رقم 9</strong> للتدرّب على الصوت الأصلي والميزات المتقدمة.
   </div>
 
@@ -178,5 +184,23 @@ footer a:hover{text-decoration:underline}
   </footer>
 </div>
 </main>
+
+<script>
+(function(){
+  var tip = document.getElementById('introTip');
+  var btn = document.getElementById('closeTip');
+  var KEY = 'hsk4_intro_dismissed';
+  if (localStorage.getItem(KEY) === '1' && tip){
+    tip.style.display = 'none';
+  }
+  if (btn){
+    btn.addEventListener('click', function(){
+      if (tip) tip.style.display = 'none';
+      localStorage.setItem(KEY, '1');
+    });
+  }
+})();
+</script>
+
 </body>
 </html>
