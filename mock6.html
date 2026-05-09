@@ -21,6 +21,8 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="📚 HSK4 Mock 6 - دليل بالعربية" name="twitter:title"/>
 <meta content="دليل تعليمي تفاعلي للاختبار المحاكي رقم 6 من HSK4" name="twitter:description"/>
+<meta name="twitter:image" content="https://man072012.github.io/hsk4-tutorial/og-mock6.png"/>
+<meta name="twitter:image:alt" content="HSK4 Mock 6 - دليل بالعربية"/>
 <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23667eea'/%3E%3Ctext x='50' y='65' font-size='50' text-anchor='middle' fill='white' font-weight='bold'%3E中%3C/text%3E%3C/svg%3E" rel="icon"/>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -926,6 +928,17 @@ body.show-summary .summary-card{display:block}
 .summary-correct{color:#16a34a}
 .summary-wrong{color:#dc2626}
 .summary-pending{color:#9ca3af}
+
+
+/* HSK Strategic Listening Tip Banner */
+.hsk-tip-banner{position:sticky;top:10px;background:linear-gradient(135deg,#fff7ed,#ffedd5);border:2px solid #f59e0b;border-radius:14px;padding:14px 18px;margin:18px 0;box-shadow:0 6px 20px rgba(245,158,11,0.18);z-index:50;display:flex;align-items:flex-start;gap:14px;animation:tipPulse 2s ease-in-out infinite alternate}
+.hsk-tip-banner .tip-icon{font-size:2.2em;line-height:1;flex-shrink:0;animation:tipBounce 1.5s ease-in-out infinite}
+.hsk-tip-banner .tip-content{flex:1;color:#7c2d12;font-size:1em;line-height:1.7}
+.hsk-tip-banner b{color:#9a3412}
+@keyframes tipPulse{from{box-shadow:0 6px 20px rgba(245,158,11,0.18)}to{box-shadow:0 8px 28px rgba(245,158,11,0.35)}}
+@keyframes tipBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media (max-width:600px){.hsk-tip-banner{font-size:0.92em;padding:12px;flex-direction:column;text-align:center}.hsk-tip-banner .tip-icon{font-size:1.8em}}
+@media (prefers-reduced-motion:reduce){.hsk-tip-banner,.hsk-tip-banner .tip-icon{animation:none}}
 
 </style>
 <link href="assets/hsk4-mock6-redesign.css" rel="stylesheet"/>

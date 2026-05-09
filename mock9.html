@@ -114,6 +114,17 @@ body.dark-mode .dark-mode-btn{background:#fbbf24;color:#1e293b}
 body.show-summary .summary-card{display:block}
 .summary-stat{display:inline-block;margin:6px;padding:8px 14px;background:#fff;border-radius:8px;font-weight:bold}
 
+
+/* HSK Strategic Listening Tip Banner */
+.hsk-tip-banner{position:sticky;top:10px;background:linear-gradient(135deg,#fff7ed,#ffedd5);border:2px solid #f59e0b;border-radius:14px;padding:14px 18px;margin:18px 0;box-shadow:0 6px 20px rgba(245,158,11,0.18);z-index:50;display:flex;align-items:flex-start;gap:14px;animation:tipPulse 2s ease-in-out infinite alternate}
+.hsk-tip-banner .tip-icon{font-size:2.2em;line-height:1;flex-shrink:0;animation:tipBounce 1.5s ease-in-out infinite}
+.hsk-tip-banner .tip-content{flex:1;color:#7c2d12;font-size:1em;line-height:1.7}
+.hsk-tip-banner b{color:#9a3412}
+@keyframes tipPulse{from{box-shadow:0 6px 20px rgba(245,158,11,0.18)}to{box-shadow:0 8px 28px rgba(245,158,11,0.35)}}
+@keyframes tipBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media (max-width:600px){.hsk-tip-banner{font-size:0.92em;padding:12px;flex-direction:column;text-align:center}.hsk-tip-banner .tip-icon{font-size:1.8em}}
+@media (prefers-reduced-motion:reduce){.hsk-tip-banner,.hsk-tip-banner .tip-icon{animation:none}}
+
 </style>
 <link href="assets/hsk4-mock9-redesign.css" rel="stylesheet"/>
 <meta content="#0b63ce" name="theme-color"/>
