@@ -1,5 +1,17 @@
 /* HSK4 Navigation: tab-based + mobile hamburger + nav-toggle injection */
 (function(){
+  // Skip-nav: register early at document level (capturing) to catch ALL focus events
+  document.addEventListener('focusin', function(e){
+    if (e.target && e.target.matches && e.target.matches('.skip-nav, .skip-link')){
+      e.target.classList.add('skip-nav-shown');
+    }
+  }, true);
+  document.addEventListener('focusout', function(e){
+    if (e.target && e.target.classList && e.target.classList.contains('skip-nav-shown')){
+      e.target.classList.remove('skip-nav-shown');
+    }
+  }, true);
+
   function ready(fn){
     if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', fn);
     else fn();
@@ -145,16 +157,6 @@
       }
     });
 
-    // Skip-nav: use focusin (bubbles) on body to catch focus reliably
-    document.body.addEventListener('focusin', function(e){
-      if (e.target && e.target.matches && e.target.matches('.skip-nav, .skip-link')){
-        e.target.classList.add('skip-nav-shown');
-      }
-    });
-    document.body.addEventListener('focusout', function(e){
-      if (e.target && e.target.classList && e.target.classList.contains('skip-nav-shown')){
-        e.target.classList.remove('skip-nav-shown');
-      }
-    });
+
   });
 })();
