@@ -1,37 +1,23 @@
-/* HSK4 service worker — static cache for GitHub Pages. */
-const CACHE_NAME = 'hsk4-release-v5';
+/* HSK4 service worker — Network-First for HTML/CSS/JS to avoid stale content. */
+const CACHE_NAME = 'hsk4-release-v8';
 const CORE_ASSETS = [
-  './',
-  './index.html',
-  './mock6.html',
-  './mock9.html',
-  './assets/hsk4-ui.css',
-  './assets/hsk4-ui.js',
-  './assets/hsk4-mock6-redesign.css',
-  './assets/hsk4-mock6-redesign.js',
-  './assets/hsk4-mock9-redesign.css',
-  './assets/hsk4-mock9-redesign.js',
-  './assets/hsk4-final-polish.css',
-  './assets/hsk4-final-polish.js',
-  './assets/hsk4-release-hardening.css',
-  './assets/hsk4-release-hardening.js',
   './assets/icons/icon.svg',
-  './site.webmanifest',
-  './data/hsk4_mock9_extracted.json',
-  './data/hsk4_mock9_extracted_full.json',
-  './data/hsk4_mock9_audio_urls.json',
-  './og-image.png',
-  './og-mock6.png',
-  './og-mock9.png'
+  './site.webmanifest'
 ];
 
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(CORE_ASSETS)).then(() => self.skipWaiting()));
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(CORE_ASSETS))
+      .then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key)))).then(() => self.clients.claim())
+    caches.keys()
+      .then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))))
+      .then(() => self.clients.claim())
   );
 });
 
@@ -41,19 +27,38 @@ self.addEventListener('fetch', event => {
   const url = new URL(request.url);
   if (url.origin !== location.origin) return;
 
-  const isHtml = request.headers.get('accept')?.includes('text/html');
-  if (isHtml) {
-    event.respondWith(fetch(request).then(response => {
-      const copy = response.clone();
-      caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
-      return response;
-    }).catch(() => caches.match(request).then(cached => cached || caches.match('./index.html'))));
+  // Network-First for HTML, CSS, JS - always get fresh
+  const isFreshable = /\.(html|css|js)$/.test(url.pathname) ||
+                      url.pathname === '/' ||
+                      url.pathname.endsWith('/') ||
+                      request.headers.get('accept')?.includes('text/html');
+
+  if (isFreshable) {
+    event.respondWith(
+      fetch(request, {cache: 'no-store'})
+        .then(response => {
+          // Update cache in background
+          if (response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+          }
+          return response;
+        })
+        .catch(() => caches.match(request))
+    );
     return;
   }
 
-  event.respondWith(caches.match(request).then(cached => cached || fetch(request).then(response => {
-    const copy = response.clone();
-    caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
-    return response;
-  })));
+  // Cache-First for images and other static assets
+  event.respondWith(
+    caches.match(request).then(cached => 
+      cached || fetch(request).then(response => {
+        if (response.ok) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+        }
+        return response;
+      })
+    )
+  );
 });

@@ -221,18 +221,20 @@ body:not([data-active-tab]) #listening{display:block !important}
 /* === FLASHCARD GRID FIX - prevent stretching and uneven heights === */
 .flashcard-grid{
   display:grid;
-  /* حجم ثابت للبطاقات - لا تمتد لتملأ الصف */
-  grid-template-columns:repeat(auto-fill, minmax(240px, 280px)) !important;
+  /* اعرض كثير، يتحكم بالعرض حسب الشاشة */
+  grid-template-columns:repeat(auto-fit, minmax(min(100%, 240px), 1fr)) !important;
   gap:16px !important;
   align-items:start !important;
-  /* في RTL: align cards to the right (start) */
-  justify-content:flex-start !important;
+  justify-content:start !important;
+  width:100%;
 }
-/* خاص بصفوف فيها 3 بطاقات أو أقل - تقصير العرض الأقصى */
-.flashcard-grid:has(.flashcard:nth-child(3):last-child),
-.flashcard-grid:has(.flashcard:nth-child(2):last-child){
-  grid-template-columns:repeat(auto-fill, 260px) !important;
+/* على الشاشات الكبيرة - لا تمدد البطاقات */
+@media (min-width:600px){
+  .flashcard-grid{
+    grid-template-columns:repeat(auto-fit, minmax(240px, 280px)) !important;
+  }
 }
+
 .flashcard{
   /* البطاقة لا تمتد - حجمها حسب محتواها فقط */
   height:auto !important;
@@ -269,10 +271,19 @@ body:not([data-active-tab]) #listening{display:block !important}
 @media (max-width:600px){
   .flashcard-grid{
     grid-template-columns:1fr !important;
-    gap:12px !important;
+    gap:14px !important;
+    padding:0 4px;
   }
-  .flashcard{padding:12px !important}
-  .flashcard .hsk-card-image-wrap{max-width:100% !important}
+  .flashcard{
+    padding:14px !important;
+    width:100% !important;
+    max-width:100% !important;
+  }
+  .flashcard .hsk-card-image-wrap{
+    max-width:100% !important;
+    max-height:200px !important;
+  }
+  .flashcard .hsk-card-image{max-height:200px !important}
 }
 
 /* Tablet: 2 columns */
