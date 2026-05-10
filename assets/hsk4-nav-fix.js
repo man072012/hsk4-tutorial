@@ -252,8 +252,36 @@
 
   ready(function(){
     // Mock9: kill intro page + activate listening (run after page JS)
+    function fixMock9ReadingContent(){
+      const readTab = document.getElementById('tab-reading');
+      if (!readTab || readTab.dataset.fixedReading === '1') return;
+      const allQs = readTab.querySelectorAll('.question');
+      let emptyCount = 0, fullCount = 0;
+      allQs.forEach(function(q){
+        if (!q.querySelector('.chinese')) emptyCount++;
+        else fullCount++;
+      });
+      // Hide section-breaks for parts that have ONLY empty questions (Parts 1 + 2)
+      const breaks = readTab.querySelectorAll('.section-break, h2');
+      breaks.forEach(function(br){
+        const text = br.textContent || '';
+        if (text.includes('ملء الفراغ') || text.includes('ترتيب الجمل')){
+          br.style.display = 'none';
+        }
+      });
+      // Add notice at top if there are empty questions
+      if (emptyCount > 0 && !readTab.querySelector('.reading-empty-notice')){
+        const notice = document.createElement('div');
+        notice.className = 'reading-empty-notice';
+        notice.innerHTML = '‏<strong>تنبيه:</strong> أسئلة الفراغ (46-55) وترتيب الجمل (56-65) لا تحتوي على نصوص مرجعية في هذا الدليل ، لذا تم إخفاؤها. <br>توفر ' + fullCount + ' سؤالاً للفهم القرائي (66-85) بمحتوى كامل (نص + سؤال + شرح + كلمات).';
+        readTab.insertBefore(notice, readTab.firstChild);
+      }
+      readTab.dataset.fixedReading = '1';
+    }
+
     function killMock9Intro(){
       if (!document.body.classList.contains('mock9-redesign') && !document.body.classList.contains('mk9-redesign')) return;
+      fixMock9ReadingContent();
       const introTabBtn = document.querySelector('#mainNav button[data-tab="intro"]');
       if (introTabBtn) introTabBtn.style.display = 'none';
       const introTab = document.getElementById('tab-intro');

@@ -819,3 +819,24 @@ body.mk9-redesign #mainNav button[data-tab="intro"],
 body.mock9-redesign .mk9-side-nav button[data-tab="intro"]{
   display:none !important;
 }
+
+/* === Mock9 Reading: hide empty questions (only qheader, no content) === */
+body.mock9-redesign #tab-reading .question:not(:has(.chinese)),
+body.mk9-redesign #tab-reading .question:not(:has(.chinese)){
+  display:none !important;
+}
+/* Hide empty section-break headers if they precede only empty questions */
+body.mock9-redesign #tab-reading .reading-empty-notice{
+  background:linear-gradient(135deg, #fef3c7, #fde68a);
+  border:2px solid #d97706;
+  border-radius:12px;
+  padding:14px 18px;
+  margin:14px 0 20px;
+  color:#7c2d12;
+  font-weight:bold;
+  line-height:1.6;
+}
+body.mock9-redesign #tab-reading .reading-empty-notice strong{
+  color:#92400e;
+  font-size:16px;
+}
