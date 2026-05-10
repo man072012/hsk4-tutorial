@@ -251,6 +251,29 @@
   }
 
   ready(function(){
+    // Mock9: kill intro tab + hero + activate listening as default
+    if (document.body.classList.contains('mock9-redesign') || document.body.classList.contains('mk9-redesign')){
+      const introTabBtn = document.querySelector('#mainNav button[data-tab="intro"]');
+      if (introTabBtn) introTabBtn.style.display = 'none';
+      const introTab = document.getElementById('tab-intro');
+      if (introTab){
+        introTab.classList.remove('active');
+        introTab.style.display = 'none';
+      }
+      const hero = document.querySelector('.mk9-hero');
+      if (hero) hero.style.display = 'none';
+      // If intro was active, switch to listening
+      const lstBtn = document.querySelector('#mainNav button[data-tab="listening"]');
+      const lstTab = document.getElementById('tab-listening');
+      if (lstBtn && !lstBtn.classList.contains('active')){
+        document.querySelectorAll('#mainNav button').forEach(function(b){ b.classList.remove('active'); });
+        lstBtn.classList.add('active');
+      }
+      if (lstTab && !lstTab.classList.contains('active')){
+        document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+        lstTab.classList.add('active');
+      }
+    }
     // Persistent nav-toggle injection
     injectNavToggle();
     forcePinyinPosition();

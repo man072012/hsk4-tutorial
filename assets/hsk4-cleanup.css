@@ -807,3 +807,15 @@ html body .opt-item.disabled{
   pointer-events:none !important;
   cursor:not-allowed !important;
 }
+
+/* === Mock9: hide intro page entirely === */
+body.mock9-redesign .mk9-hero,
+body.mk9-redesign .mk9-hero,
+body.mock9-redesign #tab-intro,
+body.mk9-redesign #tab-intro,
+body.mock9-redesign .tab#tab-intro,
+body.mock9-redesign #mainNav button[data-tab="intro"],
+body.mk9-redesign #mainNav button[data-tab="intro"],
+body.mock9-redesign .mk9-side-nav button[data-tab="intro"]{
+  display:none !important;
+}
