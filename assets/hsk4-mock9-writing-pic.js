@@ -21,7 +21,7 @@
       html += '<div class="question">';
       html += '<div class="qheader"><span class="qnum">سؤال '+n+'</span><span class="answer">جملة نموذجية</span></div>';
       html += '<div style="text-align:center;margin:14px 0">';
-      html += '<img src="'+imgUrl+'" alt="صورة السؤال '+n+'" loading="lazy" style="max-width:100%;max-height:300px;border-radius:12px;border:2px solid #d97706;box-shadow:0 4px 12px rgba(0,0,0,0.1)">';
+      html += '<img src="'+imgUrl+'" alt="صورة السؤال '+n+'" loading="eager" decoding="async" style="max-width:100%;max-height:300px;border-radius:12px;border:2px solid #d97706;box-shadow:0 4px 12px rgba(0,0,0,0.1)">';
       html += '</div>';
       html += '<div class="chinese" style="background:#fef3c7;border-right-color:#d97706;font-size:24px;text-align:center;font-weight:bold">الكلمة المفتاحية: <span class="chinese-inline">'+q.word+'</span> <small style="color:#92400e">('+q.meaning+')</small></div>';
       html += '<button class="show-answer-btn" onclick="toggleExplain(this)">💡 إظهار الجملة النموذجية</button>';
