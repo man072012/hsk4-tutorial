@@ -210,10 +210,20 @@
     const pinyin = document.getElementById('pinyinToggle') || document.getElementById('togglePinyin');
     if (!pinyin) return;
     const isMk9 = document.body.classList.contains('mk9-redesign') || document.body.classList.contains('mock9-redesign');
-    // Detach pinyin from any sticky/positioned parent that would constrain fixed positioning
+    // Detach pinyin from any parent that creates a containing block for position:fixed
+    // Triggers: position:sticky, transform, will-change, filter, backdrop-filter, contain, perspective
     if (pinyin.parentElement && pinyin.parentElement !== document.body){
       const parentCS = getComputedStyle(pinyin.parentElement);
-      if (parentCS.position === 'sticky' || parentCS.transform !== 'none' || parentCS.willChange !== 'auto'){
+      const createsContainingBlock = (
+        parentCS.position === 'sticky' ||
+        parentCS.transform !== 'none' ||
+        parentCS.willChange !== 'auto' ||
+        parentCS.filter !== 'none' ||
+        parentCS.backdropFilter !== 'none' ||
+        parentCS.perspective !== 'none' ||
+        (parentCS.contain && /(layout|paint|strict|content)/.test(parentCS.contain))
+      );
+      if (createsContainingBlock){
         document.body.appendChild(pinyin);
       }
     }
