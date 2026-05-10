@@ -251,8 +251,9 @@
   }
 
   ready(function(){
-    // Mock9: kill intro tab + hero + activate listening as default
-    if (document.body.classList.contains('mock9-redesign') || document.body.classList.contains('mk9-redesign')){
+    // Mock9: kill intro page + activate listening (run after page JS)
+    function killMock9Intro(){
+      if (!document.body.classList.contains('mock9-redesign') && !document.body.classList.contains('mk9-redesign')) return;
       const introTabBtn = document.querySelector('#mainNav button[data-tab="intro"]');
       if (introTabBtn) introTabBtn.style.display = 'none';
       const introTab = document.getElementById('tab-intro');
@@ -262,18 +263,25 @@
       }
       const hero = document.querySelector('.mk9-hero');
       if (hero) hero.style.display = 'none';
-      // If intro was active, switch to listening
       const lstBtn = document.querySelector('#mainNav button[data-tab="listening"]');
       const lstTab = document.getElementById('tab-listening');
-      if (lstBtn && !lstBtn.classList.contains('active')){
+      if (lstBtn){
         document.querySelectorAll('#mainNav button').forEach(function(b){ b.classList.remove('active'); });
         lstBtn.classList.add('active');
+        // Trigger any onclick handler the page bound to this button
+        try { lstBtn.click(); } catch(e){}
       }
-      if (lstTab && !lstTab.classList.contains('active')){
+      if (lstTab){
         document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
         lstTab.classList.add('active');
+        lstTab.style.display = '';
       }
     }
+    // Run immediately + after delay (in case page JS overrides) + repeat
+    killMock9Intro();
+    setTimeout(killMock9Intro, 200);
+    setTimeout(killMock9Intro, 800);
+    setTimeout(killMock9Intro, 2000);
     // Persistent nav-toggle injection
     injectNavToggle();
     forcePinyinPosition();
