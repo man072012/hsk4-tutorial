@@ -14,10 +14,10 @@
         </a>
         <nav class="m6-mini-nav" aria-label="روابط سريعة">
           <a href="index.html">الرئيسية</a>
-          <a class="is-active" href="#listening">الاستماع</a>
+          <a class="is-active" href="#flashcards">البطاقات والقواعد</a>
+          <a href="#listening">الاستماع</a>
           <a href="#reading">القراءة</a>
           <a href="#writing">الكتابة</a>
-          <a href="#flashcards">البطاقات والقواعد</a>
         </nav>
         <div class="m6-lang" aria-label="اللغة">🌐 العربية</div>
       </div>`;
