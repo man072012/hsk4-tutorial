@@ -2,7 +2,7 @@
 (function(){
   // === Mock 9 is under development - prevent navigation from card ===
   document.addEventListener('click', function(e){
-    const card = e.target.closest('a[href*="mock9"]');
+    const card = e.target.closest('a[href*="test2"], a[href*="mock9"]');
     if (card){
       e.preventDefault();
       e.stopPropagation();
