@@ -840,3 +840,15 @@ body.mock9-redesign #tab-reading .reading-empty-notice strong{
   color:#92400e;
   font-size:16px;
 }
+
+/* === Hide topbar entirely on Landing page === */
+body.hsk-landing-page .hsk-topbar,
+body.hsk-landing-page header.hsk-topbar,
+body.hsk-landing-page .nav-toggle-btn{
+  display:none !important;
+}
+body.hsk-landing-page #tests,
+body.hsk-landing-page main.hsk-page-shell{
+  margin-top:14px !important;
+  padding-top:14px !important;
+}
