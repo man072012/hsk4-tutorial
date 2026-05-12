@@ -1,5 +1,28 @@
 /* HSK4 Navigation: tab-based + mobile hamburger + nav-toggle injection */
 (function(){
+  // === Mock 9 is under development - block access ===
+  if (location.pathname.endsWith('mock9.html') || location.pathname.endsWith('/mock9')){
+    // Make Mock9 page click to go home
+    document.addEventListener('click', function(e){
+      const a = e.target.closest('a');
+      // Allow brand/home logo clicks
+      if (a && (a.href.includes('index.html') || a.href.endsWith('/') || a.classList.contains('mk9-brand') || a.classList.contains('hsk-brand'))){
+        return;
+      }
+      e.preventDefault();
+      e.stopPropagation();
+      location.href = 'index.html';
+    }, true);
+    // Also intercept body click
+    window.addEventListener('load', function(){
+      document.body.addEventListener('click', function(e){
+        if (!e.target.closest('a[href*="index.html"]')){
+          location.href = 'index.html';
+        }
+      }, {once: true, capture: true});
+    });
+  }
+
   // === Mock9 button function patches (define if missing or override broken) ===
   // Bug 1: checkTF - add revealed class + correct/wrong
   if (typeof window.checkTF !== 'function' || !window.__hsk4_checkTF_patched){
