@@ -136,6 +136,19 @@
     }, 50);
   }, false);
 
+  // Writing/Reading: reveal-btn click toggles .revealed on parent q-card
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.reveal-btn, .reveal-answer-btn');
+    if (!btn) return;
+    const card = btn.closest('.q-card, .question');
+    if (!card) return;
+    const isOpen = !card.classList.contains('revealed');
+    card.classList.toggle('revealed', isOpen);
+    btn.classList.toggle('shown', isOpen);
+    btn.innerHTML = isOpen ? '🙈 إخفاء الإجابة' : '🔍 اظهار الإجابة';
+  }, false);
+
+
   // Skip-nav: register early at document level (capturing) to catch ALL focus events
   document.addEventListener('focusin', function(e){
     if (e.target && e.target.matches && e.target.matches('.skip-nav, .skip-link')){

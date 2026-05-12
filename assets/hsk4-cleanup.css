@@ -969,3 +969,38 @@ body.mock6-redesign .m6-mini-nav a[href="#flashcards"],
 body.mock6-redesign .hsk-nav a[href="#flashcards"]{
   order:-1 !important;
 }
+
+/* === Writing section: hide answer reveals until clicked === */
+/* Hide the green "الترتيب الصحيح" box by default */
+body.mock6-redesign #writing .q-card:not(.revealed) .chinese-box > div[style*="d1fae5"],
+body.answer-hidden #writing .q-card:not(.revealed) .chinese-box > div[style*="d1fae5"],
+body.mock6-redesign #writing .q-card:not(.revealed) [style*="background:#d1fae5"],
+body.answer-hidden #writing .q-card:not(.revealed) [style*="background:#d1fae5"]{
+  display:none !important;
+}
+
+/* Also hide other answer-revealing elements in writing tab until question revealed */
+body.mock6-redesign #writing .q-card:not(.revealed) .trans-box,
+body.mock6-redesign #writing .q-card:not(.revealed) .vocab-section,
+body.mock6-redesign #writing .q-card:not(.revealed) .why-box,
+body.mock6-redesign #writing .q-card:not(.revealed) .explain-box,
+body.mock6-redesign #writing .q-card:not(.revealed) .memory-box,
+body.answer-hidden #writing .q-card:not(.revealed) .trans-box,
+body.answer-hidden #writing .q-card:not(.revealed) .vocab-section,
+body.answer-hidden #writing .q-card:not(.revealed) .why-box,
+body.answer-hidden #writing .q-card:not(.revealed) .explain-box,
+body.answer-hidden #writing .q-card:not(.revealed) .memory-box{
+  display:none !important;
+}
+
+/* When revealed, show with animation */
+body.mock6-redesign #writing .q-card.revealed .chinese-box > div[style*="d1fae5"],
+body.mock6-redesign #writing .q-card.revealed [style*="background:#d1fae5"],
+body.mock6-redesign #writing .q-card.revealed .trans-box,
+body.mock6-redesign #writing .q-card.revealed .vocab-section,
+body.mock6-redesign #writing .q-card.revealed .why-box,
+body.mock6-redesign #writing .q-card.revealed .explain-box,
+body.mock6-redesign #writing .q-card.revealed .memory-box{
+  display:block !important;
+  animation:fadeInTab 0.3s ease;
+}
