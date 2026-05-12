@@ -11,7 +11,7 @@
     }
   }, true);
 
-  // On mock9.html itself, show overlay (handled by CSS) but don't redirect aggressively
+  // On test2.html itself, show overlay (handled by CSS) but don't redirect aggressively
   // Allow user to manually go back via brand logo
 
   // === Mock9 button function patches (define if missing or override broken) ===
@@ -361,7 +361,7 @@
     let initialTab = TAB_MAP[hash];
     if (!initialTab){
       // Default tab: flashcards on mock6, listening elsewhere
-      const isMock6 = document.body.classList.contains('mock6-redesign') || location.pathname.endsWith('mock6.html');
+      const isMock6 = document.body.classList.contains('mock6-redesign') || location.pathname.endsWith('test1.html');
       initialTab = isMock6 ? 'flashcards' : 'listening';
     }
     if (!document.getElementById(initialTab)){
