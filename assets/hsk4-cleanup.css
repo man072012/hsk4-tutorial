@@ -939,3 +939,33 @@ body.mk9-redesign::after{
     padding:24px 20px;
   }
 }
+
+/* === Section title background fix - ensure white text shows on blue === */
+html body .tab-content > .section-title,
+body.mock6-redesign .tab-content > .section-title,
+body.mock9-redesign .tab-content > .section-title{
+  background:linear-gradient(135deg, #0b63ce, #064aa3) !important;
+  color:#fff !important;
+  padding:18px 24px !important;
+  border-radius:16px !important;
+  margin:16px 0 22px !important;
+  box-shadow:0 8px 24px rgba(11,99,206,0.25) !important;
+}
+html body .tab-content > .section-title h2,
+html body .tab-content > .section-title h1,
+html body .tab-content > .section-title p,
+body.mock6-redesign .tab-content > .section-title *,
+body.mock9-redesign .tab-content > .section-title *{
+  color:#fff !important;
+  text-shadow:0 1px 3px rgba(0,0,0,0.2) !important;
+}
+
+/* === Mock6 nav reorder: flashcards & grammar FIRST === */
+body.mock6-redesign .m6-mini-nav,
+body.mock6-redesign .hsk-nav{
+  flex-direction:row-reverse !important;
+}
+body.mock6-redesign .m6-mini-nav a[href="#flashcards"],
+body.mock6-redesign .hsk-nav a[href="#flashcards"]{
+  order:-1 !important;
+}

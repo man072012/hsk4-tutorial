@@ -358,7 +358,12 @@
 
     // Initial active tab
     const hash = location.hash;
-    let initialTab = TAB_MAP[hash] || 'listening';
+    let initialTab = TAB_MAP[hash];
+    if (!initialTab){
+      // Default tab: flashcards on mock6, listening elsewhere
+      const isMock6 = document.body.classList.contains('mock6-redesign') || location.pathname.endsWith('mock6.html');
+      initialTab = isMock6 ? 'flashcards' : 'listening';
+    }
     if (!document.getElementById(initialTab)){
       const first = document.querySelector('.tab-content, .tab');
       if (first && first.id) initialTab = first.id;
